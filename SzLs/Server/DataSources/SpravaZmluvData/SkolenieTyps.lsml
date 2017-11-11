@@ -74,6 +74,15 @@
         FromEnd="SkolenieTyp"
         Name="SkolenieTypOtazkas"
         ToEnd="SkolenieTypOtazka" />
+      <EntityProperty
+        Name="MaskaCislaPreukazu"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <Association
@@ -278,6 +287,12 @@
           Name="CisloOpravnenia"
           Nullable="True"
           Property="SkolenieTyp/Properties[CisloOpravnenia]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="MaskaCislaPreukazu"
+          Nullable="True"
+          Property="SkolenieTyp/Properties[MaskaCislaPreukazu]"
           Type="varchar" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>

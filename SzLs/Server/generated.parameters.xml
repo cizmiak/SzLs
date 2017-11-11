@@ -11,6 +11,6 @@
     <parameterEntry kind="XmlFile" scope="web.config" match="configuration/connectionStrings/add[@name='SpravaZmluvData']/@connectionString" />
   </parameter>
   <parameter name="SzLs_IisWebApplication" description="IIS Web Application content location" defaultValue="Default Web Site/SzLs" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Projects\\SzLs\\SzLs\\Bin\\Debug\\app\.publish\\$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Projects\\SzLs\\SzLs\\Bin\\Release\\app\.publish\\$" />
   </parameter>
 </parameters>

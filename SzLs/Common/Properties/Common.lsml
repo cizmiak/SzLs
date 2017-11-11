@@ -1011,13 +1011,13 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="LekarskaPrehliadka"
-        PropertyType=":DateTime?">
+        IsReadOnly="True"
+        Name="StavNazov"
+        PropertyType=":String?">
         <EntityProperty.Attributes>
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
-          <NotSearchable />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
         </EntityProperty.Attributes>
       </EntityProperty>
     </EntityType.Properties>
@@ -1900,7 +1900,7 @@
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
-            Value="20" />
+            Value="50" />
           <AnsiConstraint />
         </EntityProperty.Attributes>
       </EntityProperty>
@@ -2037,6 +2037,13 @@
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <EntityProperty
+        Name="F"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <EntityType
@@ -2151,6 +2158,15 @@
         FromEnd="SkolenieTyp"
         Name="SkolenieTypOtazkas"
         ToEnd="SkolenieTypOtazka" />
+      <EntityProperty
+        Name="MaskaCislaPreukazu"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <EntityType
@@ -9109,10 +9125,11 @@
     <QueryOperation
       Name="SkolenieDruhs_All"
       ReturnType="SkolenieDruh*">
-		<QueryOperation.Attributes>
-			<Generated />
-			<Description Value="Returns all entities contained in the entity set." />
-		</QueryOperation.Attributes>
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns all entities contained in the entity set." />
+      </QueryOperation.Attributes>
       <QueryOperation.FilterExpression>
         <QueryFilterExpressionTree />
       </QueryOperation.FilterExpression>
@@ -9126,10 +9143,11 @@
     <QueryOperation
       Name="Zamestnanecs_All"
       ReturnType="Zamestnanec*">
-		<QueryOperation.Attributes>
-			<Generated />
-			<Description Value="Returns all entities contained in the entity set." />
-		</QueryOperation.Attributes>
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns all entities contained in the entity set." />
+      </QueryOperation.Attributes>
       <QueryOperation.FilterExpression>
         <QueryFilterExpressionTree />
       </QueryOperation.FilterExpression>
@@ -9143,10 +9161,11 @@
     <QueryOperation
       Name="Zmluvy_All"
       ReturnType="Zmluva*">
-		<QueryOperation.Attributes>
-			<Generated />
-			<Description Value="Returns all entities contained in the entity set." />
-		</QueryOperation.Attributes>
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns all entities contained in the entity set." />
+      </QueryOperation.Attributes>
       <QueryOperation.FilterExpression>
         <QueryFilterExpressionTree />
       </QueryOperation.FilterExpression>
@@ -9160,10 +9179,11 @@
     <QueryOperation
       Name="Portfolios_All"
       ReturnType="Portfolio*">
-		<QueryOperation.Attributes>
-			<Generated />
-			<Description Value="Returns all entities contained in the entity set." />
-		</QueryOperation.Attributes>
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns all entities contained in the entity set." />
+      </QueryOperation.Attributes>
       <QueryOperation.FilterExpression>
         <QueryFilterExpressionTree />
       </QueryOperation.FilterExpression>

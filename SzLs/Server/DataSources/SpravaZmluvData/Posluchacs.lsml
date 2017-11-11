@@ -133,13 +133,13 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="LekarskaPrehliadka"
-        PropertyType=":DateTime?">
+        IsReadOnly="True"
+        Name="StavNazov"
+        PropertyType=":String?">
         <EntityProperty.Attributes>
-          <DateTimeConstraint
-            Precision="3"
-            PreserveSeconds="True" />
-          <NotSearchable />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
         </EntityProperty.Attributes>
       </EntityProperty>
     </EntityType.Properties>
@@ -329,10 +329,12 @@
           StoreGeneratedPattern="Computed"
           Type="varchar" />
         <SsdlProperty
-          Name="LekarskaPrehliadka"
+          MaxLength="50"
+          Name="StavNazov"
           Nullable="True"
-          Property="Posluchac/Properties[LekarskaPrehliadka]"
-          Type="datetime" />
+          Property="Posluchac/Properties[StavNazov]"
+          StoreGeneratedPattern="Computed"
+          Type="varchar" />
         <SsdlForeignKeyProperty
           Name="OrganizaciaID"
           Nullable="True"

@@ -379,19 +379,6 @@
                   </ContentItem.DataSource>
                 </ContentItem>
               </ContentItem>
-              <ContentItem
-                DataType=":DateTime?"
-                Kind="Value"
-                Name="LekarskaPrehliadka">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Posluchac/Properties[LekarskaPrehliadka]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
             </ContentItem>
           </ContentItem>
           <ContentItem

@@ -36,7 +36,7 @@
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
-            Value="20" />
+            Value="50" />
           <AnsiConstraint />
         </EntityProperty.Attributes>
       </EntityProperty>
@@ -169,6 +169,13 @@
       <EntityProperty
         Name="Z_PocetHodin"
         PropertyType=":Double?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="F"
+        PropertyType=":Boolean?">
         <EntityProperty.Attributes>
           <NotSearchable />
         </EntityProperty.Attributes>
@@ -345,7 +352,7 @@
           Property="SkoleniePosluchac/Properties[PosluchacID]"
           Type="int" />
         <SsdlProperty
-          MaxLength="20"
+          MaxLength="50"
           Name="CisloPreukazu"
           Nullable="True"
           Property="SkoleniePosluchac/Properties[CisloPreukazu]"
@@ -431,6 +438,11 @@
           Nullable="True"
           Property="SkoleniePosluchac/Properties[Z_PocetHodin]"
           Type="float" />
+        <SsdlProperty
+          Name="F"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[F]"
+          Type="bit" />
         <SsdlForeignKeyProperty
           Name="VysledokID"
           Nullable="True"

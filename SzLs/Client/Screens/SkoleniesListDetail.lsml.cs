@@ -5,14 +5,14 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Threading;
+using Microsoft.LightSwitch.Threading;
 
 namespace LightSwitchApplication
 {
-    public partial class SkoleniesListDetail
-    {
+	public partial class SkoleniesListDetail
+	{
 		private string ReportServerUrl { get; set; }
-        private SkolenieVysledok PredvolenyVysledok { get; set; }
+		private SkolenieVysledok PredvolenyVysledok { get; set; }
 
 		partial void SkoleniesListDetail_InitializeDataWorkspace(List<IDataService> saveChangesTo)
 		{
@@ -30,45 +30,72 @@ namespace LightSwitchApplication
 			this.PocetOtazok = pocetOtazok;
 		}
 
-        partial void SkoleniesListDetail_Created()
-        {
+		partial void SkoleniesListDetail_Created()
+		{
 			this.FindControl("Typ").ControlAvailable += Application.updateSourceAfterLastKeyUp;
 			this.FindControl("Druh").ControlAvailable += Application.updateSourceAfterLastKeyUp;
 			this.FindControl("Organizacia5").ControlAvailable += Application.updateSourceAfterLastKeyUp;
 			this.FindControl("Zmluva2").ControlAvailable += Application.updateSourceAfterLastKeyUp;
 			this.FindControl("Lektor").ControlAvailable += Application.updateSourceAfterLastKeyUp;
+			this.FindControl("XlsxImport").ControlAvailable += XlsxImport_ControlAvailable;
 		}
 
-        private string getKonfiguracnaHodnota(string nastavenie)
-        {
-            return this.DataWorkspace.SpravaZmluvData
-                .KonfiguracnaHodnota(nastavenie).FirstOrDefault().Hodnota;
-        }
+		private void XlsxImport_ControlAvailable(object sender, ControlAvailableEventArgs e)
+		{
+			((Button)e.Control).Click += XlsxImport_Click;
+		}
 
-        private string getReportUrl(string format)
-        {
-            return string.Format(
-                "{0}?/{1}&rs:ClearSession=true&rs:Command=Render&rs:Format={2}&SkolenieID={3}"
-                , ReportServerUrl
-                , Report.Hodnota
-                , format
+		private void XlsxImport_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			Dispatchers.Main.Invoke(() => {
+				var dialog = new OpenFileDialog();
+				dialog.Filter = "Excel(*.xlsx)|*.xlsx";
+
+				if (dialog.ShowDialog() == true)
+				{
+					//using (var fileStream = dialog.File.OpenRead())
+					//{
+					//	if (fileStream.Length > 0)
+					//	{
+					//		fileStream.Close();
+					//	}
+					//}
+
+					//XlsxHelper.Read(dialog.File.OpenRead());
+				}
+			});
+		}
+
+		private string getKonfiguracnaHodnota(string nastavenie)
+		{
+			return this.DataWorkspace.SpravaZmluvData
+				.KonfiguracnaHodnota(nastavenie).FirstOrDefault().Hodnota;
+		}
+
+		private string getReportUrl(string format)
+		{
+			return string.Format(
+				"{0}?/{1}&rs:ClearSession=true&rs:Command=Render&rs:Format={2}&SkolenieID={3}"
+				, ReportServerUrl
+				, Report.Hodnota
+				, format
 				, Skolenies.SelectedItem.ID
-                );
-        }
+				);
+		}
 
-        partial void ZaradPosluchaca_Execute()
-        {
+		partial void ZaradPosluchaca_Execute()
+		{
 			SkoleniePosluchac zaradenyPosluchac = SkoleniePosluchacs.AddNew();
 			zaradenyPosluchac.Posluchac = PosluchaciNezaradeni.SelectedItem;
-            zaradenyPosluchac.SkolenieVysledok = PredvolenyVysledok;
+			zaradenyPosluchac.SkolenieVysledok = PredvolenyVysledok;
 			this.Save();
-        }
+		}
 
-        partial void VyradPosluchaca_Execute()
-        {
-            SkoleniePosluchacs.SelectedItem.Delete();
+		partial void VyradPosluchaca_Execute()
+		{
+			SkoleniePosluchacs.SelectedItem.Delete();
 			this.Save();
-        }
+		}
 
 		partial void ZrusFiltre_Execute()
 		{
@@ -80,20 +107,20 @@ namespace LightSwitchApplication
 			this.Lektor = null;
 		}
 
-        partial void OtvoritReport_Execute()
-        {
-            Application.navigateUri(getReportUrl("HTML4.0"));
-        }
+		partial void OtvoritReport_Execute()
+		{
+			Application.navigateUri(getReportUrl("HTML4.0"));
+		}
 
-        partial void ExportDoWordu_Execute()
-        {
-            Application.navigateUri(getReportUrl("WORD"));
-        }
+		partial void ExportDoWordu_Execute()
+		{
+			Application.navigateUri(getReportUrl("WORD"));
+		}
 
-        partial void ExportDoPDF_Execute()
-        {
-            Application.navigateUri(getReportUrl("PDF"));
-        }
+		partial void ExportDoPDF_Execute()
+		{
+			Application.navigateUri(getReportUrl("PDF"));
+		}
 
 		partial void SkoleniePosluchacsAddNew_Execute()
 		{
@@ -185,5 +212,46 @@ namespace LightSwitchApplication
 			this.CloseModalWindow("GenerovanieOtazok");
 			this.SkolenieOtazkas.Refresh();
 		}
-    }
+
+		private string getNextCisloPreukazu()
+		{
+			var selectedSkolenie = this.Skolenies.SelectedItem;
+			if (selectedSkolenie != null && selectedSkolenie.SkolenieTyp != null)
+			{
+				var maska = selectedSkolenie.SkolenieTyp.MaskaCislaPreukazu;
+				if (maska != null)
+				{
+					var lastCisloPreukazu = this.DataWorkspace.SpravaZmluvData.SkoleniePosluchacs
+						.Where(sp => sp.Skolenie.SkolenieTyp.ID == selectedSkolenie.SkolenieTyp.ID)
+						.Execute()
+						.Where(sp => sp.CisloPreukazu != null && sp.CisloPreukazu.Contains(maska))
+						.Select(sp => sp.CisloPreukazu)
+						.OrderByDescending(cp => cp)
+						.FirstOrDefault();
+
+					lastCisloPreukazu = lastCisloPreukazu ?? string.Format("{0}{1}000", maska, DateTime.Now.Year);
+
+					var lastCisloString = lastCisloPreukazu.Replace(maska, "");
+					decimal lastCislo;
+					if (decimal.TryParse(lastCisloString, out lastCislo))
+						return string.Format("{0}{1:F0}", maska, lastCislo + 1);
+				}
+			}
+			return null;
+		}
+
+		partial void GenerujCisloPreukazu_Execute()
+		{
+			this.SkoleniePosluchacs.SelectedItem.CisloPreukazu = this.getNextCisloPreukazu();
+
+		}
+
+		partial void GenerujCisloPreukazu_CanExecute(ref bool result)
+		{
+			result = this.Skolenies.SelectedItem != null &&
+				this.Skolenies.SelectedItem.SkolenieTyp != null &&
+				this.SkoleniePosluchacs.SelectedItem != null &&
+				string.IsNullOrEmpty(this.SkoleniePosluchacs.SelectedItem.CisloPreukazu);
+		}
+	}
 }
