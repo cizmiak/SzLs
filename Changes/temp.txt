@@ -1,0 +1,7 @@
+CREATE TABLE dbo.Notifikacia
+(
+	ID INT NOT NULL,
+	EntitaID INT NOT NULL,
+	RiadokID INT NOT NULL,
+	CONSTRAINT PK_Notifikacia PRIMARY KEY(ID)
+)
