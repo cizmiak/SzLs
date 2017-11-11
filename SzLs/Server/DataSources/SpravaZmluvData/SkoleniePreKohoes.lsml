@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="SkoleniePreKoho">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_SkoleniePreKoho"
+        FromEnd="SkoleniePreKoho"
+        Name="Skolenies"
+        ToEnd="Skolenie" />
+      <NavigationProperty
+        Association="FK_SkoleniePreKohoOtazka_SkoleniePreKoho"
+        FromEnd="SkoleniePreKoho"
+        Name="SkoleniePreKohoOtazkas"
+        ToEnd="SkoleniePreKohoOtazka" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Skolenie_SkoleniePreKoho">
+    <AssociationEnd
+      EntityType="SkoleniePreKoho"
+      Name="SkoleniePreKoho">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <Association
+    Name="FK_SkoleniePreKohoOtazka_SkoleniePreKoho">
+    <AssociationEnd
+      EntityType="SkoleniePreKoho"
+      Multiplicity="One"
+      Name="SkoleniePreKoho">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="SkoleniePreKohoOtazka"
+      Multiplicity="Many"
+      Name="SkoleniePreKohoOtazka" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="SkoleniePreKoho"
+      Name="SkoleniePreKohoes" />
+    <AssociationSet
+      Association="FK_Skolenie_SkoleniePreKoho"
+      Name="FK_Skolenie_SkoleniePreKoho">
+      <AssociationSetEnd
+        EntitySet="SkoleniePreKohoes"
+        Name="SkoleniePreKoho" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <QueryOperation
+      Name="SkoleniePreKohoes_Single"
+      ReturnType="SkoleniePreKoho">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkoleniePreKohoes" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="SkoleniePreKohoes_SingleOrDefault"
+      ReturnType="SkoleniePreKoho">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkoleniePreKohoes" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <AssociationSet
+      Association="FK_SkoleniePreKohoOtazka_SkoleniePreKoho"
+      Name="FK_SkoleniePreKohoOtazka_SkoleniePreKoho">
+      <AssociationSetEnd
+        EntitySet="SkoleniePreKohoes"
+        Name="SkoleniePreKoho" />
+      <AssociationSetEnd
+        EntitySet="SkoleniePreKohoOtazkas"
+        Name="SkoleniePreKohoOtazka" />
+    </AssociationSet>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="SkoleniePreKohoes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="SkoleniePreKoho" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="SkoleniePreKoho/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Nazov"
+          Nullable="True"
+          Property="SkoleniePreKoho/Properties[Nazov]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_SkoleniePreKoho">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_SkoleniePreKoho" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_SkoleniePreKoho]/Members[SkoleniePreKoho]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_SkoleniePreKoho]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PreKohoID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_SkoleniePreKohoOtazka_SkoleniePreKoho">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_SkoleniePreKohoOtazka_SkoleniePreKoho" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkoleniePreKohoOtazka_SkoleniePreKoho]/Members[SkoleniePreKoho]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkoleniePreKohoOtazka_SkoleniePreKoho]/Members[SkoleniePreKohoOtazka]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SkoleniePreKohoID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

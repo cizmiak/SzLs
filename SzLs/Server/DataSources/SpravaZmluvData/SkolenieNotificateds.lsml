@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="SkolenieNotificated">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <EntityProperty
+        Name="ID"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Referencia"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="SkolenieNazov"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="200" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Uskutocnene"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nasledujuce"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="UcastCelkom"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Vyhovelo"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nevyhovelo"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="MiestoKonania"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="200" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="SkoleniePreKoho"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Typ"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Druh"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="FormaSkusania"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Organizacia"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Lektor"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="101" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PredsedaKomisie"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="101" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ClenKomisie1"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="101" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ClenKomisie2"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="101" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Email"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="302" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="NasledujuceZa"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="20" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="NotificationID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="InsertedDateTime"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+    </EntityType.Properties>
+  </EntityType>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="SkolenieNotificated"
+      Name="SkolenieNotificateds" />
+    <QueryOperation
+      Name="SkolenieNotificateds_Single"
+      ReturnType="SkolenieNotificated">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="NotificationID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="NotificationID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkolenieNotificateds" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="NotificationID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'NotificationID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="SkolenieNotificateds_SingleOrDefault"
+      ReturnType="SkolenieNotificated">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="NotificationID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="NotificationID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkolenieNotificateds" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="NotificationID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'NotificationID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="SkolenieNotificateds">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="SkolenieNotificated" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[ID]"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Referencia"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Referencia]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="200"
+          Name="SkolenieNazov"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[SkolenieNazov]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Uskutocnene"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Uskutocnene]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Nasledujuce"
+          Nullable="True"
+          Property="SkolenieNotificated/Properties[Nasledujuce]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="UcastCelkom"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[UcastCelkom]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Vyhovelo"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Vyhovelo]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Nevyhovelo"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Nevyhovelo]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="200"
+          Name="MiestoKonania"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[MiestoKonania]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="SkoleniePreKoho"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[SkoleniePreKoho]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Typ"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Typ]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Druh"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Druh]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="FormaSkusania"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[FormaSkusania]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Organizacia"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Organizacia]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="101"
+          Name="Lektor"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Lektor]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="101"
+          Name="PredsedaKomisie"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[PredsedaKomisie]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="101"
+          Name="ClenKomisie1"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[ClenKomisie1]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="101"
+          Name="ClenKomisie2"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[ClenKomisie2]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="302"
+          Name="Email"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[Email]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="NasledujuceZa"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[NasledujuceZa]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="NotificationID"
+          Nullable="False"
+          Property="SkolenieNotificated/Properties[NotificationID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          Name="InsertedDateTime"
+          Nullable="True"
+          Property="SkolenieNotificated/Properties[InsertedDateTime]"
+          Type="datetime" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+  </DataService>
+</ServiceApplication>

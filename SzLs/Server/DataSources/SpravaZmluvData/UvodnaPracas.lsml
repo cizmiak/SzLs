@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="UvodnaPraca">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Poradie"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Popis"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="500" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="DniNaRiesenie"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Uloha_UvodnaPraca"
+        FromEnd="UvodnaPraca"
+        Name="Ulohas"
+        ToEnd="Uloha" />
+      <NavigationProperty
+        Association="FK_UvodnaPraca_UvodnaPracaStav"
+        FromEnd="UvodnaPraca"
+        Name="UvodnaPracaStav"
+        ToEnd="UvodnaPracaStav" />
+      <NavigationProperty
+        Association="FK_UvodnaPraca_ZmluvaTyp"
+        FromEnd="UvodnaPraca"
+        Name="ZmluvaTyp"
+        ToEnd="ZmluvaTyp" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Uloha_UvodnaPraca">
+    <AssociationEnd
+      EntityType="UvodnaPraca"
+      Name="UvodnaPraca">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Uloha"
+      Multiplicity="Many"
+      Name="Uloha" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="UvodnaPraca"
+      Name="UvodnaPracas" />
+    <AssociationSet
+      Association="FK_Uloha_UvodnaPraca"
+      Name="FK_Uloha_UvodnaPraca">
+      <AssociationSetEnd
+        EntitySet="UvodnaPracas"
+        Name="UvodnaPraca" />
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+    </AssociationSet>
+    <QueryOperation
+      Name="UvodnaPracas_Single"
+      ReturnType="UvodnaPraca">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="UvodnaPracas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="UvodnaPracas_SingleOrDefault"
+      ReturnType="UvodnaPraca">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="UvodnaPracas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="UvodnaPracas">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="UvodnaPraca" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="UvodnaPraca/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          Name="Poradie"
+          Nullable="True"
+          Property="UvodnaPraca/Properties[Poradie]"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Nazov"
+          Nullable="True"
+          Property="UvodnaPraca/Properties[Nazov]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="500"
+          Name="Popis"
+          Nullable="True"
+          Property="UvodnaPraca/Properties[Popis]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="DniNaRiesenie"
+          Nullable="True"
+          Property="UvodnaPraca/Properties[DniNaRiesenie]"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="StavID"
+          Nullable="True"
+          PropertyName="StavID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ZmluvaTypID"
+          Nullable="True"
+          PropertyName="ZmluvaTypID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Uloha_UvodnaPraca">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Uloha_UvodnaPraca" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_UvodnaPraca]/Members[UvodnaPraca]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_UvodnaPraca]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UvodnaPracaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

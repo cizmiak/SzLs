@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Skolenie">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Referencia"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="200" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Uskutocnene"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nasledujuce"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="MiestoKonania"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="200" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="UcastCelkom"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Vyhovelo"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nevyhovelo"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Vyska15"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Plosina"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Rebrik5"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Hlbka13"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Postroj"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PreukazyVydane"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PreukazyVydal"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="CisloPreukazu"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="20" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="I"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="A"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="B"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="C"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="D"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="E"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="W1"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="W2"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="G"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="II"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Z"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="C_BezVodickehoOpravnenia"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="W1_BezVodickehoOpravnenia"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Z_PocetHodin"
+        PropertyType=":Double?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_ClenKomisie1"
+        FromEnd="Skolenie"
+        Name="ClenKomisie1"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Clen Komisie 1" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_ClenKomisie2"
+        FromEnd="Skolenie"
+        Name="ClenKomisie2"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Clen Komisie 2" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_Organizacia"
+        FromEnd="Skolenie"
+        Name="Organizacia"
+        ToEnd="Organizacia" />
+      <NavigationProperty
+        Association="FK_Skolenie_PredsedaKomisie"
+        FromEnd="Skolenie"
+        Name="PredsedaKomisie"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Predseda Komisie" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_SkolenieDruh"
+        FromEnd="Skolenie"
+        Name="SkolenieDruh"
+        ToEnd="SkolenieDruh">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Druh Skolenia" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_SkolenieFormaSkusania"
+        FromEnd="Skolenie"
+        Name="SkolenieFormaSkusania"
+        ToEnd="SkolenieFormaSkusania">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Forma Skusania" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_SkoleniePreKoho"
+        FromEnd="Skolenie"
+        Name="SkoleniePreKoho"
+        ToEnd="SkoleniePreKoho">
+        <NavigationProperty.Attributes>
+          <DisplayName />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_SkolenieTyp"
+        FromEnd="Skolenie"
+        Name="SkolenieTyp"
+        ToEnd="SkolenieTyp">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Typ Skolenia" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_Zamestnanec"
+        FromEnd="Skolenie"
+        Name="Lektor"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Lektor" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_Zmluva"
+        FromEnd="Skolenie"
+        Name="Zmluva"
+        ToEnd="Zmluva" />
+      <NavigationProperty
+        Association="FK_SkoleniePosluchac_Skolenie"
+        FromEnd="Skolenie"
+        Name="SkoleniePosluchacs"
+        ToEnd="SkoleniePosluchac">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Zucastneni Posluchaci" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <EntityProperty
+        IsReadOnly="True"
+        Name="IdComputed"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        IsReadOnly="True"
+        Name="IdVarchar"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_Notifikovany"
+        FromEnd="Skolenie"
+        Name="Notifikovany"
+        ToEnd="Zamestnanec" />
+      <NavigationProperty
+        Association="FK_SkolenieOtazka_Skolenie"
+        FromEnd="Skolenie"
+        Name="SkolenieOtazkas"
+        ToEnd="SkolenieOtazka" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_SkoleniePosluchac_Skolenie">
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="One"
+      Name="Skolenie">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="SkoleniePosluchac"
+      Multiplicity="Many"
+      Name="SkoleniePosluchac" />
+  </Association>
+  <Association
+    Name="FK_SkolenieOtazka_Skolenie">
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="One"
+      Name="Skolenie">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="SkolenieOtazka"
+      Multiplicity="Many"
+      Name="SkolenieOtazka" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Skolenie"
+      Name="Skolenia" />
+    <AssociationSet
+      Association="FK_SkoleniePosluchac_Skolenie"
+      Name="FK_SkoleniePosluchac_Skolenie">
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+      <AssociationSetEnd
+        EntitySet="SkoleniePosluchacs"
+        Name="SkoleniePosluchac" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Skolenia_Single"
+      ReturnType="Skolenie">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Skolenia" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Skolenia_SingleOrDefault"
+      ReturnType="Skolenie">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Skolenia" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <AssociationSet
+      Association="FK_SkolenieOtazka_Skolenie"
+      Name="FK_SkolenieOtazka_Skolenie">
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+      <AssociationSetEnd
+        EntitySet="SkolenieOtazky"
+        Name="SkolenieOtazka" />
+    </AssociationSet>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Skolenia">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Skolenie" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Skolenie/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Referencia"
+          Nullable="True"
+          Property="Skolenie/Properties[Referencia]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="200"
+          Name="Nazov"
+          Nullable="True"
+          Property="Skolenie/Properties[Nazov]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Uskutocnene"
+          Nullable="True"
+          Property="Skolenie/Properties[Uskutocnene]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="Nasledujuce"
+          Nullable="True"
+          Property="Skolenie/Properties[Nasledujuce]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="200"
+          Name="MiestoKonania"
+          Nullable="True"
+          Property="Skolenie/Properties[MiestoKonania]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="UcastCelkom"
+          Nullable="True"
+          Property="Skolenie/Properties[UcastCelkom]"
+          Type="int" />
+        <SsdlProperty
+          Name="Vyhovelo"
+          Nullable="True"
+          Property="Skolenie/Properties[Vyhovelo]"
+          Type="int" />
+        <SsdlProperty
+          Name="Nevyhovelo"
+          Nullable="True"
+          Property="Skolenie/Properties[Nevyhovelo]"
+          Type="int" />
+        <SsdlProperty
+          Name="Vyska15"
+          Nullable="True"
+          Property="Skolenie/Properties[Vyska15]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Plosina"
+          Nullable="True"
+          Property="Skolenie/Properties[Plosina]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Rebrik5"
+          Nullable="True"
+          Property="Skolenie/Properties[Rebrik5]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Hlbka13"
+          Nullable="True"
+          Property="Skolenie/Properties[Hlbka13]"
+          Type="bit" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Postroj"
+          Nullable="True"
+          Property="Skolenie/Properties[Postroj]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="PreukazyVydane"
+          Nullable="True"
+          Property="Skolenie/Properties[PreukazyVydane]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="PreukazyVydal"
+          Nullable="True"
+          Property="Skolenie/Properties[PreukazyVydal]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="CisloPreukazu"
+          Nullable="True"
+          Property="Skolenie/Properties[CisloPreukazu]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="I"
+          Nullable="True"
+          Property="Skolenie/Properties[I]"
+          Type="bit" />
+        <SsdlProperty
+          Name="A"
+          Nullable="True"
+          Property="Skolenie/Properties[A]"
+          Type="bit" />
+        <SsdlProperty
+          Name="B"
+          Nullable="True"
+          Property="Skolenie/Properties[B]"
+          Type="bit" />
+        <SsdlProperty
+          Name="C"
+          Nullable="True"
+          Property="Skolenie/Properties[C]"
+          Type="bit" />
+        <SsdlProperty
+          Name="D"
+          Nullable="True"
+          Property="Skolenie/Properties[D]"
+          Type="bit" />
+        <SsdlProperty
+          Name="E"
+          Nullable="True"
+          Property="Skolenie/Properties[E]"
+          Type="bit" />
+        <SsdlProperty
+          Name="W1"
+          Nullable="True"
+          Property="Skolenie/Properties[W1]"
+          Type="bit" />
+        <SsdlProperty
+          Name="W2"
+          Nullable="True"
+          Property="Skolenie/Properties[W2]"
+          Type="bit" />
+        <SsdlProperty
+          Name="G"
+          Nullable="True"
+          Property="Skolenie/Properties[G]"
+          Type="bit" />
+        <SsdlProperty
+          Name="II"
+          Nullable="True"
+          Property="Skolenie/Properties[II]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Z"
+          Nullable="True"
+          Property="Skolenie/Properties[Z]"
+          Type="bit" />
+        <SsdlProperty
+          Name="C_BezVodickehoOpravnenia"
+          Nullable="True"
+          Property="Skolenie/Properties[C_BezVodickehoOpravnenia]"
+          Type="bit" />
+        <SsdlProperty
+          Name="W1_BezVodickehoOpravnenia"
+          Nullable="True"
+          Property="Skolenie/Properties[W1_BezVodickehoOpravnenia]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Z_PocetHodin"
+          Nullable="True"
+          Property="Skolenie/Properties[Z_PocetHodin]"
+          Type="float" />
+        <SsdlProperty
+          Name="IdComputed"
+          Nullable="False"
+          Property="Skolenie/Properties[IdComputed]"
+          StoreGeneratedPattern="Computed"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="IdVarchar"
+          Nullable="True"
+          Property="Skolenie/Properties[IdVarchar]"
+          StoreGeneratedPattern="Computed"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="ClenKomisie1ID"
+          Nullable="True"
+          PropertyName="ClenKomisie1ID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ClenKomisie2ID"
+          Nullable="True"
+          PropertyName="ClenKomisie2ID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="NotifikovanyID"
+          Nullable="True"
+          PropertyName="NotifikovanyID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="OrganizaciaID"
+          Nullable="True"
+          PropertyName="OrganizaciaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="PredsedaKomisieID"
+          Nullable="True"
+          PropertyName="PredsedaKomisieID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="DruhID"
+          Nullable="True"
+          PropertyName="DruhID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="FormaSkusaniaID"
+          Nullable="True"
+          PropertyName="FormaSkusaniaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="PreKohoID"
+          Nullable="True"
+          PropertyName="PreKohoID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="TypID"
+          Nullable="True"
+          PropertyName="TypID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="SkolitelID"
+          Nullable="True"
+          PropertyName="SkolitelID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ZmluvaID"
+          Nullable="True"
+          PropertyName="ZmluvaID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_SkolenieOtazka_Skolenie">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_SkolenieOtazka_Skolenie" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkolenieOtazka_Skolenie]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkolenieOtazka_Skolenie]/Members[SkolenieOtazka]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SkolenieID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_SkoleniePosluchac_Skolenie">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_SkoleniePosluchac_Skolenie" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkoleniePosluchac_Skolenie]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkoleniePosluchac_Skolenie]/Members[SkoleniePosluchac]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SkolenieID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Organizacia">
+    <EntityType.Attributes />
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Referencia"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Poznamka"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Ulica"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PSC"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Mesto"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Mail"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Telefon"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Fax"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ICO"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="DIC"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_KontaktnaOsoba_Organizacia"
+        FromEnd="Organizacia"
+        Name="KontaktnaOsobas"
+        ToEnd="KontaktnaOsoba" />
+      <NavigationProperty
+        Association="FK_Organizacia_Krajina"
+        FromEnd="Organizacia"
+        Name="Krajina"
+        ToEnd="Krajina" />
+      <NavigationProperty
+        Association="FK_Organizacia_Matka"
+        FromEnd="Organizacia"
+        Name="Organizacias"
+        ToEnd="Organizacia1">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Expozitury" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Organizacia_Matka"
+        FromEnd="Organizacia1"
+        Name="Organizacia1"
+        ToEnd="Organizacia">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Matka" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Organizacia_OrganizaciaStav"
+        FromEnd="Organizacia"
+        Name="OrganizaciaStav"
+        ToEnd="OrganizaciaStav">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Stav" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Posluchac_Organizacia"
+        FromEnd="Organizacia"
+        Name="Posluchacs"
+        ToEnd="Posluchac">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Posluchaci" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_Organizacia"
+        FromEnd="Organizacia"
+        Name="Skolenies"
+        ToEnd="Skolenie">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Skolenia" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Zmluva_Organizacia"
+        FromEnd="Organizacia"
+        Name="Zmluvas"
+        ToEnd="Zmluva">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Zmluvy" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_KontaktnaOsoba_Organizacia">
+    <AssociationEnd
+      EntityType="Organizacia"
+      Name="Organizacia">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="KontaktnaOsoba"
+      Multiplicity="Many"
+      Name="KontaktnaOsoba" />
+  </Association>
+  <Association
+    Name="FK_Organizacia_Matka">
+    <AssociationEnd
+      EntityType="Organizacia"
+      Name="Organizacia">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Organizacia"
+      Multiplicity="Many"
+      Name="Organizacia1" />
+  </Association>
+  <Association
+    Name="FK_Posluchac_Organizacia">
+    <AssociationEnd
+      EntityType="Organizacia"
+      Name="Organizacia">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Posluchac"
+      Multiplicity="Many"
+      Name="Posluchac" />
+  </Association>
+  <Association
+    Name="FK_Skolenie_Organizacia">
+    <AssociationEnd
+      EntityType="Organizacia"
+      Name="Organizacia">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <Association
+    Name="FK_Zmluva_Organizacia">
+    <AssociationEnd
+      EntityType="Organizacia"
+      Name="Organizacia">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Zmluva"
+      Multiplicity="Many"
+      Name="Zmluva" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Organizacia"
+      Name="Organizacie" />
+    <AssociationSet
+      Association="FK_KontaktnaOsoba_Organizacia"
+      Name="FK_KontaktnaOsoba_Organizacia">
+      <AssociationSetEnd
+        EntitySet="Organizacie"
+        Name="Organizacia" />
+      <AssociationSetEnd
+        EntitySet="KontaktneOsoby"
+        Name="KontaktnaOsoba" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Organizacia_Matka"
+      Name="FK_Organizacia_Matka">
+      <AssociationSetEnd
+        EntitySet="Organizacie"
+        Name="Organizacia" />
+      <AssociationSetEnd
+        EntitySet="Organizacie"
+        Name="Organizacia1" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Posluchac_Organizacia"
+      Name="FK_Posluchac_Organizacia">
+      <AssociationSetEnd
+        EntitySet="Organizacie"
+        Name="Organizacia" />
+      <AssociationSetEnd
+        EntitySet="Posluchacs"
+        Name="Posluchac" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Skolenie_Organizacia"
+      Name="FK_Skolenie_Organizacia">
+      <AssociationSetEnd
+        EntitySet="Organizacie"
+        Name="Organizacia" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Zmluva_Organizacia"
+      Name="FK_Zmluva_Organizacia">
+      <AssociationSetEnd
+        EntitySet="Organizacie"
+        Name="Organizacia" />
+      <AssociationSetEnd
+        EntitySet="Zmluvy"
+        Name="Zmluva" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Organizacie_Single"
+      ReturnType="Organizacia">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Organizacie" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Organizacie_SingleOrDefault"
+      ReturnType="Organizacia">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Organizacie" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Organizacie_All"
+      ReturnType="Organizacia*">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns all entities contained in the entity set." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree />
+      </QueryOperation.FilterExpression>
+      <QueryOperation.SortCriteria>
+        <SortCriterion>
+          <ChainExpression>
+            <MemberExpression
+              Member="Nazov" />
+          </ChainExpression>
+        </SortCriterion>
+      </QueryOperation.SortCriteria>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Organizacie" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Organizacie">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Organizacia" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Organizacia/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Referencia"
+          Nullable="True"
+          Property="Organizacia/Properties[Referencia]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Nazov"
+          Nullable="True"
+          Property="Organizacia/Properties[Nazov]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Poznamka"
+          Nullable="True"
+          Property="Organizacia/Properties[Poznamka]"
+          Type="varchar(max)" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Ulica"
+          Nullable="True"
+          Property="Organizacia/Properties[Ulica]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="PSC"
+          Nullable="True"
+          Property="Organizacia/Properties[PSC]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Mesto"
+          Nullable="True"
+          Property="Organizacia/Properties[Mesto]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Mail"
+          Nullable="True"
+          Property="Organizacia/Properties[Mail]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Telefon"
+          Nullable="True"
+          Property="Organizacia/Properties[Telefon]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Fax"
+          Nullable="True"
+          Property="Organizacia/Properties[Fax]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ICO"
+          Nullable="True"
+          Property="Organizacia/Properties[ICO]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="DIC"
+          Nullable="True"
+          Property="Organizacia/Properties[DIC]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="KrajinaID"
+          Nullable="True"
+          PropertyName="KrajinaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="Matka"
+          Nullable="True"
+          PropertyName="Matka"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="StavID"
+          Nullable="True"
+          PropertyName="StavID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KontaktnaOsoba_Organizacia">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KontaktnaOsoba_Organizacia" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_KontaktnaOsoba_Organizacia]/Members[Organizacia]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_KontaktnaOsoba_Organizacia]/Members[KontaktnaOsoba]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrganizaciaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Organizacia_Matka">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Organizacia_Matka" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Organizacia_Matka]/Members[Organizacia]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Organizacia_Matka]/Members[Organizacia1]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Matka" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Posluchac_Organizacia">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Posluchac_Organizacia" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Posluchac_Organizacia]/Members[Organizacia]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Posluchac_Organizacia]/Members[Posluchac]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrganizaciaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_Organizacia">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_Organizacia" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_Organizacia]/Members[Organizacia]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_Organizacia]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrganizaciaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zmluva_Organizacia">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zmluva_Organizacia" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_Organizacia]/Members[Organizacia]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_Organizacia]/Members[Zmluva]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrganizaciaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="SkolenieTyp">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Notifikacia1"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Notifikacia2"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Notifikacia3"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="CisloOpravnenia"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_SkolenieTyp"
+        FromEnd="SkolenieTyp"
+        Name="Skolenies"
+        ToEnd="Skolenie" />
+      <NavigationProperty
+        Association="FK_SkolenieTypOtazka_SkolenieTyp"
+        FromEnd="SkolenieTyp"
+        Name="SkolenieTypOtazkas"
+        ToEnd="SkolenieTypOtazka" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Skolenie_SkolenieTyp">
+    <AssociationEnd
+      EntityType="SkolenieTyp"
+      Name="SkolenieTyp">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <Association
+    Name="FK_SkolenieTypOtazka_SkolenieTyp">
+    <AssociationEnd
+      EntityType="SkolenieTyp"
+      Multiplicity="One"
+      Name="SkolenieTyp">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="SkolenieTypOtazka"
+      Multiplicity="Many"
+      Name="SkolenieTypOtazka" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="SkolenieTyp"
+      Name="SkolenieTyps" />
+    <AssociationSet
+      Association="FK_Skolenie_SkolenieTyp"
+      Name="FK_Skolenie_SkolenieTyp">
+      <AssociationSetEnd
+        EntitySet="SkolenieTyps"
+        Name="SkolenieTyp" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <QueryOperation
+      Name="SkolenieTyps_Single"
+      ReturnType="SkolenieTyp">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkolenieTyps" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="SkolenieTyps_SingleOrDefault"
+      ReturnType="SkolenieTyp">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkolenieTyps" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <AssociationSet
+      Association="FK_SkolenieTypOtazka_SkolenieTyp"
+      Name="FK_SkolenieTypOtazka_SkolenieTyp">
+      <AssociationSetEnd
+        EntitySet="SkolenieTyps"
+        Name="SkolenieTyp" />
+      <AssociationSetEnd
+        EntitySet="SkolenieTypOtazkas"
+        Name="SkolenieTypOtazka" />
+    </AssociationSet>
+    <QueryOperation
+      Name="SkolenieTyps_All"
+      ReturnType="SkolenieTyp*">
+      <QueryOperation.Attributes>
+        <Generated />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree />
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkolenieTyps" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="SkolenieTyps">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="SkolenieTyp" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="SkolenieTyp/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Nazov"
+          Nullable="True"
+          Property="SkolenieTyp/Properties[Nazov]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Notifikacia1"
+          Nullable="True"
+          Property="SkolenieTyp/Properties[Notifikacia1]"
+          Type="int" />
+        <SsdlProperty
+          Name="Notifikacia2"
+          Nullable="True"
+          Property="SkolenieTyp/Properties[Notifikacia2]"
+          Type="int" />
+        <SsdlProperty
+          Name="Notifikacia3"
+          Nullable="True"
+          Property="SkolenieTyp/Properties[Notifikacia3]"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="CisloOpravnenia"
+          Nullable="True"
+          Property="SkolenieTyp/Properties[CisloOpravnenia]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_SkolenieTyp">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_SkolenieTyp" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_SkolenieTyp]/Members[SkolenieTyp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_SkolenieTyp]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="TypID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_SkolenieTypOtazka_SkolenieTyp">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_SkolenieTypOtazka_SkolenieTyp" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkolenieTypOtazka_SkolenieTyp]/Members[SkolenieTyp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkolenieTypOtazka_SkolenieTyp]/Members[SkolenieTypOtazka]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SkolenieTypID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

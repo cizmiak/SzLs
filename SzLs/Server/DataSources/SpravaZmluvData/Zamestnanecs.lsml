@@ -1,0 +1,915 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Zamestnanec">
+    <EntityType.Attributes />
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Login"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Meno"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Priezvisko"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Titul"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Pozicia"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Email"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_ClenKomisie1"
+        FromEnd="Zamestnanec"
+        Name="Skolenies"
+        ToEnd="Skolenie">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Skolenia Clen Komisie 1" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_ClenKomisie2"
+        FromEnd="Zamestnanec"
+        Name="Skolenies1"
+        ToEnd="Skolenie">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Skolenia Clen Komisie 2" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_PredsedaKomisie"
+        FromEnd="Zamestnanec"
+        Name="Skolenies2"
+        ToEnd="Skolenie">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Skolenia Predseda Komisie" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_Zamestnanec"
+        FromEnd="Zamestnanec"
+        Name="Skolenies3"
+        ToEnd="Skolenie">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Skolenia Lektor" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Uloha_Riesitel"
+        FromEnd="Zamestnanec"
+        Name="Ulohas"
+        ToEnd="Uloha">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Ulohy Riesitel" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Uloha_Upravil"
+        FromEnd="Zamestnanec"
+        Name="Ulohas1"
+        ToEnd="Uloha">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Ulohy Upravil" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Zamestnanec_Nadriadeny"
+        FromEnd="Zamestnanec"
+        Name="Zamestnanecs"
+        ToEnd="Zamestnanec1">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Podriadeni" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Zamestnanec_Nadriadeny"
+        FromEnd="Zamestnanec1"
+        Name="Zamestnanec1"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Nadriadeny" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Zamestnanec_Rola"
+        FromEnd="Zamestnanec"
+        Name="Rola"
+        ToEnd="Rola" />
+      <NavigationProperty
+        Association="FK_Zamestnanec_ZamestnanecStav"
+        FromEnd="Zamestnanec"
+        Name="ZamestnanecStav"
+        ToEnd="ZamestnanecStav" />
+      <NavigationProperty
+        Association="FK_Zmluva_Upravil"
+        FromEnd="Zamestnanec"
+        Name="Zmluvas"
+        ToEnd="Zmluva">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Zmluvy Upravil" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Zmluva_Zamestnanec"
+        FromEnd="Zamestnanec"
+        Name="Zmluvas1"
+        ToEnd="Zmluva">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Zmluvy Zodpovedny" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_ZmluvaPredmet_Zamestnanec"
+        FromEnd="Zamestnanec"
+        Name="ZmluvaPredmets"
+        ToEnd="ZmluvaPredmet" />
+      <EntityProperty
+        IsReadOnly="True"
+        Name="CeleMeno"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Computed />
+          <NotSearchable />
+          <NotSortable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Skolenie_Notifikovany"
+        FromEnd="Zamestnanec"
+        Name="Skolenies4"
+        ToEnd="Skolenie" />
+      <EntityProperty
+        Name="Podpis"
+        PropertyType="Microsoft.LightSwitch.Extensions:Image?">
+        <EntityProperty.Attributes>
+          <MaxLength />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Skolenie_ClenKomisie1">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <Association
+    Name="FK_Skolenie_ClenKomisie2">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <Association
+    Name="FK_Skolenie_PredsedaKomisie">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <Association
+    Name="FK_Skolenie_Zamestnanec">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <Association
+    Name="FK_Uloha_Riesitel">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Uloha"
+      Multiplicity="Many"
+      Name="Uloha" />
+  </Association>
+  <Association
+    Name="FK_Uloha_Upravil">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Uloha"
+      Multiplicity="Many"
+      Name="Uloha" />
+  </Association>
+  <Association
+    Name="FK_Zamestnanec_Nadriadeny">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Multiplicity="Many"
+      Name="Zamestnanec1" />
+  </Association>
+  <Association
+    Name="FK_Zmluva_Upravil">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Zmluva"
+      Multiplicity="Many"
+      Name="Zmluva" />
+  </Association>
+  <Association
+    Name="FK_Zmluva_Zamestnanec">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Zmluva"
+      Multiplicity="Many"
+      Name="Zmluva" />
+  </Association>
+  <Association
+    Name="FK_ZmluvaPredmet_Zamestnanec">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="ZmluvaPredmet"
+      Multiplicity="Many"
+      Name="ZmluvaPredmet" />
+  </Association>
+  <Association
+    Name="FK_Skolenie_Notifikovany">
+    <AssociationEnd
+      EntityType="Zamestnanec"
+      Name="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Skolenie"
+      Multiplicity="Many"
+      Name="Skolenie" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Zamestnanec"
+      Name="Zamestnanecs" />
+    <AssociationSet
+      Association="FK_Skolenie_ClenKomisie1"
+      Name="FK_Skolenie_ClenKomisie1">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Skolenie_ClenKomisie2"
+      Name="FK_Skolenie_ClenKomisie2">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Skolenie_PredsedaKomisie"
+      Name="FK_Skolenie_PredsedaKomisie">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Skolenie_Zamestnanec"
+      Name="FK_Skolenie_Zamestnanec">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Uloha_Riesitel"
+      Name="FK_Uloha_Riesitel">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Uloha_Upravil"
+      Name="FK_Uloha_Upravil">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Zamestnanec_Nadriadeny"
+      Name="FK_Zamestnanec_Nadriadeny">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec1" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Zmluva_Upravil"
+      Name="FK_Zmluva_Upravil">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Zmluvy"
+        Name="Zmluva" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Zmluva_Zamestnanec"
+      Name="FK_Zmluva_Zamestnanec">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Zmluvy"
+        Name="Zmluva" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_ZmluvaPredmet_Zamestnanec"
+      Name="FK_ZmluvaPredmet_Zamestnanec">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="ZmluvaPredmets"
+        Name="ZmluvaPredmet" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Zamestnanecs_Single"
+      ReturnType="Zamestnanec">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Zamestnanecs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Zamestnanecs_SingleOrDefault"
+      ReturnType="Zamestnanec">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Zamestnanecs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <AssociationSet
+      Association="FK_Skolenie_Notifikovany"
+      Name="FK_Skolenie_Notifikovany">
+      <AssociationSetEnd
+        EntitySet="Zamestnanecs"
+        Name="Zamestnanec" />
+      <AssociationSetEnd
+        EntitySet="Skolenia"
+        Name="Skolenie" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Zamestnanecs_All"
+      ReturnType="Zamestnanec*">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns all entities contained in the entity set." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree />
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Zamestnanecs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Zamestnanecs">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Zamestnanec" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Zamestnanec/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Login"
+          Nullable="True"
+          Property="Zamestnanec/Properties[Login]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Meno"
+          Nullable="True"
+          Property="Zamestnanec/Properties[Meno]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Priezvisko"
+          Nullable="True"
+          Property="Zamestnanec/Properties[Priezvisko]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="Titul"
+          Nullable="True"
+          Property="Zamestnanec/Properties[Titul]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Pozicia"
+          Nullable="True"
+          Property="Zamestnanec/Properties[Pozicia]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Email"
+          Nullable="True"
+          Property="Zamestnanec/Properties[Email]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Podpis"
+          Nullable="True"
+          Property="Zamestnanec/Properties[Podpis]"
+          Type="varbinary(max)" />
+        <SsdlForeignKeyProperty
+          Name="Nadriadeny"
+          Nullable="True"
+          PropertyName="Nadriadeny"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="RolaID"
+          Nullable="True"
+          PropertyName="RolaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="StavID"
+          Nullable="True"
+          PropertyName="StavID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_ClenKomisie1">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_ClenKomisie1" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_ClenKomisie1]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_ClenKomisie1]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ClenKomisie1ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_ClenKomisie2">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_ClenKomisie2" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_ClenKomisie2]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_ClenKomisie2]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ClenKomisie2ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_Notifikovany">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_Notifikovany" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_Notifikovany]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_Notifikovany]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="NotifikovanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_PredsedaKomisie">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_PredsedaKomisie" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_PredsedaKomisie]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_PredsedaKomisie]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PredsedaKomisieID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Skolenie_Zamestnanec">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Skolenie_Zamestnanec" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_Zamestnanec]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Skolenie_Zamestnanec]/Members[Skolenie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SkolitelID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Uloha_Riesitel">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Uloha_Riesitel" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Riesitel]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Riesitel]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Riesitel" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Uloha_Upravil">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Uloha_Upravil" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Upravil]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Upravil]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Upravil" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zamestnanec_Nadriadeny">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zamestnanec_Nadriadeny" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zamestnanec_Nadriadeny]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zamestnanec_Nadriadeny]/Members[Zamestnanec1]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Nadriadeny" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zmluva_Upravil">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zmluva_Upravil" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_Upravil]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_Upravil]/Members[Zmluva]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UpravilID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zmluva_Zamestnanec">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zmluva_Zamestnanec" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_Zamestnanec]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_Zamestnanec]/Members[Zmluva]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Zodpovedny" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ZmluvaPredmet_Zamestnanec">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ZmluvaPredmet_Zamestnanec" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_ZmluvaPredmet_Zamestnanec]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_ZmluvaPredmet_Zamestnanec]/Members[ZmluvaPredmet]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Riesitel" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

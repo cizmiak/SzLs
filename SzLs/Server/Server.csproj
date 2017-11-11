@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectTypeGuids>{8BB0C5E8-0616-4F60-8E55-A43933E57E9C};{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{09E3804B-EE43-4A18-9F80-4761BB51A25D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LightSwitchApplication</RootNamespace>
+    <AssemblyName>Application.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <LightSwitchVersion>v5.0</LightSwitchVersion>
+    <FileAlignment>512</FileAlignment>
+    <IgnoreDeployManagedRuntimeVersion>True</IgnoreDeployManagedRuntimeVersion>
+    <UseDeclareParametersXMLInMsDeploy>False</UseDeclareParametersXMLInMsDeploy>
+    <WCFRIASERVICESSDKPath Condition=" '$(WCFRIASERVICESSDKPath)' == '' ">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WCFRIAServices\v1.0@InstallPath)</WCFRIASERVICESSDKPath>
+    <WCFRIASERVICESSDKPath Condition=" '$(WCFRIASERVICESSDKPath)' == '' ">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\WCFRIAServices\v1.0@InstallPath)</WCFRIASERVICESSDKPath>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MicrosoftSdkDir Condition="'$(MicrosoftSdkDir)' == ''">$([System.IO.Path]::Combine($(MSBuildProgramFiles32), 'Microsoft SDKs'))</MicrosoftSdkDir>
+    <LightSwitchSdkPath Condition="'$(LightSwitchSdkPath)' == ''">$([System.IO.Path]::Combine($(MicrosoftSdkDir), 'LightSwitch', $(LightSwitchVersion)))</LightSwitchSdkPath>
+    <LightSwitchSdkPath Condition="'$(LightSwitchSDKPath)' != '' and !HasTrailingSlash('$(LightSwitchSDKPath)')">$(LightSwitchSDKPath)\</LightSwitchSdkPath>
+    <SupportedCultures>en-US</SupportedCultures>
+    <LightSwitchDisplayName>Server</LightSwitchDisplayName>
+    <NuGetPackagesFolder Condition=" Exists('..\Packages')">..\Packages\</NuGetPackagesFolder>
+    <NuGetPackagesFolder Condition=" Exists('..\..\Packages')">..\..\Packages\</NuGetPackagesFolder>
+    <LightSwitchProjectTypeV45>Server</LightSwitchProjectTypeV45>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseDesignTimeFeatures>true</UseDesignTimeFeatures>
+    <NoWarn>1522</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseDesignTimeFeatures>false</UseDesignTimeFeatures>
+    <NoWarn>1522</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.LightSwitch.Extensions.Server">
+      <HintPath>..\_Pvt_Extensions\Microsoft.LightSwitch.Extensions\Server\Reference\Microsoft.LightSwitch.Extensions.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>$(NuGetPackagesFolder)\System.IdentityModel.Tokens.Jwt.1.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+      <ProjectCritical>True</ProjectCritical>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.LightSwitch">
+      <HintPath>$(LightSwitchSDKPath)\Client\Microsoft.LightSwitch.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.LightSwitch.AppBridge">
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.LightSwitch.AppBridge.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.LightSwitch.ExportProvider, Version=10.0.14.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>$(LightSwitchSDKPath)\Client\Microsoft.LightSwitch.ExportProvider.dll</HintPath>
+      <SpecificVersion>True</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.LightSwitch.CodeMarker, Version=14.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>$(LightSwitchSDKPath)\Client\Microsoft.LightSwitch.CodeMarker.dll</HintPath>
+      <SpecificVersion>True</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.LightSwitch.ManifestService">
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.LightSwitch.ManifestService.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.LightSwitch.Model.Xaml">
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.LightSwitch.Model.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.LightSwitch.Server">
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.LightSwitch.Server.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.LightSwitch.Server.Host">
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.LightSwitch.Server.Host.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.PollingDuplex">
+      <HintPath>$(LightSwitchSDKPath)\Server\System.ServiceModel.PollingDuplex.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm">
+      <Private>True</Private>
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData">
+      <Private>True</Private>
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services">
+      <Private>True</Private>
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.Data.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client">
+      <Private>True</Private>
+      <HintPath>$(LightSwitchSDKPath)\Server\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial">
+      <Private>True</Private>
+      <HintPath>$(LightSwitchSDKPath)\Server\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.EntityFramework">
+      <HintPath>$(WCFRIASERVICESSDKPath)\v1.0\Libraries\Server\System.ServiceModel.DomainServices.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.Hosting">
+      <HintPath>$(WCFRIASERVICESSDKPath)\v1.0\Libraries\Server\System.ServiceModel.DomainServices.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.Hosting.OData">
+      <HintPath>$(WCFRIASERVICESSDKPath)\v1.0\Libraries\Server\System.ServiceModel.DomainServices.Hosting.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.DomainServices.Server">
+      <HintPath>$(WCFRIASERVICESSDKPath)\v1.0\Libraries\Server\System.ServiceModel.DomainServices.Server.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSources\SpravaZmluvData\_SpravaZmluvDataService.lsml.cs" />
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserCode\Shared\Organizacia.cs" />
+    <Compile Include="UserCode\Shared\Posluchac.cs" />
+    <Compile Include="UserCode\Shared\Skolenie.cs" />
+    <Compile Include="UserCode\Shared\SkoleniePosluchac.cs" />
+    <Compile Include="UserCode\Shared\Uloha.cs" />
+    <Compile Include="UserCode\Shared\Zamestnanec.cs" />
+    <Compile Include="UserCode\Shared\Zmluva.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <LightSwitchModel Include="Properties\Service.lsml">
+      <ProjectCritical>true</ProjectCritical>
+    </LightSwitchModel>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="default.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <_ServerFile Include="packages.config" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Entitas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Jednotkas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Konfiguracias.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\KontaktneOsoby.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\KontaktnaOsobaStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Krajinas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\NaVedomies.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Oblasts.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Organizacie.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\OrganizaciaStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Portfolios.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\PortfolioKategorias.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\PortfolioStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Posluchacs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\PosluchacStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\PracovneZaradenies.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Rolas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Rozsahs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Skolenia.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkolenieDruhs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkolenieFormaSkusanias.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkolenieNotificateds.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkoleniePosluchacs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkoleniePreKohoes.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkolenieTyps.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkolenieVysledoks.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Ulohy.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UlohaPrilohas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UlohaStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UlohaTyps.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UvodnaPracas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UvodnaPracaStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Zamestnanecs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\ZamestnanecStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Zmluvy.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\ZmluvaPredmets.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\ZmluvaRozsahs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\ZmluvaStavs.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\ZmluvaTyps.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Otazkas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkolenieOtazky.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkolenieTypOtazkas.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkoleniePreKohoOtazkas.lsml" />
+    <LightSwitchModel Include="Properties\DataSources\SpravaZmluvData.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\PosluchaciNezaradeni.lsml">
+      <DependentUpon>Posluchacs.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\KonfiguracnaHodnota.lsml">
+      <DependentUpon>Konfiguracias.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UlohaTypVykon.lsml">
+      <DependentUpon>UlohaTyps.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UlohaTypUvodnaPraca.lsml">
+      <DependentUpon>UlohaTyps.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UlohyVykon.lsml">
+      <DependentUpon>Ulohy.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\UlohyUvodnaPraca.lsml">
+      <DependentUpon>Ulohy.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\ZamestnanecPodlaLoginu.lsml">
+      <DependentUpon>Zamestnanecs.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\OrganizaciePodlaNazvu.lsml">
+      <DependentUpon>Organizacie.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\OtazkyPreSkolenie.lsml">
+      <DependentUpon>Otazkas.lsml</DependentUpon>
+    </LightSwitchModel>
+    <None Include="Web.Debug.Config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.Config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\LightSwitch\$(LightSwitchVersion)\Microsoft.LightSwitch.Build.Tasks.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349C5851-65DF-11DA-9384-00065B846F21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58808</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58808/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{8BB0C5E8-0616-4F60-8E55-A43933E57E9C}" Configuration="Debug|Any CPU">
+        <SpecializedConfiguration />
+      </FlavorProperties>
+      <FlavorProperties GUID="{8BB0C5E8-0616-4F60-8E55-A43933E57E9C}" Configuration="Release|Any CPU">
+        <SpecializedConfiguration />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

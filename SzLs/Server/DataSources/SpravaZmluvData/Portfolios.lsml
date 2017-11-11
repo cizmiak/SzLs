@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Portfolio">
+    <EntityType.Attributes />
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Referencia"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="256" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Popis"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="512" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="CenaVynos"
+        PropertyType=":Decimal?">
+        <EntityProperty.Attributes>
+          <DecimalConstraint
+            Precision="19"
+            Scale="4" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="CenaNaklad"
+        PropertyType=":Decimal?">
+        <EntityProperty.Attributes>
+          <DecimalConstraint
+            Precision="19"
+            Scale="4" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Portfolio_PortfolioKategoria"
+        FromEnd="Portfolio"
+        Name="PortfolioKategoria"
+        ToEnd="PortfolioKategoria" />
+      <NavigationProperty
+        Association="FK_Portfolio_PortfolioStav"
+        FromEnd="Portfolio"
+        Name="PortfolioStav"
+        ToEnd="PortfolioStav" />
+      <NavigationProperty
+        Association="FK_Uloha_Portfolio"
+        FromEnd="Portfolio"
+        Name="Ulohas"
+        ToEnd="Uloha" />
+      <NavigationProperty
+        Association="FK_ZmluvaPredmet_Portfolio"
+        FromEnd="Portfolio"
+        Name="ZmluvaPredmets"
+        ToEnd="ZmluvaPredmet" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Uloha_Portfolio">
+    <AssociationEnd
+      EntityType="Portfolio"
+      Name="Portfolio">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Uloha"
+      Multiplicity="Many"
+      Name="Uloha" />
+  </Association>
+  <Association
+    Name="FK_ZmluvaPredmet_Portfolio">
+    <AssociationEnd
+      EntityType="Portfolio"
+      Multiplicity="One"
+      Name="Portfolio">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="ZmluvaPredmet"
+      Multiplicity="Many"
+      Name="ZmluvaPredmet" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Portfolio"
+      Name="Portfolios" />
+    <AssociationSet
+      Association="FK_Uloha_Portfolio"
+      Name="FK_Uloha_Portfolio">
+      <AssociationSetEnd
+        EntitySet="Portfolios"
+        Name="Portfolio" />
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_ZmluvaPredmet_Portfolio"
+      Name="FK_ZmluvaPredmet_Portfolio">
+      <AssociationSetEnd
+        EntitySet="Portfolios"
+        Name="Portfolio" />
+      <AssociationSetEnd
+        EntitySet="ZmluvaPredmets"
+        Name="ZmluvaPredmet" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Portfolios_Single"
+      ReturnType="Portfolio">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Portfolios" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Portfolios_SingleOrDefault"
+      ReturnType="Portfolio">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Portfolios" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Portfolios_All"
+      ReturnType="Portfolio*">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns all entities contained in the entity set." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree />
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Portfolios" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Portfolios">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Portfolio" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Portfolio/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Referencia"
+          Nullable="True"
+          Property="Portfolio/Properties[Referencia]"
+          Type="nvarchar" />
+        <SsdlProperty
+          MaxLength="256"
+          Name="Nazov"
+          Nullable="True"
+          Property="Portfolio/Properties[Nazov]"
+          Type="nvarchar" />
+        <SsdlProperty
+          MaxLength="512"
+          Name="Popis"
+          Nullable="True"
+          Property="Portfolio/Properties[Popis]"
+          Type="nvarchar" />
+        <SsdlProperty
+          Name="CenaVynos"
+          Nullable="True"
+          Property="Portfolio/Properties[CenaVynos]"
+          Type="money" />
+        <SsdlProperty
+          Name="CenaNaklad"
+          Nullable="True"
+          Property="Portfolio/Properties[CenaNaklad]"
+          Type="money" />
+        <SsdlForeignKeyProperty
+          Name="KategoriaID"
+          Nullable="True"
+          PropertyName="KategoriaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="StavID"
+          Nullable="True"
+          PropertyName="StavID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Uloha_Portfolio">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Uloha_Portfolio" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Portfolio]/Members[Portfolio]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Portfolio]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PortfolioID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ZmluvaPredmet_Portfolio">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ZmluvaPredmet_Portfolio" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_ZmluvaPredmet_Portfolio]/Members[Portfolio]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_ZmluvaPredmet_Portfolio]/Members[ZmluvaPredmet]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PortfolioID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

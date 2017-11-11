@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Jednotka">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Znacka"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="5" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="SQLName"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Uloha_PortfolioJednotka"
+        FromEnd="Jednotka"
+        Name="Ulohas"
+        ToEnd="Uloha" />
+      <NavigationProperty
+        Association="FK_Zmluva_PeriodaFakturJednotka"
+        FromEnd="Jednotka"
+        Name="Zmluvas"
+        ToEnd="Zmluva" />
+      <NavigationProperty
+        Association="FK_Zmluva_PocetVykonovJednotka"
+        FromEnd="Jednotka"
+        Name="Zmluvas1"
+        ToEnd="Zmluva" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Uloha_PortfolioJednotka">
+    <AssociationEnd
+      EntityType="Jednotka"
+      Name="Jednotka">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Uloha"
+      Multiplicity="Many"
+      Name="Uloha" />
+  </Association>
+  <Association
+    Name="FK_Zmluva_PeriodaFakturJednotka">
+    <AssociationEnd
+      EntityType="Jednotka"
+      Name="Jednotka">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Zmluva"
+      Multiplicity="Many"
+      Name="Zmluva" />
+  </Association>
+  <Association
+    Name="FK_Zmluva_PocetVykonovJednotka">
+    <AssociationEnd
+      EntityType="Jednotka"
+      Name="Jednotka">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Zmluva"
+      Multiplicity="Many"
+      Name="Zmluva" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Jednotka"
+      Name="Jednotkas" />
+    <AssociationSet
+      Association="FK_Uloha_PortfolioJednotka"
+      Name="FK_Uloha_PortfolioJednotka">
+      <AssociationSetEnd
+        EntitySet="Jednotkas"
+        Name="Jednotka" />
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Zmluva_PeriodaFakturJednotka"
+      Name="FK_Zmluva_PeriodaFakturJednotka">
+      <AssociationSetEnd
+        EntitySet="Jednotkas"
+        Name="Jednotka" />
+      <AssociationSetEnd
+        EntitySet="Zmluvy"
+        Name="Zmluva" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Zmluva_PocetVykonovJednotka"
+      Name="FK_Zmluva_PocetVykonovJednotka">
+      <AssociationSetEnd
+        EntitySet="Jednotkas"
+        Name="Jednotka" />
+      <AssociationSetEnd
+        EntitySet="Zmluvy"
+        Name="Zmluva" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Jednotkas_Single"
+      ReturnType="Jednotka">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Jednotkas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Jednotkas_SingleOrDefault"
+      ReturnType="Jednotka">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Jednotkas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Jednotkas">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Jednotka" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Jednotka/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="5"
+          Name="Znacka"
+          Nullable="True"
+          Property="Jednotka/Properties[Znacka]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="Nazov"
+          Nullable="True"
+          Property="Jednotka/Properties[Nazov]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="SQLName"
+          Nullable="True"
+          Property="Jednotka/Properties[SQLName]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Uloha_PortfolioJednotka">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Uloha_PortfolioJednotka" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_PortfolioJednotka]/Members[Jednotka]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_PortfolioJednotka]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PortfolioJednotkaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zmluva_PeriodaFakturJednotka">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zmluva_PeriodaFakturJednotka" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_PeriodaFakturJednotka]/Members[Jednotka]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_PeriodaFakturJednotka]/Members[Zmluva]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PeriodaFakturJednotkaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zmluva_PocetVykonovJednotka">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zmluva_PocetVykonovJednotka" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_PocetVykonovJednotka]/Members[Jednotka]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Zmluva_PocetVykonovJednotka]/Members[Zmluva]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PocetVykonovJednotkaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

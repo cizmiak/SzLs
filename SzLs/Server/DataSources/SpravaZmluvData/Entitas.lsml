@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Entita">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Tabulka"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Entita_Parent"
+        FromEnd="Entita"
+        Name="Entitas"
+        ToEnd="Entita1" />
+      <NavigationProperty
+        Association="FK_Entita_Parent"
+        FromEnd="Entita1"
+        Name="Entita1"
+        ToEnd="Entita" />
+      <NavigationProperty
+        Association="FK_NaVedomie_Entita"
+        FromEnd="Entita"
+        Name="NaVedomies"
+        ToEnd="NaVedomie" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Entita_Parent">
+    <AssociationEnd
+      EntityType="Entita"
+      Name="Entita">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Entita"
+      Multiplicity="Many"
+      Name="Entita1" />
+  </Association>
+  <Association
+    Name="FK_NaVedomie_Entita">
+    <AssociationEnd
+      EntityType="Entita"
+      Multiplicity="One"
+      Name="Entita">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="NaVedomie"
+      Multiplicity="Many"
+      Name="NaVedomie" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Entita"
+      Name="Entitas" />
+    <AssociationSet
+      Association="FK_Entita_Parent"
+      Name="FK_Entita_Parent">
+      <AssociationSetEnd
+        EntitySet="Entitas"
+        Name="Entita" />
+      <AssociationSetEnd
+        EntitySet="Entitas"
+        Name="Entita1" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_NaVedomie_Entita"
+      Name="FK_NaVedomie_Entita">
+      <AssociationSetEnd
+        EntitySet="Entitas"
+        Name="Entita" />
+      <AssociationSetEnd
+        EntitySet="NaVedomies"
+        Name="NaVedomie" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Entitas_Single"
+      ReturnType="Entita">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Entitas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Entitas_SingleOrDefault"
+      ReturnType="Entita">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Entitas" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Entitas">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Entita" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Entita/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Tabulka"
+          Nullable="True"
+          Property="Entita/Properties[Tabulka]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="ParentID"
+          Nullable="True"
+          PropertyName="ParentID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Entita_Parent">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Entita_Parent" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Entita_Parent]/Members[Entita]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Entita_Parent]/Members[Entita1]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ParentID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_NaVedomie_Entita">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_NaVedomie_Entita" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_NaVedomie_Entita]/Members[Entita]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_NaVedomie_Entita]/Members[NaVedomie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="EntitaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

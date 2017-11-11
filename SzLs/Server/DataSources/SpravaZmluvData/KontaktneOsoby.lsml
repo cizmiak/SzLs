@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="KontaktnaOsoba">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Meno"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="20" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Priezvisko"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="20" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Titul"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Mail"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Telefon"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Fax"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Poznamka"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_KontaktnaOsoba_KontaktnaOsobaStav"
+        FromEnd="KontaktnaOsoba"
+        Name="KontaktnaOsobaStav"
+        ToEnd="KontaktnaOsobaStav" />
+      <NavigationProperty
+        Association="FK_KontaktnaOsoba_Organizacia"
+        FromEnd="KontaktnaOsoba"
+        Name="Organizacia"
+        ToEnd="Organizacia" />
+      <NavigationProperty
+        Association="FK_NaVedomie_KontaktnaOsoba"
+        FromEnd="KontaktnaOsoba"
+        Name="NaVedomies"
+        ToEnd="NaVedomie" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_NaVedomie_KontaktnaOsoba">
+    <AssociationEnd
+      EntityType="KontaktnaOsoba"
+      Multiplicity="One"
+      Name="KontaktnaOsoba">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="NaVedomie"
+      Multiplicity="Many"
+      Name="NaVedomie" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="KontaktnaOsoba"
+      Name="KontaktneOsoby" />
+    <AssociationSet
+      Association="FK_NaVedomie_KontaktnaOsoba"
+      Name="FK_NaVedomie_KontaktnaOsoba">
+      <AssociationSetEnd
+        EntitySet="KontaktneOsoby"
+        Name="KontaktnaOsoba" />
+      <AssociationSetEnd
+        EntitySet="NaVedomies"
+        Name="NaVedomie" />
+    </AssociationSet>
+    <QueryOperation
+      Name="KontaktneOsoby_Single"
+      ReturnType="KontaktnaOsoba">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="KontaktneOsoby" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="KontaktneOsoby_SingleOrDefault"
+      ReturnType="KontaktnaOsoba">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="KontaktneOsoby" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="KontaktneOsoby">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="KontaktnaOsoba" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="KontaktnaOsoba/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Meno"
+          Nullable="True"
+          Property="KontaktnaOsoba/Properties[Meno]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Priezvisko"
+          Nullable="True"
+          Property="KontaktnaOsoba/Properties[Priezvisko]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="Titul"
+          Nullable="True"
+          Property="KontaktnaOsoba/Properties[Titul]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Mail"
+          Nullable="True"
+          Property="KontaktnaOsoba/Properties[Mail]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Telefon"
+          Nullable="True"
+          Property="KontaktnaOsoba/Properties[Telefon]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Fax"
+          Nullable="True"
+          Property="KontaktnaOsoba/Properties[Fax]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Poznamka"
+          Nullable="True"
+          Property="KontaktnaOsoba/Properties[Poznamka]"
+          Type="varchar(max)" />
+        <SsdlForeignKeyProperty
+          Name="StavID"
+          Nullable="True"
+          PropertyName="StavID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="OrganizaciaID"
+          Nullable="True"
+          PropertyName="OrganizaciaID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_NaVedomie_KontaktnaOsoba">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_NaVedomie_KontaktnaOsoba" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_NaVedomie_KontaktnaOsoba]/Members[KontaktnaOsoba]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_NaVedomie_KontaktnaOsoba]/Members[NaVedomie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OsobaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

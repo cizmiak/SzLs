@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Uloha">
+    <EntityType.Attributes>
+      <DisplayName
+        Value="Uloha" />
+    </EntityType.Attributes>
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Poradie"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PortfolioPerioda"
+        PropertyType=":Int32?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Nazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Popis"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Deadline"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Plan"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="RiesitelIny"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="VyrieseneDna"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Sprava"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Vytvorene"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Upravovane"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="NavrhovaneRiesenie"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_NaVedomie_Uloha"
+        FromEnd="Uloha"
+        Name="NaVedomies"
+        ToEnd="NaVedomie" />
+      <NavigationProperty
+        Association="FK_Uloha_Oblast"
+        FromEnd="Uloha"
+        Name="Oblast"
+        ToEnd="Oblast" />
+      <NavigationProperty
+        Association="FK_Uloha_Parent"
+        FromEnd="Uloha"
+        Name="Ulohas"
+        ToEnd="Uloha1" />
+      <NavigationProperty
+        Association="FK_Uloha_Parent"
+        FromEnd="Uloha1"
+        Name="Uloha1"
+        ToEnd="Uloha" />
+      <NavigationProperty
+        Association="FK_Uloha_Portfolio"
+        FromEnd="Uloha"
+        Name="Portfolio"
+        ToEnd="Portfolio" />
+      <NavigationProperty
+        Association="FK_Uloha_PortfolioJednotka"
+        FromEnd="Uloha"
+        Name="Jednotka"
+        ToEnd="Jednotka" />
+      <NavigationProperty
+        Association="FK_Uloha_Riesitel"
+        FromEnd="Uloha"
+        Name="ZamestnanecRiesitel"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Riesitel" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Uloha_UlohaStav"
+        FromEnd="Uloha"
+        Name="UlohaStav"
+        ToEnd="UlohaStav" />
+      <NavigationProperty
+        Association="FK_Uloha_UlohaTyp"
+        FromEnd="Uloha"
+        Name="UlohaTyp"
+        ToEnd="UlohaTyp" />
+      <NavigationProperty
+        Association="FK_Uloha_Upravil"
+        FromEnd="Uloha"
+        Name="ZamestnanecUpravil"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Upravil" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <NavigationProperty
+        Association="FK_Uloha_UvodnaPraca"
+        FromEnd="Uloha"
+        Name="UvodnaPraca"
+        ToEnd="UvodnaPraca" />
+      <NavigationProperty
+        Association="FK_Uloha_Zmluva"
+        FromEnd="Uloha"
+        Name="Zmluva"
+        ToEnd="Zmluva" />
+      <NavigationProperty
+        Association="FK_UlohaPriloha_Uloha"
+        FromEnd="Uloha"
+        Name="UlohaPrilohas"
+        ToEnd="UlohaPriloha" />
+      <EntityProperty
+        IsReadOnly="True"
+        Name="IdComputed"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        IsReadOnly="True"
+        Name="IdVarchar"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_NaVedomie_Uloha">
+    <AssociationEnd
+      EntityType="Uloha"
+      Multiplicity="One"
+      Name="Uloha">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="NaVedomie"
+      Multiplicity="Many"
+      Name="NaVedomie" />
+  </Association>
+  <Association
+    Name="FK_Uloha_Parent">
+    <AssociationEnd
+      EntityType="Uloha"
+      Name="Uloha">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="Uloha"
+      Multiplicity="Many"
+      Name="Uloha1" />
+  </Association>
+  <Association
+    Name="FK_UlohaPriloha_Uloha">
+    <AssociationEnd
+      EntityType="Uloha"
+      Name="Uloha">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="UlohaPriloha"
+      Multiplicity="Many"
+      Name="UlohaPriloha" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Uloha"
+      Name="Ulohy" />
+    <AssociationSet
+      Association="FK_NaVedomie_Uloha"
+      Name="FK_NaVedomie_Uloha">
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+      <AssociationSetEnd
+        EntitySet="NaVedomies"
+        Name="NaVedomie" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_Uloha_Parent"
+      Name="FK_Uloha_Parent">
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha1" />
+    </AssociationSet>
+    <AssociationSet
+      Association="FK_UlohaPriloha_Uloha"
+      Name="FK_UlohaPriloha_Uloha">
+      <AssociationSetEnd
+        EntitySet="Ulohy"
+        Name="Uloha" />
+      <AssociationSetEnd
+        EntitySet="UlohaPrilohas"
+        Name="UlohaPriloha" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Ulohy_Single"
+      ReturnType="Uloha">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Ulohy" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Ulohy_SingleOrDefault"
+      ReturnType="Uloha">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Ulohy" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Ulohy">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Uloha" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Uloha/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          Name="Poradie"
+          Nullable="True"
+          Property="Uloha/Properties[Poradie]"
+          Type="int" />
+        <SsdlProperty
+          Name="PortfolioPerioda"
+          Nullable="True"
+          Property="Uloha/Properties[PortfolioPerioda]"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Nazov"
+          Nullable="True"
+          Property="Uloha/Properties[Nazov]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Popis"
+          Nullable="True"
+          Property="Uloha/Properties[Popis]"
+          Type="varchar(max)" />
+        <SsdlProperty
+          Name="Deadline"
+          Nullable="True"
+          Property="Uloha/Properties[Deadline]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="Plan"
+          Nullable="True"
+          Property="Uloha/Properties[Plan]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="RiesitelIny"
+          Nullable="True"
+          Property="Uloha/Properties[RiesitelIny]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="VyrieseneDna"
+          Nullable="True"
+          Property="Uloha/Properties[VyrieseneDna]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="Sprava"
+          Nullable="True"
+          Property="Uloha/Properties[Sprava]"
+          Type="varchar(max)" />
+        <SsdlProperty
+          Name="Vytvorene"
+          Nullable="True"
+          Property="Uloha/Properties[Vytvorene]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="Upravovane"
+          Nullable="True"
+          Property="Uloha/Properties[Upravovane]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="NavrhovaneRiesenie"
+          Nullable="True"
+          Property="Uloha/Properties[NavrhovaneRiesenie]"
+          Type="varchar(max)" />
+        <SsdlProperty
+          Name="IdComputed"
+          Nullable="False"
+          Property="Uloha/Properties[IdComputed]"
+          StoreGeneratedPattern="Computed"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="IdVarchar"
+          Nullable="True"
+          Property="Uloha/Properties[IdVarchar]"
+          StoreGeneratedPattern="Computed"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="OblastID"
+          Nullable="True"
+          PropertyName="OblastID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ParentID"
+          Nullable="True"
+          PropertyName="ParentID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="PortfolioID"
+          Nullable="True"
+          PropertyName="PortfolioID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="PortfolioJednotkaID"
+          Nullable="True"
+          PropertyName="PortfolioJednotkaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="Riesitel"
+          Nullable="True"
+          PropertyName="Riesitel"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="StavID"
+          Nullable="True"
+          PropertyName="StavID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="TypID"
+          Nullable="True"
+          PropertyName="TypID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="Upravil"
+          Nullable="True"
+          PropertyName="Upravil"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="UvodnaPracaID"
+          Nullable="True"
+          PropertyName="UvodnaPracaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ZmluvaID"
+          Nullable="True"
+          PropertyName="ZmluvaID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_NaVedomie_Uloha">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_NaVedomie_Uloha" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_NaVedomie_Uloha]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_NaVedomie_Uloha]/Members[NaVedomie]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UlohaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Uloha_Parent">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Uloha_Parent" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Parent]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Uloha_Parent]/Members[Uloha1]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ParentID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_UlohaPriloha_Uloha">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_UlohaPriloha_Uloha" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_UlohaPriloha_Uloha]/Members[Uloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_UlohaPriloha_Uloha]/Members[UlohaPriloha]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UlohaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

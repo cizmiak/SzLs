@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Posluchac">
+    <EntityType.Attributes />
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        IsReadOnly="True"
+        Name="ID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Meno"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Priezvisko"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Titul"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="DatumNarodenia"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Bydlisko"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="500" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_Posluchac_Organizacia"
+        FromEnd="Posluchac"
+        Name="Organizacia"
+        ToEnd="Organizacia" />
+      <NavigationProperty
+        Association="FK_Posluchac_PosluchacStav"
+        FromEnd="Posluchac"
+        Name="PosluchacStav"
+        ToEnd="PosluchacStav" />
+      <NavigationProperty
+        Association="FK_Posluchac_PracovneZaradenie"
+        FromEnd="Posluchac"
+        Name="PracovneZaradenie"
+        ToEnd="PracovneZaradenie" />
+      <NavigationProperty
+        Association="FK_SkoleniePosluchac_Posluchac"
+        FromEnd="Posluchac"
+        Name="SkoleniePosluchacs"
+        ToEnd="SkoleniePosluchac" />
+      <EntityProperty
+        IsReadOnly="True"
+        Name="IdComputed"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        IsReadOnly="True"
+        Name="IdVarchar"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        IsReadOnly="True"
+        Name="OrganizaciaNazov"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        IsReadOnly="True"
+        Name="CeleMeno"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Computed />
+          <NotSearchable />
+          <NotSortable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="LekarskaPrehliadka"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_SkoleniePosluchac_Posluchac">
+    <AssociationEnd
+      EntityType="Posluchac"
+      Multiplicity="One"
+      Name="Posluchac">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Unset" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      EntityType="SkoleniePosluchac"
+      Multiplicity="Many"
+      Name="SkoleniePosluchac" />
+  </Association>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Posluchac"
+      Name="Posluchacs" />
+    <AssociationSet
+      Association="FK_SkoleniePosluchac_Posluchac"
+      Name="FK_SkoleniePosluchac_Posluchac">
+      <AssociationSetEnd
+        EntitySet="Posluchacs"
+        Name="Posluchac" />
+      <AssociationSetEnd
+        EntitySet="SkoleniePosluchacs"
+        Name="SkoleniePosluchac" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Posluchacs_Single"
+      ReturnType="Posluchac">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Posluchacs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Posluchacs_SingleOrDefault"
+      ReturnType="Posluchac">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="ID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="ID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Posluchacs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="ID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'ID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Posluchacs">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Posluchac" />
+        <SsdlProperty
+          Name="ID"
+          Nullable="False"
+          Property="Posluchac/Properties[ID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Meno"
+          Nullable="True"
+          Property="Posluchac/Properties[Meno]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Priezvisko"
+          Nullable="True"
+          Property="Posluchac/Properties[Priezvisko]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="Titul"
+          Nullable="True"
+          Property="Posluchac/Properties[Titul]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="DatumNarodenia"
+          Nullable="True"
+          Property="Posluchac/Properties[DatumNarodenia]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="500"
+          Name="Bydlisko"
+          Nullable="True"
+          Property="Posluchac/Properties[Bydlisko]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="IdComputed"
+          Nullable="False"
+          Property="Posluchac/Properties[IdComputed]"
+          StoreGeneratedPattern="Computed"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="IdVarchar"
+          Nullable="True"
+          Property="Posluchac/Properties[IdVarchar]"
+          StoreGeneratedPattern="Computed"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="OrganizaciaNazov"
+          Nullable="True"
+          Property="Posluchac/Properties[OrganizaciaNazov]"
+          StoreGeneratedPattern="Computed"
+          Type="varchar" />
+        <SsdlProperty
+          Name="LekarskaPrehliadka"
+          Nullable="True"
+          Property="Posluchac/Properties[LekarskaPrehliadka]"
+          Type="datetime" />
+        <SsdlForeignKeyProperty
+          Name="OrganizaciaID"
+          Nullable="True"
+          PropertyName="OrganizaciaID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="StavID"
+          Nullable="True"
+          PropertyName="StavID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="PracovneZaradenieID"
+          Nullable="True"
+          PropertyName="PracovneZaradenieID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_SkoleniePosluchac_Posluchac">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_SkoleniePosluchac_Posluchac" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkoleniePosluchac_Posluchac]/Members[Posluchac]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_SkoleniePosluchac_Posluchac]/Members[SkoleniePosluchac]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PosluchacID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

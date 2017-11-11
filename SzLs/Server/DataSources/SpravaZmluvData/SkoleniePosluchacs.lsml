@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="SkoleniePosluchac">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="SkolenieID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <KeyProperty
+        Name="PosluchacID"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="CisloPreukazu"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="20" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Association="FK_SkoleniePosluchac_Posluchac"
+        FromEnd="SkoleniePosluchac"
+        Name="Posluchac"
+        ToEnd="Posluchac" />
+      <NavigationProperty
+        Association="FK_SkoleniePosluchac_Skolenie"
+        FromEnd="SkoleniePosluchac"
+        Name="Skolenie"
+        ToEnd="Skolenie" />
+      <NavigationProperty
+        Association="FK_SkoleniePosluchac_SkolenieVysledok"
+        FromEnd="SkoleniePosluchac"
+        Name="SkolenieVysledok"
+        ToEnd="SkolenieVysledok" />
+      <EntityProperty
+        Name="PreukazVydany"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Kind="Unspecified"
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PreukazVydal"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="I"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="A"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="B"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="C"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="D"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="E"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="W1"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="W2"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="G"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="II"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Z"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="C_BezVodickehoOpravnenia"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="W1_BezVodickehoOpravnenia"
+        PropertyType=":Boolean?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Z_PocetHodin"
+        PropertyType=":Double?">
+        <EntityProperty.Attributes>
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+    </EntityType.Properties>
+  </EntityType>
+  <EntityContainer
+    Name="SpravaZmluvData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="SkoleniePosluchac"
+      Name="SkoleniePosluchacs" />
+    <QueryOperation
+      Name="SkoleniePosluchacs_Single"
+      ReturnType="SkoleniePosluchac">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="And">
+            <BinaryExpression.Left>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="PosluchacID" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="PosluchacID" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="SkolenieID" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="SkolenieID" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkoleniePosluchacs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="SkolenieID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'SkolenieID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+      <QueryOperationParameter
+        Name="PosluchacID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'PosluchacID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="SkoleniePosluchacs_SingleOrDefault"
+      ReturnType="SkoleniePosluchac">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="And">
+            <BinaryExpression.Left>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="PosluchacID" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="PosluchacID" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <BinaryExpression
+                NodeType="Equal">
+                <BinaryExpression.Left>
+                  <ChainExpression>
+                    <MemberExpression
+                      Member="SkolenieID" />
+                  </ChainExpression>
+                </BinaryExpression.Left>
+                <BinaryExpression.Right>
+                  <ParameterExpression
+                    Parameter="SkolenieID" />
+                </BinaryExpression.Right>
+              </BinaryExpression>
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="SkoleniePosluchacs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="SkolenieID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'SkolenieID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+      <QueryOperationParameter
+        Name="PosluchacID"
+        ParameterType=":Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'PosluchacID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="SpravaZmluvDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="SkoleniePosluchacs">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="SkoleniePosluchac" />
+        <SsdlProperty
+          Name="SkolenieID"
+          Nullable="False"
+          Property="SkoleniePosluchac/Properties[SkolenieID]"
+          Type="int" />
+        <SsdlProperty
+          Name="PosluchacID"
+          Nullable="False"
+          Property="SkoleniePosluchac/Properties[PosluchacID]"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="CisloPreukazu"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[CisloPreukazu]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="PreukazVydany"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[PreukazVydany]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="PreukazVydal"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[PreukazVydal]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="I"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[I]"
+          Type="bit" />
+        <SsdlProperty
+          Name="A"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[A]"
+          Type="bit" />
+        <SsdlProperty
+          Name="B"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[B]"
+          Type="bit" />
+        <SsdlProperty
+          Name="C"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[C]"
+          Type="bit" />
+        <SsdlProperty
+          Name="D"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[D]"
+          Type="bit" />
+        <SsdlProperty
+          Name="E"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[E]"
+          Type="bit" />
+        <SsdlProperty
+          Name="W1"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[W1]"
+          Type="bit" />
+        <SsdlProperty
+          Name="W2"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[W2]"
+          Type="bit" />
+        <SsdlProperty
+          Name="G"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[G]"
+          Type="bit" />
+        <SsdlProperty
+          Name="II"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[II]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Z"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[Z]"
+          Type="bit" />
+        <SsdlProperty
+          Name="C_BezVodickehoOpravnenia"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[C_BezVodickehoOpravnenia]"
+          Type="bit" />
+        <SsdlProperty
+          Name="W1_BezVodickehoOpravnenia"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[W1_BezVodickehoOpravnenia]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Z_PocetHodin"
+          Nullable="True"
+          Property="SkoleniePosluchac/Properties[Z_PocetHodin]"
+          Type="float" />
+        <SsdlForeignKeyProperty
+          Name="VysledokID"
+          Nullable="True"
+          PropertyName="VysledokID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+  </DataService>
+</ServiceApplication>
