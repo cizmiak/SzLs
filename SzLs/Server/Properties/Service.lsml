@@ -11,8 +11,8 @@
   <EntityContainerGroup
     Name="DataWorkspace">
     <EntityContainerGroupProperty
-      EntityContainer="Microsoft.LightSwitch.Security:SecurityData"
-      Name="SecurityData">
+      Name="SecurityData"
+      EntityContainer="Microsoft.LightSwitch.Security:SecurityData">
       <EntityContainerGroupProperty.Attributes>
         <Generated />
         <DisplayName
@@ -22,8 +22,11 @@
       </EntityContainerGroupProperty.Attributes>
     </EntityContainerGroupProperty>
     <EntityContainerGroupProperty
-      EntityContainer="SpravaZmluvData"
-      Name="SpravaZmluvData" />
+      Name="SpravaZmluvData"
+      EntityContainer="SpravaZmluvData" />
+    <EntityContainerGroupProperty
+      Name="XlsxReaderServiceData"
+      EntityContainer="XlsxReaderServiceData" />
   </EntityContainerGroup>
   <GlobalAttributeGroup
     Name="LightSwitchServiceApplicationGroup">

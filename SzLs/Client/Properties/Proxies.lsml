@@ -466,4 +466,22 @@
         Target="ServiceInterface:FK_SkoleniePreKohoOtazka_SkoleniePreKoho" />
     </Association.Attributes>
   </Association>
+  <EntityContainer>
+    <EntityContainer.Attributes>
+      <Proxy
+        Target="ServiceInterface:XlsxReaderServiceData" />
+    </EntityContainer.Attributes>
+  </EntityContainer>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:XlsxByte" />
+    </EntityType.Attributes>
+  </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:XlsxRow" />
+    </EntityType.Attributes>
+  </EntityType>
 </Application>

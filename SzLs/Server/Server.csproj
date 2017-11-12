@@ -177,9 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <_ServerFile Include="packages.config" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\Entitas.lsml" />
@@ -253,12 +254,24 @@
     <LightSwitchModel Include="DataSources\SpravaZmluvData\OtazkyPreSkolenie.lsml">
       <DependentUpon>Otazkas.lsml</DependentUpon>
     </LightSwitchModel>
+    <LightSwitchModel Include="Properties\DataSources\XlsxReaderServiceData.lsml" />
+    <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxBytes.lsml" />
+    <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxRows.lsml" />
+    <LightSwitchModel Include="DataSources\XlsxReaderServiceData\GetXlsxRowsById.lsml">
+      <DependentUpon>XlsxRows.lsml</DependentUpon>
+    </LightSwitchModel>
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.Config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\XlsxReaderService\XlsxReaderService.csproj">
+      <Project>{cb9ff44e-a3ba-4571-aa21-04ff302cc895}</Project>
+      <Name>XlsxReaderService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityContainer
+    Name="XlsxReaderServiceData"
+    DataProvider="CustomDataProvider">
+    <EntityContainer.Attributes>
+      <Partial
+        IsPrimary="True" />
+    </EntityContainer.Attributes>
+    <SubmitOperation
+      Name="SaveChanges" />
+  </EntityContainer>
+  <DataService
+    Name="XlsxReaderServiceDataDataService"
+    EntityContainer="XlsxReaderServiceData">
+    <DataService.Attributes>
+      <Partial
+        IsPrimary="True" />
+    </DataService.Attributes>
+    <DataService.ConnectionProperties>
+      <ConnectionProperty
+        Name="AssemblyName"
+        Value="XlsxReaderService" />
+      <ConnectionProperty
+        Name="FullClassName"
+        Value="XlsxReaderService.XlsxReaderService" />
+      <ConnectionProperty
+        Name="ConnectionStringGuid"
+        Value="a846a9fe-fccf-43f2-9ff2-29bbab7d7ecd" />
+      <ConnectionProperty
+        Name="ConnectionStringDescription"
+        Value="" />
+    </DataService.ConnectionProperties>
+  </DataService>
+</ServiceApplication>

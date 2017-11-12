@@ -1,99 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application
-  DefaultNavigationItem="!module/NavigationItems[Tasks]"
   Name="LightSwitchApplication"
-  Shell="Microsoft.LightSwitch.Cosmopolitan:CosmopolitanShell"
-  Theme="Microsoft.LightSwitch.Cosmopolitan:CosmopolitanTheme"
+  TargetPlatform="RichClient"
   Version="1.0.0.0"
-  TargetPlatform="RichClient" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  DefaultNavigationItem="!module/NavigationItems[Tasks]"
+  Shell="Microsoft.LightSwitch.Cosmopolitan:CosmopolitanShell"
+  Theme="Microsoft.LightSwitch.Cosmopolitan:CosmopolitanTheme" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
   <Application.Attributes>
     <ModuleNamespace
       Namespace="LightSwitchApplication" />
     <Partial
       IsPrimary="True" />
   </Application.Attributes>
-  <Application.Methods></Application.Methods>
-  <Application.NavigationItems>
-    <ApplicationNavigationGroup
-      DefaultItem="!module/NavigationItems[Tasks]/Children[Domov]"
-      Name="Tasks">
-      <ApplicationNavigationGroup.Attributes>
-        <DisplayName
-          Value="Hlavne Menu" />
-      </ApplicationNavigationGroup.Attributes>
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowDomov]"
-        Name="Domov" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowOrganizaciasListDetail]"
-        Name="OrganizaciasListDetail" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowZmluvasListDetail]"
-        Name="ZmluvasListDetail" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowUlohasListDetail]"
-        Name="UlohasListDetail" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowSkoleniesListDetail]"
-        Name="SkoleniesListDetail" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowPosluchacsListDetail]"
-        Name="PosluchacsListDetail" />
-    </ApplicationNavigationGroup>
-    <ApplicationNavigationGroup
-      Name="group">
-      <ApplicationNavigationGroup.Attributes>
-        <DisplayName
-          Value="Ciselniky" />
-      </ApplicationNavigationGroup.Attributes>
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowCiselnikyOrganizacie]"
-        Name="CiselnikyOrganizacie" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowCislenikyZmluv]"
-        Name="link4" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowCiselnikyUlohy]"
-        Name="link2" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowCiselnikySkolenia]"
-        Name="link1" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowCiselnikyOstatne]"
-        Name="CiselnikyOstatne" />
-    </ApplicationNavigationGroup>
-    <ApplicationNavigationGroup
-      Name="group1">
-      <ApplicationNavigationGroup.Attributes>
-        <DisplayName
-          Value="Nastavenia" />
-      </ApplicationNavigationGroup.Attributes>
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowKonfiguraciasListDetail]"
-        Name="link" />
-      <ApplicationNavigationLink
-        Command="!module/Commands[ScreenCommandShowZamestnanci]"
-        Name="link5" />
-    </ApplicationNavigationGroup>
-    <ApplicationNavigationGroup
-      Name="Administration">
-      <ApplicationNavigationGroup.Attributes>
-        <DisplayName
-          Value="Administration" />
-      </ApplicationNavigationGroup.Attributes>
-      <ApplicationNavigationLink
-        Command="Microsoft.LightSwitch.Security:!module/Commands[ScreenCommandShowRolesScreen]"
-        Name="RolesScreen" />
-      <ApplicationNavigationLink
-        Command="Microsoft.LightSwitch.Security:!module/Commands[ScreenCommandShowUsersScreen]"
-        Name="UsersScreen" />
-    </ApplicationNavigationGroup>
-  </Application.NavigationItems>
   <EntityContainerGroup
     Name="DataWorkspace">
     <EntityContainerGroupProperty
-      EntityContainer="Microsoft.LightSwitch.Security:SecurityData"
-      Name="SecurityData">
+      Name="SecurityData"
+      EntityContainer="Microsoft.LightSwitch.Security:SecurityData">
       <EntityContainerGroupProperty.Attributes>
         <Generated />
         <DisplayName
@@ -103,8 +26,11 @@
       </EntityContainerGroupProperty.Attributes>
     </EntityContainerGroupProperty>
     <EntityContainerGroupProperty
-      EntityContainer="SpravaZmluvData"
-      Name="SpravaZmluvData" />
+      Name="SpravaZmluvData"
+      EntityContainer="SpravaZmluvData" />
+    <EntityContainerGroupProperty
+      Name="XlsxReaderServiceData"
+      EntityContainer="XlsxReaderServiceData" />
   </EntityContainerGroup>
   <GlobalAttributeGroup>
     <GlobalAttributeGroup.Attributes>
@@ -159,4 +85,80 @@
       Name="ScreenCommandShowDomov"
       Target="!module/Methods[ShowDomov]" />
   </Application.Commands>
+  <Application.NavigationItems>
+    <ApplicationNavigationGroup
+      Name="Tasks"
+      DefaultItem="!module/NavigationItems[Tasks]/Children[Domov]">
+      <ApplicationNavigationGroup.Attributes>
+        <DisplayName
+          Value="Hlavne Menu" />
+      </ApplicationNavigationGroup.Attributes>
+      <ApplicationNavigationLink
+        Name="Domov"
+        Command="!module/Commands[ScreenCommandShowDomov]" />
+      <ApplicationNavigationLink
+        Name="OrganizaciasListDetail"
+        Command="!module/Commands[ScreenCommandShowOrganizaciasListDetail]" />
+      <ApplicationNavigationLink
+        Name="ZmluvasListDetail"
+        Command="!module/Commands[ScreenCommandShowZmluvasListDetail]" />
+      <ApplicationNavigationLink
+        Name="UlohasListDetail"
+        Command="!module/Commands[ScreenCommandShowUlohasListDetail]" />
+      <ApplicationNavigationLink
+        Name="SkoleniesListDetail"
+        Command="!module/Commands[ScreenCommandShowSkoleniesListDetail]" />
+      <ApplicationNavigationLink
+        Name="PosluchacsListDetail"
+        Command="!module/Commands[ScreenCommandShowPosluchacsListDetail]" />
+    </ApplicationNavigationGroup>
+    <ApplicationNavigationGroup
+      Name="group">
+      <ApplicationNavigationGroup.Attributes>
+        <DisplayName
+          Value="Ciselniky" />
+      </ApplicationNavigationGroup.Attributes>
+      <ApplicationNavigationLink
+        Name="CiselnikyOrganizacie"
+        Command="!module/Commands[ScreenCommandShowCiselnikyOrganizacie]" />
+      <ApplicationNavigationLink
+        Name="link4"
+        Command="!module/Commands[ScreenCommandShowCislenikyZmluv]" />
+      <ApplicationNavigationLink
+        Name="link2"
+        Command="!module/Commands[ScreenCommandShowCiselnikyUlohy]" />
+      <ApplicationNavigationLink
+        Name="link1"
+        Command="!module/Commands[ScreenCommandShowCiselnikySkolenia]" />
+      <ApplicationNavigationLink
+        Name="CiselnikyOstatne"
+        Command="!module/Commands[ScreenCommandShowCiselnikyOstatne]" />
+    </ApplicationNavigationGroup>
+    <ApplicationNavigationGroup
+      Name="group1">
+      <ApplicationNavigationGroup.Attributes>
+        <DisplayName
+          Value="Nastavenia" />
+      </ApplicationNavigationGroup.Attributes>
+      <ApplicationNavigationLink
+        Name="link"
+        Command="!module/Commands[ScreenCommandShowKonfiguraciasListDetail]" />
+      <ApplicationNavigationLink
+        Name="link5"
+        Command="!module/Commands[ScreenCommandShowZamestnanci]" />
+    </ApplicationNavigationGroup>
+    <ApplicationNavigationGroup
+      Name="Administration">
+      <ApplicationNavigationGroup.Attributes>
+        <DisplayName
+          Value="Administration" />
+      </ApplicationNavigationGroup.Attributes>
+      <ApplicationNavigationLink
+        Name="RolesScreen"
+        Command="Microsoft.LightSwitch.Security:!module/Commands[ScreenCommandShowRolesScreen]" />
+      <ApplicationNavigationLink
+        Name="UsersScreen"
+        Command="Microsoft.LightSwitch.Security:!module/Commands[ScreenCommandShowUsersScreen]" />
+    </ApplicationNavigationGroup>
+  </Application.NavigationItems>
 </Application>

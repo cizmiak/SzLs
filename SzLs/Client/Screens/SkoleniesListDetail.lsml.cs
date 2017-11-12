@@ -47,22 +47,37 @@ namespace LightSwitchApplication
 
 		private void XlsxImport_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
+			byte[] bytes = null;
+
 			Dispatchers.Main.Invoke(() => {
 				var dialog = new OpenFileDialog();
 				dialog.Filter = "Excel(*.xlsx)|*.xlsx";
 
 				if (dialog.ShowDialog() == true)
 				{
-					//using (var fileStream = dialog.File.OpenRead())
-					//{
-					//	if (fileStream.Length > 0)
-					//	{
-					//		fileStream.Close();
-					//	}
-					//}
+					using (var fileStream = dialog.File.OpenRead())
+					{
+						int fileLength = (int)fileStream.Length;
+						if (fileStream.Length > 0)
+						{
+							bytes = new byte[fileLength];
+							fileStream.Read(bytes, 0, fileLength);
+						}
 
-					//XlsxHelper.Read(dialog.File.OpenRead());
+						fileStream.Close();
+					}
 				}
+			});
+
+			this.Details.Dispatcher.BeginInvoke(() =>
+			{
+				var id = Guid.NewGuid();
+				var xlsxByte = this.DataWorkspace.XlsxReaderServiceData.XlsxBytes.AddNew();
+				xlsxByte.Id = id;
+				xlsxByte.Bytes = bytes;
+				this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
+
+				var xlsxRows = this.DataWorkspace.XlsxReaderServiceData.GetXlsxRowsById(id).Execute();
 			});
 		}
 
