@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="XlsxRow">
+    Name="XlsxCell">
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -24,18 +24,21 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="IsHeader"
-        PropertyType=":Boolean">
+        Name="Value"
+        PropertyType=":String?" />
+      <EntityProperty
+        Name="ColumnId"
+        PropertyType=":Int32">
         <EntityProperty.Attributes>
           <Required />
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="XlsxCells"
+        Name="XlsxRow"
         Association="XlsxCell_XlsxRow"
-        FromEnd="XlsxRow"
-        ToEnd="XlsxCell" />
+        FromEnd="XlsxCell"
+        ToEnd="XlsxRow" />
     </EntityType.Properties>
   </EntityType>
   <EntityContainer
@@ -44,11 +47,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="XlsxRows"
-      EntityType="XlsxRow" />
+      Name="XlsxCells"
+      EntityType="XlsxCell" />
     <QueryOperation
-      Name="XlsxRows_Single"
-      ReturnType="XlsxRow">
+      Name="XlsxCells_Single"
+      ReturnType="XlsxCell">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -74,12 +77,12 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="XlsxRows" />
+            Member="XlsxCells" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
         Name="Id"
-        ParameterType=":Guid?">
+        ParameterType="Microsoft.LightSwitch:Guid?">
         <QueryOperationParameter.Attributes>
           <Description
             Value="The value of the 'Id' key property of the entity to retrieve." />
@@ -87,8 +90,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="XlsxRows_SingleOrDefault"
-      ReturnType="XlsxRow">
+      Name="XlsxCells_SingleOrDefault"
+      ReturnType="XlsxCell">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -114,84 +117,43 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="XlsxRows" />
+            Member="XlsxCells" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
         Name="Id"
-        ParameterType=":Guid?">
+        ParameterType="Microsoft.LightSwitch:Guid?">
         <QueryOperationParameter.Attributes>
           <Description
             Value="The value of the 'Id' key property of the entity to retrieve." />
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
-    <AssociationSet
-      Name="XlsxCell_XlsxRow"
-      Association="XlsxCell_XlsxRow">
-      <AssociationSetEnd
-        Name="XlsxRow"
-        EntitySet="XlsxRows" />
-      <AssociationSetEnd
-        Name="XlsxCell"
-        EntitySet="XlsxCells" />
-    </AssociationSet>
   </EntityContainer>
-  <Association
-    Name="XlsxCell_XlsxRow">
-    <AssociationEnd
-      Name="XlsxRow"
-      Multiplicity="One"
-      EntityType="XlsxRow">
-      <AssociationEnd.Attributes>
-        <DeleteRule />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-    <AssociationEnd
-      Name="XlsxCell"
-      Multiplicity="Many"
-      EntityType="XlsxCell" />
-  </Association>
   <DataService
     Name="XlsxReaderServiceDataDataService">
     <DataService.Attributes>
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="XlsxRows">
+      EntitySet="XlsxCells">
       <EntitySetMapping.Attributes>
         <WcfRiaEntitySet
-          EntitySetQuery="GetXlsxRows"
-          EntityTypeName="XlsxReaderService.XlsxRow" />
+          EntitySetQuery="GetXlsxCells"
+          EntityTypeName="XlsxReaderService.XlsxCell" />
         <WcfRiaProperty
           Name="Id"
-          Property="XlsxRow/Properties[Id]" />
+          Property="XlsxCell/Properties[Id]" />
         <WcfRiaProperty
-          Name="IsHeader"
-          Property="XlsxRow/Properties[IsHeader]" />
+          Name="Value"
+          Property="XlsxCell/Properties[Value]" />
         <WcfRiaProperty
-          Name="XlsxCells"
-          Property="XlsxRow/Properties[XlsxCells]" />
+          Name="ColumnId"
+          Property="XlsxCell/Properties[ColumnId]" />
+        <WcfRiaProperty
+          Name="XlsxRow"
+          Property="XlsxCell/Properties[XlsxRow]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
-    <AssociationSetMapping
-      AssociationSet="XlsxCell_XlsxRow">
-      <AssociationSetMapping.Attributes>
-        <WcfRiaAssociationSetEnd
-          End="XlsxReaderServiceData/Members[XlsxCell_XlsxRow]/Members[XlsxRow]">
-          <WcfRiaAssociationSetEnd.Attributes>
-            <WcfRiaPropertyRef
-              Name="Id" />
-          </WcfRiaAssociationSetEnd.Attributes>
-        </WcfRiaAssociationSetEnd>
-        <WcfRiaAssociationSetEnd
-          End="XlsxReaderServiceData/Members[XlsxCell_XlsxRow]/Members[XlsxCell]">
-          <WcfRiaAssociationSetEnd.Attributes>
-            <WcfRiaPropertyRef
-              Name="XlsxRowId" />
-          </WcfRiaAssociationSetEnd.Attributes>
-        </WcfRiaAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
   </DataService>
 </ServiceApplication>

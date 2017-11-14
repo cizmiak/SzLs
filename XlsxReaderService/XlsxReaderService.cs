@@ -13,7 +13,7 @@ namespace XlsxReaderService
 	public class XlsxReaderService : DomainService
 	{
 		#region XlsxBytes
-		private static ConcurrentDictionary<Guid, XlsxBytes> XlsxBytes { get; set; } =
+		private static ConcurrentDictionary<Guid, XlsxBytes> XlsxBytes =>
 			new ConcurrentDictionary<Guid, XlsxBytes>();
 
 		[Query(IsDefault = true)]
@@ -41,7 +41,8 @@ namespace XlsxReaderService
 		}
 		#endregion
 
-		private static List<XlsxRow> XlsxRows { get; set; } = new List<XlsxRow>();
+		#region XlsxRows
+		private static List<XlsxRow> XlsxRows => new List<XlsxRow>();
 
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxRow> GetXlsxRows()
@@ -52,20 +53,39 @@ namespace XlsxReaderService
 		[Query]
 		public IQueryable<XlsxRow> GetXlsxRowsById(Guid? id)
 		{
+			if (!id.HasValue)
+				return null;
+
 			XlsxBytes xlsxBytes = null;
 			XlsxBytes.TryGetValue(id.Value, out xlsxBytes);
 
 			using (MemoryStream mem = new MemoryStream())
 			{
 				mem.Write(xlsxBytes.Bytes, 0, (int)xlsxBytes.Bytes.Length);
-				using (var sheet = SpreadsheetDocument.Open(mem, false))
+				using (var spreadSheet = SpreadsheetDocument.Open(mem, false))
 				{
-					sheet.Close();
+					//spreadSheet.ta
+					foreach(var workSheetpart in spreadSheet.WorkbookPart.WorksheetParts)
+					{
+						//workSheetpart.Worksheet.
+					}
+					spreadSheet.Close();
 				}
 				mem.Close();
 			}
 
 			return XlsxRows.AsQueryable();
 		}
+		#endregion
+
+		#region XlsxCells
+		private static List<XlsxCell> XlsxCells => new List<XlsxCell>();
+
+		[Query(IsDefault = true)]
+		public IQueryable<XlsxCell> GetXlsxCells()
+		{
+			return XlsxCells.AsQueryable();
+		}
+		#endregion
 	}
 }

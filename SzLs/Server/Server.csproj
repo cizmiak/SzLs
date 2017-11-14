@@ -260,6 +260,7 @@
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\GetXlsxRowsById.lsml">
       <DependentUpon>XlsxRows.lsml</DependentUpon>
     </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxCells.lsml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

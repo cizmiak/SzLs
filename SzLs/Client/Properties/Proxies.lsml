@@ -484,4 +484,16 @@
         Target="ServiceInterface:XlsxRow" />
     </EntityType.Attributes>
   </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:XlsxCell" />
+    </EntityType.Attributes>
+  </EntityType>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:XlsxCell_XlsxRow" />
+    </Association.Attributes>
+  </Association>
 </Application>
