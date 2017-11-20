@@ -42,11 +42,60 @@ namespace XlsxReaderService
 		#endregion
 
 		#region XlsxRows
-		private static List<XlsxRow> XlsxRows => new List<XlsxRow>();
+		private static List<XlsxRow> XlsxRows { get; set; }
 
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxRow> GetXlsxRows()
 		{
+			if (XlsxRows == null)
+			{
+				var row1 = new XlsxRow() { Id = Guid.NewGuid(), IsHeader = true };
+				row1.XlsxCells = new List<XlsxCell>()
+					{
+						new XlsxCell()
+						{
+							Id = Guid.NewGuid(),
+							Value = "Header 1",
+							ColumnId = 1,
+							XlsxRowId = row1.Id,
+							XlsxRow = row1
+						},
+						new XlsxCell()
+						{
+							Id = Guid.NewGuid(),
+							Value = "Header 2",
+							ColumnId = 2,
+							XlsxRowId = row1.Id,
+							XlsxRow = row1
+						},
+					};
+
+				var row2 = new XlsxRow() { Id = Guid.NewGuid(), IsHeader = false };
+				row2.XlsxCells = new List<XlsxCell>()
+					{
+						new XlsxCell()
+						{
+							Id = Guid.NewGuid(),
+							Value = "Cell 1",
+							ColumnId = 1,
+							XlsxRowId = row2.Id,
+							XlsxRow = row2
+						},
+						new XlsxCell()
+						{
+							Id = Guid.NewGuid(),
+							Value = "Cell 2",
+							ColumnId = 2,
+							XlsxRowId = row2.Id,
+							XlsxRow = row2
+						},
+					};
+
+				XlsxRows = new List<XlsxRow>();
+				XlsxRows.Add(row1);
+				XlsxRows.Add(row2);
+			}
+
 			return XlsxRows.AsQueryable();
 		}
 
@@ -84,7 +133,7 @@ namespace XlsxReaderService
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxCell> GetXlsxCells()
 		{
-			return XlsxCells.AsQueryable();
+			return XlsxRows.SelectMany(r => r.XlsxCells).AsQueryable();
 		}
 		#endregion
 	}

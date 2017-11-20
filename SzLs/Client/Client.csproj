@@ -176,6 +176,9 @@
     </ServiceMetadataReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Server\DataSources\XlsxReaderServiceData\XlsxRow.lsml.cs">
+      <Link>UserCode\Shared\XlsxRow.lsml.cs</Link>
+    </Compile>
     <Compile Include="..\Server\UserCode\Shared\Organizacia.cs">
       <Link>UserCode\Shared\Organizacia.cs</Link>
     </Compile>
@@ -209,6 +212,9 @@
     </Compile>
     <Compile Include="Screens\UlohasListDetail.lsml.cs">
       <DependentUpon>UlohasListDetail.lsml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\XlsxRows.lsml.cs">
+      <DependentUpon>XlsxRows.lsml</DependentUpon>
     </Compile>
     <Compile Include="Screens\ZmluvasListDetail.lsml.cs">
       <DependentUpon>ZmluvasListDetail.lsml</DependentUpon>
@@ -244,6 +250,8 @@
     <LightSwitchModel Include="Screens\CiselnikyOstatne.lsml" />
     <LightSwitchModel Include="Screens\PosluchacsListDetail.lsml" />
     <LightSwitchModel Include="Screens\Domov.lsml" />
+    <LightSwitchModel Include="Screens\XlsxRows.lsml" />
+    <LightSwitchModel Include="Properties\XlsxReaderServiceData\XlsxRows.lsml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

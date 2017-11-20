@@ -154,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSources\SpravaZmluvData\_SpravaZmluvDataService.lsml.cs" />
+    <Compile Include="DataSources\XlsxReaderServiceData\XlsxRow.lsml.cs">
+      <DependentUpon>XlsxRows.lsml</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

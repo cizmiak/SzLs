@@ -84,6 +84,9 @@
     <ApplicationCommand
       Name="ScreenCommandShowDomov"
       Target="!module/Methods[ShowDomov]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowXlsxRows"
+      Target="!module/Methods[ShowXlsxRows]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -111,6 +114,9 @@
       <ApplicationNavigationLink
         Name="PosluchacsListDetail"
         Command="!module/Commands[ScreenCommandShowPosluchacsListDetail]" />
+      <ApplicationNavigationLink
+        Name="XlsxRows"
+        Command="!module/Commands[ScreenCommandShowXlsxRows]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="group">
