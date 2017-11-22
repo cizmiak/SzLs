@@ -6,6 +6,7 @@ using System.Linq;
 using System.ServiceModel.DomainServices.Server;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using OpenXmlPowerTools;
 
 namespace XlsxReaderService
 {
@@ -13,8 +14,11 @@ namespace XlsxReaderService
 	public class XlsxReaderService : DomainService
 	{
 		#region XlsxBytes
-		private static ConcurrentDictionary<Guid, XlsxBytes> XlsxBytes =>
+		private static ConcurrentDictionary<Guid, XlsxBytes> XlsxBytes { get; } =
 			new ConcurrentDictionary<Guid, XlsxBytes>();
+
+		private static ConcurrentDictionary<Guid, List<XlsxSheet>> XlsxSheets { get; } =
+			new ConcurrentDictionary<Guid, List<XlsxSheet>>();
 
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxBytes> GetXlsxBytes()
@@ -38,6 +42,53 @@ namespace XlsxReaderService
 		public void DeleteXlsxBytes(XlsxBytes xlsxBytes)
 		{
 			XlsxBytes.TryRemove(xlsxBytes.Id, out xlsxBytes);
+		}
+		#endregion
+
+		#region XlsxSheets
+		[Query(IsDefault = true)]
+		public IQueryable<XlsxSheet> GetXlsxSheets()
+		{
+			return new List<XlsxSheet>().AsQueryable();
+		}
+
+		[Query]
+		public IQueryable<XlsxSheet> GetXlsxSheetsById(Guid? id)
+		{
+			if (!id.HasValue)
+				return null;
+
+			XlsxBytes xlsxBytes = null;
+			XlsxBytes.TryGetValue(id.Value, out xlsxBytes);
+			if (xlsxBytes != null)
+			{
+				var sheets = new List<XlsxSheet>();
+
+				using (MemoryStream mem = new MemoryStream())
+				{
+					mem.Write(xlsxBytes.Bytes, 0, (int)xlsxBytes.Bytes.Length);
+					using (var spreadSheet = SpreadsheetDocument.Open(mem, false))
+					{
+						foreach (var workSheetpart in spreadSheet.WorkbookPart.WorksheetParts)
+						{
+							var sheet = new XlsxSheet()
+							{
+								Id = Guid.NewGuid(),
+								Name = SpreadsheetDocumentManager.GetSheetName(workSheetpart, spreadSheet)
+							};
+							var dimension = workSheetpart.Worksheet.SheetDimension;
+							var range = SmlDataRetriever.RetrieveRange(spreadSheet, sheet.Name, dimension.Reference.Value);
+							sheets.Add(sheet);
+						}
+						spreadSheet.Close();
+					}
+					mem.Close();
+				}
+
+				return sheets.AsQueryable();
+			}
+			else
+				return null;
 		}
 		#endregion
 

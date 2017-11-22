@@ -144,6 +144,11 @@
           <NotSortable />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <NavigationProperty
+        Name="XlsxSheet"
+        Association="XlsxRow_XlsxSheet"
+        FromEnd="XlsxRow"
+        ToEnd="XlsxSheet" />
     </EntityType.Properties>
   </EntityType>
   <EntityContainer
@@ -277,6 +282,9 @@
         <WcfRiaProperty
           Name="IsHeader"
           Property="XlsxRow/Properties[IsHeader]" />
+        <WcfRiaProperty
+          Name="XlsxSheet"
+          Property="XlsxRow/Properties[XlsxSheet]" />
         <WcfRiaProperty
           Name="XlsxCells"
           Property="XlsxRow/Properties[XlsxCells]" />

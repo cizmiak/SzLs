@@ -204,6 +204,9 @@
     <Compile Include="Screens\Domov.lsml.cs">
       <DependentUpon>Domov.lsml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\GetXlsxSheetsById.lsml.cs">
+      <DependentUpon>GetXlsxSheetsById.lsml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\OrganizaciasListDetail.lsml.cs">
       <DependentUpon>OrganizaciasListDetail.lsml</DependentUpon>
     </Compile>
@@ -252,6 +255,7 @@
     <LightSwitchModel Include="Screens\Domov.lsml" />
     <LightSwitchModel Include="Screens\XlsxRows.lsml" />
     <LightSwitchModel Include="Properties\XlsxReaderServiceData\XlsxRows.lsml" />
+    <LightSwitchModel Include="Screens\GetXlsxSheetsById.lsml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

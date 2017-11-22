@@ -87,6 +87,9 @@
     <ApplicationCommand
       Name="ScreenCommandShowXlsxRows"
       Target="!module/Methods[ShowXlsxRows]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowGetXlsxSheetsById"
+      Target="!module/Methods[ShowGetXlsxSheetsById]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -117,6 +120,9 @@
       <ApplicationNavigationLink
         Name="XlsxRows"
         Command="!module/Commands[ScreenCommandShowXlsxRows]" />
+      <ApplicationNavigationLink
+        Name="GetXlsxSheetsById"
+        Command="!module/Commands[ScreenCommandShowGetXlsxSheetsById]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="group">

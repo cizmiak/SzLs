@@ -64,6 +64,7 @@
     <Compile Include="XlsxBytes.cs" />
     <Compile Include="XlsxReaderService.cs" />
     <Compile Include="XlsxRow.cs" />
+    <Compile Include="XlsxSheet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Lib\" />
