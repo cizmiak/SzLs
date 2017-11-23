@@ -260,9 +260,6 @@
     <LightSwitchModel Include="Properties\DataSources\XlsxReaderServiceData.lsml" />
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxBytes.lsml" />
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxRows.lsml" />
-    <LightSwitchModel Include="DataSources\XlsxReaderServiceData\GetXlsxRowsById.lsml">
-      <DependentUpon>XlsxRows.lsml</DependentUpon>
-    </LightSwitchModel>
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxCells.lsml" />
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxSheets.lsml" />
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\GetXlsxSheetsById.lsml">

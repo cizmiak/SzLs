@@ -13,13 +13,13 @@ namespace XlsxReaderService
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
 	public class XlsxReaderService : DomainService
 	{
-		#region XlsxBytes
 		private static ConcurrentDictionary<Guid, XlsxBytes> XlsxBytes { get; } =
 			new ConcurrentDictionary<Guid, XlsxBytes>();
 
 		private static ConcurrentDictionary<Guid, List<XlsxSheet>> XlsxSheets { get; } =
 			new ConcurrentDictionary<Guid, List<XlsxSheet>>();
-
+		
+		#region XlsxBytes
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxBytes> GetXlsxBytes()
 		{
@@ -35,7 +35,7 @@ namespace XlsxReaderService
 		[Insert]
 		public void InsertXlsxBytes(XlsxBytes xlsxBytes)
 		{
-			XlsxBytes.AddOrUpdate(xlsxBytes.Id, xlsxBytes, (k, v) => xlsxBytes);
+			XlsxBytes.TryAdd(xlsxBytes.Id, xlsxBytes);
 		}
 
 		[Delete]
@@ -49,142 +49,94 @@ namespace XlsxReaderService
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxSheet> GetXlsxSheets()
 		{
-			return new List<XlsxSheet>().AsQueryable();
+			return XlsxSheets.SelectMany(kvPair => kvPair.Value).AsQueryable();
 		}
 
 		[Query]
-		public IQueryable<XlsxSheet> GetXlsxSheetsById(Guid? id)
+		public IQueryable<XlsxSheet> GetXlsxSheetsById(Guid? xlsxId)
 		{
-			if (!id.HasValue)
+			if (!xlsxId.HasValue)
 				return null;
 
 			XlsxBytes xlsxBytes = null;
-			XlsxBytes.TryGetValue(id.Value, out xlsxBytes);
-			if (xlsxBytes != null)
-			{
-				var sheets = new List<XlsxSheet>();
-
-				using (MemoryStream mem = new MemoryStream())
-				{
-					mem.Write(xlsxBytes.Bytes, 0, (int)xlsxBytes.Bytes.Length);
-					using (var spreadSheet = SpreadsheetDocument.Open(mem, false))
-					{
-						foreach (var workSheetpart in spreadSheet.WorkbookPart.WorksheetParts)
-						{
-							var sheet = new XlsxSheet()
-							{
-								Id = Guid.NewGuid(),
-								Name = SpreadsheetDocumentManager.GetSheetName(workSheetpart, spreadSheet)
-							};
-							var dimension = workSheetpart.Worksheet.SheetDimension;
-							var range = SmlDataRetriever.RetrieveRange(spreadSheet, sheet.Name, dimension.Reference.Value);
-							sheets.Add(sheet);
-						}
-						spreadSheet.Close();
-					}
-					mem.Close();
-				}
-
-				return sheets.AsQueryable();
-			}
-			else
+			XlsxBytes.TryGetValue(xlsxId.Value, out xlsxBytes);
+			if (xlsxBytes == null)
 				return null;
-		}
-		#endregion
-
-		#region XlsxRows
-		private static List<XlsxRow> XlsxRows { get; set; }
-
-		[Query(IsDefault = true)]
-		public IQueryable<XlsxRow> GetXlsxRows()
-		{
-			if (XlsxRows == null)
-			{
-				var row1 = new XlsxRow() { Id = Guid.NewGuid(), IsHeader = true };
-				row1.XlsxCells = new List<XlsxCell>()
-					{
-						new XlsxCell()
-						{
-							Id = Guid.NewGuid(),
-							Value = "Header 1",
-							ColumnId = 1,
-							XlsxRowId = row1.Id,
-							XlsxRow = row1
-						},
-						new XlsxCell()
-						{
-							Id = Guid.NewGuid(),
-							Value = "Header 2",
-							ColumnId = 2,
-							XlsxRowId = row1.Id,
-							XlsxRow = row1
-						},
-					};
-
-				var row2 = new XlsxRow() { Id = Guid.NewGuid(), IsHeader = false };
-				row2.XlsxCells = new List<XlsxCell>()
-					{
-						new XlsxCell()
-						{
-							Id = Guid.NewGuid(),
-							Value = "Cell 1",
-							ColumnId = 1,
-							XlsxRowId = row2.Id,
-							XlsxRow = row2
-						},
-						new XlsxCell()
-						{
-							Id = Guid.NewGuid(),
-							Value = "Cell 2",
-							ColumnId = 2,
-							XlsxRowId = row2.Id,
-							XlsxRow = row2
-						},
-					};
-
-				XlsxRows = new List<XlsxRow>();
-				XlsxRows.Add(row1);
-				XlsxRows.Add(row2);
-			}
-
-			return XlsxRows.AsQueryable();
-		}
-
-		[Query]
-		public IQueryable<XlsxRow> GetXlsxRowsById(Guid? id)
-		{
-			if (!id.HasValue)
-				return null;
-
-			XlsxBytes xlsxBytes = null;
-			XlsxBytes.TryGetValue(id.Value, out xlsxBytes);
+			
+			var xlsxSheets = new List<XlsxSheet>();
 
 			using (MemoryStream mem = new MemoryStream())
 			{
 				mem.Write(xlsxBytes.Bytes, 0, (int)xlsxBytes.Bytes.Length);
-				using (var spreadSheet = SpreadsheetDocument.Open(mem, false))
+				using (var spreadSheetDoc = SpreadsheetDocument.Open(mem, false))
 				{
-					//spreadSheet.ta
-					foreach(var workSheetpart in spreadSheet.WorkbookPart.WorksheetParts)
+					foreach (var workSheetpart in spreadSheetDoc.WorkbookPart.WorksheetParts)
 					{
-						//workSheetpart.Worksheet.
+						var xlsxSheet = new XlsxSheet()
+						{
+							Id = Guid.NewGuid(),
+							Name = SpreadsheetDocumentManager.GetSheetName(workSheetpart, spreadSheetDoc)
+						};
+
+						var xlsxRows = new List<XlsxRow>();
+						foreach (var row in workSheetpart.Worksheet.Descendants<DocumentFormat.OpenXml.Spreadsheet.Row>())
+						{
+							var xlsxRow = new XlsxRow()
+							{
+								Id = Guid.NewGuid(),
+								RowId = (int)(uint)row.RowIndex,
+								IsHeader = false,
+								XlsxSheetId = xlsxSheet.Id,
+								XlsxSheet = xlsxSheet
+							};
+
+							var xlsxCells = new List<XlsxCell>();
+							var i = 0;
+							foreach (var cell in row.Descendants<DocumentFormat.OpenXml.Spreadsheet.Cell>())
+							{
+								i++;
+								xlsxCells.Add(new XlsxCell()
+								{
+									Id = Guid.NewGuid(),
+									Value = WorksheetAccessor.GetCellValue(spreadSheetDoc, workSheetpart, i, xlsxRow.RowId).ToString(),
+									ColumnId = i,
+									XlsxRowId = xlsxRow.Id,
+									XlsxRow = xlsxRow
+								});
+							}
+
+							xlsxRow.XlsxCells = xlsxCells;
+						}
+
+						xlsxSheet.XlsxRows = xlsxRows;
+
+						//var dimension = workSheetpart.Worksheet.SheetDimension.Reference.Value;
+						//var range = SmlDataRetriever.RetrieveRange(spreadSheetDoc, xlsxSheet.Name, dimension);
+						xlsxSheets.Add(xlsxSheet);
 					}
-					spreadSheet.Close();
+					spreadSheetDoc.Close();
 				}
 				mem.Close();
 			}
 
-			return XlsxRows.AsQueryable();
+			XlsxSheets.TryAdd(xlsxId.Value, xlsxSheets);
+			return xlsxSheets.AsQueryable();
+		}
+		#endregion
+
+		#region XlsxRows
+		[Query(IsDefault = true)]
+		public IQueryable<XlsxRow> GetXlsxRows()
+		{
+			return GetXlsxSheets().SelectMany(xlsxSheet => xlsxSheet.XlsxRows).AsQueryable();
 		}
 		#endregion
 
 		#region XlsxCells
-		private static List<XlsxCell> XlsxCells => new List<XlsxCell>();
-
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxCell> GetXlsxCells()
 		{
-			return XlsxRows.SelectMany(r => r.XlsxCells).AsQueryable();
+			return GetXlsxRows().SelectMany(r => r.XlsxCells).AsQueryable();
 		}
 		#endregion
 	}

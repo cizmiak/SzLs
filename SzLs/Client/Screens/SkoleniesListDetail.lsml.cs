@@ -77,7 +77,7 @@ namespace LightSwitchApplication
 				xlsxByte.Bytes = bytes;
 				this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
 
-				var xlsxRows = this.DataWorkspace.XlsxReaderServiceData.GetXlsxRowsById(id).Execute();
+				//var xlsxRows = this.DataWorkspace.XlsxReaderServiceData.GetXlsxRowsById(id).Execute();
 			});
 		}
 

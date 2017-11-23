@@ -596,7 +596,7 @@
             <CallExpression
               Target="GetXlsxSheetsById/Properties[GetXlsxSheetsById1]/Query">
               <ArgumentExpression
-                Parameter="id">
+                Parameter="xlsxId">
                 <ChainExpression>
                   <MemberExpression
                     Member="GetXlsxSheetsById/Properties[XlsxId]" />

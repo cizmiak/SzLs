@@ -19,7 +19,7 @@
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
-        Name="id"
+        Name="xlsxId"
         ParameterType=":Guid?" />
     </QueryOperation>
   </EntityContainer>
@@ -34,8 +34,8 @@
         <WcfRiaQueryOperation
           Name="GetXlsxSheetsById" />
         <WcfRiaQueryOperationParameter
-          Name="id"
-          QueryOperationParameter="XlsxReaderServiceData/Members[GetXlsxSheetsById]/Parameters[id]" />
+          Name="xlsxId"
+          QueryOperationParameter="XlsxReaderServiceData/Members[GetXlsxSheetsById]/Parameters[xlsxId]" />
       </QueryOperationMapping.Attributes>
     </QueryOperationMapping>
   </DataService>

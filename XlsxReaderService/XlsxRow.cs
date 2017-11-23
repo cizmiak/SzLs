@@ -9,6 +9,7 @@ namespace XlsxReaderService
 		[Key]
 		public Guid Id { get; set; }
 		public bool IsHeader { get; set; }
+		public int RowId { get; set; }
 		public Guid XlsxSheetId { get; set; }
 
 		[Association("XlsxCell_XlsxRow", "Id", "XlsxRowId")]

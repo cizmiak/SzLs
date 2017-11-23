@@ -149,6 +149,14 @@
         Association="XlsxRow_XlsxSheet"
         FromEnd="XlsxRow"
         ToEnd="XlsxSheet" />
+      <EntityProperty
+        Name="RowId"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <EntityContainer
@@ -282,6 +290,9 @@
         <WcfRiaProperty
           Name="IsHeader"
           Property="XlsxRow/Properties[IsHeader]" />
+        <WcfRiaProperty
+          Name="RowId"
+          Property="XlsxRow/Properties[RowId]" />
         <WcfRiaProperty
           Name="XlsxSheet"
           Property="XlsxRow/Properties[XlsxSheet]" />
