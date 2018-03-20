@@ -11,11 +11,10 @@ namespace LightSwitchApplication
 	{
 		partial void PosluchaciNezaradeni_PreprocessQuery(int? OrganizaciaID, int? SkolenieID, int? MatkaID, ref IQueryable<Posluchac> query)
 		{
-			IQueryable<int> zaradeniPosluchaci = this.SkoleniePosluchacs
+			var zaradeniPosluchaci = this.SkoleniePosluchacs
 				.Where(skoleniePosluchac => skoleniePosluchac.SkolenieID == (SkolenieID ?? -1))
-				.Cast<SkoleniePosluchac>()
-				.Select(skoleniePosluchac => skoleniePosluchac.Posluchac.ID)
-				.AsQueryable();
+				.Execute()
+				.Select(skoleniePosluchac => skoleniePosluchac.Posluchac.ID);
 
 			query = query.Where(posluchac => !zaradeniPosluchaci.Contains(posluchac.ID));
 		}
@@ -198,8 +197,7 @@ namespace LightSwitchApplication
 
 		partial void PosluchacFromDb_PreprocessQuery(string meno, string priezvisko, string titul, int? organizaciaId, ref IQueryable<Posluchac> query)
 		{
-			var test = query.Where(p => p.Details.EntityState != EntityState.Added && p.Details.EntityState != EntityState.Deleted);
-			query = query.Where(p => 
+			query = query.Where(p =>
 				(p.Meno == meno || p.Meno == null && meno == null)
 				&&
 				(p.Priezvisko == priezvisko || p.Priezvisko == null && priezvisko == null)
