@@ -165,13 +165,10 @@
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserCode\Shared\Organizacia.cs" />
     <Compile Include="UserCode\Shared\Posluchac.cs" />
     <Compile Include="UserCode\Shared\Skolenie.cs" />
-    <Compile Include="UserCode\Shared\SkoleniePosluchac.cs" />
     <Compile Include="UserCode\Shared\Uloha.cs" />
     <Compile Include="UserCode\Shared\Zamestnanec.cs" />
-    <Compile Include="UserCode\Shared\Zmluva.cs" />
   </ItemGroup>
   <ItemGroup>
     <LightSwitchModel Include="Properties\Service.lsml">
@@ -264,6 +261,12 @@
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\XlsxSheets.lsml" />
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\GetXlsxSheetsById.lsml">
       <DependentUpon>XlsxSheets.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\OrganizacieSearch.lsml">
+      <DependentUpon>Organizacie.lsml</DependentUpon>
+    </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\PosluchacFromDb.lsml">
+      <DependentUpon>Posluchacs.lsml</DependentUpon>
     </LightSwitchModel>
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.config</DependentUpon>

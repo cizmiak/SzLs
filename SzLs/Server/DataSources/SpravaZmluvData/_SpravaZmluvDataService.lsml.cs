@@ -7,24 +7,24 @@ using Microsoft.LightSwitch.Security.Server;
 using Microsoft.LightSwitch.Security;
 namespace LightSwitchApplication
 {
-    public partial class SpravaZmluvDataService
-    {
+	public partial class SpravaZmluvDataService
+	{
 		partial void PosluchaciNezaradeni_PreprocessQuery(int? OrganizaciaID, int? SkolenieID, int? MatkaID, ref IQueryable<Posluchac> query)
-        {
-            IQueryable<int> zaradeniPosluchaci = this.SkoleniePosluchacs
-                .Where(skoleniePosluchac => skoleniePosluchac.SkolenieID == (SkolenieID ?? -1))
-                .Cast<SkoleniePosluchac>()
-                .Select(skoleniePosluchac => skoleniePosluchac.Posluchac.ID)
-                .AsQueryable();
+		{
+			IQueryable<int> zaradeniPosluchaci = this.SkoleniePosluchacs
+				.Where(skoleniePosluchac => skoleniePosluchac.SkolenieID == (SkolenieID ?? -1))
+				.Cast<SkoleniePosluchac>()
+				.Select(skoleniePosluchac => skoleniePosluchac.Posluchac.ID)
+				.AsQueryable();
 
-            query = query.Where(posluchac => !zaradeniPosluchaci.Contains(posluchac.ID));
-        }
+			query = query.Where(posluchac => !zaradeniPosluchaci.Contains(posluchac.ID));
+		}
 
 		partial void UlohaTypVykon_PreprocessQuery(ref IQueryable<UlohaTyp> query)
-        {
-            Konfiguracia konfiguraciaTypUlohy = KonfiguracnaHodnota("ZmluvaVykonTypUlohy").FirstOrDefault();
-            query = query.Where(ulohaTyp => ulohaTyp.Nazov == konfiguraciaTypUlohy.Hodnota);
-        }
+		{
+			Konfiguracia konfiguraciaTypUlohy = KonfiguracnaHodnota("ZmluvaVykonTypUlohy").FirstOrDefault();
+			query = query.Where(ulohaTyp => ulohaTyp.Nazov == konfiguraciaTypUlohy.Hodnota);
+		}
 
 		partial void UlohaTypUvodnaPraca_PreprocessQuery(ref IQueryable<UlohaTyp> query)
 		{
@@ -53,7 +53,7 @@ namespace LightSwitchApplication
 		partial void Ulohy_Inserting(Uloha entity)
 		{
 			entity.Vytvorene = DateTime.Now;
-            entity.ZamestnanecUpravil = this.ZamestnanecPodlaLoginu(this.Application.User.FullName);
+			entity.ZamestnanecUpravil = this.ZamestnanecPodlaLoginu(this.Application.User.FullName);
 		} 
 
 		partial void Zmluvy_Updating(Zmluva entity)
@@ -62,7 +62,7 @@ namespace LightSwitchApplication
 			entity.Zamestnanec = this.ZamestnanecPodlaLoginu(this.Application.User.FullName);
 		}
 
-        partial void Zmluvy_Inserting(Zmluva entity)
+		partial void Zmluvy_Inserting(Zmluva entity)
 		{
 			entity.PoslednaUprava = DateTime.Now;
 			entity.Zamestnanec = this.ZamestnanecPodlaLoginu(this.Application.User.FullName);
@@ -188,5 +188,25 @@ namespace LightSwitchApplication
 		{
 			query = query.OrderBy(entity => entity.Nazov);
 		}
-    }
+
+		partial void OrganizacieSearch_PreprocessQuery(string searchString, ref IQueryable<Organizacia> query)
+		{
+			query = query.Where(o => o.Referencia == searchString);
+			if (query.Count() != 1)
+				query.Where(o => o.Nazov == searchString);
+		}
+
+		partial void PosluchacFromDb_PreprocessQuery(string meno, string priezvisko, string titul, int? organizaciaId, ref IQueryable<Posluchac> query)
+		{
+			var test = query.Where(p => p.Details.EntityState != EntityState.Added && p.Details.EntityState != EntityState.Deleted);
+			query = query.Where(p => 
+				(p.Meno == meno || p.Meno == null && meno == null)
+				&&
+				(p.Priezvisko == priezvisko || p.Priezvisko == null && priezvisko == null)
+				&&
+				(p.Titul == titul || p.Titul == null && titul == null)
+				&&
+				(p.Organizacia.ID == organizaciaId));
+		}
+	}
 }

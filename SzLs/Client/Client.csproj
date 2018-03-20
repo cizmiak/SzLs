@@ -179,26 +179,17 @@
     <Compile Include="..\Server\DataSources\XlsxReaderServiceData\XlsxRow.lsml.cs">
       <Link>UserCode\Shared\XlsxRow.lsml.cs</Link>
     </Compile>
-    <Compile Include="..\Server\UserCode\Shared\Organizacia.cs">
-      <Link>UserCode\Shared\Organizacia.cs</Link>
-    </Compile>
     <Compile Include="..\Server\UserCode\Shared\Posluchac.cs">
       <Link>UserCode\Shared\Posluchac.cs</Link>
     </Compile>
     <Compile Include="..\Server\UserCode\Shared\Skolenie.cs">
       <Link>UserCode\Shared\Skolenie.cs</Link>
     </Compile>
-    <Compile Include="..\Server\UserCode\Shared\SkoleniePosluchac.cs">
-      <Link>UserCode\Shared\SkoleniePosluchac.cs</Link>
-    </Compile>
     <Compile Include="..\Server\UserCode\Shared\Uloha.cs">
       <Link>UserCode\Shared\Uloha.cs</Link>
     </Compile>
     <Compile Include="..\Server\UserCode\Shared\Zamestnanec.cs">
       <Link>UserCode\Shared\Zamestnanec.cs</Link>
-    </Compile>
-    <Compile Include="..\Server\UserCode\Shared\Zmluva.cs">
-      <Link>UserCode\Shared\Zmluva.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\Domov.lsml.cs">

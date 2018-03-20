@@ -49,15 +49,13 @@ namespace LightSwitchApplication
 			});
 
 			var id = Guid.NewGuid();
+
 			this.Details.Dispatcher.BeginInvoke(() =>
-			{
-				
+			{				
 				var xlsxByte = this.DataWorkspace.XlsxReaderServiceData.XlsxBytes.AddNew();
 				xlsxByte.Id = id;
 				xlsxByte.Bytes = bytes;
 				this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
-
-				//var xlsxRows = this.DataWorkspace.XlsxReaderServiceData.GetXlsxRowsById(id).Execute();
 			});
 
 			this.XlsxId = id;

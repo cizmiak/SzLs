@@ -166,6 +166,7 @@
     </EntityContainer.Attributes>
     <EntitySet
       Name="XlsxRows"
+      CanUpdate="True"
       EntityType="XlsxRow" />
     <QueryOperation
       Name="XlsxRows_Single"

@@ -261,14 +261,14 @@
                   </ScreenExpressionTree>
                 </ContentItem.DataSource>
                 <ContentItem
-                  Name="Id2"
+                  Name="RowId"
                   Kind="Value"
-                  DataType=":Guid">
+                  DataType=":Int32">
                   <ContentItem.DataSource>
                     <ScreenExpressionTree>
                       <ChainExpression>
                         <MemberExpression
-                          Member="XlsxRow/Properties[Id]" />
+                          Member="XlsxRow/Properties[RowId]" />
                       </ChainExpression>
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
@@ -282,6 +282,19 @@
                       <ChainExpression>
                         <MemberExpression
                           Member="XlsxRow/Properties[IsHeader]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
+                <ContentItem
+                  Name="Column0"
+                  Kind="Value"
+                  DataType=":String">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="XlsxRow/Properties[Column0]" />
                       </ChainExpression>
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
@@ -412,19 +425,6 @@
                       <ChainExpression>
                         <MemberExpression
                           Member="XlsxRow/Properties[Column10]" />
-                      </ChainExpression>
-                    </ScreenExpressionTree>
-                  </ContentItem.DataSource>
-                </ContentItem>
-                <ContentItem
-                  Name="Column0"
-                  Kind="Value"
-                  DataType=":String">
-                  <ContentItem.DataSource>
-                    <ScreenExpressionTree>
-                      <ChainExpression>
-                        <MemberExpression
-                          Member="XlsxRow/Properties[Column0]" />
                       </ChainExpression>
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
@@ -574,6 +574,7 @@
     <Screen.Properties>
       <ScreenCollectionProperty
         Name="GetXlsxSheetsById1"
+        DisablePaging="True"
         PageSize="45"
         PropertyType="CollectionView$XlsxSheet">
         <ScreenCollectionProperty.Query>
@@ -611,6 +612,7 @@
         PropertyType=":Guid" />
       <ScreenCollectionProperty
         Name="XlsxRows"
+        DisablePaging="True"
         PageSize="15"
         PropertyType="CollectionView$XlsxRow">
         <ScreenCollectionProperty.Query>

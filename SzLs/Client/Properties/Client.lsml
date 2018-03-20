@@ -117,12 +117,6 @@
       <ApplicationNavigationLink
         Name="PosluchacsListDetail"
         Command="!module/Commands[ScreenCommandShowPosluchacsListDetail]" />
-      <ApplicationNavigationLink
-        Name="XlsxRows"
-        Command="!module/Commands[ScreenCommandShowXlsxRows]" />
-      <ApplicationNavigationLink
-        Name="GetXlsxSheetsById"
-        Command="!module/Commands[ScreenCommandShowGetXlsxSheetsById]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="group">

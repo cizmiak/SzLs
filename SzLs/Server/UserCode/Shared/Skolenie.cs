@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.LightSwitch;
 namespace LightSwitchApplication
 {
-    public partial class Skolenie
-    {
+	public partial class Skolenie
+	{
 		partial void Notifikovany_Validate(EntityValidationResultsBuilder results)
 		{
 			if (this.Notifikovany == null)

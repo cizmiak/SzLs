@@ -10,7 +10,6 @@ using OpenXmlPowerTools;
 
 namespace XlsxReaderService
 {
-	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
 	public class XlsxReaderService : DomainService
 	{
 		private static ConcurrentDictionary<Guid, XlsxBytes> XlsxBytes { get; } =
@@ -95,10 +94,21 @@ namespace XlsxReaderService
 							foreach (var cell in row.Descendants<DocumentFormat.OpenXml.Spreadsheet.Cell>())
 							{
 								i++;
+
+								string value;
+								try
+								{
+									value = WorksheetAccessor.GetCellValue(spreadSheetDoc, workSheetpart, i, xlsxRow.RowId).ToString();
+								}
+								catch (Exception e)
+								{
+									value = e.Message;
+								}
+
 								xlsxCells.Add(new XlsxCell()
 								{
 									Id = Guid.NewGuid(),
-									Value = WorksheetAccessor.GetCellValue(spreadSheetDoc, workSheetpart, i, xlsxRow.RowId).ToString(),
+									Value = value,
 									ColumnId = i,
 									XlsxRowId = xlsxRow.Id,
 									XlsxRow = xlsxRow
@@ -106,12 +116,10 @@ namespace XlsxReaderService
 							}
 
 							xlsxRow.XlsxCells = xlsxCells;
+							xlsxRows.Add(xlsxRow);
 						}
 
 						xlsxSheet.XlsxRows = xlsxRows;
-
-						//var dimension = workSheetpart.Worksheet.SheetDimension.Reference.Value;
-						//var range = SmlDataRetriever.RetrieveRange(spreadSheetDoc, xlsxSheet.Name, dimension);
 						xlsxSheets.Add(xlsxSheet);
 					}
 					spreadSheetDoc.Close();
@@ -128,15 +136,25 @@ namespace XlsxReaderService
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxRow> GetXlsxRows()
 		{
-			return GetXlsxSheets().SelectMany(xlsxSheet => xlsxSheet.XlsxRows).AsQueryable();
+			return XlsxSheets
+				.SelectMany(kvPair => kvPair.Value)
+				.SelectMany(xlsxSheet => xlsxSheet.XlsxRows)
+				.AsQueryable();
 		}
+
+		[Update]
+		public void UpdateXlsxRow(XlsxRow xlsxRow) { }
 		#endregion
 
 		#region XlsxCells
 		[Query(IsDefault = true)]
 		public IQueryable<XlsxCell> GetXlsxCells()
 		{
-			return GetXlsxRows().SelectMany(r => r.XlsxCells).AsQueryable();
+			return XlsxSheets
+				.SelectMany(kvPair => kvPair.Value)
+				.SelectMany(xlsxSheet => xlsxSheet.XlsxRows)
+				.SelectMany(r => r.XlsxCells)
+				.AsQueryable();
 		}
 		#endregion
 	}

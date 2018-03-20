@@ -6,13 +6,15 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using Microsoft.LightSwitch.Threading;
+using System.Windows;
 
 namespace LightSwitchApplication
 {
 	public partial class SkoleniesListDetail
 	{
-		private string ReportServerUrl { get; set; }
-		private SkolenieVysledok PredvolenyVysledok { get; set; }
+		private string ReportServerUrl;
+		private SkolenieVysledok PredvolenyVysledok;
+		private XlsxSheet xlsxSheet;
 
 		partial void SkoleniesListDetail_InitializeDataWorkspace(List<IDataService> saveChangesTo)
 		{
@@ -47,6 +49,12 @@ namespace LightSwitchApplication
 
 		private void XlsxImport_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
+			if (this.Skolenies.SelectedItem == null)
+			{
+				this.showMessage("Nie je vybrate ziadne skolenie.");
+				return;
+			}
+
 			byte[] bytes = null;
 
 			Dispatchers.Main.Invoke(() => {
@@ -69,16 +77,170 @@ namespace LightSwitchApplication
 				}
 			});
 
+			var id = Guid.NewGuid();
+			
 			this.Details.Dispatcher.BeginInvoke(() =>
 			{
-				var id = Guid.NewGuid();
 				var xlsxByte = this.DataWorkspace.XlsxReaderServiceData.XlsxBytes.AddNew();
 				xlsxByte.Id = id;
 				xlsxByte.Bytes = bytes;
 				this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
 
-				//var xlsxRows = this.DataWorkspace.XlsxReaderServiceData.GetXlsxRowsById(id).Execute();
+				this.xlsxSheet = null;
+				this.xlsxSheet = this.DataWorkspace.XlsxReaderServiceData
+					.GetXlsxSheetsById(id)
+					.Where(s => s.Name.StartsWith("import"))
+					.FirstOrDefault();
+
+				this.xlsxDataReady();
+
+				this.DataWorkspace.XlsxReaderServiceData.Details.DiscardChanges();
 			});
+		}
+
+		private void xlsxDataReady()
+		{
+			if (this.xlsxSheet == null)
+			{
+				this.showMessage("Nazov excel sheetu, ktory chcete naimportovat, sa musi zacinat slovom 'import'.");
+				return;
+			}
+
+			var headers = this.GetHeaders();
+			var headerRow = this.GetHeaderRow(this.xlsxSheet, headers);
+			if (headerRow == null)
+			{
+				var message = "Nepodarilo sa najst hlavickovy riadok.";
+				message += "\nPovolene nazvy stlpcov su:\n";
+				message += string.Join("\n", headers);
+				this.showMessage(message);
+				return;
+			}
+
+			this.parseXlsxData(this.xlsxSheet, headerRow, headers);
+		}
+
+		private void showMessage(string message)
+		{
+			Dispatchers.Main.Invoke(() =>
+				MessageBox.Show(message));
+		}
+
+		private void parseXlsxData(XlsxSheet xlsxSheet, XlsxRow headerRow, IEnumerable<string> headers)
+		{
+			var xlsxHeaders = headerRow.XlsxCells.Select(c => c.Value).ToArray();
+			var intersectHeaders = headers.Intersect(xlsxHeaders);
+
+			foreach (var row in xlsxSheet.XlsxRows)
+			{
+				if (row.RowId <= headerRow.RowId)
+					continue;
+
+				var cells = row.XlsxCells.Select(c => c.Value).ToArray();
+				var posluchac = this.DataWorkspace.SpravaZmluvData.Posluchacs.AddNew();
+				for (int i = 0; i < xlsxHeaders.Length; i++)
+				{
+					if (!intersectHeaders.Contains(xlsxHeaders[i]))
+						continue;
+
+					var propertyType = posluchac.Details.Properties[xlsxHeaders[i]].PropertyType;
+
+					if (propertyType == typeof(string))
+						posluchac.Details.Properties[xlsxHeaders[i]].Value = cells[i];
+					else if (propertyType == typeof(bool))
+						posluchac.Details.Properties[xlsxHeaders[i]].Value = bool.Parse(cells[i]);
+					else if (propertyType == typeof(DateTime))
+						posluchac.Details.Properties[xlsxHeaders[i]].Value = DateTime.Parse(cells[i]);
+
+					if (xlsxHeaders[i] == "Organizacia")
+					{
+						var organizacia = this.DataWorkspace.SpravaZmluvData.OrganizacieSearch(cells[i]);
+						posluchac.Organizacia = organizacia;
+					}
+
+					if (xlsxHeaders[i] == "PracovneZaradenie")
+					{
+						var pracovneZaradenie = this.DataWorkspace.SpravaZmluvData
+							.PracovneZaradenies
+							.Where(pz => pz.Nazov == cells[i])
+							.FirstOrDefault();
+
+						if (pracovneZaradenie == null)
+						{
+							pracovneZaradenie = this.DataWorkspace.SpravaZmluvData.PracovneZaradenies.AddNew();
+							pracovneZaradenie.Nazov = cells[i];
+							posluchac.PracovneZaradenie = pracovneZaradenie;
+						}
+					}
+				}
+
+				var selectedSkolenie = this.Skolenies.SelectedItem;
+
+				if (posluchac.Organizacia == null)
+					posluchac.Organizacia = selectedSkolenie.Organizacia;
+
+				var savedPosluchac = this.DataWorkspace.SpravaZmluvData.PosluchacFromDb(
+					posluchac.Meno,
+					posluchac.Priezvisko,
+					posluchac.Titul,
+					posluchac.Organizacia?.ID);
+
+				if (savedPosluchac != null)
+				{
+					posluchac.Delete();
+					posluchac = savedPosluchac;
+				}
+
+				var posluchacAlreadyThere = selectedSkolenie.SkoleniePosluchacs
+					.SingleOrDefault(sp => sp.PosluchacID == posluchac.ID);
+				if (posluchacAlreadyThere == null)
+				{
+					var skoleniePosluchac = selectedSkolenie.SkoleniePosluchacs.AddNew();
+					skoleniePosluchac.Skolenie = selectedSkolenie;
+					skoleniePosluchac.Posluchac = posluchac;
+					skoleniePosluchac.SkolenieVysledok = PredvolenyVysledok;
+				}
+			}
+		}
+
+		private IEnumerable<string> GetHeaders()
+		{
+			var posluchacHeaders = this.DataWorkspace.SpravaZmluvData
+				.Posluchacs.Details.EntityType
+				.GetProperties()
+				.Where(p => p.CanWrite)
+				.Select(p => p.Name);
+			var skoleniePosluchacHeaders = this.DataWorkspace.SpravaZmluvData
+				.SkoleniePosluchacs.Details.EntityType
+				.GetProperties()
+				.Where(p => p.CanWrite)
+				.Select(p => p.Name);
+			var headers = posluchacHeaders
+				.Concat(skoleniePosluchacHeaders)
+				.Distinct()
+				.Where(h => !h.StartsWith("Posluchac") && !h.StartsWith("Skolenie"));
+			return headers;
+		}
+
+		private XlsxRow GetHeaderRow(XlsxSheet xlsxSheet, IEnumerable<string> headers)
+		{
+			foreach (var row in xlsxSheet.XlsxRows)
+			{
+				var foundHeaderCount = 0;
+				foreach (var cell in row.XlsxCells)
+				{
+					if (headers.Contains(cell.Value))
+						foundHeaderCount++;
+
+					if (foundHeaderCount > 1)
+					{
+						row.IsHeader = true;
+						return row;
+					}
+				}
+			}
+
+			return null;
 		}
 
 		private string getKonfiguracnaHodnota(string nastavenie)

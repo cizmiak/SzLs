@@ -6,8 +6,8 @@ using Microsoft.LightSwitch;
 
 namespace LightSwitchApplication
 {
-    public partial class Uloha
-    {
+	public partial class Uloha
+	{
 		partial void UvodnaPraca_Changed()
 		{
 			if(this.UvodnaPraca != null)
@@ -18,14 +18,14 @@ namespace LightSwitchApplication
 			}
 		}
 
-        partial void VyrieseneDna_Changed()
-        {
-            string ulohaStavVyrieseneString =
+		partial void VyrieseneDna_Changed()
+		{
+			string ulohaStavVyrieseneString =
 				this.DataWorkspace.SpravaZmluvData.KonfiguracnaHodnota("UlohaStavVyriesene").FirstOrDefault().Hodnota;
-            if (this.VyrieseneDna != null && (this.UlohaStav == null || this.UlohaStav.Nazov != ulohaStavVyrieseneString))
-            {
+			if (this.VyrieseneDna != null && (this.UlohaStav == null || this.UlohaStav.Nazov != ulohaStavVyrieseneString))
+			{
 				this.UlohaStav = this.DataWorkspace.SpravaZmluvData.UlohaStavs.Where(us => us.Nazov == ulohaStavVyrieseneString).FirstOrDefault();
-            }
-        }
+			}
+		}
 	}
 }
