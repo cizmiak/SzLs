@@ -268,6 +268,9 @@
     <LightSwitchModel Include="DataSources\SpravaZmluvData\PosluchacFromDb.lsml">
       <DependentUpon>Posluchacs.lsml</DependentUpon>
     </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\SkoleniaByPosluchac.lsml">
+      <DependentUpon>Skolenia.lsml</DependentUpon>
+    </LightSwitchModel>
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

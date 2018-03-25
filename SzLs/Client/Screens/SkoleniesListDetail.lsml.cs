@@ -131,6 +131,11 @@ namespace LightSwitchApplication
 			var xlsxHeaders = headerRow.XlsxCells.Select(c => c.Value).ToArray();
 			var intersectHeaders = headers.Intersect(xlsxHeaders);
 
+			var processedXlsxRows = 0;
+			var rowsAlreadyInDb = 0;
+			var rowsAlreadyImported = 0;
+			var rowsImported = 0;
+
 			foreach (var row in xlsxSheet.XlsxRows)
 			{
 				if (row.RowId <= headerRow.RowId)
@@ -173,6 +178,7 @@ namespace LightSwitchApplication
 						}
 					}
 				}
+				processedXlsxRows++;
 
 				var selectedSkolenie = this.Skolenies.SelectedItem;
 
@@ -189,18 +195,30 @@ namespace LightSwitchApplication
 				{
 					posluchac.Delete();
 					posluchac = savedPosluchac;
+					rowsAlreadyInDb++;
 				}
 
-				var posluchacAlreadyThere = selectedSkolenie.SkoleniePosluchacs
+				var posluchacAlreadyImported = selectedSkolenie.SkoleniePosluchacs
 					.SingleOrDefault(sp => sp.PosluchacID == posluchac.ID);
-				if (posluchacAlreadyThere == null)
+				if (posluchacAlreadyImported == null)
 				{
 					var skoleniePosluchac = selectedSkolenie.SkoleniePosluchacs.AddNew();
 					skoleniePosluchac.Skolenie = selectedSkolenie;
 					skoleniePosluchac.Posluchac = posluchac;
 					skoleniePosluchac.SkolenieVysledok = PredvolenyVysledok;
+					rowsImported++;
+				}
+				else
+				{
+					rowsAlreadyImported++;
 				}
 			}
+
+			var message = $"Pocet precitanych riadkov z Excelu: {processedXlsxRows}.\n";
+			//message += $"Pocet najdenych riadkov v databaze: {rowsAlreadyInDb}";
+			message += $"Pocet nenaimportovanych riadokov kvoli duplicite: {rowsAlreadyImported}.\n";
+			message += $"Pocet naimportovanych riadkov: {rowsImported}";
+			this.showMessage(message);
 		}
 
 		private IEnumerable<string> GetHeaders()

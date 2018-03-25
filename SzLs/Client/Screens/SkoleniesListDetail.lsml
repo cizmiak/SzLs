@@ -2010,114 +2010,161 @@
                 </ContentItem.PropertySources>
               </ContentItem>
               <ContentItem
-                Name="ZaradVyrad"
+                Name="ZaradVyradImport"
                 Kind="Group"
-                View=":RowsLayout">
-                <ContentItem.CommandItems>
-                  <ContentItem
-                    Name="ZaradPosluchaca"
-                    Kind="Command">
-                    <ContentItem.Attributes>
-                      <DisplayName
-                        Value="&lt;" />
-                    </ContentItem.Attributes>
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <CallExpression
-                            Target="SkoleniesListDetail/Methods[ZaradPosluchaca]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                    <ContentItem.PropertySources>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[VerticalAlignment]">
-                        <ScreenExpressionTree>
-                          <ConstantExpression
-                            Value="Stretch"
-                            ResultType=":String" />
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[MinWidth]">
-                        <ScreenExpressionTree>
-                          <ConstantExpression
-                            Value="42"
-                            ResultType=":Double" />
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[HorizontalAlignment]">
-                        <ScreenExpressionTree>
-                          <ConstantExpression
-                            Value="Stretch"
-                            ResultType=":String" />
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                    </ContentItem.PropertySources>
-                  </ContentItem>
-                  <ContentItem
-                    Name="VyradPosluchaca"
-                    Kind="Command">
-                    <ContentItem.Attributes>
-                      <DisplayName
-                        Value="&gt;" />
-                    </ContentItem.Attributes>
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <CallExpression
-                            Target="SkoleniesListDetail/Methods[VyradPosluchaca]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                    <ContentItem.PropertySources>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[HorizontalAlignment]">
+                View="Microsoft.LightSwitch.RichClient:RowsLayout">
+                <ContentItem
+                  Name="ZaradVyrad"
+                  Kind="Group"
+                  View="Microsoft.LightSwitch.RichClient:RowsLayout">
+                  <ContentItem.CommandItems>
+                    <ContentItem
+                      Name="ZaradPosluchaca"
+                      Kind="Command">
+                      <ContentItem.Attributes>
+                        <DisplayName
+                          Value="&lt;" />
+                      </ContentItem.Attributes>
+                      <ContentItem.DataSource>
                         <ScreenExpressionTree>
                           <ChainExpression>
+                            <CallExpression
+                              Target="SkoleniesListDetail/Methods[ZaradPosluchaca]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                      <ContentItem.PropertySources>
+                        <ControlPropertySource
+                          Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                          <ScreenExpressionTree>
                             <ConstantExpression
                               Value="Stretch"
                               ResultType=":String" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[VerticalAlignment]">
-                        <ScreenExpressionTree>
-                          <ChainExpression>
+                          </ScreenExpressionTree>
+                        </ControlPropertySource>
+                        <ControlPropertySource
+                          Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[MinWidth]">
+                          <ScreenExpressionTree>
+                            <ConstantExpression
+                              Value="42"
+                              ResultType=":Double" />
+                          </ScreenExpressionTree>
+                        </ControlPropertySource>
+                        <ControlPropertySource
+                          Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
+                          <ScreenExpressionTree>
                             <ConstantExpression
                               Value="Stretch"
                               ResultType=":String" />
+                          </ScreenExpressionTree>
+                        </ControlPropertySource>
+                      </ContentItem.PropertySources>
+                    </ContentItem>
+                    <ContentItem
+                      Name="VyradPosluchaca"
+                      Kind="Command">
+                      <ContentItem.Attributes>
+                        <DisplayName
+                          Value="&gt;" />
+                      </ContentItem.Attributes>
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <CallExpression
+                              Target="SkoleniesListDetail/Methods[VyradPosluchaca]" />
                           </ChainExpression>
                         </ScreenExpressionTree>
-                      </ControlPropertySource>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[MinWidth]">
-                        <ScreenExpressionTree>
-                          <ConstantExpression
-                            Value="42"
-                            ResultType=":Double" />
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                    </ContentItem.PropertySources>
-                  </ContentItem>
-                  <ContentItem
-                    Name="XlsxImport"
-                    Kind="Command">
-                    <ContentItem.DataSource>
+                      </ContentItem.DataSource>
+                      <ContentItem.PropertySources>
+                        <ControlPropertySource
+                          Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <ConstantExpression
+                                Value="Stretch"
+                                ResultType=":String" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ControlPropertySource>
+                        <ControlPropertySource
+                          Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <ConstantExpression
+                                Value="Stretch"
+                                ResultType=":String" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ControlPropertySource>
+                        <ControlPropertySource
+                          Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[MinWidth]">
+                          <ScreenExpressionTree>
+                            <ConstantExpression
+                              Value="42"
+                              ResultType=":Double" />
+                          </ScreenExpressionTree>
+                        </ControlPropertySource>
+                      </ContentItem.PropertySources>
+                    </ContentItem>
+                  </ContentItem.CommandItems>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
                       <ScreenExpressionTree>
-                        <ChainExpression>
-                          <CallExpression
-                            Target="SkoleniesListDetail/Methods[XlsxImport]" />
-                        </ChainExpression>
+                        <ConstantExpression
+                          Value="Center"
+                          ResultType=":String" />
                       </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                </ContentItem.CommandItems>
+                    </ControlPropertySource>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                      <ScreenExpressionTree>
+                        <ConstantExpression
+                          Value="Center"
+                          ResultType=":String" />
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
+                </ContentItem>
+                <ContentItem
+                  Name="Import"
+                  Kind="Group">
+                  <ContentItem.CommandItems>
+                    <ContentItem
+                      Name="XlsxImport"
+                      Kind="Command">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <CallExpression
+                              Target="SkoleniesListDetail/Methods[XlsxImport]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                  </ContentItem.CommandItems>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
+                      <ScreenExpressionTree>
+                        <ConstantExpression
+                          Value="Center"
+                          ResultType=":String" />
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                      <ScreenExpressionTree>
+                        <ConstantExpression
+                          Value="Center"
+                          ResultType=":String" />
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
+                </ContentItem>
                 <ContentItem.PropertySources>
                   <ControlPropertySource
-                    Property=":RootControl/Properties[VerticalAlignment]">
+                    Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
                     <ScreenExpressionTree>
                       <ConstantExpression
                         Value="Center"
@@ -2125,7 +2172,7 @@
                     </ScreenExpressionTree>
                   </ControlPropertySource>
                   <ControlPropertySource
-                    Property="Microsoft.LightSwitch:RootControl/Properties[HorizontalAlignment]">
+                    Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
                     <ScreenExpressionTree>
                       <ConstantExpression
                         Value="Center"
@@ -2135,7 +2182,7 @@
                 </ContentItem.PropertySources>
               </ContentItem>
               <ContentItem
-                Name="Group2"
+                Name="NezaradeniPosluchaci_ZaradenyPosluchac"
                 Kind="Group"
                 View=":TabsLayout">
                 <ContentItem
@@ -2376,332 +2423,736 @@
                 <ContentItem
                   Name="ZaradenyPosluchac"
                   Kind="Group"
-                  View=":TableLayout">
+                  View="Microsoft.LightSwitch.RichClient:TabsLayout">
                   <ContentItem
-                    Name="SkoleniePosluchacs_SelectedItem"
-                    Kind="Details"
-                    DataType="SkoleniePosluchac">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="SkoleniesListDetail/Properties[SkoleniePosluchacs]" />
-                          <MemberExpression
-                            Member="SelectedItem" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
+                    Name="ZaradenyPosluchacDetail"
+                    Kind="Group"
+                    View="Microsoft.LightSwitch.RichClient:TableLayout">
+                    <ContentItem.Attributes>
+                      <DisplayName
+                        Value="Detail" />
+                    </ContentItem.Attributes>
                     <ContentItem
-                      Name="Posluchac"
+                      Name="SkoleniePosluchacs_SelectedItem"
                       Kind="Details"
-                      DataType="Posluchac"
-                      View=":Summary">
+                      DataType="SkoleniePosluchac">
                       <ContentItem.DataSource>
                         <ScreenExpressionTree>
                           <ChainExpression>
                             <MemberExpression
-                              Member="SkoleniePosluchac/Properties[Posluchac]" />
+                              Member="SkoleniesListDetail/Properties[SkoleniePosluchacs]" />
+                            <MemberExpression
+                              Member="SelectedItem" />
                           </ChainExpression>
                         </ScreenExpressionTree>
                       </ContentItem.DataSource>
-                      <ContentItem.PropertySources>
-                        <ControlPropertySource
-                          Property="Microsoft.LightSwitch:RootControl/Properties[FontStyle]">
+                      <ContentItem
+                        Name="Posluchac"
+                        Kind="Details"
+                        DataType="Posluchac"
+                        View="Microsoft.LightSwitch.RichClient:Summary">
+                        <ContentItem.DataSource>
                           <ScreenExpressionTree>
-                            <ConstantExpression
-                              Value="Strong"
-                              ResultType=":String" />
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[Posluchac]" />
+                            </ChainExpression>
                           </ScreenExpressionTree>
-                        </ControlPropertySource>
-                      </ContentItem.PropertySources>
-                    </ContentItem>
-                    <ContentItem
-                      Name="CisloPreukazu2"
-                      Kind="Value"
-                      DataType=":String?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[CisloPreukazu]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="Group4"
-                      Kind="Group">
-                      <ContentItem.CommandItems>
-                        <ContentItem
-                          Name="GenerujCisloPreukazu"
-                          Kind="Command">
-                          <ContentItem.DataSource>
+                        </ContentItem.DataSource>
+                        <ContentItem.PropertySources>
+                          <ControlPropertySource
+                            Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[FontStyle]">
                             <ScreenExpressionTree>
-                              <ChainExpression>
-                                <CallExpression
-                                  Target="SkoleniesListDetail/Methods[GenerujCisloPreukazu]" />
-                              </ChainExpression>
+                              <ConstantExpression
+                                Value="Strong"
+                                ResultType=":String" />
                             </ScreenExpressionTree>
-                          </ContentItem.DataSource>
-                        </ContentItem>
-                      </ContentItem.CommandItems>
-                      <ContentItem.PropertySources>
-                        <ControlPropertySource
-                          Property="Microsoft.LightSwitch:RootControl/Properties[VerticalAlignment]">
+                          </ControlPropertySource>
+                        </ContentItem.PropertySources>
+                      </ContentItem>
+                      <ContentItem
+                        Name="CisloPreukazu2"
+                        Kind="Value"
+                        DataType=":String?">
+                        <ContentItem.DataSource>
                           <ScreenExpressionTree>
-                            <ConstantExpression
-                              Value="Top"
-                              ResultType=":String" />
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[CisloPreukazu]" />
+                            </ChainExpression>
                           </ScreenExpressionTree>
-                        </ControlPropertySource>
-                      </ContentItem.PropertySources>
-                    </ContentItem>
-                    <ContentItem
-                      Name="PreukazVydal1"
-                      Kind="Value"
-                      DataType=":String?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[PreukazVydal]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="PreukazVydany1"
-                      Kind="Value"
-                      DataType=":DateTime?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[PreukazVydany]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                      <ContentItem.PropertySources>
-                        <ControlPropertySource
-                          Property="Microsoft.LightSwitch:RootControl/Properties[HorizontalAlignment]">
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Group4"
+                        Kind="Group">
+                        <ContentItem.CommandItems>
+                          <ContentItem
+                            Name="GenerujCisloPreukazu"
+                            Kind="Command">
+                            <ContentItem.DataSource>
+                              <ScreenExpressionTree>
+                                <ChainExpression>
+                                  <CallExpression
+                                    Target="SkoleniesListDetail/Methods[GenerujCisloPreukazu]" />
+                                </ChainExpression>
+                              </ScreenExpressionTree>
+                            </ContentItem.DataSource>
+                          </ContentItem>
+                        </ContentItem.CommandItems>
+                        <ContentItem.PropertySources>
+                          <ControlPropertySource
+                            Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                            <ScreenExpressionTree>
+                              <ConstantExpression
+                                Value="Top"
+                                ResultType=":String" />
+                            </ScreenExpressionTree>
+                          </ControlPropertySource>
+                        </ContentItem.PropertySources>
+                      </ContentItem>
+                      <ContentItem
+                        Name="PreukazVydal1"
+                        Kind="Value"
+                        DataType=":String?">
+                        <ContentItem.DataSource>
                           <ScreenExpressionTree>
-                            <ConstantExpression
-                              Value="Stretch"
-                              ResultType=":String" />
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[PreukazVydal]" />
+                            </ChainExpression>
                           </ScreenExpressionTree>
-                        </ControlPropertySource>
-                      </ContentItem.PropertySources>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="PreukazVydany1"
+                        Kind="Value"
+                        DataType=":DateTime?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[PreukazVydany]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem.PropertySources>
+                          <ControlPropertySource
+                            Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
+                            <ScreenExpressionTree>
+                              <ConstantExpression
+                                Value="Stretch"
+                                ResultType=":String" />
+                            </ScreenExpressionTree>
+                          </ControlPropertySource>
+                        </ContentItem.PropertySources>
+                      </ContentItem>
+                      <ContentItem
+                        Name="I"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[I]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="II2"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[II]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="W1"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[W1]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="W1_BezVodickehoOpravnenia2"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[W1_BezVodickehoOpravnenia]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="W2"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[W2]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
                     </ContentItem>
                     <ContentItem
-                      Name="I"
-                      Kind="Value"
-                      DataType=":Boolean?">
+                      Name="SkoleniePosluchacs_SelectedItem1"
+                      Kind="Details"
+                      DataType="SkoleniePosluchac">
                       <ContentItem.DataSource>
                         <ScreenExpressionTree>
                           <ChainExpression>
                             <MemberExpression
-                              Member="SkoleniePosluchac/Properties[I]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="II2"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
+                              Member="SkoleniesListDetail/Properties[SkoleniePosluchacs]" />
                             <MemberExpression
-                              Member="SkoleniePosluchac/Properties[II]" />
+                              Member="SelectedItem" />
                           </ChainExpression>
                         </ScreenExpressionTree>
                       </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="W1"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[W1]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="W1_BezVodickehoOpravnenia2"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[W1_BezVodickehoOpravnenia]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="W2"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[W2]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
+                      <ContentItem
+                        Name="A"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[A]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="B"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[B]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="C"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[C]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="C_BezVodickehoOpravnenia2"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[C_BezVodickehoOpravnenia]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="D"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[D]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="E"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[E]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="F"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[F]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="G1"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[G]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Z2"
+                        Kind="Value"
+                        DataType=":Boolean?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[Z]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Z_PocetHodin2"
+                        Kind="Value"
+                        DataType=":Double?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[Z_PocetHodin]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
                     </ContentItem>
                   </ContentItem>
                   <ContentItem
-                    Name="SkoleniePosluchacs_SelectedItem1"
-                    Kind="Details"
-                    DataType="SkoleniePosluchac">
+                    Name="SkoleniaByPosluchac"
+                    Kind="Collection"
+                    DataType="CollectionView$Skolenie">
+                    <ContentItem.Attributes>
+                      <DisplayName
+                        Value="Absolvovane Skolenia" />
+                    </ContentItem.Attributes>
                     <ContentItem.DataSource>
                       <ScreenExpressionTree>
                         <ChainExpression>
                           <MemberExpression
-                            Member="SkoleniesListDetail/Properties[SkoleniePosluchacs]" />
-                          <MemberExpression
-                            Member="SelectedItem" />
+                            Member="SkoleniesListDetail/Properties[SkoleniaByPosluchac]" />
                         </ChainExpression>
                       </ScreenExpressionTree>
                     </ContentItem.DataSource>
                     <ContentItem
-                      Name="A"
-                      Kind="Value"
-                      DataType=":Boolean?">
+                      Name="SkoleniaByPosluchacTemplate"
+                      Kind="Details"
+                      DataType="Skolenie">
                       <ContentItem.DataSource>
                         <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[A]" />
-                          </ChainExpression>
+                          <ChainExpression />
                         </ScreenExpressionTree>
                       </ContentItem.DataSource>
+                      <ContentItem
+                        Name="ID"
+                        Kind="Value"
+                        DataType=":Int32">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[ID]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Zmluva3"
+                        Kind="Details"
+                        DataType="Zmluva">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Zmluva]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="Zmluva4"
+                          Kind="Details"
+                          DataType="Zmluva">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Organizacia6"
+                        Kind="Details"
+                        DataType="Organizacia">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Organizacia]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="Organizacia7"
+                          Kind="Details"
+                          DataType="Organizacia">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="SkolenieTyp2"
+                        Kind="Details"
+                        DataType="SkolenieTyp">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[SkolenieTyp]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="SkolenieTyp3"
+                          Kind="Details"
+                          DataType="SkolenieTyp">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="SkolenieDruh2"
+                        Kind="Details"
+                        DataType="SkolenieDruh">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[SkolenieDruh]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="SkolenieDruh3"
+                          Kind="Details"
+                          DataType="SkolenieDruh">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Referencia2"
+                        Kind="Value"
+                        DataType=":String?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Referencia]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Nazov2"
+                        Kind="Value"
+                        DataType=":String?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Nazov]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Uskutocnene2"
+                        Kind="Value"
+                        DataType=":DateTime?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Uskutocnene]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Nasledujuce2"
+                        Kind="Value"
+                        DataType=":DateTime?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Nasledujuce]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="MiestoKonania2"
+                        Kind="Value"
+                        DataType=":String?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[MiestoKonania]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Vyhovelo2"
+                        Kind="Value"
+                        DataType=":Int32?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Vyhovelo]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Lektor1"
+                        Kind="Details"
+                        DataType="Zamestnanec">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Lektor]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="Zamestnanec9"
+                          Kind="Details"
+                          DataType="Zamestnanec">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="Notifikovany1"
+                        Kind="Details"
+                        DataType="Zamestnanec">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[Notifikovany]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="Zamestnanec10"
+                          Kind="Details"
+                          DataType="Zamestnanec">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="PredsedaKomisie"
+                        Kind="Details"
+                        DataType="Zamestnanec">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[PredsedaKomisie]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="Zamestnanec8"
+                          Kind="Details"
+                          DataType="Zamestnanec">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="ClenKomisie1"
+                        Kind="Details"
+                        DataType="Zamestnanec">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[ClenKomisie1]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="Zamestnanec6"
+                          Kind="Details"
+                          DataType="Zamestnanec">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="ClenKomisie2"
+                        Kind="Details"
+                        DataType="Zamestnanec">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[ClenKomisie2]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="Zamestnanec7"
+                          Kind="Details"
+                          DataType="Zamestnanec">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="SkolenieFormaSkusania2"
+                        Kind="Details"
+                        DataType="SkolenieFormaSkusania">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[SkolenieFormaSkusania]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="SkolenieFormaSkusania3"
+                          Kind="Details"
+                          DataType="SkolenieFormaSkusania">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem
+                        Name="SkoleniePreKoho2"
+                        Kind="Details"
+                        DataType="SkoleniePreKoho">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="Skolenie/Properties[SkoleniePreKoho]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem
+                          Name="SkoleniePreKoho3"
+                          Kind="Details"
+                          DataType="SkoleniePreKoho">
+                          <ContentItem.DataSource>
+                            <ScreenExpressionTree>
+                              <ChainExpression />
+                            </ScreenExpressionTree>
+                          </ContentItem.DataSource>
+                        </ContentItem>
+                      </ContentItem>
+                      <ContentItem.PropertySources>
+                        <ControlPropertySource
+                          Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[BrowseOnly]">
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <ConstantExpression
+                                Value="True"
+                                ResultType=":Boolean" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ControlPropertySource>
+                      </ContentItem.PropertySources>
                     </ContentItem>
-                    <ContentItem
-                      Name="B"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
+                    <ContentItem.PropertySources>
+                      <ControlPropertySource
+                        Property="Microsoft.LightSwitch.RichClient:DataGrid/Properties[ShowVirtualRow]">
                         <ScreenExpressionTree>
                           <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[B]" />
+                            <ConstantExpression
+                              Value="False"
+                              ResultType=":Boolean" />
                           </ChainExpression>
                         </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="C"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[C]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="C_BezVodickehoOpravnenia2"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[C_BezVodickehoOpravnenia]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="D"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[D]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="E"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[E]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="F"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[F]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="G1"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[G]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="Z2"
-                      Kind="Value"
-                      DataType=":Boolean?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[Z]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                    <ContentItem
-                      Name="Z_PocetHodin2"
-                      Kind="Value"
-                      DataType=":Double?">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <MemberExpression
-                              Member="SkoleniePosluchac/Properties[Z_PocetHodin]" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
+                      </ControlPropertySource>
+                    </ContentItem.PropertySources>
                   </ContentItem>
                 </ContentItem>
               </ContentItem>
@@ -4097,6 +4548,44 @@
           <Required />
         </ScreenProperty.Attributes>
       </ScreenProperty>
+      <ScreenCollectionProperty
+        Name="SkoleniaByPosluchac"
+        PageSize="45"
+        PropertyType="CollectionView$Skolenie">
+        <ScreenCollectionProperty.Query>
+          <ScreenQueryDefinition
+            Name="SkoleniaByPosluchacQuery"
+            ReturnType="Skolenie*">
+            <ScreenQueryDefinition.FilterExpression>
+              <QueryFilterExpressionTree />
+            </ScreenQueryDefinition.FilterExpression>
+            <ScreenQueryDefinition.Source>
+              <QuerySourceExpressionTree>
+                <MemberExpression
+                  Member="SpravaZmluvData/Members[SkoleniaByPosluchac]" />
+              </QuerySourceExpressionTree>
+            </ScreenQueryDefinition.Source>
+          </ScreenQueryDefinition>
+        </ScreenCollectionProperty.Query>
+        <ScreenExpressionTree>
+          <ChainExpression>
+            <CallExpression
+              Target="SkoleniesListDetail/Properties[SkoleniaByPosluchac]/Query">
+              <ArgumentExpression
+                Parameter="posluchacId">
+                <ChainExpression>
+                  <MemberExpression
+                    Member="SkoleniesListDetail/Properties[SkoleniePosluchacs]" />
+                  <MemberExpression
+                    Member="SelectedItem" />
+                  <MemberExpression
+                    Member="PosluchacID" />
+                </ChainExpression>
+              </ArgumentExpression>
+            </CallExpression>
+          </ChainExpression>
+        </ScreenExpressionTree>
+      </ScreenCollectionProperty>
     </Screen.Properties>
   </Screen>
   <Application.Methods>

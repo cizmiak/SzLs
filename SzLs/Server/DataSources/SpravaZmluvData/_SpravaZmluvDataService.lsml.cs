@@ -13,8 +13,8 @@ namespace LightSwitchApplication
 		{
 			var zaradeniPosluchaci = this.SkoleniePosluchacs
 				.Where(skoleniePosluchac => skoleniePosluchac.SkolenieID == (SkolenieID ?? -1))
-				.Execute()
-				.Select(skoleniePosluchac => skoleniePosluchac.Posluchac.ID);
+				.Select(skoleniePosluchac => skoleniePosluchac.Posluchac.ID)
+				.Execute();
 
 			query = query.Where(posluchac => !zaradeniPosluchaci.Contains(posluchac.ID));
 		}
@@ -205,6 +205,16 @@ namespace LightSwitchApplication
 				(p.Titul == titul || p.Titul == null && titul == null)
 				&&
 				(p.Organizacia.ID == organizaciaId));
+		}
+
+		partial void SkoleniaByPosluchac_PreprocessQuery(int? posluchacId, ref IQueryable<Skolenie> query)
+		{
+			var skoleniaIds = this.DataWorkspace.SpravaZmluvData.SkoleniePosluchacs
+				.Where(sp => sp.PosluchacID == posluchacId)
+				.Select(sp => sp.SkolenieID)
+				.Execute();
+
+			query = query.Where(s => skoleniaIds.Contains(s.ID));
 		}
 	}
 }
