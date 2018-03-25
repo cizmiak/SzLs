@@ -2,6 +2,7 @@
 <Application
   Name="LightSwitchApplication"
   TargetPlatform="RichClient"
+  Logo="Microsoft.LightSwitch.UserImageResources::Resources\sys_logo.png"
   Version="1.0.0.0"
   DefaultNavigationItem="!module/NavigationItems[Tasks]"
   Shell="Microsoft.LightSwitch.Cosmopolitan:CosmopolitanShell"

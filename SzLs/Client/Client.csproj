@@ -248,7 +248,9 @@
     <LightSwitchModel Include="Properties\XlsxReaderServiceData\XlsxRows.lsml" />
     <LightSwitchModel Include="Screens\GetXlsxSheetsById.lsml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\sys_logo.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Organizacie.PNG" />
   </ItemGroup>
@@ -278,6 +280,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClientResource Include="Properties\Config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\sys_logo_ico.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\LightSwitch\$(LightSwitchVersion)\Microsoft.LightSwitch.Build.Tasks.targets" />
