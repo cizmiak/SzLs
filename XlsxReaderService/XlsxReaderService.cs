@@ -90,26 +90,27 @@ namespace XlsxReaderService
 							};
 
 							var xlsxCells = new List<XlsxCell>();
-							var i = 0;
 							foreach (var cell in row.Descendants<DocumentFormat.OpenXml.Spreadsheet.Cell>())
 							{
-								i++;
+								var columnId = WorksheetAccessor.GetColumnNumber(cell.CellReference);
 
-								string value;
+								string value = null;
 								try
 								{
-									value = WorksheetAccessor.GetCellValue(spreadSheetDoc, workSheetpart, i, xlsxRow.RowId).ToString();
+									value = WorksheetAccessor
+										.GetCellValue(spreadSheetDoc, workSheetpart, columnId, xlsxRow.RowId)
+										.ToString();
 								}
 								catch (Exception e)
 								{
-									value = e.Message;
+									value = value ?? e.Message;
 								}
 
 								xlsxCells.Add(new XlsxCell()
 								{
 									Id = Guid.NewGuid(),
 									Value = value,
-									ColumnId = i,
+									ColumnId = columnId,
 									XlsxRowId = xlsxRow.Id,
 									XlsxRow = xlsxRow
 								});
