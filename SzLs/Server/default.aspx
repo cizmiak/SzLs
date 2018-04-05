@@ -9,7 +9,10 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+	<httpRedirect enabled="true" exactDestination="true" httpResponseStatus="Found">
+      <clear />
+      <add wildcard="/" destination="Client/default.htm" />
+    </httpRedirect>
     </div>
     </form>
 </body>

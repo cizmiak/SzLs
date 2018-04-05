@@ -7,10 +7,13 @@
   <parameter name="Update web.config connection string" description="" defaultValue="Data Source={DatabaseServer};Database={DatabaseName};uid={DatabaseUserName};Pwd={DatabaseUserPassword};" tags="Hidden">
     <parameterEntry kind="XmlFile" scope="web.config" match="//connectionStrings/add[@name='_IntrinsicData']/@connectionString" />
   </parameter>
-  <parameter name="SpravaZmluvData" description="Configure the ConnectionString" defaultValue="Data Source=.;Initial Catalog=SpravaZmluv;Persist Security Info=True;User ID=SpravaZmluvUser;Password=SpravaZmluvUser" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="web.config" match="configuration/connectionStrings/add[@name='SpravaZmluvData']/@connectionString" />
-  </parameter>
   <parameter name="SzLs_IisWebApplication" description="IIS Web Application content location" defaultValue="Default Web Site/SzLs" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Projects\\SzLs\\SzLs\\Bin\\Release\\app\.publish\\$" />
+  </parameter>
+  <parameter name="XlsxReaderService.XlsxReaderService" description="Configure the custom connection string." defaultValue="" tags="None">
+    <parameterEntry kind="XmlFile" scope="web.config" match="/configuration/connectionStrings/add[@name='XlsxReaderService.XlsxReaderService']/@connectionString" />
+  </parameter>
+  <parameter name="SpravaZmluvData" description="Configure the ConnectionString" defaultValue="data source=.;initial catalog=SpravaZmluv;persist security info=True;user id=SpravaZmluvUser;password=SpravaZmluvUser" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="web.config" match="/configuration/connectionStrings/add[@name='SpravaZmluvData']/@connectionString" />
   </parameter>
 </parameters>
