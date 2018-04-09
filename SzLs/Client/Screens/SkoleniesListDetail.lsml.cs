@@ -199,7 +199,12 @@ namespace LightSwitchApplication
 				}
 
 				var posluchacAlreadyImported = selectedSkolenie.SkoleniePosluchacs
-					.SingleOrDefault(sp => sp.PosluchacID == posluchac.ID);
+					.SingleOrDefault(sp =>
+						sp.Posluchac.Meno == posluchac.Meno &&
+						sp.Posluchac.Priezvisko == posluchac.Priezvisko &&
+						sp.Posluchac.Titul == posluchac.Titul &&
+						sp.Posluchac.Organizacia?.ID == posluchac.Organizacia?.ID);
+
 				if (posluchacAlreadyImported == null)
 				{
 					var skoleniePosluchac = selectedSkolenie.SkoleniePosluchacs.AddNew();
