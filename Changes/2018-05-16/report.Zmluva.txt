@@ -1,0 +1,118 @@
+USE [SpravaZmluv]
+GO
+/****** Object:  StoredProcedure [report].[Zmluva]    Script Date: 16.05.2018 20:49:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [report].[Zmluva]
+(
+	@now DATETIME = NULL,
+	@fakturacia BIT = NULL,
+	@StavID INT = NULL,
+	@TypID INT = NULL,
+	@ZodpovednyID INT = NULL
+)
+AS
+
+/*debug_start*/
+--DECLARE
+--	@now DATETIME = NULL,
+--	@fakturacia BIT = NULL,
+--	@StavID INT = NULL,
+--	@TypID INT = NULL
+/*debug_end*/
+
+SET @now = ISNULL(@now, GETDATE())
+
+SELECT
+	o.Nazov AS Organizacia,
+	o.ICO,
+	o.Ulica,
+	o.Mesto,
+	o.PSC,
+	z.CisloZmluvy,
+	z.Nazov,
+	zod.Priezvisko + ' ' + zod.Meno AS Zodpovedny,
+	zt.Nazov AS Typ,
+	zs.Nazov AS Stav,
+	z.UcinnostZmluvyOd,
+	z.UkoncenieZmluvyDna,
+	z.PeriodaFaktur,
+	--DATEDIFF(MONTH, CAST(YEAR(z.UcinnostZmluvyOd) AS VARCHAR(4)), @now) AS Difference,
+	--DATEDIFF(MONTH, CAST(YEAR(z.UcinnostZmluvyOd) AS VARCHAR(4)), @now) % z.PeriodaFaktur AS Remainder,
+	--CASE
+	--	WHEN
+	--		@now >
+	--		DATEADD
+	--		(
+	--			MONTH, 1,
+	--			CAST(YEAR(z.UcinnostZmluvyOd) AS VARCHAR(4)) + '-' + 
+	--			CAST(MONTH(z.UcinnostZmluvyOd) AS VARCHAR(2)) + '-01'
+	--		)
+	--		AND
+	--		DATEDIFF(MONTH, CAST(YEAR(z.UcinnostZmluvyOd) AS VARCHAR(4)), @now) % z.PeriodaFaktur = 0
+	--	THEN 'true'
+	--	ELSE 'false'
+	--END InInvoice,
+	--CAST(@now - DAY(@now) + 1 - z.UcinnostZmluvyOd AS FLOAT) AS citatel,
+	--CAST(@now - DAY(@now) + 1 - DATEADD(MONTH, -z.PeriodaFaktur, @now - DAY(@now) + 1) AS FLOAT) AS menovatel,
+	CASE
+		WHEN
+			CAST(@now - DAY(@now) + 1 - z.UcinnostZmluvyOd AS FLOAT) <
+			CAST(@now - DAY(@now) + 1 - DATEADD(MONTH, -z.PeriodaFaktur, @now - DAY(@now) + 1) AS FLOAT)
+		THEN
+			CAST(@now - DAY(@now) + 1 - z.UcinnostZmluvyOd AS FLOAT) /
+			CAST(@now - DAY(@now) + 1 - DATEADD(MONTH, -z.PeriodaFaktur, @now - DAY(@now) + 1) AS FLOAT)
+		ELSE 1.0
+	END AS PriceRatio,			
+	z.DohodnutaCena,
+	z.PoslednaUprava,
+	up.Priezvisko + ' ' + up.Meno AS Upravil
+FROM
+	dbo.Zmluva z
+	LEFT JOIN dbo.Organizacia o
+		ON o.ID = z.OrganizaciaID
+	LEFT JOIN dbo.ZmluvaTyp zt
+		ON zt.ID = z.TypID
+	LEFT JOIN dbo.ZmluvaStav zs
+		ON zs.ID = z.StavID
+	LEFT JOIN dbo.Zamestnanec up
+		ON up.ID = z.UpravilID
+	LEFT JOIN dbo.Zamestnanec zod
+		ON zod.ID = z.Zodpovedny
+WHERE
+	(
+		@now >=
+		DATEADD
+		(
+			MONTH, 1,
+			z.UcinnostZmluvyOd - DAY(z.UcinnostZmluvyOd) + 1
+		)
+		AND
+		DATEDIFF(MONTH, CAST(YEAR(z.UcinnostZmluvyOd) AS VARCHAR(4)), @now) % z.PeriodaFaktur = 0
+		AND
+		z.StavID = 1 --len aktivne
+		AND
+		@fakturacia = 1
+		OR
+		ISNULL(@fakturacia, 0) = 0 
+	)
+	AND
+	(
+		z.StavID = @StavID
+		OR
+		@StavID IS NULL
+	)
+	AND
+	(
+		z.TypID = @TypID
+		OR
+		@TypID IS NULL
+	)
+	AND
+	(
+		z.Zodpovedny = @ZodpovednyID
+		OR
+		ISNULL(@ZodpovednyID, -1) = -1
+	)

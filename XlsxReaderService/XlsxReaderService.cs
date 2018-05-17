@@ -28,19 +28,22 @@ namespace XlsxReaderService
 		[Update]
 		public void UpdateXlsxBytes(XlsxBytes xlsxBytes)
 		{
-			XlsxBytes.AddOrUpdate(xlsxBytes.Id, xlsxBytes, (k,v) => xlsxBytes);
+			CreateXlsxSheets(xlsxBytes);
 		}
 
 		[Insert]
 		public void InsertXlsxBytes(XlsxBytes xlsxBytes)
 		{
-			XlsxBytes.TryAdd(xlsxBytes.Id, xlsxBytes);
+			CreateXlsxSheets(xlsxBytes);
 		}
 
 		[Delete]
 		public void DeleteXlsxBytes(XlsxBytes xlsxBytes)
 		{
 			XlsxBytes.TryRemove(xlsxBytes.Id, out xlsxBytes);
+
+			List<XlsxSheet> dummy = null;
+			XlsxSheets.TryRemove(xlsxBytes.Id, out dummy);
 		}
 		#endregion
 
@@ -54,14 +57,22 @@ namespace XlsxReaderService
 		[Query]
 		public IQueryable<XlsxSheet> GetXlsxSheetsById(Guid? xlsxId)
 		{
-			if (!xlsxId.HasValue)
-				return null;
-
-			XlsxBytes xlsxBytes = null;
-			XlsxBytes.TryGetValue(xlsxId.Value, out xlsxBytes);
-			if (xlsxBytes == null)
-				return null;
+			List<XlsxSheet> xlsxSheets = null;
+			if (xlsxId.HasValue && XlsxSheets.TryGetValue(xlsxId.Value, out xlsxSheets))
+			{
+				return xlsxSheets.AsQueryable();
+			}
+			return null;
 			
+		}
+
+		private static void CreateXlsxSheets(XlsxBytes xlsxBytes)
+		{
+			XlsxBytes.AddOrUpdate(xlsxBytes.Id, xlsxBytes, (k, v) => xlsxBytes);
+
+			if (xlsxBytes == null)
+				return;
+
 			var xlsxSheets = new List<XlsxSheet>();
 
 			using (MemoryStream mem = new MemoryStream())
@@ -128,8 +139,7 @@ namespace XlsxReaderService
 				mem.Close();
 			}
 
-			XlsxSheets.TryAdd(xlsxId.Value, xlsxSheets);
-			return xlsxSheets.AsQueryable();
+			XlsxSheets.AddOrUpdate(xlsxBytes.Id, xlsxSheets, (k,v) => xlsxSheets);
 		}
 		#endregion
 

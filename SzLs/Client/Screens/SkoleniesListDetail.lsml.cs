@@ -77,24 +77,37 @@ namespace LightSwitchApplication
 				}
 			});
 
-			var id = Guid.NewGuid();
+			
 			
 			this.Details.Dispatcher.BeginInvoke(() =>
 			{
-				var xlsxByte = this.DataWorkspace.XlsxReaderServiceData.XlsxBytes.AddNew();
-				xlsxByte.Id = id;
-				xlsxByte.Bytes = bytes;
-				this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
+				try
+				{
+					var id = Guid.NewGuid();
 
-				this.xlsxSheet = null;
-				this.xlsxSheet = this.DataWorkspace.XlsxReaderServiceData
-					.GetXlsxSheetsById(id)
-					.Where(s => s.Name.StartsWith("import"))
-					.FirstOrDefault();
+					var xlsxByte = this.DataWorkspace.XlsxReaderServiceData.XlsxBytes.AddNew();
+					xlsxByte.Id = id;
+					xlsxByte.Bytes = bytes;
+					this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
 
-				this.xlsxDataReady();
+					this.xlsxSheet = null;
+					this.xlsxSheet = this.DataWorkspace.XlsxReaderServiceData
+						.GetXlsxSheetsById(id)
+						.Where(s => s.Name.StartsWith("import"))
+						.FirstOrDefault();
 
-				this.DataWorkspace.XlsxReaderServiceData.Details.DiscardChanges();
+					this.xlsxDataReady();
+
+					xlsxByte.Delete();
+					this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
+				}
+				catch (Exception exception)
+				{
+					var innerException = exception.InnerException != null
+						? exception.InnerException.Message
+						: string.Empty;
+					this.showMessage($"{exception.Message}\n{innerException}");
+				}
 			});
 		}
 
