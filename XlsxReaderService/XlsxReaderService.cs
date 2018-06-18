@@ -88,6 +88,9 @@ namespace XlsxReaderService
 							Name = SpreadsheetDocumentManager.GetSheetName(workSheetpart, spreadSheetDoc)
 						};
 
+						if (!xlsxSheet.Name.StartsWith("import"))
+							continue;
+
 						var xlsxRows = new List<XlsxRow>();
 						foreach (var row in workSheetpart.Worksheet.Descendants<DocumentFormat.OpenXml.Spreadsheet.Row>())
 						{

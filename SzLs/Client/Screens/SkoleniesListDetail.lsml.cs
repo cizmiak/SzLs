@@ -15,6 +15,8 @@ namespace LightSwitchApplication
 		private string ReportServerUrl;
 		private SkolenieVysledok PredvolenyVysledok;
 		private XlsxSheet xlsxSheet;
+		private List<Organizacia> organizacie;
+		private List<PracovneZaradenie> pracovneZaradenia;
 
 		partial void SkoleniesListDetail_InitializeDataWorkspace(List<IDataService> saveChangesTo)
 		{
@@ -81,11 +83,12 @@ namespace LightSwitchApplication
 			
 			this.Details.Dispatcher.BeginInvoke(() =>
 			{
+				XlsxByte xlsxByte = null;
 				try
 				{
 					var id = Guid.NewGuid();
 
-					var xlsxByte = this.DataWorkspace.XlsxReaderServiceData.XlsxBytes.AddNew();
+					xlsxByte = this.DataWorkspace.XlsxReaderServiceData.XlsxBytes.AddNew();
 					xlsxByte.Id = id;
 					xlsxByte.Bytes = bytes;
 					this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
@@ -93,20 +96,22 @@ namespace LightSwitchApplication
 					this.xlsxSheet = null;
 					this.xlsxSheet = this.DataWorkspace.XlsxReaderServiceData
 						.GetXlsxSheetsById(id)
-						.Where(s => s.Name.StartsWith("import"))
 						.FirstOrDefault();
 
 					this.xlsxDataReady();
-
-					xlsxByte.Delete();
-					this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
 				}
 				catch (Exception exception)
 				{
 					var innerException = exception.InnerException != null
 						? exception.InnerException.Message
 						: string.Empty;
-					this.showMessage($"{exception.Message}\n{innerException}");
+					this.showMessage($"{exception.Message}\n{innerException}\n{exception.StackTrace}");
+				}
+				finally
+				{
+					if (xlsxByte != null)
+						xlsxByte.Delete();
+					this.DataWorkspace.XlsxReaderServiceData.SaveChanges();
 				}
 			});
 		}
@@ -149,6 +154,21 @@ namespace LightSwitchApplication
 			var rowsAlreadyImported = 0;
 			var rowsImported = 0;
 
+			if (this.organizacie == null || this.organizacie.Count < this.DataWorkspace.SpravaZmluvData
+				.Organizacie
+				.GetQuery().Execute().Count())
+			{
+				this.organizacie = this.DataWorkspace.SpravaZmluvData.Organizacie.GetQuery().Execute().ToList();
+			}
+
+			if (this.pracovneZaradenia == null || this.pracovneZaradenia.Count < this.DataWorkspace.SpravaZmluvData
+				.PracovneZaradenies
+				.GetQuery().Execute().Count())
+			{
+				this.pracovneZaradenia = this.DataWorkspace.SpravaZmluvData.PracovneZaradenies
+					.GetQuery().Execute().ToList();
+			}
+
 			foreach (var row in xlsxSheet.XlsxRows)
 			{
 				if (row.RowId <= headerRow.RowId)
@@ -159,6 +179,9 @@ namespace LightSwitchApplication
 				for (int i = 0; i < xlsxHeaders.Length; i++)
 				{
 					if (!intersectHeaders.Contains(xlsxHeaders[i]))
+						continue;
+
+					if (i >= cells.Length)
 						continue;
 
 					var propertyType = posluchac.Details.Properties[xlsxHeaders[i]].PropertyType;
@@ -172,25 +195,31 @@ namespace LightSwitchApplication
 
 					if (xlsxHeaders[i] == "Organizacia")
 					{
-						var organizacia = this.DataWorkspace.SpravaZmluvData.OrganizacieSearch(cells[i]);
+						var organizacia = this.organizacie.FirstOrDefault(o => o.Referencia == (cells[i]));
+						organizacia = organizacia ?? this.organizacie.FirstOrDefault(o => o.Nazov == (cells[i]));
 						posluchac.Organizacia = organizacia;
 					}
 
 					if (xlsxHeaders[i] == "PracovneZaradenie")
 					{
-						var pracovneZaradenie = this.DataWorkspace.SpravaZmluvData
-							.PracovneZaradenies
-							.Where(pz => pz.Nazov == cells[i])
-							.FirstOrDefault();
+						var pracovneZaradenie = this.pracovneZaradenia.FirstOrDefault(pz => pz.Nazov == cells[i]);
 
 						if (pracovneZaradenie == null)
 						{
 							pracovneZaradenie = this.DataWorkspace.SpravaZmluvData.PracovneZaradenies.AddNew();
+							pracovneZaradenia.Add(pracovneZaradenie);
 							pracovneZaradenie.Nazov = cells[i];
 							posluchac.PracovneZaradenie = pracovneZaradenie;
 						}
 					}
 				}
+
+				if (string.IsNullOrEmpty(posluchac.Meno) && string.IsNullOrEmpty(posluchac.Priezvisko))
+				{
+					posluchac.Delete();
+					continue;
+				}
+
 				processedXlsxRows++;
 
 				var selectedSkolenie = this.Skolenies.SelectedItem;

@@ -188,13 +188,6 @@ namespace LightSwitchApplication
 			query = query.OrderBy(entity => entity.Nazov);
 		}
 
-		partial void OrganizacieSearch_PreprocessQuery(string searchString, ref IQueryable<Organizacia> query)
-		{
-			query = query.Where(o => o.Referencia == searchString);
-			if (query.Count() != 1)
-				query.Where(o => o.Nazov == searchString);
-		}
-
 		partial void PosluchacFromDb_PreprocessQuery(string meno, string priezvisko, string titul, int? organizaciaId, ref IQueryable<Posluchac> query)
 		{
 			query = query.Where(p =>

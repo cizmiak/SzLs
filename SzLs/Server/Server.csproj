@@ -262,9 +262,6 @@
     <LightSwitchModel Include="DataSources\XlsxReaderServiceData\GetXlsxSheetsById.lsml">
       <DependentUpon>XlsxSheets.lsml</DependentUpon>
     </LightSwitchModel>
-    <LightSwitchModel Include="DataSources\SpravaZmluvData\OrganizacieSearch.lsml">
-      <DependentUpon>Organizacie.lsml</DependentUpon>
-    </LightSwitchModel>
     <LightSwitchModel Include="DataSources\SpravaZmluvData\PosluchacFromDb.lsml">
       <DependentUpon>Posluchacs.lsml</DependentUpon>
     </LightSwitchModel>
