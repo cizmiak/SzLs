@@ -176,6 +176,9 @@
     </ServiceMetadataReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Server\DataSources\SpravaZmluvData\SkoleniePosluchac.lsml.cs">
+      <Link>UserCode\Shared\SkoleniePosluchac.lsml.cs</Link>
+    </Compile>
     <Compile Include="..\Server\DataSources\XlsxReaderServiceData\XlsxRow.lsml.cs">
       <Link>UserCode\Shared\XlsxRow.lsml.cs</Link>
     </Compile>

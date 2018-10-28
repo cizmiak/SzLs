@@ -153,6 +153,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\SpravaZmluvData\SkoleniePosluchac.lsml.cs">
+      <DependentUpon>SkoleniePosluchacs.lsml</DependentUpon>
+    </Compile>
     <Compile Include="DataSources\SpravaZmluvData\_SpravaZmluvDataService.lsml.cs" />
     <Compile Include="DataSources\XlsxReaderServiceData\XlsxRow.lsml.cs">
       <DependentUpon>XlsxRows.lsml</DependentUpon>

@@ -44,6 +44,30 @@ namespace LightSwitchApplication
 			this.FindControl("XlsxImport").ControlAvailable += XlsxImport_ControlAvailable;
 		}
 
+		partial void SkoleniesListDetail_Saved()
+		{
+			PosluchaciNezaradeni.Refresh();
+		}
+
+		private string getKonfiguracnaHodnota(string nastavenie)
+		{
+			return this.DataWorkspace.SpravaZmluvData
+				.KonfiguracnaHodnota(nastavenie).FirstOrDefault().Hodnota;
+		}
+
+		private string getReportUrl(string format)
+		{
+			return string.Format(
+				"{0}?/{1}&rs:ClearSession=true&rs:Command=Render&rs:Format={2}&SkolenieID={3}"
+				, ReportServerUrl
+				, Report.Hodnota
+				, format
+				, Skolenies.SelectedItem.ID
+				);
+		}
+
+		#region Xlsx Import
+
 		private void XlsxImport_ControlAvailable(object sender, ControlAvailableEventArgs e)
 		{
 			((Button)e.Control).Click += XlsxImport_Click;
@@ -308,28 +332,28 @@ namespace LightSwitchApplication
 			return null;
 		}
 
-		private string getKonfiguracnaHodnota(string nastavenie)
-		{
-			return this.DataWorkspace.SpravaZmluvData
-				.KonfiguracnaHodnota(nastavenie).FirstOrDefault().Hodnota;
-		}
+		#endregion
 
-		private string getReportUrl(string format)
-		{
-			return string.Format(
-				"{0}?/{1}&rs:ClearSession=true&rs:Command=Render&rs:Format={2}&SkolenieID={3}"
-				, ReportServerUrl
-				, Report.Hodnota
-				, format
-				, Skolenies.SelectedItem.ID
-				);
-		}
+		#region Posluchac
 
 		partial void ZaradPosluchaca_Execute()
 		{
 			SkoleniePosluchac zaradenyPosluchac = SkoleniePosluchacs.AddNew();
 			zaradenyPosluchac.Posluchac = PosluchaciNezaradeni.SelectedItem;
 			zaradenyPosluchac.SkolenieVysledok = PredvolenyVysledok;
+
+			var currentSkolenie = this.Skolenies.SelectedItem;
+			var lastSkoleniePosluchac = this.DataWorkspace.SpravaZmluvData.SkoleniePosluchacs
+				.Where(sp =>
+					sp.PosluchacID == zaradenyPosluchac.Posluchac.ID
+					&&
+					sp.Skolenie.SkolenieTyp.ID == currentSkolenie.SkolenieTyp.ID)
+				.OrderByDescending(sp => sp.Skolenie.Uskutocnene)
+				.Execute()
+				.FirstOrDefault();
+
+			zaradenyPosluchac.CopyFrom(lastSkoleniePosluchac);
+
 			this.Save();
 		}
 
@@ -338,6 +362,27 @@ namespace LightSwitchApplication
 			SkoleniePosluchacs.SelectedItem.Delete();
 			this.Save();
 		}
+
+		partial void ZaradPosluchaca_CanExecute(ref bool result)
+		{
+			result = PosluchaciNezaradeni.SelectedItem != null;
+		}
+
+		partial void VyradPosluchaca_CanExecute(ref bool result)
+		{
+			result = SkoleniePosluchacs.SelectedItem != null;
+		}
+
+		partial void SkoleniePosluchacsAddNew_Execute()
+		{
+			SkoleniePosluchac zaradovanyPosluchac = SkoleniePosluchacs.AddNew();
+			zaradovanyPosluchac.Posluchac = this.DataWorkspace.SpravaZmluvData.Posluchacs.AddNew();
+			zaradovanyPosluchac.Posluchac.Organizacia = Skolenies.SelectedItem.Organizacia;
+			zaradovanyPosluchac.SkolenieVysledok = PredvolenyVysledok;
+		}
+		#endregion
+
+		#region Reports
 
 		partial void ZrusFiltre_Execute()
 		{
@@ -364,18 +409,9 @@ namespace LightSwitchApplication
 			Application.navigateUri(getReportUrl("PDF"));
 		}
 
-		partial void SkoleniePosluchacsAddNew_Execute()
-		{
-			SkoleniePosluchac zaradovanyPosluchac = SkoleniePosluchacs.AddNew();
-			zaradovanyPosluchac.Posluchac = this.DataWorkspace.SpravaZmluvData.Posluchacs.AddNew();
-			zaradovanyPosluchac.Posluchac.Organizacia = Skolenies.SelectedItem.Organizacia;
-			zaradovanyPosluchac.SkolenieVysledok = PredvolenyVysledok;
-		}
+		#endregion
 
-		partial void SkoleniesListDetail_Saved()
-		{
-			PosluchaciNezaradeni.Refresh();
-		}
+		#region Copy
 
 		partial void CopySkolenie_Execute()
 		{
@@ -396,13 +432,7 @@ namespace LightSwitchApplication
 					SkoleniePosluchac skoleniePosluchacCopy = selectedSkolenieCopy.SkoleniePosluchacs.AddNew();
 					skoleniePosluchacCopy.Posluchac = skoleniePosluchac.Posluchac;
 
-					foreach (var property in skoleniePosluchac.Details.Properties.All())
-					{
-						if (!property.IsReadOnly)
-						{
-							skoleniePosluchacCopy.Details.Properties[property.Name].Value = property.Value;
-						}
-					}
+					skoleniePosluchacCopy.CopyFrom(skoleniePosluchac);
 				}
 			}
 		}
@@ -411,6 +441,10 @@ namespace LightSwitchApplication
 		{
 			result = (Skolenies.SelectedItem != null);
 		}
+
+		#endregion
+
+		#region Questions
 
 		partial void GenerovatOtazky_CanExecute(ref bool result)
 		{
@@ -455,6 +489,10 @@ namespace LightSwitchApplication
 			this.SkolenieOtazkas.Refresh();
 		}
 
+		#endregion
+
+		#region CisloPreukazu
+
 		private string getNextCisloPreukazu()
 		{
 			var selectedSkolenie = this.Skolenies.SelectedItem;
@@ -495,5 +533,7 @@ namespace LightSwitchApplication
 				this.SkoleniePosluchacs.SelectedItem != null &&
 				string.IsNullOrEmpty(this.SkoleniePosluchacs.SelectedItem.CisloPreukazu);
 		}
+
+		#endregion
 	}
 }
