@@ -1493,9 +1493,9 @@
               <ContentItem
                 Name="Group1"
                 Kind="Group"
-                View=":ColumnsLayout">
+                View="Microsoft.LightSwitch.RichClient:RowsLayout">
                 <ContentItem
-                  Name="Group12"
+                  Name="ReportGroup"
                   Kind="Group">
                   <ContentItem
                     Name="Report"
@@ -1581,81 +1581,86 @@
                       </ContentItem>
                     </ContentItem>
                   </ContentItem>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                      <ScreenExpressionTree>
+                        <ConstantExpression
+                          Value="Top"
+                          ResultType=":String" />
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
                 </ContentItem>
                 <ContentItem
-                  Name="Group3"
-                  Kind="Group"
-                  View=":RowsLayout">
-                  <ContentItem
-                    Name="TlacidlaExport"
-                    Kind="Group">
-                    <ContentItem.CommandItems>
-                      <ContentItem
-                        Name="OtvoritReport"
-                        Kind="Command">
-                        <ContentItem.DataSource>
-                          <ScreenExpressionTree>
-                            <ChainExpression>
-                              <CallExpression
-                                Target="SkoleniesListDetail/Methods[OtvoritReport]" />
-                            </ChainExpression>
-                          </ScreenExpressionTree>
-                        </ContentItem.DataSource>
-                      </ContentItem>
-                      <ContentItem
-                        Name="ExportDoWordu"
-                        Kind="Command">
-                        <ContentItem.DataSource>
-                          <ScreenExpressionTree>
-                            <ChainExpression>
-                              <CallExpression
-                                Target="SkoleniesListDetail/Methods[ExportDoWordu]" />
-                            </ChainExpression>
-                          </ScreenExpressionTree>
-                        </ContentItem.DataSource>
-                      </ContentItem>
-                      <ContentItem
-                        Name="ExportDoPDF"
-                        Kind="Command">
-                        <ContentItem.DataSource>
-                          <ScreenExpressionTree>
-                            <ChainExpression>
-                              <CallExpression
-                                Target="SkoleniesListDetail/Methods[ExportDoPDF]" />
-                            </ChainExpression>
-                          </ScreenExpressionTree>
-                        </ContentItem.DataSource>
-                      </ContentItem>
-                    </ContentItem.CommandItems>
-                    <ContentItem.PropertySources>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[VerticalAlignment]">
-                        <ScreenExpressionTree>
-                          <ConstantExpression
-                            Value="Top"
-                            ResultType=":String" />
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                      <ControlPropertySource
-                        Property=":RootControl/Properties[AttachedLabelPosition]">
-                        <ScreenExpressionTree>
-                          <ConstantExpression
-                            Value="None"
-                            ResultType=":String" />
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                      <ControlPropertySource
-                        Property="Microsoft.LightSwitch:RootControl/Properties[HorizontalAlignment]">
+                  Name="TlacidlaExport"
+                  Kind="Group">
+                  <ContentItem.CommandItems>
+                    <ContentItem
+                      Name="OtvoritReport"
+                      Kind="Command">
+                      <ContentItem.DataSource>
                         <ScreenExpressionTree>
                           <ChainExpression>
-                            <ConstantExpression
-                              Value="Left"
-                              ResultType=":String" />
+                            <CallExpression
+                              Target="SkoleniesListDetail/Methods[OtvoritReport]" />
                           </ChainExpression>
                         </ScreenExpressionTree>
-                      </ControlPropertySource>
-                    </ContentItem.PropertySources>
-                  </ContentItem>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="ExportDoWordu"
+                      Kind="Command">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <CallExpression
+                              Target="SkoleniesListDetail/Methods[ExportDoWordu]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                    <ContentItem
+                      Name="ExportDoPDF"
+                      Kind="Command">
+                      <ContentItem.DataSource>
+                        <ScreenExpressionTree>
+                          <ChainExpression>
+                            <CallExpression
+                              Target="SkoleniesListDetail/Methods[ExportDoPDF]" />
+                          </ChainExpression>
+                        </ScreenExpressionTree>
+                      </ContentItem.DataSource>
+                    </ContentItem>
+                  </ContentItem.CommandItems>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                      <ScreenExpressionTree>
+                        <ConstantExpression
+                          Value="Top"
+                          ResultType=":String" />
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[AttachedLabelPosition]">
+                      <ScreenExpressionTree>
+                        <ConstantExpression
+                          Value="None"
+                          ResultType=":String" />
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <ConstantExpression
+                            Value="Right"
+                            ResultType=":String" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
                 </ContentItem>
               </ContentItem>
               <ContentItem.PropertySources>

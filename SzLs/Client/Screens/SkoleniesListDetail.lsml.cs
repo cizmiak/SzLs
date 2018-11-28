@@ -535,5 +535,23 @@ namespace LightSwitchApplication
 		}
 
 		#endregion
+
+		partial void ExportDoPDF_CanExecute(ref bool result)
+		{
+			result = this.Report != null;
+
+		}
+
+		partial void ExportDoWordu_CanExecute(ref bool result)
+		{
+			result = this.Report != null;
+
+		}
+
+		partial void OtvoritReport_CanExecute(ref bool result)
+		{
+			result = this.Report != null;
+
+		}
 	}
 }
