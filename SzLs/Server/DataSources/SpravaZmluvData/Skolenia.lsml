@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -48,7 +48,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -59,7 +58,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -137,7 +135,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -260,9 +257,9 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="ClenKomisie1"
         Association="FK_Skolenie_ClenKomisie1"
         FromEnd="Skolenie"
-        Name="ClenKomisie1"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -270,9 +267,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="ClenKomisie2"
         Association="FK_Skolenie_ClenKomisie2"
         FromEnd="Skolenie"
-        Name="ClenKomisie2"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -280,14 +277,14 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Organizacia"
         Association="FK_Skolenie_Organizacia"
         FromEnd="Skolenie"
-        Name="Organizacia"
         ToEnd="Organizacia" />
       <NavigationProperty
+        Name="PredsedaKomisie"
         Association="FK_Skolenie_PredsedaKomisie"
         FromEnd="Skolenie"
-        Name="PredsedaKomisie"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -295,9 +292,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="SkolenieDruh"
         Association="FK_Skolenie_SkolenieDruh"
         FromEnd="Skolenie"
-        Name="SkolenieDruh"
         ToEnd="SkolenieDruh">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -305,9 +302,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="SkolenieFormaSkusania"
         Association="FK_Skolenie_SkolenieFormaSkusania"
         FromEnd="Skolenie"
-        Name="SkolenieFormaSkusania"
         ToEnd="SkolenieFormaSkusania">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -315,18 +312,18 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="SkoleniePreKoho"
         Association="FK_Skolenie_SkoleniePreKoho"
         FromEnd="Skolenie"
-        Name="SkoleniePreKoho"
         ToEnd="SkoleniePreKoho">
         <NavigationProperty.Attributes>
           <DisplayName />
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="SkolenieTyp"
         Association="FK_Skolenie_SkolenieTyp"
         FromEnd="Skolenie"
-        Name="SkolenieTyp"
         ToEnd="SkolenieTyp">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -334,9 +331,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Lektor"
         Association="FK_Skolenie_Zamestnanec"
         FromEnd="Skolenie"
-        Name="Lektor"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -344,14 +341,14 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zmluva"
         Association="FK_Skolenie_Zmluva"
         FromEnd="Skolenie"
-        Name="Zmluva"
         ToEnd="Zmluva" />
       <NavigationProperty
+        Name="SkoleniePosluchacs"
         Association="FK_SkoleniePosluchac_Skolenie"
         FromEnd="Skolenie"
-        Name="SkoleniePosluchacs"
         ToEnd="SkoleniePosluchac">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -359,8 +356,8 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="IdComputed"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <EntityProperty.Attributes>
           <Required />
@@ -368,8 +365,8 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="IdVarchar"
+        IsReadOnly="True"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -378,48 +375,46 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Notifikovany"
         Association="FK_Skolenie_Notifikovany"
         FromEnd="Skolenie"
-        Name="Notifikovany"
         ToEnd="Zamestnanec" />
       <NavigationProperty
+        Name="SkolenieOtazkas"
         Association="FK_SkolenieOtazka_Skolenie"
         FromEnd="Skolenie"
-        Name="SkolenieOtazkas"
         ToEnd="SkolenieOtazka" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_SkoleniePosluchac_Skolenie">
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="One"
-      Name="Skolenie">
+      EntityType="Skolenie">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkoleniePosluchac"
+      Name="SkoleniePosluchac"
       Multiplicity="Many"
-      Name="SkoleniePosluchac" />
+      EntityType="SkoleniePosluchac" />
   </Association>
   <Association
     Name="FK_SkolenieOtazka_Skolenie">
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="One"
-      Name="Skolenie">
+      EntityType="Skolenie">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkolenieOtazka"
+      Name="SkolenieOtazka"
       Multiplicity="Many"
-      Name="SkolenieOtazka" />
+      EntityType="SkolenieOtazka" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -427,20 +422,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Skolenia"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Skolenie"
-      Name="Skolenia" />
+      EntityType="Skolenie" />
     <AssociationSet
-      Association="FK_SkoleniePosluchac_Skolenie"
-      Name="FK_SkoleniePosluchac_Skolenie">
+      Name="FK_SkoleniePosluchac_Skolenie"
+      Association="FK_SkoleniePosluchac_Skolenie">
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
       <AssociationSetEnd
-        EntitySet="SkoleniePosluchacs"
-        Name="SkoleniePosluchac" />
+        Name="SkoleniePosluchac"
+        EntitySet="SkoleniePosluchacs" />
     </AssociationSet>
     <QueryOperation
       Name="Skolenia_Single"
@@ -523,14 +518,14 @@
       </QueryOperationParameter>
     </QueryOperation>
     <AssociationSet
-      Association="FK_SkolenieOtazka_Skolenie"
-      Name="FK_SkolenieOtazka_Skolenie">
+      Name="FK_SkolenieOtazka_Skolenie"
+      Association="FK_SkolenieOtazka_Skolenie">
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
       <AssociationSetEnd
-        EntitySet="SkolenieOtazky"
-        Name="SkolenieOtazka" />
+        Name="SkolenieOtazka"
+        EntitySet="SkolenieOtazky" />
     </AssociationSet>
   </EntityContainer>
   <DataService
@@ -547,233 +542,233 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Skolenie/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Skolenie/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Referencia"
           Nullable="True"
-          Property="Skolenie/Properties[Referencia]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Skolenie/Properties[Referencia]" />
         <SsdlProperty
           MaxLength="200"
           Name="Nazov"
           Nullable="True"
-          Property="Skolenie/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Skolenie/Properties[Nazov]" />
         <SsdlProperty
           Name="Uskutocnene"
           Nullable="True"
-          Property="Skolenie/Properties[Uskutocnene]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Skolenie/Properties[Uskutocnene]" />
         <SsdlProperty
           Name="Nasledujuce"
           Nullable="True"
-          Property="Skolenie/Properties[Nasledujuce]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Skolenie/Properties[Nasledujuce]" />
         <SsdlProperty
           MaxLength="200"
           Name="MiestoKonania"
           Nullable="True"
-          Property="Skolenie/Properties[MiestoKonania]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Skolenie/Properties[MiestoKonania]" />
         <SsdlProperty
           Name="UcastCelkom"
           Nullable="True"
-          Property="Skolenie/Properties[UcastCelkom]"
-          Type="int" />
+          Type="int"
+          Property="Skolenie/Properties[UcastCelkom]" />
         <SsdlProperty
           Name="Vyhovelo"
           Nullable="True"
-          Property="Skolenie/Properties[Vyhovelo]"
-          Type="int" />
+          Type="int"
+          Property="Skolenie/Properties[Vyhovelo]" />
         <SsdlProperty
           Name="Nevyhovelo"
           Nullable="True"
-          Property="Skolenie/Properties[Nevyhovelo]"
-          Type="int" />
+          Type="int"
+          Property="Skolenie/Properties[Nevyhovelo]" />
         <SsdlProperty
           Name="Vyska15"
           Nullable="True"
-          Property="Skolenie/Properties[Vyska15]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[Vyska15]" />
         <SsdlProperty
           Name="Plosina"
           Nullable="True"
-          Property="Skolenie/Properties[Plosina]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[Plosina]" />
         <SsdlProperty
           Name="Rebrik5"
           Nullable="True"
-          Property="Skolenie/Properties[Rebrik5]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[Rebrik5]" />
         <SsdlProperty
           Name="Hlbka13"
           Nullable="True"
-          Property="Skolenie/Properties[Hlbka13]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[Hlbka13]" />
         <SsdlProperty
           MaxLength="100"
           Name="Postroj"
           Nullable="True"
-          Property="Skolenie/Properties[Postroj]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Skolenie/Properties[Postroj]" />
         <SsdlProperty
           Name="PreukazyVydane"
           Nullable="True"
-          Property="Skolenie/Properties[PreukazyVydane]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Skolenie/Properties[PreukazyVydane]" />
         <SsdlProperty
           MaxLength="100"
           Name="PreukazyVydal"
           Nullable="True"
-          Property="Skolenie/Properties[PreukazyVydal]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Skolenie/Properties[PreukazyVydal]" />
         <SsdlProperty
           MaxLength="20"
           Name="CisloPreukazu"
           Nullable="True"
-          Property="Skolenie/Properties[CisloPreukazu]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Skolenie/Properties[CisloPreukazu]" />
         <SsdlProperty
           Name="I"
           Nullable="True"
-          Property="Skolenie/Properties[I]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[I]" />
         <SsdlProperty
           Name="A"
           Nullable="True"
-          Property="Skolenie/Properties[A]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[A]" />
         <SsdlProperty
           Name="B"
           Nullable="True"
-          Property="Skolenie/Properties[B]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[B]" />
         <SsdlProperty
           Name="C"
           Nullable="True"
-          Property="Skolenie/Properties[C]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[C]" />
         <SsdlProperty
           Name="D"
           Nullable="True"
-          Property="Skolenie/Properties[D]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[D]" />
         <SsdlProperty
           Name="E"
           Nullable="True"
-          Property="Skolenie/Properties[E]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[E]" />
         <SsdlProperty
           Name="W1"
           Nullable="True"
-          Property="Skolenie/Properties[W1]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[W1]" />
         <SsdlProperty
           Name="W2"
           Nullable="True"
-          Property="Skolenie/Properties[W2]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[W2]" />
         <SsdlProperty
           Name="G"
           Nullable="True"
-          Property="Skolenie/Properties[G]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[G]" />
         <SsdlProperty
           Name="II"
           Nullable="True"
-          Property="Skolenie/Properties[II]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[II]" />
         <SsdlProperty
           Name="Z"
           Nullable="True"
-          Property="Skolenie/Properties[Z]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[Z]" />
         <SsdlProperty
           Name="C_BezVodickehoOpravnenia"
           Nullable="True"
-          Property="Skolenie/Properties[C_BezVodickehoOpravnenia]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[C_BezVodickehoOpravnenia]" />
         <SsdlProperty
           Name="W1_BezVodickehoOpravnenia"
           Nullable="True"
-          Property="Skolenie/Properties[W1_BezVodickehoOpravnenia]"
-          Type="bit" />
+          Type="bit"
+          Property="Skolenie/Properties[W1_BezVodickehoOpravnenia]" />
         <SsdlProperty
           Name="Z_PocetHodin"
           Nullable="True"
-          Property="Skolenie/Properties[Z_PocetHodin]"
-          Type="float" />
+          Type="float"
+          Property="Skolenie/Properties[Z_PocetHodin]" />
         <SsdlProperty
           Name="IdComputed"
           Nullable="False"
-          Property="Skolenie/Properties[IdComputed]"
           StoreGeneratedPattern="Computed"
-          Type="int" />
+          Type="int"
+          Property="Skolenie/Properties[IdComputed]" />
         <SsdlProperty
           MaxLength="10"
           Name="IdVarchar"
           Nullable="True"
-          Property="Skolenie/Properties[IdVarchar]"
           StoreGeneratedPattern="Computed"
-          Type="varchar" />
+          Type="varchar"
+          Property="Skolenie/Properties[IdVarchar]" />
         <SsdlForeignKeyProperty
           Name="ClenKomisie1ID"
           Nullable="True"
-          PropertyName="ClenKomisie1ID"
-          Type="int" />
+          Type="int"
+          PropertyName="ClenKomisie1ID" />
         <SsdlForeignKeyProperty
           Name="ClenKomisie2ID"
           Nullable="True"
-          PropertyName="ClenKomisie2ID"
-          Type="int" />
+          Type="int"
+          PropertyName="ClenKomisie2ID" />
         <SsdlForeignKeyProperty
           Name="NotifikovanyID"
           Nullable="True"
-          PropertyName="NotifikovanyID"
-          Type="int" />
+          Type="int"
+          PropertyName="NotifikovanyID" />
         <SsdlForeignKeyProperty
           Name="OrganizaciaID"
           Nullable="True"
-          PropertyName="OrganizaciaID"
-          Type="int" />
+          Type="int"
+          PropertyName="OrganizaciaID" />
         <SsdlForeignKeyProperty
           Name="PredsedaKomisieID"
           Nullable="True"
-          PropertyName="PredsedaKomisieID"
-          Type="int" />
+          Type="int"
+          PropertyName="PredsedaKomisieID" />
         <SsdlForeignKeyProperty
           Name="DruhID"
           Nullable="True"
-          PropertyName="DruhID"
-          Type="int" />
+          Type="int"
+          PropertyName="DruhID" />
         <SsdlForeignKeyProperty
           Name="FormaSkusaniaID"
           Nullable="True"
-          PropertyName="FormaSkusaniaID"
-          Type="int" />
+          Type="int"
+          PropertyName="FormaSkusaniaID" />
         <SsdlForeignKeyProperty
           Name="PreKohoID"
           Nullable="True"
-          PropertyName="PreKohoID"
-          Type="int" />
+          Type="int"
+          PropertyName="PreKohoID" />
         <SsdlForeignKeyProperty
           Name="TypID"
           Nullable="True"
-          PropertyName="TypID"
-          Type="int" />
+          Type="int"
+          PropertyName="TypID" />
         <SsdlForeignKeyProperty
           Name="SkolitelID"
           Nullable="True"
-          PropertyName="SkolitelID"
-          Type="int" />
+          Type="int"
+          PropertyName="SkolitelID" />
         <SsdlForeignKeyProperty
           Name="ZmluvaID"
           Nullable="True"
-          PropertyName="ZmluvaID"
-          Type="int" />
+          Type="int"
+          PropertyName="ZmluvaID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

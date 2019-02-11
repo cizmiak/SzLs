@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -53,66 +53,63 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Ulohas"
         Association="FK_Uloha_PortfolioJednotka"
         FromEnd="Jednotka"
-        Name="Ulohas"
         ToEnd="Uloha" />
       <NavigationProperty
+        Name="Zmluvas"
         Association="FK_Zmluva_PeriodaFakturJednotka"
         FromEnd="Jednotka"
-        Name="Zmluvas"
         ToEnd="Zmluva" />
       <NavigationProperty
+        Name="Zmluvas1"
         Association="FK_Zmluva_PocetVykonovJednotka"
         FromEnd="Jednotka"
-        Name="Zmluvas1"
         ToEnd="Zmluva" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Uloha_PortfolioJednotka">
     <AssociationEnd
-      EntityType="Jednotka"
-      Name="Jednotka">
+      Name="Jednotka"
+      EntityType="Jednotka">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Uloha"
+      Name="Uloha"
       Multiplicity="Many"
-      Name="Uloha" />
+      EntityType="Uloha" />
   </Association>
   <Association
     Name="FK_Zmluva_PeriodaFakturJednotka">
     <AssociationEnd
-      EntityType="Jednotka"
-      Name="Jednotka">
+      Name="Jednotka"
+      EntityType="Jednotka">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="Many"
-      Name="Zmluva" />
+      EntityType="Zmluva" />
   </Association>
   <Association
     Name="FK_Zmluva_PocetVykonovJednotka">
     <AssociationEnd
-      EntityType="Jednotka"
-      Name="Jednotka">
+      Name="Jednotka"
+      EntityType="Jednotka">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="Many"
-      Name="Zmluva" />
+      EntityType="Zmluva" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -120,40 +117,40 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Jednotkas"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Jednotka"
-      Name="Jednotkas" />
+      EntityType="Jednotka" />
     <AssociationSet
-      Association="FK_Uloha_PortfolioJednotka"
-      Name="FK_Uloha_PortfolioJednotka">
+      Name="FK_Uloha_PortfolioJednotka"
+      Association="FK_Uloha_PortfolioJednotka">
       <AssociationSetEnd
-        EntitySet="Jednotkas"
-        Name="Jednotka" />
+        Name="Jednotka"
+        EntitySet="Jednotkas" />
       <AssociationSetEnd
-        EntitySet="Ulohy"
-        Name="Uloha" />
+        Name="Uloha"
+        EntitySet="Ulohy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Zmluva_PeriodaFakturJednotka"
-      Name="FK_Zmluva_PeriodaFakturJednotka">
+      Name="FK_Zmluva_PeriodaFakturJednotka"
+      Association="FK_Zmluva_PeriodaFakturJednotka">
       <AssociationSetEnd
-        EntitySet="Jednotkas"
-        Name="Jednotka" />
+        Name="Jednotka"
+        EntitySet="Jednotkas" />
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Zmluva_PocetVykonovJednotka"
-      Name="FK_Zmluva_PocetVykonovJednotka">
+      Name="FK_Zmluva_PocetVykonovJednotka"
+      Association="FK_Zmluva_PocetVykonovJednotka">
       <AssociationSetEnd
-        EntitySet="Jednotkas"
-        Name="Jednotka" />
+        Name="Jednotka"
+        EntitySet="Jednotkas" />
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
     </AssociationSet>
     <QueryOperation
       Name="Jednotkas_Single"
@@ -250,27 +247,27 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Jednotka/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Jednotka/Properties[ID]" />
         <SsdlProperty
           MaxLength="5"
           Name="Znacka"
           Nullable="True"
-          Property="Jednotka/Properties[Znacka]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Jednotka/Properties[Znacka]" />
         <SsdlProperty
           MaxLength="10"
           Name="Nazov"
           Nullable="True"
-          Property="Jednotka/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Jednotka/Properties[Nazov]" />
         <SsdlProperty
           MaxLength="10"
           Name="SQLName"
           Nullable="True"
-          Property="Jednotka/Properties[SQLName]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Jednotka/Properties[SQLName]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Skolenies"
         Association="FK_Skolenie_SkolenieFormaSkusania"
         FromEnd="SkolenieFormaSkusania"
-        Name="Skolenies"
         ToEnd="Skolenie" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Skolenie_SkolenieFormaSkusania">
     <AssociationEnd
-      EntityType="SkolenieFormaSkusania"
-      Name="SkolenieFormaSkusania">
+      Name="SkolenieFormaSkusania"
+      EntityType="SkolenieFormaSkusania">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkolenieFormaSkusanias"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkolenieFormaSkusania"
-      Name="SkolenieFormaSkusanias" />
+      EntityType="SkolenieFormaSkusania" />
     <AssociationSet
-      Association="FK_Skolenie_SkolenieFormaSkusania"
-      Name="FK_Skolenie_SkolenieFormaSkusania">
+      Name="FK_Skolenie_SkolenieFormaSkusania"
+      Association="FK_Skolenie_SkolenieFormaSkusania">
       <AssociationSetEnd
-        EntitySet="SkolenieFormaSkusanias"
-        Name="SkolenieFormaSkusania" />
+        Name="SkolenieFormaSkusania"
+        EntitySet="SkolenieFormaSkusanias" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <QueryOperation
       Name="SkolenieFormaSkusanias_Single"
@@ -172,15 +171,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="SkolenieFormaSkusania/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="SkolenieFormaSkusania/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="SkolenieFormaSkusania/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkolenieFormaSkusania/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

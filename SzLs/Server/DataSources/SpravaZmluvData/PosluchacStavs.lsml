@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Posluchacs"
         Association="FK_Posluchac_PosluchacStav"
         FromEnd="PosluchacStav"
-        Name="Posluchacs"
         ToEnd="Posluchac" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Posluchac_PosluchacStav">
     <AssociationEnd
-      EntityType="PosluchacStav"
-      Name="PosluchacStav">
+      Name="PosluchacStav"
+      EntityType="PosluchacStav">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Posluchac"
+      Name="Posluchac"
       Multiplicity="Many"
-      Name="Posluchac" />
+      EntityType="Posluchac" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="PosluchacStavs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="PosluchacStav"
-      Name="PosluchacStavs" />
+      EntityType="PosluchacStav" />
     <AssociationSet
-      Association="FK_Posluchac_PosluchacStav"
-      Name="FK_Posluchac_PosluchacStav">
+      Name="FK_Posluchac_PosluchacStav"
+      Association="FK_Posluchac_PosluchacStav">
       <AssociationSetEnd
-        EntitySet="PosluchacStavs"
-        Name="PosluchacStav" />
+        Name="PosluchacStav"
+        EntitySet="PosluchacStavs" />
       <AssociationSetEnd
-        EntitySet="Posluchacs"
-        Name="Posluchac" />
+        Name="Posluchac"
+        EntitySet="Posluchacs" />
     </AssociationSet>
     <QueryOperation
       Name="PosluchacStavs_Single"
@@ -172,15 +171,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="PosluchacStav/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="PosluchacStav/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="PosluchacStav/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="PosluchacStav/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

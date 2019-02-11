@@ -6,7 +6,6 @@
   </ServiceApplication.Attributes>
   <EntityType
     Name="Posluchac">
-    <EntityType.Attributes />
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -17,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -58,7 +57,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -74,28 +72,28 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Organizacia"
         Association="FK_Posluchac_Organizacia"
         FromEnd="Posluchac"
-        Name="Organizacia"
         ToEnd="Organizacia" />
       <NavigationProperty
+        Name="PosluchacStav"
         Association="FK_Posluchac_PosluchacStav"
         FromEnd="Posluchac"
-        Name="PosluchacStav"
         ToEnd="PosluchacStav" />
       <NavigationProperty
+        Name="PracovneZaradenie"
         Association="FK_Posluchac_PracovneZaradenie"
         FromEnd="Posluchac"
-        Name="PracovneZaradenie"
         ToEnd="PracovneZaradenie" />
       <NavigationProperty
+        Name="SkoleniePosluchacs"
         Association="FK_SkoleniePosluchac_Posluchac"
         FromEnd="Posluchac"
-        Name="SkoleniePosluchacs"
         ToEnd="SkoleniePosluchac" />
       <EntityProperty
-        IsReadOnly="True"
         Name="IdComputed"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <EntityProperty.Attributes>
           <Required />
@@ -103,8 +101,8 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="IdVarchar"
+        IsReadOnly="True"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -113,8 +111,8 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="OrganizaciaNazov"
+        IsReadOnly="True"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -123,8 +121,8 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="CeleMeno"
+        IsReadOnly="True"
         PropertyType=":String">
         <EntityProperty.Attributes>
           <Computed />
@@ -133,8 +131,8 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="StavNazov"
+        IsReadOnly="True"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -147,18 +145,17 @@
   <Association
     Name="FK_SkoleniePosluchac_Posluchac">
     <AssociationEnd
-      EntityType="Posluchac"
+      Name="Posluchac"
       Multiplicity="One"
-      Name="Posluchac">
+      EntityType="Posluchac">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkoleniePosluchac"
+      Name="SkoleniePosluchac"
       Multiplicity="Many"
-      Name="SkoleniePosluchac" />
+      EntityType="SkoleniePosluchac" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -166,20 +163,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Posluchacs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Posluchac"
-      Name="Posluchacs" />
+      EntityType="Posluchac" />
     <AssociationSet
-      Association="FK_SkoleniePosluchac_Posluchac"
-      Name="FK_SkoleniePosluchac_Posluchac">
+      Name="FK_SkoleniePosluchac_Posluchac"
+      Association="FK_SkoleniePosluchac_Posluchac">
       <AssociationSetEnd
-        EntitySet="Posluchacs"
-        Name="Posluchac" />
+        Name="Posluchac"
+        EntitySet="Posluchacs" />
       <AssociationSetEnd
-        EntitySet="SkoleniePosluchacs"
-        Name="SkoleniePosluchac" />
+        Name="SkoleniePosluchac"
+        EntitySet="SkoleniePosluchacs" />
     </AssociationSet>
     <QueryOperation
       Name="Posluchacs_Single"
@@ -276,80 +273,80 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Posluchac/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Posluchac/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Meno"
           Nullable="True"
-          Property="Posluchac/Properties[Meno]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Posluchac/Properties[Meno]" />
         <SsdlProperty
           MaxLength="50"
           Name="Priezvisko"
           Nullable="True"
-          Property="Posluchac/Properties[Priezvisko]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Posluchac/Properties[Priezvisko]" />
         <SsdlProperty
           MaxLength="10"
           Name="Titul"
           Nullable="True"
-          Property="Posluchac/Properties[Titul]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Posluchac/Properties[Titul]" />
         <SsdlProperty
           Name="DatumNarodenia"
           Nullable="True"
-          Property="Posluchac/Properties[DatumNarodenia]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Posluchac/Properties[DatumNarodenia]" />
         <SsdlProperty
           MaxLength="500"
           Name="Bydlisko"
           Nullable="True"
-          Property="Posluchac/Properties[Bydlisko]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Posluchac/Properties[Bydlisko]" />
         <SsdlProperty
           Name="IdComputed"
           Nullable="False"
-          Property="Posluchac/Properties[IdComputed]"
           StoreGeneratedPattern="Computed"
-          Type="int" />
+          Type="int"
+          Property="Posluchac/Properties[IdComputed]" />
         <SsdlProperty
           MaxLength="10"
           Name="IdVarchar"
           Nullable="True"
-          Property="Posluchac/Properties[IdVarchar]"
           StoreGeneratedPattern="Computed"
-          Type="varchar" />
+          Type="varchar"
+          Property="Posluchac/Properties[IdVarchar]" />
         <SsdlProperty
           MaxLength="100"
           Name="OrganizaciaNazov"
           Nullable="True"
-          Property="Posluchac/Properties[OrganizaciaNazov]"
           StoreGeneratedPattern="Computed"
-          Type="varchar" />
+          Type="varchar"
+          Property="Posluchac/Properties[OrganizaciaNazov]" />
         <SsdlProperty
           MaxLength="50"
           Name="StavNazov"
           Nullable="True"
-          Property="Posluchac/Properties[StavNazov]"
           StoreGeneratedPattern="Computed"
-          Type="varchar" />
+          Type="varchar"
+          Property="Posluchac/Properties[StavNazov]" />
         <SsdlForeignKeyProperty
           Name="OrganizaciaID"
           Nullable="True"
-          PropertyName="OrganizaciaID"
-          Type="int" />
+          Type="int"
+          PropertyName="OrganizaciaID" />
         <SsdlForeignKeyProperty
           Name="StavID"
           Nullable="True"
-          PropertyName="StavID"
-          Type="int" />
+          Type="int"
+          PropertyName="StavID" />
         <SsdlForeignKeyProperty
           Name="PracovneZaradenieID"
           Nullable="True"
-          PropertyName="PracovneZaradenieID"
-          Type="int" />
+          Type="int"
+          PropertyName="PracovneZaradenieID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

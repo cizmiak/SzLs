@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -26,14 +26,14 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <NavigationProperty
+        Name="Otazka"
         Association="FK_SkoleniePreKohoOtazka_Otazka"
         FromEnd="SkoleniePreKohoOtazka"
-        Name="Otazka"
         ToEnd="Otazka" />
       <NavigationProperty
+        Name="SkoleniePreKoho"
         Association="FK_SkoleniePreKohoOtazka_SkoleniePreKoho"
         FromEnd="SkoleniePreKohoOtazka"
-        Name="SkoleniePreKoho"
         ToEnd="SkoleniePreKoho" />
     </EntityType.Properties>
   </EntityType>
@@ -43,11 +43,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkoleniePreKohoOtazkas"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkoleniePreKohoOtazka"
-      Name="SkoleniePreKohoOtazkas" />
+      EntityType="SkoleniePreKohoOtazka" />
     <QueryOperation
       Name="SkoleniePreKohoOtazkas_Single"
       ReturnType="SkoleniePreKohoOtazka">
@@ -143,19 +143,19 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="SkoleniePreKohoOtazka/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="SkoleniePreKohoOtazka/Properties[ID]" />
         <SsdlForeignKeyProperty
           Name="OtazkaID"
           Nullable="False"
-          PropertyName="OtazkaID"
-          Type="int" />
+          Type="int"
+          PropertyName="OtazkaID" />
         <SsdlForeignKeyProperty
           Name="SkoleniePreKohoID"
           Nullable="False"
-          PropertyName="SkoleniePreKohoID"
-          Type="int" />
+          Type="int"
+          PropertyName="SkoleniePreKohoID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

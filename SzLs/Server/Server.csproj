@@ -186,13 +186,11 @@
   </ItemGroup>
   <ItemGroup>
     <_ServerFile Include="packages.config" />
-    <LightSwitchModel Include="DataSources\SpravaZmluvData\Entitas.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\Jednotkas.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\Konfiguracias.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\KontaktneOsoby.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\KontaktnaOsobaStavs.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\Krajinas.lsml" />
-    <LightSwitchModel Include="DataSources\SpravaZmluvData\NaVedomies.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\Oblasts.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\Organizacie.lsml" />
     <LightSwitchModel Include="DataSources\SpravaZmluvData\OrganizaciaStavs.lsml" />
@@ -271,6 +269,9 @@
     <LightSwitchModel Include="DataSources\SpravaZmluvData\SkoleniaByPosluchac.lsml">
       <DependentUpon>Skolenia.lsml</DependentUpon>
     </LightSwitchModel>
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\EmailTemplates.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Offers.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\OfferStates.lsml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

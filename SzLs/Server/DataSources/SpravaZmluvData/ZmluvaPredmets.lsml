@@ -39,14 +39,14 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Portfolio"
         Association="FK_ZmluvaPredmet_Portfolio"
         FromEnd="ZmluvaPredmet"
-        Name="Portfolio"
         ToEnd="Portfolio" />
       <NavigationProperty
+        Name="Zamestnanec"
         Association="FK_ZmluvaPredmet_Zamestnanec"
         FromEnd="ZmluvaPredmet"
-        Name="Zamestnanec"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -54,9 +54,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zmluva"
         Association="FK_ZmluvaPredmet_Zmluva"
         FromEnd="ZmluvaPredmet"
-        Name="Zmluva"
         ToEnd="Zmluva" />
     </EntityType.Properties>
   </EntityType>
@@ -66,11 +66,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="ZmluvaPredmets"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="ZmluvaPredmet"
-      Name="ZmluvaPredmets" />
+      EntityType="ZmluvaPredmet" />
     <QueryOperation
       Name="ZmluvaPredmets_Single"
       ReturnType="ZmluvaPredmet">
@@ -222,23 +222,23 @@
         <SsdlProperty
           Name="ZmluvaID"
           Nullable="False"
-          Property="ZmluvaPredmet/Properties[ZmluvaID]"
-          Type="int" />
+          Type="int"
+          Property="ZmluvaPredmet/Properties[ZmluvaID]" />
         <SsdlProperty
           Name="PortfolioID"
           Nullable="False"
-          Property="ZmluvaPredmet/Properties[PortfolioID]"
-          Type="int" />
+          Type="int"
+          Property="ZmluvaPredmet/Properties[PortfolioID]" />
         <SsdlProperty
           Name="Perioda"
           Nullable="True"
-          Property="ZmluvaPredmet/Properties[Perioda]"
-          Type="int" />
+          Type="int"
+          Property="ZmluvaPredmet/Properties[Perioda]" />
         <SsdlForeignKeyProperty
           Name="Riesitel"
           Nullable="True"
-          PropertyName="Riesitel"
-          Type="int" />
+          Type="int"
+          PropertyName="Riesitel" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

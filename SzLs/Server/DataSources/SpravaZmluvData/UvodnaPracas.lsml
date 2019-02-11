@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -58,36 +58,35 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Ulohas"
         Association="FK_Uloha_UvodnaPraca"
         FromEnd="UvodnaPraca"
-        Name="Ulohas"
         ToEnd="Uloha" />
       <NavigationProperty
+        Name="UvodnaPracaStav"
         Association="FK_UvodnaPraca_UvodnaPracaStav"
         FromEnd="UvodnaPraca"
-        Name="UvodnaPracaStav"
         ToEnd="UvodnaPracaStav" />
       <NavigationProperty
+        Name="ZmluvaTyp"
         Association="FK_UvodnaPraca_ZmluvaTyp"
         FromEnd="UvodnaPraca"
-        Name="ZmluvaTyp"
         ToEnd="ZmluvaTyp" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Uloha_UvodnaPraca">
     <AssociationEnd
-      EntityType="UvodnaPraca"
-      Name="UvodnaPraca">
+      Name="UvodnaPraca"
+      EntityType="UvodnaPraca">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Uloha"
+      Name="Uloha"
       Multiplicity="Many"
-      Name="Uloha" />
+      EntityType="Uloha" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -95,20 +94,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="UvodnaPracas"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="UvodnaPraca"
-      Name="UvodnaPracas" />
+      EntityType="UvodnaPraca" />
     <AssociationSet
-      Association="FK_Uloha_UvodnaPraca"
-      Name="FK_Uloha_UvodnaPraca">
+      Name="FK_Uloha_UvodnaPraca"
+      Association="FK_Uloha_UvodnaPraca">
       <AssociationSetEnd
-        EntitySet="UvodnaPracas"
-        Name="UvodnaPraca" />
+        Name="UvodnaPraca"
+        EntitySet="UvodnaPracas" />
       <AssociationSetEnd
-        EntitySet="Ulohy"
-        Name="Uloha" />
+        Name="Uloha"
+        EntitySet="Ulohy" />
     </AssociationSet>
     <QueryOperation
       Name="UvodnaPracas_Single"
@@ -205,41 +204,41 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="UvodnaPraca/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="UvodnaPraca/Properties[ID]" />
         <SsdlProperty
           Name="Poradie"
           Nullable="True"
-          Property="UvodnaPraca/Properties[Poradie]"
-          Type="int" />
+          Type="int"
+          Property="UvodnaPraca/Properties[Poradie]" />
         <SsdlProperty
           MaxLength="100"
           Name="Nazov"
           Nullable="True"
-          Property="UvodnaPraca/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="UvodnaPraca/Properties[Nazov]" />
         <SsdlProperty
           MaxLength="500"
           Name="Popis"
           Nullable="True"
-          Property="UvodnaPraca/Properties[Popis]"
-          Type="varchar" />
+          Type="varchar"
+          Property="UvodnaPraca/Properties[Popis]" />
         <SsdlProperty
           Name="DniNaRiesenie"
           Nullable="True"
-          Property="UvodnaPraca/Properties[DniNaRiesenie]"
-          Type="int" />
+          Type="int"
+          Property="UvodnaPraca/Properties[DniNaRiesenie]" />
         <SsdlForeignKeyProperty
           Name="StavID"
           Nullable="True"
-          PropertyName="StavID"
-          Type="int" />
+          Type="int"
+          PropertyName="StavID" />
         <SsdlForeignKeyProperty
           Name="ZmluvaTypID"
           Nullable="True"
-          PropertyName="ZmluvaTypID"
-          Type="int" />
+          Type="int"
+          PropertyName="ZmluvaTypID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

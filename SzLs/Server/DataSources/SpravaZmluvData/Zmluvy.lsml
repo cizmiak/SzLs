@@ -6,7 +6,6 @@
   </ServiceApplication.Attributes>
   <EntityType
     Name="Zmluva">
-    <EntityType.Attributes />
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -17,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -63,7 +62,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -74,7 +72,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -92,7 +89,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -103,7 +99,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -133,21 +128,20 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Skolenies"
         Association="FK_Skolenie_Zmluva"
         FromEnd="Zmluva"
-        Name="Skolenies"
         ToEnd="Skolenie" />
       <NavigationProperty
+        Name="Ulohas"
         Association="FK_Uloha_Zmluva"
         FromEnd="Zmluva"
-        Name="Ulohas"
         ToEnd="Uloha">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -155,14 +149,14 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Organizacia"
         Association="FK_Zmluva_Organizacia"
         FromEnd="Zmluva"
-        Name="Organizacia"
         ToEnd="Organizacia" />
       <NavigationProperty
+        Name="Jednotka"
         Association="FK_Zmluva_PeriodaFakturJednotka"
         FromEnd="Zmluva"
-        Name="Jednotka"
         ToEnd="Jednotka">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -170,9 +164,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Jednotka1"
         Association="FK_Zmluva_PocetVykonovJednotka"
         FromEnd="Zmluva"
-        Name="Jednotka1"
         ToEnd="Jednotka">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -180,9 +174,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zamestnanec"
         Association="FK_Zmluva_Upravil"
         FromEnd="Zmluva"
-        Name="Zamestnanec"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -190,9 +184,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zamestnanec1"
         Association="FK_Zmluva_Zamestnanec"
         FromEnd="Zmluva"
-        Name="Zamestnanec1"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -200,9 +194,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="ZmluvaStav"
         Association="FK_Zmluva_ZmluvaStav"
         FromEnd="Zmluva"
-        Name="ZmluvaStav"
         ToEnd="ZmluvaStav">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -210,9 +204,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="ZmluvaTyp"
         Association="FK_Zmluva_ZmluvaTyp"
         FromEnd="Zmluva"
-        Name="ZmluvaTyp"
         ToEnd="ZmluvaTyp">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -220,9 +214,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="ZmluvaPredmets"
         Association="FK_ZmluvaPredmet_Zmluva"
         FromEnd="Zmluva"
-        Name="ZmluvaPredmets"
         ToEnd="ZmluvaPredmet">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -230,9 +224,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="ZmluvaRozsahs"
         Association="FK_ZmluvaRozsah_Zmluva"
         FromEnd="Zmluva"
-        Name="ZmluvaRozsahs"
         ToEnd="ZmluvaRozsah">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -240,8 +234,8 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="IdComputed"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <EntityProperty.Attributes>
           <Required />
@@ -249,8 +243,8 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        IsReadOnly="True"
         Name="IdVarchar"
+        IsReadOnly="True"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -263,64 +257,60 @@
   <Association
     Name="FK_Skolenie_Zmluva">
     <AssociationEnd
-      EntityType="Zmluva"
-      Name="Zmluva">
+      Name="Zmluva"
+      EntityType="Zmluva">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_Uloha_Zmluva">
     <AssociationEnd
-      EntityType="Zmluva"
-      Name="Zmluva">
+      Name="Zmluva"
+      EntityType="Zmluva">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Uloha"
+      Name="Uloha"
       Multiplicity="Many"
-      Name="Uloha" />
+      EntityType="Uloha" />
   </Association>
   <Association
     Name="FK_ZmluvaPredmet_Zmluva">
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="One"
-      Name="Zmluva">
+      EntityType="Zmluva">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="ZmluvaPredmet"
+      Name="ZmluvaPredmet"
       Multiplicity="Many"
-      Name="ZmluvaPredmet" />
+      EntityType="ZmluvaPredmet" />
   </Association>
   <Association
     Name="FK_ZmluvaRozsah_Zmluva">
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="One"
-      Name="Zmluva">
+      EntityType="Zmluva">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="ZmluvaRozsah"
+      Name="ZmluvaRozsah"
       Multiplicity="Many"
-      Name="ZmluvaRozsah" />
+      EntityType="ZmluvaRozsah" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -328,50 +318,50 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Zmluvy"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Zmluva"
-      Name="Zmluvy" />
+      EntityType="Zmluva" />
     <AssociationSet
-      Association="FK_Skolenie_Zmluva"
-      Name="FK_Skolenie_Zmluva">
+      Name="FK_Skolenie_Zmluva"
+      Association="FK_Skolenie_Zmluva">
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Uloha_Zmluva"
-      Name="FK_Uloha_Zmluva">
+      Name="FK_Uloha_Zmluva"
+      Association="FK_Uloha_Zmluva">
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
       <AssociationSetEnd
-        EntitySet="Ulohy"
-        Name="Uloha" />
+        Name="Uloha"
+        EntitySet="Ulohy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_ZmluvaPredmet_Zmluva"
-      Name="FK_ZmluvaPredmet_Zmluva">
+      Name="FK_ZmluvaPredmet_Zmluva"
+      Association="FK_ZmluvaPredmet_Zmluva">
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
       <AssociationSetEnd
-        EntitySet="ZmluvaPredmets"
-        Name="ZmluvaPredmet" />
+        Name="ZmluvaPredmet"
+        EntitySet="ZmluvaPredmets" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_ZmluvaRozsah_Zmluva"
-      Name="FK_ZmluvaRozsah_Zmluva">
+      Name="FK_ZmluvaRozsah_Zmluva"
+      Association="FK_ZmluvaRozsah_Zmluva">
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
       <AssociationSetEnd
-        EntitySet="ZmluvaRozsahs"
-        Name="ZmluvaRozsah" />
+        Name="ZmluvaRozsah"
+        EntitySet="ZmluvaRozsahs" />
     </AssociationSet>
     <QueryOperation
       Name="Zmluvy_Single"
@@ -486,119 +476,119 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Zmluva/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Zmluva/Properties[ID]" />
         <SsdlProperty
           MaxLength="100"
           Name="CisloZmluvy"
           Nullable="True"
-          Property="Zmluva/Properties[CisloZmluvy]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zmluva/Properties[CisloZmluvy]" />
         <SsdlProperty
           MaxLength="100"
           Name="Nazov"
           Nullable="True"
-          Property="Zmluva/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zmluva/Properties[Nazov]" />
         <SsdlProperty
           Name="PocetVykonov"
           Nullable="True"
-          Property="Zmluva/Properties[PocetVykonov]"
-          Type="int" />
+          Type="int"
+          Property="Zmluva/Properties[PocetVykonov]" />
         <SsdlProperty
           Name="PeriodaVykonov"
           Nullable="True"
-          Property="Zmluva/Properties[PeriodaVykonov]"
-          Type="int" />
+          Type="int"
+          Property="Zmluva/Properties[PeriodaVykonov]" />
         <SsdlProperty
           Name="UcinnostZmluvyOd"
           Nullable="True"
-          Property="Zmluva/Properties[UcinnostZmluvyOd]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Zmluva/Properties[UcinnostZmluvyOd]" />
         <SsdlProperty
           Name="PravoplatnostZmluvyOd"
           Nullable="True"
-          Property="Zmluva/Properties[PravoplatnostZmluvyOd]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Zmluva/Properties[PravoplatnostZmluvyOd]" />
         <SsdlProperty
           Name="NaDobuUrcitu"
           Nullable="True"
-          Property="Zmluva/Properties[NaDobuUrcitu]"
-          Type="bit" />
+          Type="bit"
+          Property="Zmluva/Properties[NaDobuUrcitu]" />
         <SsdlProperty
           Name="UkoncenieZmluvyDna"
           Nullable="True"
-          Property="Zmluva/Properties[UkoncenieZmluvyDna]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Zmluva/Properties[UkoncenieZmluvyDna]" />
         <SsdlProperty
           Name="DatumPridelenia"
           Nullable="True"
-          Property="Zmluva/Properties[DatumPridelenia]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Zmluva/Properties[DatumPridelenia]" />
         <SsdlProperty
           Name="DohodnutaCena"
           Nullable="True"
-          Property="Zmluva/Properties[DohodnutaCena]"
-          Type="money" />
+          Type="money"
+          Property="Zmluva/Properties[DohodnutaCena]" />
         <SsdlProperty
           Name="PeriodaFaktur"
           Nullable="True"
-          Property="Zmluva/Properties[PeriodaFaktur]"
-          Type="int" />
+          Type="int"
+          Property="Zmluva/Properties[PeriodaFaktur]" />
         <SsdlProperty
           Name="PoslednaUprava"
           Nullable="True"
-          Property="Zmluva/Properties[PoslednaUprava]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Zmluva/Properties[PoslednaUprava]" />
         <SsdlProperty
           Name="IdComputed"
           Nullable="False"
-          Property="Zmluva/Properties[IdComputed]"
           StoreGeneratedPattern="Computed"
-          Type="int" />
+          Type="int"
+          Property="Zmluva/Properties[IdComputed]" />
         <SsdlProperty
           MaxLength="10"
           Name="IdVarchar"
           Nullable="True"
-          Property="Zmluva/Properties[IdVarchar]"
           StoreGeneratedPattern="Computed"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zmluva/Properties[IdVarchar]" />
         <SsdlForeignKeyProperty
           Name="OrganizaciaID"
           Nullable="True"
-          PropertyName="OrganizaciaID"
-          Type="int" />
+          Type="int"
+          PropertyName="OrganizaciaID" />
         <SsdlForeignKeyProperty
           Name="PeriodaFakturJednotkaID"
           Nullable="True"
-          PropertyName="PeriodaFakturJednotkaID"
-          Type="int" />
+          Type="int"
+          PropertyName="PeriodaFakturJednotkaID" />
         <SsdlForeignKeyProperty
           Name="PocetVykonovJednotkaID"
           Nullable="True"
-          PropertyName="PocetVykonovJednotkaID"
-          Type="int" />
+          Type="int"
+          PropertyName="PocetVykonovJednotkaID" />
         <SsdlForeignKeyProperty
           Name="UpravilID"
           Nullable="True"
-          PropertyName="UpravilID"
-          Type="int" />
+          Type="int"
+          PropertyName="UpravilID" />
         <SsdlForeignKeyProperty
           Name="Zodpovedny"
           Nullable="True"
-          PropertyName="Zodpovedny"
-          Type="int" />
+          Type="int"
+          PropertyName="Zodpovedny" />
         <SsdlForeignKeyProperty
           Name="StavID"
           Nullable="True"
-          PropertyName="StavID"
-          Type="int" />
+          Type="int"
+          PropertyName="StavID" />
         <SsdlForeignKeyProperty
           Name="TypID"
           Nullable="True"
-          PropertyName="TypID"
-          Type="int" />
+          Type="int"
+          PropertyName="TypID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

@@ -6,7 +6,6 @@
   </ServiceApplication.Attributes>
   <EntityType
     Name="Organizacia">
-    <EntityType.Attributes />
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -17,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -125,19 +124,19 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="KontaktnaOsobas"
         Association="FK_KontaktnaOsoba_Organizacia"
         FromEnd="Organizacia"
-        Name="KontaktnaOsobas"
         ToEnd="KontaktnaOsoba" />
       <NavigationProperty
+        Name="Krajina"
         Association="FK_Organizacia_Krajina"
         FromEnd="Organizacia"
-        Name="Krajina"
         ToEnd="Krajina" />
       <NavigationProperty
+        Name="Organizacias"
         Association="FK_Organizacia_Matka"
         FromEnd="Organizacia"
-        Name="Organizacias"
         ToEnd="Organizacia1">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -145,9 +144,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Organizacia1"
         Association="FK_Organizacia_Matka"
         FromEnd="Organizacia1"
-        Name="Organizacia1"
         ToEnd="Organizacia">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -155,9 +154,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="OrganizaciaStav"
         Association="FK_Organizacia_OrganizaciaStav"
         FromEnd="Organizacia"
-        Name="OrganizaciaStav"
         ToEnd="OrganizaciaStav">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -165,9 +164,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Posluchacs"
         Association="FK_Posluchac_Organizacia"
         FromEnd="Organizacia"
-        Name="Posluchacs"
         ToEnd="Posluchac">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -175,9 +174,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Skolenies"
         Association="FK_Skolenie_Organizacia"
         FromEnd="Organizacia"
-        Name="Skolenies"
         ToEnd="Skolenie">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -185,91 +184,92 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zmluvas"
         Association="FK_Zmluva_Organizacia"
         FromEnd="Organizacia"
-        Name="Zmluvas"
         ToEnd="Zmluva">
         <NavigationProperty.Attributes>
           <DisplayName
             Value="Zmluvy" />
         </NavigationProperty.Attributes>
       </NavigationProperty>
+      <NavigationProperty
+        Name="Offers"
+        Association="FK_Offers_Organization"
+        FromEnd="Organizacia"
+        ToEnd="Offers" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_KontaktnaOsoba_Organizacia">
     <AssociationEnd
-      EntityType="Organizacia"
-      Name="Organizacia">
+      Name="Organizacia"
+      EntityType="Organizacia">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="KontaktnaOsoba"
+      Name="KontaktnaOsoba"
       Multiplicity="Many"
-      Name="KontaktnaOsoba" />
+      EntityType="KontaktnaOsoba" />
   </Association>
   <Association
     Name="FK_Organizacia_Matka">
     <AssociationEnd
-      EntityType="Organizacia"
-      Name="Organizacia">
+      Name="Organizacia"
+      EntityType="Organizacia">
       <AssociationEnd.Attributes>
         <DeleteRule
           Action="Restrict" />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Organizacia"
+      Name="Organizacia1"
       Multiplicity="Many"
-      Name="Organizacia1" />
+      EntityType="Organizacia" />
   </Association>
   <Association
     Name="FK_Posluchac_Organizacia">
     <AssociationEnd
-      EntityType="Organizacia"
-      Name="Organizacia">
+      Name="Organizacia"
+      EntityType="Organizacia">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Posluchac"
+      Name="Posluchac"
       Multiplicity="Many"
-      Name="Posluchac" />
+      EntityType="Posluchac" />
   </Association>
   <Association
     Name="FK_Skolenie_Organizacia">
     <AssociationEnd
-      EntityType="Organizacia"
-      Name="Organizacia">
+      Name="Organizacia"
+      EntityType="Organizacia">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_Zmluva_Organizacia">
     <AssociationEnd
-      EntityType="Organizacia"
-      Name="Organizacia">
+      Name="Organizacia"
+      EntityType="Organizacia">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="Many"
-      Name="Zmluva" />
+      EntityType="Zmluva" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -277,60 +277,60 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Organizacie"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Organizacia"
-      Name="Organizacie" />
+      EntityType="Organizacia" />
     <AssociationSet
-      Association="FK_KontaktnaOsoba_Organizacia"
-      Name="FK_KontaktnaOsoba_Organizacia">
+      Name="FK_KontaktnaOsoba_Organizacia"
+      Association="FK_KontaktnaOsoba_Organizacia">
       <AssociationSetEnd
-        EntitySet="Organizacie"
-        Name="Organizacia" />
+        Name="Organizacia"
+        EntitySet="Organizacie" />
       <AssociationSetEnd
-        EntitySet="KontaktneOsoby"
-        Name="KontaktnaOsoba" />
+        Name="KontaktnaOsoba"
+        EntitySet="KontaktneOsoby" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Organizacia_Matka"
-      Name="FK_Organizacia_Matka">
+      Name="FK_Organizacia_Matka"
+      Association="FK_Organizacia_Matka">
       <AssociationSetEnd
-        EntitySet="Organizacie"
-        Name="Organizacia" />
+        Name="Organizacia"
+        EntitySet="Organizacie" />
       <AssociationSetEnd
-        EntitySet="Organizacie"
-        Name="Organizacia1" />
+        Name="Organizacia1"
+        EntitySet="Organizacie" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Posluchac_Organizacia"
-      Name="FK_Posluchac_Organizacia">
+      Name="FK_Posluchac_Organizacia"
+      Association="FK_Posluchac_Organizacia">
       <AssociationSetEnd
-        EntitySet="Organizacie"
-        Name="Organizacia" />
+        Name="Organizacia"
+        EntitySet="Organizacie" />
       <AssociationSetEnd
-        EntitySet="Posluchacs"
-        Name="Posluchac" />
+        Name="Posluchac"
+        EntitySet="Posluchacs" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Skolenie_Organizacia"
-      Name="FK_Skolenie_Organizacia">
+      Name="FK_Skolenie_Organizacia"
+      Association="FK_Skolenie_Organizacia">
       <AssociationSetEnd
-        EntitySet="Organizacie"
-        Name="Organizacia" />
+        Name="Organizacia"
+        EntitySet="Organizacie" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Zmluva_Organizacia"
-      Name="FK_Zmluva_Organizacia">
+      Name="FK_Zmluva_Organizacia"
+      Association="FK_Zmluva_Organizacia">
       <AssociationSetEnd
-        EntitySet="Organizacie"
-        Name="Organizacia" />
+        Name="Organizacia"
+        EntitySet="Organizacie" />
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
     </AssociationSet>
     <QueryOperation
       Name="Organizacie_Single"
@@ -423,6 +423,12 @@
       <QueryOperation.FilterExpression>
         <QueryFilterExpressionTree />
       </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Organizacie" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
       <QueryOperation.SortCriteria>
         <SortCriterion>
           <ChainExpression>
@@ -431,14 +437,32 @@
           </ChainExpression>
         </SortCriterion>
       </QueryOperation.SortCriteria>
-      <QueryOperation.Source>
-        <QuerySourceExpressionTree>
-          <MemberExpression
-            Member="Organizacie" />
-        </QuerySourceExpressionTree>
-      </QueryOperation.Source>
     </QueryOperation>
+    <AssociationSet
+      Name="FK_Offers_Organization"
+      Association="FK_Offers_Organization">
+      <AssociationSetEnd
+        Name="Organizacia"
+        EntitySet="Organizacie" />
+      <AssociationSetEnd
+        Name="Offers"
+        EntitySet="Offers" />
+    </AssociationSet>
   </EntityContainer>
+  <Association
+    Name="FK_Offers_Organization">
+    <AssociationEnd
+      Name="Organizacia"
+      EntityType="Organizacia">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Offers"
+      Multiplicity="Many"
+      EntityType="Offer" />
+  </Association>
   <DataService
     Name="SpravaZmluvDataDataService">
     <DataService.Attributes>
@@ -453,89 +477,89 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Organizacia/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Organizacia/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Referencia"
           Nullable="True"
-          Property="Organizacia/Properties[Referencia]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[Referencia]" />
         <SsdlProperty
           MaxLength="100"
           Name="Nazov"
           Nullable="True"
-          Property="Organizacia/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[Nazov]" />
         <SsdlProperty
           Name="Poznamka"
           Nullable="True"
-          Property="Organizacia/Properties[Poznamka]"
-          Type="varchar(max)" />
+          Type="varchar(max)"
+          Property="Organizacia/Properties[Poznamka]" />
         <SsdlProperty
           MaxLength="100"
           Name="Ulica"
           Nullable="True"
-          Property="Organizacia/Properties[Ulica]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[Ulica]" />
         <SsdlProperty
           MaxLength="10"
           Name="PSC"
           Nullable="True"
-          Property="Organizacia/Properties[PSC]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[PSC]" />
         <SsdlProperty
           MaxLength="50"
           Name="Mesto"
           Nullable="True"
-          Property="Organizacia/Properties[Mesto]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[Mesto]" />
         <SsdlProperty
           MaxLength="100"
           Name="Mail"
           Nullable="True"
-          Property="Organizacia/Properties[Mail]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[Mail]" />
         <SsdlProperty
           MaxLength="100"
           Name="Telefon"
           Nullable="True"
-          Property="Organizacia/Properties[Telefon]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[Telefon]" />
         <SsdlProperty
           MaxLength="100"
           Name="Fax"
           Nullable="True"
-          Property="Organizacia/Properties[Fax]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[Fax]" />
         <SsdlProperty
           MaxLength="50"
           Name="ICO"
           Nullable="True"
-          Property="Organizacia/Properties[ICO]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[ICO]" />
         <SsdlProperty
           MaxLength="50"
           Name="DIC"
           Nullable="True"
-          Property="Organizacia/Properties[DIC]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Organizacia/Properties[DIC]" />
         <SsdlForeignKeyProperty
           Name="KrajinaID"
           Nullable="True"
-          PropertyName="KrajinaID"
-          Type="int" />
+          Type="int"
+          PropertyName="KrajinaID" />
         <SsdlForeignKeyProperty
           Name="Matka"
           Nullable="True"
-          PropertyName="Matka"
-          Type="int" />
+          Type="int"
+          PropertyName="Matka" />
         <SsdlForeignKeyProperty
           Name="StavID"
           Nullable="True"
-          PropertyName="StavID"
-          Type="int" />
+          Type="int"
+          PropertyName="StavID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping
@@ -555,6 +579,27 @@
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="OrganizaciaID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Offers_Organization">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Offers_Organization" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Offers_Organization]/Members[Organizacia]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Offers_Organization]/Members[Offers]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrganizationId" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
       </AssociationSetMapping.Attributes>

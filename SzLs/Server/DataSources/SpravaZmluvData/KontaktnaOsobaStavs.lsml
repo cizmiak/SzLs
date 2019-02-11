@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="KontaktnaOsobas"
         Association="FK_KontaktnaOsoba_KontaktnaOsobaStav"
         FromEnd="KontaktnaOsobaStav"
-        Name="KontaktnaOsobas"
         ToEnd="KontaktnaOsoba" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_KontaktnaOsoba_KontaktnaOsobaStav">
     <AssociationEnd
-      EntityType="KontaktnaOsobaStav"
-      Name="KontaktnaOsobaStav">
+      Name="KontaktnaOsobaStav"
+      EntityType="KontaktnaOsobaStav">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="KontaktnaOsoba"
+      Name="KontaktnaOsoba"
       Multiplicity="Many"
-      Name="KontaktnaOsoba" />
+      EntityType="KontaktnaOsoba" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="KontaktnaOsobaStavs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="KontaktnaOsobaStav"
-      Name="KontaktnaOsobaStavs" />
+      EntityType="KontaktnaOsobaStav" />
     <AssociationSet
-      Association="FK_KontaktnaOsoba_KontaktnaOsobaStav"
-      Name="FK_KontaktnaOsoba_KontaktnaOsobaStav">
+      Name="FK_KontaktnaOsoba_KontaktnaOsobaStav"
+      Association="FK_KontaktnaOsoba_KontaktnaOsobaStav">
       <AssociationSetEnd
-        EntitySet="KontaktnaOsobaStavs"
-        Name="KontaktnaOsobaStav" />
+        Name="KontaktnaOsobaStav"
+        EntitySet="KontaktnaOsobaStavs" />
       <AssociationSetEnd
-        EntitySet="KontaktneOsoby"
-        Name="KontaktnaOsoba" />
+        Name="KontaktnaOsoba"
+        EntitySet="KontaktneOsoby" />
     </AssociationSet>
     <QueryOperation
       Name="KontaktnaOsobaStavs_Single"
@@ -172,15 +171,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="KontaktnaOsobaStav/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="KontaktnaOsobaStav/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="KontaktnaOsobaStav/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="KontaktnaOsobaStav/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

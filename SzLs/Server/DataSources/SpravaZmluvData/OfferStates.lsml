@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="SkolenieDruh">
+    Name="OfferState">
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -16,7 +16,7 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        Name="ID"
+        Name="Id"
         IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
@@ -26,7 +26,7 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="Nazov"
+        Name="Name"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -35,25 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Skolenies"
-        Association="FK_Skolenie_SkolenieDruh"
-        FromEnd="SkolenieDruh"
-        ToEnd="Skolenie" />
+        Name="Offers"
+        Association="FK_Offers_OfferStates"
+        FromEnd="OfferStates"
+        ToEnd="Offers" />
     </EntityType.Properties>
   </EntityType>
   <Association
-    Name="FK_Skolenie_SkolenieDruh">
+    Name="FK_Offers_OfferStates">
     <AssociationEnd
-      Name="SkolenieDruh"
-      EntityType="SkolenieDruh">
+      Name="OfferStates"
+      EntityType="OfferState">
       <AssociationEnd.Attributes>
         <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      Name="Skolenie"
+      Name="Offers"
       Multiplicity="Many"
-      EntityType="Skolenie" />
+      EntityType="Offer" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -61,24 +61,24 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="SkolenieDruhs"
+      Name="OfferStates"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkolenieDruh" />
+      EntityType="OfferState" />
     <AssociationSet
-      Name="FK_Skolenie_SkolenieDruh"
-      Association="FK_Skolenie_SkolenieDruh">
+      Name="FK_Offers_OfferStates"
+      Association="FK_Offers_OfferStates">
       <AssociationSetEnd
-        Name="SkolenieDruh"
-        EntitySet="SkolenieDruhs" />
+        Name="OfferStates"
+        EntitySet="OfferStates" />
       <AssociationSetEnd
-        Name="Skolenie"
-        EntitySet="Skolenia" />
+        Name="Offers"
+        EntitySet="Offers" />
     </AssociationSet>
     <QueryOperation
-      Name="SkolenieDruhs_Single"
-      ReturnType="SkolenieDruh">
+      Name="OfferStates_Single"
+      ReturnType="OfferState">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -91,12 +91,12 @@
             <BinaryExpression.Left>
               <ChainExpression>
                 <MemberExpression
-                  Member="ID" />
+                  Member="Id" />
               </ChainExpression>
             </BinaryExpression.Left>
             <BinaryExpression.Right>
               <ParameterExpression
-                Parameter="ID" />
+                Parameter="Id" />
             </BinaryExpression.Right>
           </BinaryExpression>
         </QueryFilterExpressionTree>
@@ -104,21 +104,21 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="SkolenieDruhs" />
+            Member="OfferStates" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
-        Name="ID"
-        ParameterType=":Int32?">
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
         <QueryOperationParameter.Attributes>
           <Description
-            Value="The value of the 'ID' key property of the entity to retrieve." />
+            Value="The value of the 'Id' key property of the entity to retrieve." />
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="SkolenieDruhs_SingleOrDefault"
-      ReturnType="SkolenieDruh">
+      Name="OfferStates_SingleOrDefault"
+      ReturnType="OfferState">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -131,12 +131,12 @@
             <BinaryExpression.Left>
               <ChainExpression>
                 <MemberExpression
-                  Member="ID" />
+                  Member="Id" />
               </ChainExpression>
             </BinaryExpression.Left>
             <BinaryExpression.Right>
               <ParameterExpression
-                Parameter="ID" />
+                Parameter="Id" />
             </BinaryExpression.Right>
           </BinaryExpression>
         </QueryFilterExpressionTree>
@@ -144,35 +144,17 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="SkolenieDruhs" />
+            Member="OfferStates" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
-        Name="ID"
-        ParameterType=":Int32?">
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
         <QueryOperationParameter.Attributes>
           <Description
-            Value="The value of the 'ID' key property of the entity to retrieve." />
+            Value="The value of the 'Id' key property of the entity to retrieve." />
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
-    </QueryOperation>
-    <QueryOperation
-      Name="SkolenieDruhs_All"
-      ReturnType="SkolenieDruh*">
-      <QueryOperation.Attributes>
-        <Generated />
-        <Description
-          Value="Returns all entities contained in the entity set." />
-      </QueryOperation.Attributes>
-      <QueryOperation.FilterExpression>
-        <QueryFilterExpressionTree />
-      </QueryOperation.FilterExpression>
-      <QueryOperation.Source>
-        <QuerySourceExpressionTree>
-          <MemberExpression
-            Member="SkolenieDruhs" />
-        </QuerySourceExpressionTree>
-      </QueryOperation.Source>
     </QueryOperation>
   </EntityContainer>
   <DataService
@@ -181,42 +163,42 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="SkolenieDruhs">
+      EntitySet="OfferStates">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
-          Table="SkolenieDruh" />
+          Table="OfferStates" />
         <SsdlProperty
-          Name="ID"
+          Name="Id"
           Nullable="False"
           StoreGeneratedPattern="Identity"
           Type="int"
-          Property="SkolenieDruh/Properties[ID]" />
+          Property="OfferState/Properties[Id]" />
         <SsdlProperty
           MaxLength="50"
-          Name="Nazov"
+          Name="Name"
           Nullable="True"
           Type="varchar"
-          Property="SkolenieDruh/Properties[Nazov]" />
+          Property="OfferState/Properties[Name]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping
-      AssociationSet="FK_Skolenie_SkolenieDruh">
+      AssociationSet="FK_Offers_OfferStates">
       <AssociationSetMapping.Attributes>
         <SsdlAssociationSet
-          Name="FK_Skolenie_SkolenieDruh" />
+          Name="FK_Offers_OfferStates" />
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Skolenie_SkolenieDruh]/Members[SkolenieDruh]">
+          End="SpravaZmluvData/Members[FK_Offers_OfferStates]/Members[OfferStates]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
-              Name="ID" />
+              Name="Id" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Skolenie_SkolenieDruh]/Members[Skolenie]">
+          End="SpravaZmluvData/Members[FK_Offers_OfferStates]/Members[Offers]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
-              Name="DruhID" />
+              Name="OfferStateId" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
       </AssociationSetMapping.Attributes>

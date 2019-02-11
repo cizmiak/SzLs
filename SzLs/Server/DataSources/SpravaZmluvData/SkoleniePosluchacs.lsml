@@ -41,26 +41,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Posluchac"
         Association="FK_SkoleniePosluchac_Posluchac"
         FromEnd="SkoleniePosluchac"
-        Name="Posluchac"
         ToEnd="Posluchac" />
       <NavigationProperty
+        Name="Skolenie"
         Association="FK_SkoleniePosluchac_Skolenie"
         FromEnd="SkoleniePosluchac"
-        Name="Skolenie"
         ToEnd="Skolenie" />
       <NavigationProperty
+        Name="SkolenieVysledok"
         Association="FK_SkoleniePosluchac_SkolenieVysledok"
         FromEnd="SkoleniePosluchac"
-        Name="SkolenieVysledok"
         ToEnd="SkolenieVysledok" />
       <EntityProperty
         Name="PreukazVydany"
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -188,11 +187,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkoleniePosluchacs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkoleniePosluchac"
-      Name="SkoleniePosluchacs" />
+      EntityType="SkoleniePosluchac" />
     <QueryOperation
       Name="SkoleniePosluchacs_Single"
       ReturnType="SkoleniePosluchac">
@@ -344,110 +343,110 @@
         <SsdlProperty
           Name="SkolenieID"
           Nullable="False"
-          Property="SkoleniePosluchac/Properties[SkolenieID]"
-          Type="int" />
+          Type="int"
+          Property="SkoleniePosluchac/Properties[SkolenieID]" />
         <SsdlProperty
           Name="PosluchacID"
           Nullable="False"
-          Property="SkoleniePosluchac/Properties[PosluchacID]"
-          Type="int" />
+          Type="int"
+          Property="SkoleniePosluchac/Properties[PosluchacID]" />
         <SsdlProperty
           MaxLength="50"
           Name="CisloPreukazu"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[CisloPreukazu]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkoleniePosluchac/Properties[CisloPreukazu]" />
         <SsdlProperty
           Name="PreukazVydany"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[PreukazVydany]"
-          Type="datetime" />
+          Type="datetime"
+          Property="SkoleniePosluchac/Properties[PreukazVydany]" />
         <SsdlProperty
           MaxLength="100"
           Name="PreukazVydal"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[PreukazVydal]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkoleniePosluchac/Properties[PreukazVydal]" />
         <SsdlProperty
           Name="I"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[I]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[I]" />
         <SsdlProperty
           Name="A"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[A]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[A]" />
         <SsdlProperty
           Name="B"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[B]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[B]" />
         <SsdlProperty
           Name="C"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[C]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[C]" />
         <SsdlProperty
           Name="D"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[D]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[D]" />
         <SsdlProperty
           Name="E"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[E]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[E]" />
         <SsdlProperty
           Name="W1"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[W1]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[W1]" />
         <SsdlProperty
           Name="W2"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[W2]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[W2]" />
         <SsdlProperty
           Name="G"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[G]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[G]" />
         <SsdlProperty
           Name="II"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[II]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[II]" />
         <SsdlProperty
           Name="Z"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[Z]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[Z]" />
         <SsdlProperty
           Name="C_BezVodickehoOpravnenia"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[C_BezVodickehoOpravnenia]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[C_BezVodickehoOpravnenia]" />
         <SsdlProperty
           Name="W1_BezVodickehoOpravnenia"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[W1_BezVodickehoOpravnenia]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[W1_BezVodickehoOpravnenia]" />
         <SsdlProperty
           Name="Z_PocetHodin"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[Z_PocetHodin]"
-          Type="float" />
+          Type="float"
+          Property="SkoleniePosluchac/Properties[Z_PocetHodin]" />
         <SsdlProperty
           Name="F"
           Nullable="True"
-          Property="SkoleniePosluchac/Properties[F]"
-          Type="bit" />
+          Type="bit"
+          Property="SkoleniePosluchac/Properties[F]" />
         <SsdlForeignKeyProperty
           Name="VysledokID"
           Nullable="True"
-          PropertyName="VysledokID"
-          Type="int" />
+          Type="int"
+          PropertyName="VysledokID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

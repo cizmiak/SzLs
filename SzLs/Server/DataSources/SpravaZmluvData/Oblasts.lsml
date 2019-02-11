@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Ulohas"
         Association="FK_Uloha_Oblast"
         FromEnd="Oblast"
-        Name="Ulohas"
         ToEnd="Uloha" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Uloha_Oblast">
     <AssociationEnd
-      EntityType="Oblast"
-      Name="Oblast">
+      Name="Oblast"
+      EntityType="Oblast">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Uloha"
+      Name="Uloha"
       Multiplicity="Many"
-      Name="Uloha" />
+      EntityType="Uloha" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Oblasts"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Oblast"
-      Name="Oblasts" />
+      EntityType="Oblast" />
     <AssociationSet
-      Association="FK_Uloha_Oblast"
-      Name="FK_Uloha_Oblast">
+      Name="FK_Uloha_Oblast"
+      Association="FK_Uloha_Oblast">
       <AssociationSetEnd
-        EntitySet="Oblasts"
-        Name="Oblast" />
+        Name="Oblast"
+        EntitySet="Oblasts" />
       <AssociationSetEnd
-        EntitySet="Ulohy"
-        Name="Uloha" />
+        Name="Uloha"
+        EntitySet="Ulohy" />
     </AssociationSet>
     <QueryOperation
       Name="Oblasts_Single"
@@ -172,15 +171,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Oblast/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Oblast/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="Oblast/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Oblast/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

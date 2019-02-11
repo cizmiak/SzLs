@@ -43,14 +43,14 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Rozsah"
         Association="FK_ZmluvaRozsah_Rozsah"
         FromEnd="ZmluvaRozsah"
-        Name="Rozsah"
         ToEnd="Rozsah" />
       <NavigationProperty
+        Name="Zmluva"
         Association="FK_ZmluvaRozsah_Zmluva"
         FromEnd="ZmluvaRozsah"
-        Name="Zmluva"
         ToEnd="Zmluva" />
     </EntityType.Properties>
   </EntityType>
@@ -60,11 +60,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="ZmluvaRozsahs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="ZmluvaRozsah"
-      Name="ZmluvaRozsahs" />
+      EntityType="ZmluvaRozsah" />
     <QueryOperation
       Name="ZmluvaRozsahs_Single"
       ReturnType="ZmluvaRozsah">
@@ -216,18 +216,18 @@
         <SsdlProperty
           Name="ZmluvaID"
           Nullable="False"
-          Property="ZmluvaRozsah/Properties[ZmluvaID]"
-          Type="int" />
+          Type="int"
+          Property="ZmluvaRozsah/Properties[ZmluvaID]" />
         <SsdlProperty
           Name="RozsahID"
           Nullable="False"
-          Property="ZmluvaRozsah/Properties[RozsahID]"
-          Type="int" />
+          Type="int"
+          Property="ZmluvaRozsah/Properties[RozsahID]" />
         <SsdlProperty
           Name="Dummy"
           Nullable="True"
-          Property="ZmluvaRozsah/Properties[Dummy]"
-          Type="bit" />
+          Type="bit"
+          Property="ZmluvaRozsah/Properties[Dummy]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,9 +35,9 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Uloha"
         Association="FK_UlohaPriloha_Uloha"
         FromEnd="UlohaPriloha"
-        Name="Uloha"
         ToEnd="Uloha" />
     </EntityType.Properties>
   </EntityType>
@@ -47,11 +47,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="UlohaPrilohas"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="UlohaPriloha"
-      Name="UlohaPrilohas" />
+      EntityType="UlohaPriloha" />
     <QueryOperation
       Name="UlohaPrilohas_Single"
       ReturnType="UlohaPriloha">
@@ -147,20 +147,20 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="UlohaPriloha/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="UlohaPriloha/Properties[ID]" />
         <SsdlProperty
           MaxLength="512"
           Name="Cesta"
           Nullable="True"
-          Property="UlohaPriloha/Properties[Cesta]"
-          Type="varchar" />
+          Type="varchar"
+          Property="UlohaPriloha/Properties[Cesta]" />
         <SsdlForeignKeyProperty
           Name="UlohaID"
           Nullable="True"
-          PropertyName="UlohaID"
-          Type="int" />
+          Type="int"
+          PropertyName="UlohaID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

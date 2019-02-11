@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="UvodnaPracas"
         Association="FK_UvodnaPraca_UvodnaPracaStav"
         FromEnd="UvodnaPracaStav"
-        Name="UvodnaPracas"
         ToEnd="UvodnaPraca" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_UvodnaPraca_UvodnaPracaStav">
     <AssociationEnd
-      EntityType="UvodnaPracaStav"
-      Name="UvodnaPracaStav">
+      Name="UvodnaPracaStav"
+      EntityType="UvodnaPracaStav">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="UvodnaPraca"
+      Name="UvodnaPraca"
       Multiplicity="Many"
-      Name="UvodnaPraca" />
+      EntityType="UvodnaPraca" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="UvodnaPracaStavs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="UvodnaPracaStav"
-      Name="UvodnaPracaStavs" />
+      EntityType="UvodnaPracaStav" />
     <AssociationSet
-      Association="FK_UvodnaPraca_UvodnaPracaStav"
-      Name="FK_UvodnaPraca_UvodnaPracaStav">
+      Name="FK_UvodnaPraca_UvodnaPracaStav"
+      Association="FK_UvodnaPraca_UvodnaPracaStav">
       <AssociationSetEnd
-        EntitySet="UvodnaPracaStavs"
-        Name="UvodnaPracaStav" />
+        Name="UvodnaPracaStav"
+        EntitySet="UvodnaPracaStavs" />
       <AssociationSetEnd
-        EntitySet="UvodnaPracas"
-        Name="UvodnaPraca" />
+        Name="UvodnaPraca"
+        EntitySet="UvodnaPracas" />
     </AssociationSet>
     <QueryOperation
       Name="UvodnaPracaStavs_Single"
@@ -172,15 +171,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="UvodnaPracaStav/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="UvodnaPracaStav/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="UvodnaPracaStav/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="UvodnaPracaStav/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

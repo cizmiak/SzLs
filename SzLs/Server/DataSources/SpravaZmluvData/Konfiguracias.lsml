@@ -6,7 +6,6 @@
   </ServiceApplication.Attributes>
   <EntityType
     Name="Konfiguracia">
-    <EntityType.Attributes />
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -17,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -51,7 +50,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -62,7 +60,6 @@
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
-            Kind="Unspecified"
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
@@ -76,11 +73,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Konfiguracias"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Konfiguracia"
-      Name="Konfiguracias" />
+      EntityType="Konfiguracia" />
     <QueryOperation
       Name="Konfiguracias_Single"
       ReturnType="Konfiguracia">
@@ -176,31 +173,31 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Konfiguracia/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Konfiguracia/Properties[ID]" />
         <SsdlProperty
           MaxLength="100"
           Name="Nastavenie"
           Nullable="False"
-          Property="Konfiguracia/Properties[Nastavenie]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Konfiguracia/Properties[Nastavenie]" />
         <SsdlProperty
           MaxLength="500"
           Name="Hodnota"
           Nullable="False"
-          Property="Konfiguracia/Properties[Hodnota]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Konfiguracia/Properties[Hodnota]" />
         <SsdlProperty
           Name="PlatnostOd"
           Nullable="True"
-          Property="Konfiguracia/Properties[PlatnostOd]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Konfiguracia/Properties[PlatnostOd]" />
         <SsdlProperty
           Name="PlatnostDo"
           Nullable="True"
-          Property="Konfiguracia/Properties[PlatnostDo]"
-          Type="datetime" />
+          Type="datetime"
+          Property="Konfiguracia/Properties[PlatnostDo]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

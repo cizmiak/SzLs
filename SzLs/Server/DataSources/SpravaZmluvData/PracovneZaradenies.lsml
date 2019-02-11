@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Posluchacs"
         Association="FK_Posluchac_PracovneZaradenie"
         FromEnd="PracovneZaradenie"
-        Name="Posluchacs"
         ToEnd="Posluchac" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Posluchac_PracovneZaradenie">
     <AssociationEnd
-      EntityType="PracovneZaradenie"
-      Name="PracovneZaradenie">
+      Name="PracovneZaradenie"
+      EntityType="PracovneZaradenie">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Posluchac"
+      Name="Posluchac"
       Multiplicity="Many"
-      Name="Posluchac" />
+      EntityType="Posluchac" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="PracovneZaradenies"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="PracovneZaradenie"
-      Name="PracovneZaradenies" />
+      EntityType="PracovneZaradenie" />
     <AssociationSet
-      Association="FK_Posluchac_PracovneZaradenie"
-      Name="FK_Posluchac_PracovneZaradenie">
+      Name="FK_Posluchac_PracovneZaradenie"
+      Association="FK_Posluchac_PracovneZaradenie">
       <AssociationSetEnd
-        EntitySet="PracovneZaradenies"
-        Name="PracovneZaradenie" />
+        Name="PracovneZaradenie"
+        EntitySet="PracovneZaradenies" />
       <AssociationSetEnd
-        EntitySet="Posluchacs"
-        Name="Posluchac" />
+        Name="Posluchac"
+        EntitySet="Posluchacs" />
     </AssociationSet>
     <QueryOperation
       Name="PracovneZaradenies_Single"
@@ -190,15 +189,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="PracovneZaradenie/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="PracovneZaradenie/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="PracovneZaradenie/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="PracovneZaradenie/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

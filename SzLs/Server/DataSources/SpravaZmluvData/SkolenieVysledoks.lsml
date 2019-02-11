@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="SkoleniePosluchacs"
         Association="FK_SkoleniePosluchac_SkolenieVysledok"
         FromEnd="SkolenieVysledok"
-        Name="SkoleniePosluchacs"
         ToEnd="SkoleniePosluchac" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_SkoleniePosluchac_SkolenieVysledok">
     <AssociationEnd
-      EntityType="SkolenieVysledok"
-      Name="SkolenieVysledok">
+      Name="SkolenieVysledok"
+      EntityType="SkolenieVysledok">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkoleniePosluchac"
+      Name="SkoleniePosluchac"
       Multiplicity="Many"
-      Name="SkoleniePosluchac" />
+      EntityType="SkoleniePosluchac" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkolenieVysledoks"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkolenieVysledok"
-      Name="SkolenieVysledoks" />
+      EntityType="SkolenieVysledok" />
     <AssociationSet
-      Association="FK_SkoleniePosluchac_SkolenieVysledok"
-      Name="FK_SkoleniePosluchac_SkolenieVysledok">
+      Name="FK_SkoleniePosluchac_SkolenieVysledok"
+      Association="FK_SkoleniePosluchac_SkolenieVysledok">
       <AssociationSetEnd
-        EntitySet="SkolenieVysledoks"
-        Name="SkolenieVysledok" />
+        Name="SkolenieVysledok"
+        EntitySet="SkolenieVysledoks" />
       <AssociationSetEnd
-        EntitySet="SkoleniePosluchacs"
-        Name="SkoleniePosluchac" />
+        Name="SkoleniePosluchac"
+        EntitySet="SkoleniePosluchacs" />
     </AssociationSet>
     <QueryOperation
       Name="SkolenieVysledoks_Single"
@@ -172,15 +171,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="SkolenieVysledok/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="SkolenieVysledok/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="SkolenieVysledok/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkolenieVysledok/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

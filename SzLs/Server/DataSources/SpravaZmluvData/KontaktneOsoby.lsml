@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -88,59 +88,28 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="KontaktnaOsobaStav"
         Association="FK_KontaktnaOsoba_KontaktnaOsobaStav"
         FromEnd="KontaktnaOsoba"
-        Name="KontaktnaOsobaStav"
         ToEnd="KontaktnaOsobaStav" />
       <NavigationProperty
+        Name="Organizacia"
         Association="FK_KontaktnaOsoba_Organizacia"
         FromEnd="KontaktnaOsoba"
-        Name="Organizacia"
         ToEnd="Organizacia" />
-      <NavigationProperty
-        Association="FK_NaVedomie_KontaktnaOsoba"
-        FromEnd="KontaktnaOsoba"
-        Name="NaVedomies"
-        ToEnd="NaVedomie" />
     </EntityType.Properties>
   </EntityType>
-  <Association
-    Name="FK_NaVedomie_KontaktnaOsoba">
-    <AssociationEnd
-      EntityType="KontaktnaOsoba"
-      Multiplicity="One"
-      Name="KontaktnaOsoba">
-      <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-    <AssociationEnd
-      EntityType="NaVedomie"
-      Multiplicity="Many"
-      Name="NaVedomie" />
-  </Association>
   <EntityContainer
     Name="SpravaZmluvData">
     <EntityContainer.Attributes>
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="KontaktneOsoby"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="KontaktnaOsoba"
-      Name="KontaktneOsoby" />
-    <AssociationSet
-      Association="FK_NaVedomie_KontaktnaOsoba"
-      Name="FK_NaVedomie_KontaktnaOsoba">
-      <AssociationSetEnd
-        EntitySet="KontaktneOsoby"
-        Name="KontaktnaOsoba" />
-      <AssociationSetEnd
-        EntitySet="NaVedomies"
-        Name="NaVedomie" />
-    </AssociationSet>
+      EntityType="KontaktnaOsoba" />
     <QueryOperation
       Name="KontaktneOsoby_Single"
       ReturnType="KontaktnaOsoba">
@@ -236,82 +205,61 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="KontaktnaOsoba/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="KontaktnaOsoba/Properties[ID]" />
         <SsdlProperty
           MaxLength="20"
           Name="Meno"
           Nullable="True"
-          Property="KontaktnaOsoba/Properties[Meno]"
-          Type="varchar" />
+          Type="varchar"
+          Property="KontaktnaOsoba/Properties[Meno]" />
         <SsdlProperty
           MaxLength="20"
           Name="Priezvisko"
           Nullable="True"
-          Property="KontaktnaOsoba/Properties[Priezvisko]"
-          Type="varchar" />
+          Type="varchar"
+          Property="KontaktnaOsoba/Properties[Priezvisko]" />
         <SsdlProperty
           MaxLength="10"
           Name="Titul"
           Nullable="True"
-          Property="KontaktnaOsoba/Properties[Titul]"
-          Type="varchar" />
+          Type="varchar"
+          Property="KontaktnaOsoba/Properties[Titul]" />
         <SsdlProperty
           MaxLength="100"
           Name="Mail"
           Nullable="True"
-          Property="KontaktnaOsoba/Properties[Mail]"
-          Type="varchar" />
+          Type="varchar"
+          Property="KontaktnaOsoba/Properties[Mail]" />
         <SsdlProperty
           MaxLength="100"
           Name="Telefon"
           Nullable="True"
-          Property="KontaktnaOsoba/Properties[Telefon]"
-          Type="varchar" />
+          Type="varchar"
+          Property="KontaktnaOsoba/Properties[Telefon]" />
         <SsdlProperty
           MaxLength="100"
           Name="Fax"
           Nullable="True"
-          Property="KontaktnaOsoba/Properties[Fax]"
-          Type="varchar" />
+          Type="varchar"
+          Property="KontaktnaOsoba/Properties[Fax]" />
         <SsdlProperty
           Name="Poznamka"
           Nullable="True"
-          Property="KontaktnaOsoba/Properties[Poznamka]"
-          Type="varchar(max)" />
+          Type="varchar(max)"
+          Property="KontaktnaOsoba/Properties[Poznamka]" />
         <SsdlForeignKeyProperty
           Name="StavID"
           Nullable="True"
-          PropertyName="StavID"
-          Type="int" />
+          Type="int"
+          PropertyName="StavID" />
         <SsdlForeignKeyProperty
           Name="OrganizaciaID"
           Nullable="True"
-          PropertyName="OrganizaciaID"
-          Type="int" />
+          Type="int"
+          PropertyName="OrganizaciaID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
-    <AssociationSetMapping
-      AssociationSet="FK_NaVedomie_KontaktnaOsoba">
-      <AssociationSetMapping.Attributes>
-        <SsdlAssociationSet
-          Name="FK_NaVedomie_KontaktnaOsoba" />
-        <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_NaVedomie_KontaktnaOsoba]/Members[KontaktnaOsoba]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="ID" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-        <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_NaVedomie_KontaktnaOsoba]/Members[NaVedomie]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="OsobaID" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
   </DataService>
 </ServiceApplication>

@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,47 +35,45 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Skolenies"
         Association="FK_Skolenie_SkoleniePreKoho"
         FromEnd="SkoleniePreKoho"
-        Name="Skolenies"
         ToEnd="Skolenie" />
       <NavigationProperty
+        Name="SkoleniePreKohoOtazkas"
         Association="FK_SkoleniePreKohoOtazka_SkoleniePreKoho"
         FromEnd="SkoleniePreKoho"
-        Name="SkoleniePreKohoOtazkas"
         ToEnd="SkoleniePreKohoOtazka" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Skolenie_SkoleniePreKoho">
     <AssociationEnd
-      EntityType="SkoleniePreKoho"
-      Name="SkoleniePreKoho">
+      Name="SkoleniePreKoho"
+      EntityType="SkoleniePreKoho">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_SkoleniePreKohoOtazka_SkoleniePreKoho">
     <AssociationEnd
-      EntityType="SkoleniePreKoho"
+      Name="SkoleniePreKoho"
       Multiplicity="One"
-      Name="SkoleniePreKoho">
+      EntityType="SkoleniePreKoho">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkoleniePreKohoOtazka"
+      Name="SkoleniePreKohoOtazka"
       Multiplicity="Many"
-      Name="SkoleniePreKohoOtazka" />
+      EntityType="SkoleniePreKohoOtazka" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -83,20 +81,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkoleniePreKohoes"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkoleniePreKoho"
-      Name="SkoleniePreKohoes" />
+      EntityType="SkoleniePreKoho" />
     <AssociationSet
-      Association="FK_Skolenie_SkoleniePreKoho"
-      Name="FK_Skolenie_SkoleniePreKoho">
+      Name="FK_Skolenie_SkoleniePreKoho"
+      Association="FK_Skolenie_SkoleniePreKoho">
       <AssociationSetEnd
-        EntitySet="SkoleniePreKohoes"
-        Name="SkoleniePreKoho" />
+        Name="SkoleniePreKoho"
+        EntitySet="SkoleniePreKohoes" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <QueryOperation
       Name="SkoleniePreKohoes_Single"
@@ -179,14 +177,14 @@
       </QueryOperationParameter>
     </QueryOperation>
     <AssociationSet
-      Association="FK_SkoleniePreKohoOtazka_SkoleniePreKoho"
-      Name="FK_SkoleniePreKohoOtazka_SkoleniePreKoho">
+      Name="FK_SkoleniePreKohoOtazka_SkoleniePreKoho"
+      Association="FK_SkoleniePreKohoOtazka_SkoleniePreKoho">
       <AssociationSetEnd
-        EntitySet="SkoleniePreKohoes"
-        Name="SkoleniePreKoho" />
+        Name="SkoleniePreKoho"
+        EntitySet="SkoleniePreKohoes" />
       <AssociationSetEnd
-        EntitySet="SkoleniePreKohoOtazkas"
-        Name="SkoleniePreKohoOtazka" />
+        Name="SkoleniePreKohoOtazka"
+        EntitySet="SkoleniePreKohoOtazkas" />
     </AssociationSet>
   </EntityContainer>
   <DataService
@@ -203,15 +201,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="SkoleniePreKoho/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="SkoleniePreKoho/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="SkoleniePreKoho/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkoleniePreKoho/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

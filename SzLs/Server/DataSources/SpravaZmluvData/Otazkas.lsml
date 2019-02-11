@@ -33,23 +33,23 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="SkolenieOtazkas"
         Association="FK_SkolenieOtazka_Otazka"
         FromEnd="Otazka"
-        Name="SkolenieOtazkas"
         ToEnd="SkolenieOtazka" />
       <NavigationProperty
+        Name="SkolenieTypOtazkas"
         Association="FK_SkolenieTypOtazka_Otazka"
         FromEnd="Otazka"
-        Name="SkolenieTypOtazkas"
         ToEnd="SkolenieTypOtazka" />
       <NavigationProperty
+        Name="SkoleniePreKohoOtazkas"
         Association="FK_SkoleniePreKohoOtazka_Otazka"
         FromEnd="Otazka"
-        Name="SkoleniePreKohoOtazkas"
         ToEnd="SkoleniePreKohoOtazka" />
       <EntityProperty
-        IsReadOnly="True"
         Name="Check_Sum"
+        IsReadOnly="True"
         PropertyType=":Int32?">
         <EntityProperty.Attributes>
           <NotSearchable />
@@ -60,50 +60,47 @@
   <Association
     Name="FK_SkolenieOtazka_Otazka">
     <AssociationEnd
-      EntityType="Otazka"
+      Name="Otazka"
       Multiplicity="One"
-      Name="Otazka">
+      EntityType="Otazka">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkolenieOtazka"
+      Name="SkolenieOtazka"
       Multiplicity="Many"
-      Name="SkolenieOtazka" />
+      EntityType="SkolenieOtazka" />
   </Association>
   <Association
     Name="FK_SkolenieTypOtazka_Otazka">
     <AssociationEnd
-      EntityType="Otazka"
+      Name="Otazka"
       Multiplicity="One"
-      Name="Otazka">
+      EntityType="Otazka">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkolenieTypOtazka"
+      Name="SkolenieTypOtazka"
       Multiplicity="Many"
-      Name="SkolenieTypOtazka" />
+      EntityType="SkolenieTypOtazka" />
   </Association>
   <Association
     Name="FK_SkoleniePreKohoOtazka_Otazka">
     <AssociationEnd
-      EntityType="Otazka"
+      Name="Otazka"
       Multiplicity="One"
-      Name="Otazka">
+      EntityType="Otazka">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkoleniePreKohoOtazka"
+      Name="SkoleniePreKohoOtazka"
       Multiplicity="Many"
-      Name="SkoleniePreKohoOtazka" />
+      EntityType="SkoleniePreKohoOtazka" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -111,30 +108,30 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Otazkas"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Otazka"
-      Name="Otazkas" />
+      EntityType="Otazka" />
     <AssociationSet
-      Association="FK_SkolenieOtazka_Otazka"
-      Name="FK_SkolenieOtazka_Otazka">
+      Name="FK_SkolenieOtazka_Otazka"
+      Association="FK_SkolenieOtazka_Otazka">
       <AssociationSetEnd
-        EntitySet="Otazkas"
-        Name="Otazka" />
+        Name="Otazka"
+        EntitySet="Otazkas" />
       <AssociationSetEnd
-        EntitySet="SkolenieOtazky"
-        Name="SkolenieOtazka" />
+        Name="SkolenieOtazka"
+        EntitySet="SkolenieOtazky" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_SkolenieTypOtazka_Otazka"
-      Name="FK_SkolenieTypOtazka_Otazka">
+      Name="FK_SkolenieTypOtazka_Otazka"
+      Association="FK_SkolenieTypOtazka_Otazka">
       <AssociationSetEnd
-        EntitySet="Otazkas"
-        Name="Otazka" />
+        Name="Otazka"
+        EntitySet="Otazkas" />
       <AssociationSetEnd
-        EntitySet="SkolenieTypOtazkas"
-        Name="SkolenieTypOtazka" />
+        Name="SkolenieTypOtazka"
+        EntitySet="SkolenieTypOtazkas" />
     </AssociationSet>
     <QueryOperation
       Name="Otazkas_Single"
@@ -233,14 +230,14 @@
       </QueryOperation.Source>
     </QueryOperation>
     <AssociationSet
-      Association="FK_SkoleniePreKohoOtazka_Otazka"
-      Name="FK_SkoleniePreKohoOtazka_Otazka">
+      Name="FK_SkoleniePreKohoOtazka_Otazka"
+      Association="FK_SkoleniePreKohoOtazka_Otazka">
       <AssociationSetEnd
-        EntitySet="Otazkas"
-        Name="Otazka" />
+        Name="Otazka"
+        EntitySet="Otazkas" />
       <AssociationSetEnd
-        EntitySet="SkoleniePreKohoOtazkas"
-        Name="SkoleniePreKohoOtazka" />
+        Name="SkoleniePreKohoOtazka"
+        EntitySet="SkoleniePreKohoOtazkas" />
     </AssociationSet>
   </EntityContainer>
   <DataService
@@ -257,20 +254,20 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Otazka/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Otazka/Properties[ID]" />
         <SsdlProperty
           Name="Znenie"
           Nullable="False"
-          Property="Otazka/Properties[Znenie]"
-          Type="varchar(max)" />
+          Type="varchar(max)"
+          Property="Otazka/Properties[Znenie]" />
         <SsdlProperty
           Name="Check_Sum"
           Nullable="True"
-          Property="Otazka/Properties[Check_Sum]"
           StoreGeneratedPattern="Computed"
-          Type="int" />
+          Type="int"
+          Property="Otazka/Properties[Check_Sum]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

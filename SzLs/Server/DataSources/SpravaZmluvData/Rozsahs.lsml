@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -43,27 +43,26 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="ZmluvaRozsahs"
         Association="FK_ZmluvaRozsah_Rozsah"
         FromEnd="Rozsah"
-        Name="ZmluvaRozsahs"
         ToEnd="ZmluvaRozsah" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_ZmluvaRozsah_Rozsah">
     <AssociationEnd
-      EntityType="Rozsah"
+      Name="Rozsah"
       Multiplicity="One"
-      Name="Rozsah">
+      EntityType="Rozsah">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="ZmluvaRozsah"
+      Name="ZmluvaRozsah"
       Multiplicity="Many"
-      Name="ZmluvaRozsah" />
+      EntityType="ZmluvaRozsah" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -71,20 +70,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Rozsahs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Rozsah"
-      Name="Rozsahs" />
+      EntityType="Rozsah" />
     <AssociationSet
-      Association="FK_ZmluvaRozsah_Rozsah"
-      Name="FK_ZmluvaRozsah_Rozsah">
+      Name="FK_ZmluvaRozsah_Rozsah"
+      Association="FK_ZmluvaRozsah_Rozsah">
       <AssociationSetEnd
-        EntitySet="Rozsahs"
-        Name="Rozsah" />
+        Name="Rozsah"
+        EntitySet="Rozsahs" />
       <AssociationSetEnd
-        EntitySet="ZmluvaRozsahs"
-        Name="ZmluvaRozsah" />
+        Name="ZmluvaRozsah"
+        EntitySet="ZmluvaRozsahs" />
     </AssociationSet>
     <QueryOperation
       Name="Rozsahs_Single"
@@ -181,20 +180,20 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Rozsah/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Rozsah/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="Rozsah/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Rozsah/Properties[Nazov]" />
         <SsdlProperty
           Name="Popis"
           Nullable="True"
-          Property="Rozsah/Properties[Popis]"
-          Type="varchar(max)" />
+          Type="varchar(max)"
+          Property="Rozsah/Properties[Popis]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

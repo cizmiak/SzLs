@@ -13,12 +13,6 @@
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:Entita" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
         Target="ServiceInterface:Jednotka" />
     </EntityType.Attributes>
   </EntityType>
@@ -38,12 +32,6 @@
     <EntityType.Attributes>
       <Proxy
         Target="ServiceInterface:Krajina" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
-        Target="ServiceInterface:NaVedomie" />
     </EntityType.Attributes>
   </EntityType>
   <EntityType>
@@ -235,31 +223,7 @@
   <Association>
     <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:FK_Entita_Parent" />
-    </Association.Attributes>
-  </Association>
-  <Association>
-    <Association.Attributes>
-      <Proxy
         Target="ServiceInterface:FK_KontaktnaOsoba_KontaktnaOsobaStav" />
-    </Association.Attributes>
-  </Association>
-  <Association>
-    <Association.Attributes>
-      <Proxy
-        Target="ServiceInterface:FK_NaVedomie_Entita" />
-    </Association.Attributes>
-  </Association>
-  <Association>
-    <Association.Attributes>
-      <Proxy
-        Target="ServiceInterface:FK_NaVedomie_KontaktnaOsoba" />
-    </Association.Attributes>
-  </Association>
-  <Association>
-    <Association.Attributes>
-      <Proxy
-        Target="ServiceInterface:FK_NaVedomie_Uloha" />
     </Association.Attributes>
   </Association>
   <Association>
@@ -500,6 +464,48 @@
     <Association.Attributes>
       <Proxy
         Target="ServiceInterface:XlsxRow_XlsxSheet" />
+    </Association.Attributes>
+  </Association>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:EmailTemplate" />
+    </EntityType.Attributes>
+  </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:Offer" />
+    </EntityType.Attributes>
+  </EntityType>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:OfferState" />
+    </EntityType.Attributes>
+  </EntityType>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Offers_EmailTemplate" />
+    </Association.Attributes>
+  </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Offers_OfferStates" />
+    </Association.Attributes>
+  </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Offers_Organization" />
+    </Association.Attributes>
+  </Association>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Offers_ResponsibleEmployee" />
     </Association.Attributes>
   </Association>
 </Application>

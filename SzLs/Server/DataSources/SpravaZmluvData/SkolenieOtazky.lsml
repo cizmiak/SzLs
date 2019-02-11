@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -34,14 +34,14 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Otazka"
         Association="FK_SkolenieOtazka_Otazka"
         FromEnd="SkolenieOtazka"
-        Name="Otazka"
         ToEnd="Otazka" />
       <NavigationProperty
+        Name="Skolenie"
         Association="FK_SkolenieOtazka_Skolenie"
         FromEnd="SkolenieOtazka"
-        Name="Skolenie"
         ToEnd="Skolenie" />
     </EntityType.Properties>
   </EntityType>
@@ -51,11 +51,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkolenieOtazky"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkolenieOtazka"
-      Name="SkolenieOtazky" />
+      EntityType="SkolenieOtazka" />
     <QueryOperation
       Name="SkolenieOtazky_Single"
       ReturnType="SkolenieOtazka">
@@ -151,24 +151,24 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="SkolenieOtazka/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="SkolenieOtazka/Properties[ID]" />
         <SsdlProperty
           Name="Poradie"
           Nullable="False"
-          Property="SkolenieOtazka/Properties[Poradie]"
-          Type="int" />
+          Type="int"
+          Property="SkolenieOtazka/Properties[Poradie]" />
         <SsdlForeignKeyProperty
           Name="OtazkaID"
           Nullable="False"
-          PropertyName="OtazkaID"
-          Type="int" />
+          Type="int"
+          PropertyName="OtazkaID" />
         <SsdlForeignKeyProperty
           Name="SkolenieID"
           Nullable="False"
-          PropertyName="SkolenieID"
-          Type="int" />
+          Type="int"
+          PropertyName="SkolenieID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

@@ -12,6 +12,149 @@
       <DisplayName
         Value="Ciselniky Ostatne" />
     </Screen.Attributes>
+    <Screen.RootContentItem>
+      <ContentItem
+        Name="RootContentItem"
+        Kind="Screen">
+        <ContentItem
+          Name="ScreenLayout"
+          Kind="Group"
+          View=":TabsLayout">
+          <ContentItem
+            Name="Jednotka"
+            Kind="Collection"
+            DataType="CollectionView$Jednotka">
+            <ContentItem.DataSource>
+              <ScreenExpressionTree>
+                <ChainExpression>
+                  <MemberExpression
+                    Member="CiselnikyOstatne/Properties[Jednotka]" />
+                </ChainExpression>
+              </ScreenExpressionTree>
+            </ContentItem.DataSource>
+            <ContentItem
+              Name="JednotkaTemplate"
+              Kind="Details"
+              DataType="Jednotka">
+              <ContentItem.DataSource>
+                <ScreenExpressionTree>
+                  <ChainExpression />
+                </ScreenExpressionTree>
+              </ContentItem.DataSource>
+              <ContentItem
+                Name="Znacka"
+                Kind="Value"
+                DataType=":String?">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="Jednotka/Properties[Znacka]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem
+                Name="Nazov"
+                Kind="Value"
+                DataType=":String?">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="Jednotka/Properties[Nazov]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem
+                Name="SQLName"
+                Kind="Value"
+                DataType=":String?">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="Jednotka/Properties[SQLName]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+            </ContentItem>
+            <ContentItem.CommandItems>
+              <ContentItem
+                Name="Jednotka_AddAndEditNew"
+                Kind="Command">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="CiselnikyOstatne/Properties[Jednotka]" />
+                      <CallExpression
+                        Target="AddAndEditNew" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem
+                Name="Jednotka_EditSelected"
+                Kind="Command">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="CiselnikyOstatne/Properties[Jednotka]" />
+                      <CallExpression
+                        Target="EditSelected" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem
+                Name="Jednotka_DeleteSelected"
+                Kind="Command">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="CiselnikyOstatne/Properties[Jednotka]" />
+                      <CallExpression
+                        Target="DeleteSelected" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+              </ContentItem>
+            </ContentItem.CommandItems>
+          </ContentItem>
+        </ContentItem>
+        <ContentItem.CommandItems>
+          <ContentItem
+            Name="Save"
+            Kind="Command">
+            <ContentItem.DataSource>
+              <ScreenExpressionTree>
+                <ChainExpression>
+                  <CallExpression
+                    Target="CiselnikyOstatne/Methods[Save]" />
+                </ChainExpression>
+              </ScreenExpressionTree>
+            </ContentItem.DataSource>
+          </ContentItem>
+          <ContentItem
+            Name="Refresh"
+            Kind="Command">
+            <ContentItem.DataSource>
+              <ScreenExpressionTree>
+                <ChainExpression>
+                  <CallExpression
+                    Target="CiselnikyOstatne/Methods[Refresh]" />
+                </ChainExpression>
+              </ScreenExpressionTree>
+            </ContentItem.DataSource>
+          </ContentItem>
+        </ContentItem.CommandItems>
+      </ContentItem>
+    </Screen.RootContentItem>
     <Screen.Methods>
       <ScreenMethod
         Name="Save">
@@ -44,32 +187,6 @@
     </Screen.Methods>
     <Screen.Properties>
       <ScreenCollectionProperty
-        Name="Entita"
-        PageSize="45"
-        PropertyType="CollectionView$Entita">
-        <ScreenCollectionProperty.Query>
-          <ScreenQueryDefinition
-            Name="EntitaQuery"
-            ReturnType="Entita*">
-            <ScreenQueryDefinition.FilterExpression>
-              <QueryFilterExpressionTree />
-            </ScreenQueryDefinition.FilterExpression>
-            <ScreenQueryDefinition.Source>
-              <QuerySourceExpressionTree>
-                <MemberExpression
-                  Member="SpravaZmluvData/Members[Entitas]" />
-              </QuerySourceExpressionTree>
-            </ScreenQueryDefinition.Source>
-          </ScreenQueryDefinition>
-        </ScreenCollectionProperty.Query>
-        <ScreenExpressionTree>
-          <ChainExpression>
-            <CallExpression
-              Target="CiselnikyOstatne/Properties[Entita]/Query" />
-          </ChainExpression>
-        </ScreenExpressionTree>
-      </ScreenCollectionProperty>
-      <ScreenCollectionProperty
         Name="Jednotka"
         PageSize="45"
         PropertyType="CollectionView$Jednotka">
@@ -96,252 +213,6 @@
         </ScreenExpressionTree>
       </ScreenCollectionProperty>
     </Screen.Properties>
-    <Screen.RootContentItem>
-      <ContentItem
-        Kind="Screen"
-        Name="RootContentItem">
-        <ContentItem.CommandItems>
-          <ContentItem
-            Kind="Command"
-            Name="Save">
-            <ContentItem.DataSource>
-              <ScreenExpressionTree>
-                <ChainExpression>
-                  <CallExpression
-                    Target="CiselnikyOstatne/Methods[Save]" />
-                </ChainExpression>
-              </ScreenExpressionTree>
-            </ContentItem.DataSource>
-          </ContentItem>
-          <ContentItem
-            Kind="Command"
-            Name="Refresh">
-            <ContentItem.DataSource>
-              <ScreenExpressionTree>
-                <ChainExpression>
-                  <CallExpression
-                    Target="CiselnikyOstatne/Methods[Refresh]" />
-                </ChainExpression>
-              </ScreenExpressionTree>
-            </ContentItem.DataSource>
-          </ContentItem>
-        </ContentItem.CommandItems>
-        <ContentItem
-          Kind="Group"
-          Name="ScreenLayout"
-          View=":TabsLayout">
-          <ContentItem
-            DataType="CollectionView$Entita"
-            Kind="Collection"
-            Name="Entita">
-            <ContentItem.CommandItems>
-              <ContentItem
-                Kind="Command"
-                Name="Entita_AddAndEditNew">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="CiselnikyOstatne/Properties[Entita]" />
-                      <CallExpression
-                        Target="AddAndEditNew" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Kind="Command"
-                Name="Entita_EditSelected">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="CiselnikyOstatne/Properties[Entita]" />
-                      <CallExpression
-                        Target="EditSelected" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Kind="Command"
-                Name="Entita_DeleteSelected">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="CiselnikyOstatne/Properties[Entita]" />
-                      <CallExpression
-                        Target="DeleteSelected" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-            </ContentItem.CommandItems>
-            <ContentItem.DataSource>
-              <ScreenExpressionTree>
-                <ChainExpression>
-                  <MemberExpression
-                    Member="CiselnikyOstatne/Properties[Entita]" />
-                </ChainExpression>
-              </ScreenExpressionTree>
-            </ContentItem.DataSource>
-            <ContentItem
-              DataType="Entita"
-              Kind="Details"
-              Name="EntitaTemplate">
-              <ContentItem.DataSource>
-                <ScreenExpressionTree>
-                  <ChainExpression />
-                </ScreenExpressionTree>
-              </ContentItem.DataSource>
-              <ContentItem
-                DataType=":String?"
-                Kind="Value"
-                Name="Tabulka">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Entita/Properties[Tabulka]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                DataType="Entita"
-                Kind="Details"
-                Name="Entita1">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Entita/Properties[Entita1]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-                <ContentItem
-                  DataType="Entita"
-                  Kind="Details"
-                  Name="Entita2">
-                  <ContentItem.DataSource>
-                    <ScreenExpressionTree>
-                      <ChainExpression />
-                    </ScreenExpressionTree>
-                  </ContentItem.DataSource>
-                </ContentItem>
-              </ContentItem>
-            </ContentItem>
-          </ContentItem>
-          <ContentItem
-            DataType="CollectionView$Jednotka"
-            Kind="Collection"
-            Name="Jednotka">
-            <ContentItem.CommandItems>
-              <ContentItem
-                Kind="Command"
-                Name="Jednotka_AddAndEditNew">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="CiselnikyOstatne/Properties[Jednotka]" />
-                      <CallExpression
-                        Target="AddAndEditNew" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Kind="Command"
-                Name="Jednotka_EditSelected">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="CiselnikyOstatne/Properties[Jednotka]" />
-                      <CallExpression
-                        Target="EditSelected" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Kind="Command"
-                Name="Jednotka_DeleteSelected">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="CiselnikyOstatne/Properties[Jednotka]" />
-                      <CallExpression
-                        Target="DeleteSelected" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-            </ContentItem.CommandItems>
-            <ContentItem.DataSource>
-              <ScreenExpressionTree>
-                <ChainExpression>
-                  <MemberExpression
-                    Member="CiselnikyOstatne/Properties[Jednotka]" />
-                </ChainExpression>
-              </ScreenExpressionTree>
-            </ContentItem.DataSource>
-            <ContentItem
-              DataType="Jednotka"
-              Kind="Details"
-              Name="JednotkaTemplate">
-              <ContentItem.DataSource>
-                <ScreenExpressionTree>
-                  <ChainExpression />
-                </ScreenExpressionTree>
-              </ContentItem.DataSource>
-              <ContentItem
-                DataType=":String?"
-                Kind="Value"
-                Name="Znacka">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Jednotka/Properties[Znacka]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                DataType=":String?"
-                Kind="Value"
-                Name="Nazov">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Jednotka/Properties[Nazov]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                DataType=":String?"
-                Kind="Value"
-                Name="SQLName">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Jednotka/Properties[SQLName]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-            </ContentItem>
-          </ContentItem>
-        </ContentItem>
-      </ContentItem>
-    </Screen.RootContentItem>
   </Screen>
   <Application.Methods>
     <ApplicationMethod

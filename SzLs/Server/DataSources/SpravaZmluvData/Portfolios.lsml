@@ -6,7 +6,6 @@
   </ServiceApplication.Attributes>
   <EntityType
     Name="Portfolio">
-    <EntityType.Attributes />
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -17,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -71,57 +70,55 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="PortfolioKategoria"
         Association="FK_Portfolio_PortfolioKategoria"
         FromEnd="Portfolio"
-        Name="PortfolioKategoria"
         ToEnd="PortfolioKategoria" />
       <NavigationProperty
+        Name="PortfolioStav"
         Association="FK_Portfolio_PortfolioStav"
         FromEnd="Portfolio"
-        Name="PortfolioStav"
         ToEnd="PortfolioStav" />
       <NavigationProperty
+        Name="Ulohas"
         Association="FK_Uloha_Portfolio"
         FromEnd="Portfolio"
-        Name="Ulohas"
         ToEnd="Uloha" />
       <NavigationProperty
+        Name="ZmluvaPredmets"
         Association="FK_ZmluvaPredmet_Portfolio"
         FromEnd="Portfolio"
-        Name="ZmluvaPredmets"
         ToEnd="ZmluvaPredmet" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Uloha_Portfolio">
     <AssociationEnd
-      EntityType="Portfolio"
-      Name="Portfolio">
+      Name="Portfolio"
+      EntityType="Portfolio">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Uloha"
+      Name="Uloha"
       Multiplicity="Many"
-      Name="Uloha" />
+      EntityType="Uloha" />
   </Association>
   <Association
     Name="FK_ZmluvaPredmet_Portfolio">
     <AssociationEnd
-      EntityType="Portfolio"
+      Name="Portfolio"
       Multiplicity="One"
-      Name="Portfolio">
+      EntityType="Portfolio">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="ZmluvaPredmet"
+      Name="ZmluvaPredmet"
       Multiplicity="Many"
-      Name="ZmluvaPredmet" />
+      EntityType="ZmluvaPredmet" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -129,30 +126,30 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Portfolios"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Portfolio"
-      Name="Portfolios" />
+      EntityType="Portfolio" />
     <AssociationSet
-      Association="FK_Uloha_Portfolio"
-      Name="FK_Uloha_Portfolio">
+      Name="FK_Uloha_Portfolio"
+      Association="FK_Uloha_Portfolio">
       <AssociationSetEnd
-        EntitySet="Portfolios"
-        Name="Portfolio" />
+        Name="Portfolio"
+        EntitySet="Portfolios" />
       <AssociationSetEnd
-        EntitySet="Ulohy"
-        Name="Uloha" />
+        Name="Uloha"
+        EntitySet="Ulohy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_ZmluvaPredmet_Portfolio"
-      Name="FK_ZmluvaPredmet_Portfolio">
+      Name="FK_ZmluvaPredmet_Portfolio"
+      Association="FK_ZmluvaPredmet_Portfolio">
       <AssociationSetEnd
-        EntitySet="Portfolios"
-        Name="Portfolio" />
+        Name="Portfolio"
+        EntitySet="Portfolios" />
       <AssociationSetEnd
-        EntitySet="ZmluvaPredmets"
-        Name="ZmluvaPredmet" />
+        Name="ZmluvaPredmet"
+        EntitySet="ZmluvaPredmets" />
     </AssociationSet>
     <QueryOperation
       Name="Portfolios_Single"
@@ -267,47 +264,47 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Portfolio/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Portfolio/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Referencia"
           Nullable="True"
-          Property="Portfolio/Properties[Referencia]"
-          Type="nvarchar" />
+          Type="nvarchar"
+          Property="Portfolio/Properties[Referencia]" />
         <SsdlProperty
           MaxLength="256"
           Name="Nazov"
           Nullable="True"
-          Property="Portfolio/Properties[Nazov]"
-          Type="nvarchar" />
+          Type="nvarchar"
+          Property="Portfolio/Properties[Nazov]" />
         <SsdlProperty
           MaxLength="512"
           Name="Popis"
           Nullable="True"
-          Property="Portfolio/Properties[Popis]"
-          Type="nvarchar" />
+          Type="nvarchar"
+          Property="Portfolio/Properties[Popis]" />
         <SsdlProperty
           Name="CenaVynos"
           Nullable="True"
-          Property="Portfolio/Properties[CenaVynos]"
-          Type="money" />
+          Type="money"
+          Property="Portfolio/Properties[CenaVynos]" />
         <SsdlProperty
           Name="CenaNaklad"
           Nullable="True"
-          Property="Portfolio/Properties[CenaNaklad]"
-          Type="money" />
+          Type="money"
+          Property="Portfolio/Properties[CenaNaklad]" />
         <SsdlForeignKeyProperty
           Name="KategoriaID"
           Nullable="True"
-          PropertyName="KategoriaID"
-          Type="int" />
+          Type="int"
+          PropertyName="KategoriaID" />
         <SsdlForeignKeyProperty
           Name="StavID"
           Nullable="True"
-          PropertyName="StavID"
-          Type="int" />
+          Type="int"
+          PropertyName="StavID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

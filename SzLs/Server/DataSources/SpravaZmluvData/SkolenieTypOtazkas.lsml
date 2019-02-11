@@ -16,18 +16,18 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <NavigationProperty
+        Name="Otazka"
         Association="FK_SkolenieTypOtazka_Otazka"
         FromEnd="SkolenieTypOtazka"
-        Name="Otazka"
         ToEnd="Otazka" />
       <NavigationProperty
+        Name="SkolenieTyp"
         Association="FK_SkolenieTypOtazka_SkolenieTyp"
         FromEnd="SkolenieTypOtazka"
-        Name="SkolenieTyp"
         ToEnd="SkolenieTyp" />
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -43,11 +43,11 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkolenieTypOtazkas"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkolenieTypOtazka"
-      Name="SkolenieTypOtazkas" />
+      EntityType="SkolenieTypOtazka" />
     <QueryOperation
       Name="SkolenieTypOtazkas_Single"
       ReturnType="SkolenieTypOtazka">
@@ -143,19 +143,19 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="SkolenieTypOtazka/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="SkolenieTypOtazka/Properties[ID]" />
         <SsdlForeignKeyProperty
           Name="OtazkaID"
           Nullable="False"
-          PropertyName="OtazkaID"
-          Type="int" />
+          Type="int"
+          PropertyName="OtazkaID" />
         <SsdlForeignKeyProperty
           Name="SkolenieTypID"
           Nullable="False"
-          PropertyName="SkolenieTypID"
-          Type="int" />
+          Type="int"
+          PropertyName="SkolenieTypID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
   </DataService>

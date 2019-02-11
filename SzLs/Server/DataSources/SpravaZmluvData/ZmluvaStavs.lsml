@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -35,26 +35,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Zmluvas"
         Association="FK_Zmluva_ZmluvaStav"
         FromEnd="ZmluvaStav"
-        Name="Zmluvas"
         ToEnd="Zmluva" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Zmluva_ZmluvaStav">
     <AssociationEnd
-      EntityType="ZmluvaStav"
-      Name="ZmluvaStav">
+      Name="ZmluvaStav"
+      EntityType="ZmluvaStav">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="Many"
-      Name="Zmluva" />
+      EntityType="Zmluva" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -62,20 +61,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="ZmluvaStavs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="ZmluvaStav"
-      Name="ZmluvaStavs" />
+      EntityType="ZmluvaStav" />
     <AssociationSet
-      Association="FK_Zmluva_ZmluvaStav"
-      Name="FK_Zmluva_ZmluvaStav">
+      Name="FK_Zmluva_ZmluvaStav"
+      Association="FK_Zmluva_ZmluvaStav">
       <AssociationSetEnd
-        EntitySet="ZmluvaStavs"
-        Name="ZmluvaStav" />
+        Name="ZmluvaStav"
+        EntitySet="ZmluvaStavs" />
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
     </AssociationSet>
     <QueryOperation
       Name="ZmluvaStavs_Single"
@@ -172,15 +171,15 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="ZmluvaStav/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="ZmluvaStav/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="ZmluvaStav/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="ZmluvaStav/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

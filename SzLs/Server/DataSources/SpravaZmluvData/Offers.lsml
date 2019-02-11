@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="SkolenieDruh">
+    Name="Offer">
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -16,7 +16,7 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        Name="ID"
+        Name="Id"
         IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
@@ -26,59 +26,78 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="Nazov"
+        Name="Subject"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
-            Value="50" />
+            Value="255" />
           <AnsiConstraint />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <EntityProperty
+        Name="Body"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="SentDate"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="RealizationDate"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
       <NavigationProperty
-        Name="Skolenies"
-        Association="FK_Skolenie_SkolenieDruh"
-        FromEnd="SkolenieDruh"
-        ToEnd="Skolenie" />
+        Name="EmailTemplate"
+        Association="FK_Offers_EmailTemplate"
+        FromEnd="Offers"
+        ToEnd="EmailTemplate" />
+      <NavigationProperty
+        Name="OfferState"
+        Association="FK_Offers_OfferStates"
+        FromEnd="Offers"
+        ToEnd="OfferStates" />
+      <NavigationProperty
+        Name="Organizacia"
+        Association="FK_Offers_Organization"
+        FromEnd="Offers"
+        ToEnd="Organizacia" />
+      <NavigationProperty
+        Name="Zamestnanec"
+        Association="FK_Offers_ResponsibleEmployee"
+        FromEnd="Offers"
+        ToEnd="Zamestnanec" />
     </EntityType.Properties>
   </EntityType>
-  <Association
-    Name="FK_Skolenie_SkolenieDruh">
-    <AssociationEnd
-      Name="SkolenieDruh"
-      EntityType="SkolenieDruh">
-      <AssociationEnd.Attributes>
-        <DeleteRule />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-    <AssociationEnd
-      Name="Skolenie"
-      Multiplicity="Many"
-      EntityType="Skolenie" />
-  </Association>
   <EntityContainer
     Name="SpravaZmluvData">
     <EntityContainer.Attributes>
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="SkolenieDruhs"
+      Name="Offers"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkolenieDruh" />
-    <AssociationSet
-      Name="FK_Skolenie_SkolenieDruh"
-      Association="FK_Skolenie_SkolenieDruh">
-      <AssociationSetEnd
-        Name="SkolenieDruh"
-        EntitySet="SkolenieDruhs" />
-      <AssociationSetEnd
-        Name="Skolenie"
-        EntitySet="Skolenia" />
-    </AssociationSet>
+      EntityType="Offer" />
     <QueryOperation
-      Name="SkolenieDruhs_Single"
-      ReturnType="SkolenieDruh">
+      Name="Offers_Single"
+      ReturnType="Offer">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -91,12 +110,12 @@
             <BinaryExpression.Left>
               <ChainExpression>
                 <MemberExpression
-                  Member="ID" />
+                  Member="Id" />
               </ChainExpression>
             </BinaryExpression.Left>
             <BinaryExpression.Right>
               <ParameterExpression
-                Parameter="ID" />
+                Parameter="Id" />
             </BinaryExpression.Right>
           </BinaryExpression>
         </QueryFilterExpressionTree>
@@ -104,21 +123,21 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="SkolenieDruhs" />
+            Member="Offers" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
-        Name="ID"
-        ParameterType=":Int32?">
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
         <QueryOperationParameter.Attributes>
           <Description
-            Value="The value of the 'ID' key property of the entity to retrieve." />
+            Value="The value of the 'Id' key property of the entity to retrieve." />
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="SkolenieDruhs_SingleOrDefault"
-      ReturnType="SkolenieDruh">
+      Name="Offers_SingleOrDefault"
+      ReturnType="Offer">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -131,12 +150,12 @@
             <BinaryExpression.Left>
               <ChainExpression>
                 <MemberExpression
-                  Member="ID" />
+                  Member="Id" />
               </ChainExpression>
             </BinaryExpression.Left>
             <BinaryExpression.Right>
               <ParameterExpression
-                Parameter="ID" />
+                Parameter="Id" />
             </BinaryExpression.Right>
           </BinaryExpression>
         </QueryFilterExpressionTree>
@@ -144,35 +163,17 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="SkolenieDruhs" />
+            Member="Offers" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
-        Name="ID"
-        ParameterType=":Int32?">
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
         <QueryOperationParameter.Attributes>
           <Description
-            Value="The value of the 'ID' key property of the entity to retrieve." />
+            Value="The value of the 'Id' key property of the entity to retrieve." />
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
-    </QueryOperation>
-    <QueryOperation
-      Name="SkolenieDruhs_All"
-      ReturnType="SkolenieDruh*">
-      <QueryOperation.Attributes>
-        <Generated />
-        <Description
-          Value="Returns all entities contained in the entity set." />
-      </QueryOperation.Attributes>
-      <QueryOperation.FilterExpression>
-        <QueryFilterExpressionTree />
-      </QueryOperation.FilterExpression>
-      <QueryOperation.Source>
-        <QuerySourceExpressionTree>
-          <MemberExpression
-            Member="SkolenieDruhs" />
-        </QuerySourceExpressionTree>
-      </QueryOperation.Source>
     </QueryOperation>
   </EntityContainer>
   <DataService
@@ -181,45 +182,59 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="SkolenieDruhs">
+      EntitySet="Offers">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
-          Table="SkolenieDruh" />
+          Table="Offers" />
         <SsdlProperty
-          Name="ID"
+          Name="Id"
           Nullable="False"
           StoreGeneratedPattern="Identity"
           Type="int"
-          Property="SkolenieDruh/Properties[ID]" />
+          Property="Offer/Properties[Id]" />
         <SsdlProperty
-          MaxLength="50"
-          Name="Nazov"
+          MaxLength="255"
+          Name="Subject"
           Nullable="True"
           Type="varchar"
-          Property="SkolenieDruh/Properties[Nazov]" />
+          Property="Offer/Properties[Subject]" />
+        <SsdlProperty
+          Name="Body"
+          Nullable="True"
+          Type="varchar(max)"
+          Property="Offer/Properties[Body]" />
+        <SsdlProperty
+          Name="SentDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Offer/Properties[SentDate]" />
+        <SsdlProperty
+          Name="RealizationDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Offer/Properties[RealizationDate]" />
+        <SsdlForeignKeyProperty
+          Name="EmailTemplateId"
+          Nullable="True"
+          Type="int"
+          PropertyName="EmailTemplateId" />
+        <SsdlForeignKeyProperty
+          Name="OfferStateId"
+          Nullable="True"
+          Type="int"
+          PropertyName="OfferStateId" />
+        <SsdlForeignKeyProperty
+          Name="OrganizationId"
+          Nullable="True"
+          Type="int"
+          PropertyName="OrganizationId" />
+        <SsdlForeignKeyProperty
+          Name="ResponsibleEmployeeId"
+          Nullable="True"
+          Type="int"
+          PropertyName="ResponsibleEmployeeId" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
-    <AssociationSetMapping
-      AssociationSet="FK_Skolenie_SkolenieDruh">
-      <AssociationSetMapping.Attributes>
-        <SsdlAssociationSet
-          Name="FK_Skolenie_SkolenieDruh" />
-        <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Skolenie_SkolenieDruh]/Members[SkolenieDruh]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="ID" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-        <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Skolenie_SkolenieDruh]/Members[Skolenie]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="DruhID" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
   </DataService>
 </ServiceApplication>

@@ -15,8 +15,12 @@
       Name="SaveChanges" />
   </EntityContainer>
   <DataService
-    EntityContainer="SpravaZmluvData"
-    Name="SpravaZmluvDataDataService">
+    Name="SpravaZmluvDataDataService"
+    EntityContainer="SpravaZmluvData">
+    <DataService.Attributes>
+      <Partial
+        IsPrimary="True" />
+    </DataService.Attributes>
     <DataService.ConnectionProperties>
       <ConnectionProperty
         Name="DataProviderName"
@@ -28,18 +32,11 @@
         Name="ProviderInvariantName"
         Value="System.Data.SqlClient" />
       <ConnectionProperty
-        Name="SafeConnectionString"
-        Value="Data Source=.;Initial Catalog=SpravaZmluv;Persist Security Info=True;User ID=SpravaZmluvUser;Password=SpravaZmluvUser" />
-      <ConnectionProperty
         Name="ConnectionStringGuid"
         Value="0f84e79b-0015-46be-b7aa-4de9d0ea67a2" />
       <ConnectionProperty
         Name="ProviderManifestToken"
         Value="2008" />
     </DataService.ConnectionProperties>
-    <DataService.Attributes>
-      <Partial
-        IsPrimary="True" />
-    </DataService.Attributes>
   </DataService>
 </ServiceApplication>

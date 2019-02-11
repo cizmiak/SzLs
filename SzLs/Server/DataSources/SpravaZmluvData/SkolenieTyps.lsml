@@ -16,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -65,14 +65,14 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Skolenies"
         Association="FK_Skolenie_SkolenieTyp"
         FromEnd="SkolenieTyp"
-        Name="Skolenies"
         ToEnd="Skolenie" />
       <NavigationProperty
+        Name="SkolenieTypOtazkas"
         Association="FK_SkolenieTypOtazka_SkolenieTyp"
         FromEnd="SkolenieTyp"
-        Name="SkolenieTypOtazkas"
         ToEnd="SkolenieTypOtazka" />
       <EntityProperty
         Name="MaskaCislaPreukazu"
@@ -88,33 +88,31 @@
   <Association
     Name="FK_Skolenie_SkolenieTyp">
     <AssociationEnd
-      EntityType="SkolenieTyp"
-      Name="SkolenieTyp">
+      Name="SkolenieTyp"
+      EntityType="SkolenieTyp">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_SkolenieTypOtazka_SkolenieTyp">
     <AssociationEnd
-      EntityType="SkolenieTyp"
+      Name="SkolenieTyp"
       Multiplicity="One"
-      Name="SkolenieTyp">
+      EntityType="SkolenieTyp">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="SkolenieTypOtazka"
+      Name="SkolenieTypOtazka"
       Multiplicity="Many"
-      Name="SkolenieTypOtazka" />
+      EntityType="SkolenieTypOtazka" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -122,20 +120,20 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="SkolenieTyps"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="SkolenieTyp"
-      Name="SkolenieTyps" />
+      EntityType="SkolenieTyp" />
     <AssociationSet
-      Association="FK_Skolenie_SkolenieTyp"
-      Name="FK_Skolenie_SkolenieTyp">
+      Name="FK_Skolenie_SkolenieTyp"
+      Association="FK_Skolenie_SkolenieTyp">
       <AssociationSetEnd
-        EntitySet="SkolenieTyps"
-        Name="SkolenieTyp" />
+        Name="SkolenieTyp"
+        EntitySet="SkolenieTyps" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <QueryOperation
       Name="SkolenieTyps_Single"
@@ -218,14 +216,14 @@
       </QueryOperationParameter>
     </QueryOperation>
     <AssociationSet
-      Association="FK_SkolenieTypOtazka_SkolenieTyp"
-      Name="FK_SkolenieTypOtazka_SkolenieTyp">
+      Name="FK_SkolenieTypOtazka_SkolenieTyp"
+      Association="FK_SkolenieTypOtazka_SkolenieTyp">
       <AssociationSetEnd
-        EntitySet="SkolenieTyps"
-        Name="SkolenieTyp" />
+        Name="SkolenieTyp"
+        EntitySet="SkolenieTyps" />
       <AssociationSetEnd
-        EntitySet="SkolenieTypOtazkas"
-        Name="SkolenieTypOtazka" />
+        Name="SkolenieTypOtazka"
+        EntitySet="SkolenieTypOtazkas" />
     </AssociationSet>
     <QueryOperation
       Name="SkolenieTyps_All"
@@ -258,42 +256,42 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="SkolenieTyp/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="SkolenieTyp/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Nazov"
           Nullable="True"
-          Property="SkolenieTyp/Properties[Nazov]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkolenieTyp/Properties[Nazov]" />
         <SsdlProperty
           Name="Notifikacia1"
           Nullable="True"
-          Property="SkolenieTyp/Properties[Notifikacia1]"
-          Type="int" />
+          Type="int"
+          Property="SkolenieTyp/Properties[Notifikacia1]" />
         <SsdlProperty
           Name="Notifikacia2"
           Nullable="True"
-          Property="SkolenieTyp/Properties[Notifikacia2]"
-          Type="int" />
+          Type="int"
+          Property="SkolenieTyp/Properties[Notifikacia2]" />
         <SsdlProperty
           Name="Notifikacia3"
           Nullable="True"
-          Property="SkolenieTyp/Properties[Notifikacia3]"
-          Type="int" />
+          Type="int"
+          Property="SkolenieTyp/Properties[Notifikacia3]" />
         <SsdlProperty
           MaxLength="50"
           Name="CisloOpravnenia"
           Nullable="True"
-          Property="SkolenieTyp/Properties[CisloOpravnenia]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkolenieTyp/Properties[CisloOpravnenia]" />
         <SsdlProperty
           MaxLength="50"
           Name="MaskaCislaPreukazu"
           Nullable="True"
-          Property="SkolenieTyp/Properties[MaskaCislaPreukazu]"
-          Type="varchar" />
+          Type="varchar"
+          Property="SkolenieTyp/Properties[MaskaCislaPreukazu]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

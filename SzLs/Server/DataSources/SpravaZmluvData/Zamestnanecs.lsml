@@ -6,7 +6,6 @@
   </ServiceApplication.Attributes>
   <EntityType
     Name="Zamestnanec">
-    <EntityType.Attributes />
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -17,8 +16,8 @@
     </EntityType.Methods>
     <EntityType.Properties>
       <KeyProperty
-        IsReadOnly="True"
         Name="ID"
+        IsReadOnly="True"
         PropertyType=":Int32">
         <KeyProperty.Attributes>
           <Hidden />
@@ -81,9 +80,9 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Skolenies"
         Association="FK_Skolenie_ClenKomisie1"
         FromEnd="Zamestnanec"
-        Name="Skolenies"
         ToEnd="Skolenie">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -91,9 +90,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Skolenies1"
         Association="FK_Skolenie_ClenKomisie2"
         FromEnd="Zamestnanec"
-        Name="Skolenies1"
         ToEnd="Skolenie">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -101,9 +100,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Skolenies2"
         Association="FK_Skolenie_PredsedaKomisie"
         FromEnd="Zamestnanec"
-        Name="Skolenies2"
         ToEnd="Skolenie">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -111,9 +110,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Skolenies3"
         Association="FK_Skolenie_Zamestnanec"
         FromEnd="Zamestnanec"
-        Name="Skolenies3"
         ToEnd="Skolenie">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -121,9 +120,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Ulohas"
         Association="FK_Uloha_Riesitel"
         FromEnd="Zamestnanec"
-        Name="Ulohas"
         ToEnd="Uloha">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -131,9 +130,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Ulohas1"
         Association="FK_Uloha_Upravil"
         FromEnd="Zamestnanec"
-        Name="Ulohas1"
         ToEnd="Uloha">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -141,9 +140,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zamestnanecs"
         Association="FK_Zamestnanec_Nadriadeny"
         FromEnd="Zamestnanec"
-        Name="Zamestnanecs"
         ToEnd="Zamestnanec1">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -151,9 +150,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zamestnanec1"
         Association="FK_Zamestnanec_Nadriadeny"
         FromEnd="Zamestnanec1"
-        Name="Zamestnanec1"
         ToEnd="Zamestnanec">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -161,19 +160,19 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Rola"
         Association="FK_Zamestnanec_Rola"
         FromEnd="Zamestnanec"
-        Name="Rola"
         ToEnd="Rola" />
       <NavigationProperty
+        Name="ZamestnanecStav"
         Association="FK_Zamestnanec_ZamestnanecStav"
         FromEnd="Zamestnanec"
-        Name="ZamestnanecStav"
         ToEnd="ZamestnanecStav" />
       <NavigationProperty
+        Name="Zmluvas"
         Association="FK_Zmluva_Upravil"
         FromEnd="Zamestnanec"
-        Name="Zmluvas"
         ToEnd="Zmluva">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -181,9 +180,9 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="Zmluvas1"
         Association="FK_Zmluva_Zamestnanec"
         FromEnd="Zamestnanec"
-        Name="Zmluvas1"
         ToEnd="Zmluva">
         <NavigationProperty.Attributes>
           <DisplayName
@@ -191,13 +190,13 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
+        Name="ZmluvaPredmets"
         Association="FK_ZmluvaPredmet_Zamestnanec"
         FromEnd="Zamestnanec"
-        Name="ZmluvaPredmets"
         ToEnd="ZmluvaPredmet" />
       <EntityProperty
-        IsReadOnly="True"
         Name="CeleMeno"
+        IsReadOnly="True"
         PropertyType=":String">
         <EntityProperty.Attributes>
           <Computed />
@@ -206,9 +205,9 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
+        Name="Skolenies4"
         Association="FK_Skolenie_Notifikovany"
         FromEnd="Zamestnanec"
-        Name="Skolenies4"
         ToEnd="Skolenie" />
       <EntityProperty
         Name="Podpis"
@@ -218,172 +217,167 @@
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <NavigationProperty
+        Name="Offers"
+        Association="FK_Offers_ResponsibleEmployee"
+        FromEnd="Zamestnanec"
+        ToEnd="Offers" />
     </EntityType.Properties>
   </EntityType>
   <Association
     Name="FK_Skolenie_ClenKomisie1">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_Skolenie_ClenKomisie2">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_Skolenie_PredsedaKomisie">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_Skolenie_Zamestnanec">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <Association
     Name="FK_Uloha_Riesitel">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Uloha"
+      Name="Uloha"
       Multiplicity="Many"
-      Name="Uloha" />
+      EntityType="Uloha" />
   </Association>
   <Association
     Name="FK_Uloha_Upravil">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Uloha"
+      Name="Uloha"
       Multiplicity="Many"
-      Name="Uloha" />
+      EntityType="Uloha" />
   </Association>
   <Association
     Name="FK_Zamestnanec_Nadriadeny">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
         <DeleteRule
           Action="Restrict" />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Zamestnanec"
+      Name="Zamestnanec1"
       Multiplicity="Many"
-      Name="Zamestnanec1" />
+      EntityType="Zamestnanec" />
   </Association>
   <Association
     Name="FK_Zmluva_Upravil">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="Many"
-      Name="Zmluva" />
+      EntityType="Zmluva" />
   </Association>
   <Association
     Name="FK_Zmluva_Zamestnanec">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Zmluva"
+      Name="Zmluva"
       Multiplicity="Many"
-      Name="Zmluva" />
+      EntityType="Zmluva" />
   </Association>
   <Association
     Name="FK_ZmluvaPredmet_Zamestnanec">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="ZmluvaPredmet"
+      Name="ZmluvaPredmet"
       Multiplicity="Many"
-      Name="ZmluvaPredmet" />
+      EntityType="ZmluvaPredmet" />
   </Association>
   <Association
     Name="FK_Skolenie_Notifikovany">
     <AssociationEnd
-      EntityType="Zamestnanec"
-      Name="Zamestnanec">
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
       <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Unset" />
+        <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      EntityType="Skolenie"
+      Name="Skolenie"
       Multiplicity="Many"
-      Name="Skolenie" />
+      EntityType="Skolenie" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -391,110 +385,110 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
+      Name="Zamestnanecs"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Zamestnanec"
-      Name="Zamestnanecs" />
+      EntityType="Zamestnanec" />
     <AssociationSet
-      Association="FK_Skolenie_ClenKomisie1"
-      Name="FK_Skolenie_ClenKomisie1">
+      Name="FK_Skolenie_ClenKomisie1"
+      Association="FK_Skolenie_ClenKomisie1">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Skolenie_ClenKomisie2"
-      Name="FK_Skolenie_ClenKomisie2">
+      Name="FK_Skolenie_ClenKomisie2"
+      Association="FK_Skolenie_ClenKomisie2">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Skolenie_PredsedaKomisie"
-      Name="FK_Skolenie_PredsedaKomisie">
+      Name="FK_Skolenie_PredsedaKomisie"
+      Association="FK_Skolenie_PredsedaKomisie">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Skolenie_Zamestnanec"
-      Name="FK_Skolenie_Zamestnanec">
+      Name="FK_Skolenie_Zamestnanec"
+      Association="FK_Skolenie_Zamestnanec">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Uloha_Riesitel"
-      Name="FK_Uloha_Riesitel">
+      Name="FK_Uloha_Riesitel"
+      Association="FK_Uloha_Riesitel">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Ulohy"
-        Name="Uloha" />
+        Name="Uloha"
+        EntitySet="Ulohy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Uloha_Upravil"
-      Name="FK_Uloha_Upravil">
+      Name="FK_Uloha_Upravil"
+      Association="FK_Uloha_Upravil">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Ulohy"
-        Name="Uloha" />
+        Name="Uloha"
+        EntitySet="Ulohy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Zamestnanec_Nadriadeny"
-      Name="FK_Zamestnanec_Nadriadeny">
+      Name="FK_Zamestnanec_Nadriadeny"
+      Association="FK_Zamestnanec_Nadriadeny">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec1" />
+        Name="Zamestnanec1"
+        EntitySet="Zamestnanecs" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Zmluva_Upravil"
-      Name="FK_Zmluva_Upravil">
+      Name="FK_Zmluva_Upravil"
+      Association="FK_Zmluva_Upravil">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_Zmluva_Zamestnanec"
-      Name="FK_Zmluva_Zamestnanec">
+      Name="FK_Zmluva_Zamestnanec"
+      Association="FK_Zmluva_Zamestnanec">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Zmluvy"
-        Name="Zmluva" />
+        Name="Zmluva"
+        EntitySet="Zmluvy" />
     </AssociationSet>
     <AssociationSet
-      Association="FK_ZmluvaPredmet_Zamestnanec"
-      Name="FK_ZmluvaPredmet_Zamestnanec">
+      Name="FK_ZmluvaPredmet_Zamestnanec"
+      Association="FK_ZmluvaPredmet_Zamestnanec">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="ZmluvaPredmets"
-        Name="ZmluvaPredmet" />
+        Name="ZmluvaPredmet"
+        EntitySet="ZmluvaPredmets" />
     </AssociationSet>
     <QueryOperation
       Name="Zamestnanecs_Single"
@@ -577,14 +571,14 @@
       </QueryOperationParameter>
     </QueryOperation>
     <AssociationSet
-      Association="FK_Skolenie_Notifikovany"
-      Name="FK_Skolenie_Notifikovany">
+      Name="FK_Skolenie_Notifikovany"
+      Association="FK_Skolenie_Notifikovany">
       <AssociationSetEnd
-        EntitySet="Zamestnanecs"
-        Name="Zamestnanec" />
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        EntitySet="Skolenia"
-        Name="Skolenie" />
+        Name="Skolenie"
+        EntitySet="Skolenia" />
     </AssociationSet>
     <QueryOperation
       Name="Zamestnanecs_All"
@@ -604,7 +598,31 @@
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
     </QueryOperation>
+    <AssociationSet
+      Name="FK_Offers_ResponsibleEmployee"
+      Association="FK_Offers_ResponsibleEmployee">
+      <AssociationSetEnd
+        Name="Zamestnanec"
+        EntitySet="Zamestnanecs" />
+      <AssociationSetEnd
+        Name="Offers"
+        EntitySet="Offers" />
+    </AssociationSet>
   </EntityContainer>
+  <Association
+    Name="FK_Offers_ResponsibleEmployee">
+    <AssociationEnd
+      Name="Zamestnanec"
+      EntityType="Zamestnanec">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Offers"
+      Multiplicity="Many"
+      EntityType="Offer" />
+  </Association>
   <DataService
     Name="SpravaZmluvDataDataService">
     <DataService.Attributes>
@@ -619,67 +637,88 @@
         <SsdlProperty
           Name="ID"
           Nullable="False"
-          Property="Zamestnanec/Properties[ID]"
           StoreGeneratedPattern="Identity"
-          Type="int" />
+          Type="int"
+          Property="Zamestnanec/Properties[ID]" />
         <SsdlProperty
           MaxLength="50"
           Name="Login"
           Nullable="True"
-          Property="Zamestnanec/Properties[Login]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zamestnanec/Properties[Login]" />
         <SsdlProperty
           MaxLength="50"
           Name="Meno"
           Nullable="True"
-          Property="Zamestnanec/Properties[Meno]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zamestnanec/Properties[Meno]" />
         <SsdlProperty
           MaxLength="50"
           Name="Priezvisko"
           Nullable="True"
-          Property="Zamestnanec/Properties[Priezvisko]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zamestnanec/Properties[Priezvisko]" />
         <SsdlProperty
           MaxLength="10"
           Name="Titul"
           Nullable="True"
-          Property="Zamestnanec/Properties[Titul]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zamestnanec/Properties[Titul]" />
         <SsdlProperty
           MaxLength="100"
           Name="Pozicia"
           Nullable="True"
-          Property="Zamestnanec/Properties[Pozicia]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zamestnanec/Properties[Pozicia]" />
         <SsdlProperty
           MaxLength="100"
           Name="Email"
           Nullable="True"
-          Property="Zamestnanec/Properties[Email]"
-          Type="varchar" />
+          Type="varchar"
+          Property="Zamestnanec/Properties[Email]" />
         <SsdlProperty
           Name="Podpis"
           Nullable="True"
-          Property="Zamestnanec/Properties[Podpis]"
-          Type="varbinary(max)" />
+          Type="varbinary(max)"
+          Property="Zamestnanec/Properties[Podpis]" />
         <SsdlForeignKeyProperty
           Name="Nadriadeny"
           Nullable="True"
-          PropertyName="Nadriadeny"
-          Type="int" />
+          Type="int"
+          PropertyName="Nadriadeny" />
         <SsdlForeignKeyProperty
           Name="RolaID"
           Nullable="True"
-          PropertyName="RolaID"
-          Type="int" />
+          Type="int"
+          PropertyName="RolaID" />
         <SsdlForeignKeyProperty
           Name="StavID"
           Nullable="True"
-          PropertyName="StavID"
-          Type="int" />
+          Type="int"
+          PropertyName="StavID" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Offers_ResponsibleEmployee">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Offers_ResponsibleEmployee" />
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Offers_ResponsibleEmployee]/Members[Zamestnanec]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="SpravaZmluvData/Members[FK_Offers_ResponsibleEmployee]/Members[Offers]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ResponsibleEmployeeId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
     <AssociationSetMapping
       AssociationSet="FK_Skolenie_ClenKomisie1">
       <AssociationSetMapping.Attributes>
