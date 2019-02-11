@@ -91,6 +91,9 @@
     <ApplicationCommand
       Name="ScreenCommandShowGetXlsxSheetsById"
       Target="!module/Methods[ShowGetXlsxSheetsById]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowPonuky"
+      Target="!module/Methods[ShowPonuky]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -118,6 +121,9 @@
       <ApplicationNavigationLink
         Name="PosluchacsListDetail"
         Command="!module/Commands[ScreenCommandShowPosluchacsListDetail]" />
+      <ApplicationNavigationLink
+        Name="Ponuky"
+        Command="!module/Commands[ScreenCommandShowPonuky]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="group">
