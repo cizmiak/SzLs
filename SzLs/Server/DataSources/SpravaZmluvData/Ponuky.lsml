@@ -5,7 +5,10 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="Offer">
+    Name="Ponuka">
+    <EntityType.Attributes>
+      <DisplayName />
+    </EntityType.Attributes>
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -35,53 +38,86 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="Body"
+        Name="TeloSpravy"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength />
           <AnsiConstraint />
+          <DisplayName />
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="SentDate"
+        Name="DatumOdoslania"
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
+          <DisplayName />
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="RealizationDate"
+        Name="DatumRealizacie"
         PropertyType=":DateTime?">
         <EntityProperty.Attributes>
           <DateTimeConstraint
             Precision="3"
             PreserveSeconds="True" />
           <NotSearchable />
+          <DisplayName />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="EmailTemplate"
-        Association="FK_Offers_EmailTemplate"
-        FromEnd="Offers"
-        ToEnd="EmailTemplate" />
+        Name="EmailSablona"
+        Association="EmailSablona_Ponuka"
+        FromEnd="Ponuka"
+        ToEnd="EmailSablona">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Sablona" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
       <NavigationProperty
-        Name="OfferState"
-        Association="FK_Offers_OfferStates"
-        FromEnd="Offers"
-        ToEnd="OfferStates" />
+        Name="StavPonuky"
+        Association="StavPonuky_Ponuka"
+        FromEnd="Ponuka"
+        ToEnd="StavPonuky">
+        <NavigationProperty.Attributes>
+          <DisplayName
+            Value="Stav" />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
       <NavigationProperty
         Name="Organizacia"
-        Association="FK_Offers_Organization"
-        FromEnd="Offers"
+        Association="Organizacia_Ponuka"
+        FromEnd="Ponuka"
         ToEnd="Organizacia" />
       <NavigationProperty
-        Name="Zamestnanec"
-        Association="FK_Offers_ResponsibleEmployee"
-        FromEnd="Offers"
-        ToEnd="Zamestnanec" />
+        Name="Zodpovedny"
+        Association="Zamestnanec_Ponuka"
+        FromEnd="Ponuka"
+        ToEnd="Zamestnanec">
+        <NavigationProperty.Attributes>
+          <DisplayName />
+        </NavigationProperty.Attributes>
+      </NavigationProperty>
+      <EntityProperty
+        Name="Cena"
+        PropertyType="Microsoft.LightSwitch.Extensions:Money?">
+        <EntityProperty.Attributes>
+          <DecimalConstraint
+            Precision="19"
+            Scale="4" />
+          <NotSearchable />
+          <Attribute
+            Class="Microsoft.LightSwitch.Extensions:@MoneyProperties">
+            <Property
+              Name="CurrencySymbol"
+              Value="€" />
+          </Attribute>
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <EntityContainer
@@ -90,14 +126,14 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="Offers"
+      Name="Ponuky"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Offer" />
+      EntityType="Ponuka" />
     <QueryOperation
-      Name="Offers_Single"
-      ReturnType="Offer">
+      Name="Ponuky_Single"
+      ReturnType="Ponuka">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -123,7 +159,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Offers" />
+            Member="Ponuky" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -136,8 +172,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="Offers_SingleOrDefault"
-      ReturnType="Offer">
+      Name="Ponuky_SingleOrDefault"
+      ReturnType="Ponuka">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -163,7 +199,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Offers" />
+            Member="Ponuky" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -182,7 +218,7 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="Offers">
+      EntitySet="Ponuky">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
@@ -192,28 +228,33 @@
           Nullable="False"
           StoreGeneratedPattern="Identity"
           Type="int"
-          Property="Offer/Properties[Id]" />
+          Property="Ponuka/Properties[Id]" />
         <SsdlProperty
           MaxLength="255"
           Name="Subject"
           Nullable="True"
           Type="varchar"
-          Property="Offer/Properties[Subject]" />
+          Property="Ponuka/Properties[Subject]" />
         <SsdlProperty
           Name="Body"
           Nullable="True"
           Type="varchar(max)"
-          Property="Offer/Properties[Body]" />
+          Property="Ponuka/Properties[TeloSpravy]" />
         <SsdlProperty
           Name="SentDate"
           Nullable="True"
           Type="datetime"
-          Property="Offer/Properties[SentDate]" />
+          Property="Ponuka/Properties[DatumOdoslania]" />
         <SsdlProperty
           Name="RealizationDate"
           Nullable="True"
           Type="datetime"
-          Property="Offer/Properties[RealizationDate]" />
+          Property="Ponuka/Properties[DatumRealizacie]" />
+        <SsdlProperty
+          Name="Price"
+          Nullable="True"
+          Type="money"
+          Property="Ponuka/Properties[Cena]" />
         <SsdlForeignKeyProperty
           Name="EmailTemplateId"
           Nullable="True"

@@ -218,10 +218,10 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Offers"
-        Association="FK_Offers_ResponsibleEmployee"
+        Name="Ponuka"
+        Association="Zamestnanec_Ponuka"
         FromEnd="Zamestnanec"
-        ToEnd="Offers" />
+        ToEnd="Ponuka" />
     </EntityType.Properties>
   </EntityType>
   <Association
@@ -600,17 +600,17 @@
     </QueryOperation>
     <AssociationSet
       Name="FK_Offers_ResponsibleEmployee"
-      Association="FK_Offers_ResponsibleEmployee">
+      Association="Zamestnanec_Ponuka">
       <AssociationSetEnd
         Name="Zamestnanec"
         EntitySet="Zamestnanecs" />
       <AssociationSetEnd
-        Name="Offers"
-        EntitySet="Offers" />
+        Name="Ponuka"
+        EntitySet="Ponuky" />
     </AssociationSet>
   </EntityContainer>
   <Association
-    Name="FK_Offers_ResponsibleEmployee">
+    Name="Zamestnanec_Ponuka">
     <AssociationEnd
       Name="Zamestnanec"
       EntityType="Zamestnanec">
@@ -619,9 +619,9 @@
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      Name="Offers"
+      Name="Ponuka"
       Multiplicity="Many"
-      EntityType="Offer" />
+      EntityType="Ponuka" />
   </Association>
   <DataService
     Name="SpravaZmluvDataDataService">
@@ -711,7 +711,7 @@
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Offers_ResponsibleEmployee]/Members[Offers]">
+          End="SpravaZmluvData/Members[FK_Offers_ResponsibleEmployee]/Members[Ponuka]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="ResponsibleEmployeeId" />

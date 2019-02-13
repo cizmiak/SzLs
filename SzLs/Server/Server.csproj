@@ -153,6 +153,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\SpravaZmluvData\Ponuka.lsml.cs">
+      <DependentUpon>Ponuky.lsml</DependentUpon>
+    </Compile>
     <Compile Include="DataSources\SpravaZmluvData\SkoleniePosluchac.lsml.cs">
       <DependentUpon>SkoleniePosluchacs.lsml</DependentUpon>
     </Compile>
@@ -269,9 +272,9 @@
     <LightSwitchModel Include="DataSources\SpravaZmluvData\SkoleniaByPosluchac.lsml">
       <DependentUpon>Skolenia.lsml</DependentUpon>
     </LightSwitchModel>
-    <LightSwitchModel Include="DataSources\SpravaZmluvData\EmailTemplates.lsml" />
-    <LightSwitchModel Include="DataSources\SpravaZmluvData\Offers.lsml" />
-    <LightSwitchModel Include="DataSources\SpravaZmluvData\OfferStates.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\EmailSablony.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\Ponuky.lsml" />
+    <LightSwitchModel Include="DataSources\SpravaZmluvData\StavyPonuk.lsml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

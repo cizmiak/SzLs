@@ -5,7 +5,10 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="EmailTemplate">
+    Name="EmailSablona">
+    <EntityType.Attributes>
+      <DisplayName />
+    </EntityType.Attributes>
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -26,7 +29,7 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="Name"
+        Name="Nazov"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -44,7 +47,7 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <EntityProperty
-        Name="Body"
+        Name="TeloSpravy"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength />
@@ -52,25 +55,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Offers"
-        Association="FK_Offers_EmailTemplate"
-        FromEnd="EmailTemplate"
-        ToEnd="Offers" />
+        Name="Ponuka"
+        Association="EmailSablona_Ponuka"
+        FromEnd="EmailSablona"
+        ToEnd="Ponuka" />
     </EntityType.Properties>
   </EntityType>
   <Association
-    Name="FK_Offers_EmailTemplate">
+    Name="EmailSablona_Ponuka">
     <AssociationEnd
-      Name="EmailTemplate"
-      EntityType="EmailTemplate">
+      Name="EmailSablona"
+      EntityType="EmailSablona">
       <AssociationEnd.Attributes>
         <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      Name="Offers"
+      Name="Ponuka"
       Multiplicity="Many"
-      EntityType="Offer" />
+      EntityType="Ponuka" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -78,24 +81,24 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="EmailTemplates"
+      Name="EmailSablony"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="EmailTemplate" />
+      EntityType="EmailSablona" />
     <AssociationSet
       Name="FK_Offers_EmailTemplate"
-      Association="FK_Offers_EmailTemplate">
+      Association="EmailSablona_Ponuka">
       <AssociationSetEnd
-        Name="EmailTemplate"
-        EntitySet="EmailTemplates" />
+        Name="EmailSablona"
+        EntitySet="EmailSablony" />
       <AssociationSetEnd
-        Name="Offers"
-        EntitySet="Offers" />
+        Name="Ponuka"
+        EntitySet="Ponuky" />
     </AssociationSet>
     <QueryOperation
-      Name="EmailTemplates_Single"
-      ReturnType="EmailTemplate">
+      Name="EmailSablony_Single"
+      ReturnType="EmailSablona">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -121,7 +124,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="EmailTemplates" />
+            Member="EmailSablony" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -134,8 +137,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="EmailTemplates_SingleOrDefault"
-      ReturnType="EmailTemplate">
+      Name="EmailSablony_SingleOrDefault"
+      ReturnType="EmailSablona">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -161,7 +164,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="EmailTemplates" />
+            Member="EmailSablony" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -180,7 +183,7 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="EmailTemplates">
+      EntitySet="EmailSablony">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
@@ -190,24 +193,24 @@
           Nullable="False"
           StoreGeneratedPattern="Identity"
           Type="int"
-          Property="EmailTemplate/Properties[Id]" />
+          Property="EmailSablona/Properties[Id]" />
         <SsdlProperty
           MaxLength="100"
           Name="Name"
           Nullable="True"
           Type="varchar"
-          Property="EmailTemplate/Properties[Name]" />
+          Property="EmailSablona/Properties[Nazov]" />
         <SsdlProperty
           MaxLength="255"
           Name="Subject"
           Nullable="True"
           Type="varchar"
-          Property="EmailTemplate/Properties[Subject]" />
+          Property="EmailSablona/Properties[Subject]" />
         <SsdlProperty
           Name="Body"
           Nullable="True"
           Type="varchar(max)"
-          Property="EmailTemplate/Properties[Body]" />
+          Property="EmailSablona/Properties[TeloSpravy]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping
@@ -216,14 +219,14 @@
         <SsdlAssociationSet
           Name="FK_Offers_EmailTemplate" />
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Offers_EmailTemplate]/Members[EmailTemplate]">
+          End="SpravaZmluvData/Members[FK_Offers_EmailTemplate]/Members[EmailSablona]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="Id" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Offers_EmailTemplate]/Members[Offers]">
+          End="SpravaZmluvData/Members[FK_Offers_EmailTemplate]/Members[Ponuka]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="EmailTemplateId" />

@@ -176,6 +176,9 @@
     </ServiceMetadataReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Server\DataSources\SpravaZmluvData\Ponuka.lsml.cs">
+      <Link>UserCode\Shared\Ponuka.lsml.cs</Link>
+    </Compile>
     <Compile Include="..\Server\DataSources\SpravaZmluvData\SkoleniePosluchac.lsml.cs">
       <Link>UserCode\Shared\SkoleniePosluchac.lsml.cs</Link>
     </Compile>
@@ -203,6 +206,9 @@
     </Compile>
     <Compile Include="Screens\OrganizaciasListDetail.lsml.cs">
       <DependentUpon>OrganizaciasListDetail.lsml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Ponuky.lsml.cs">
+      <DependentUpon>Ponuky.lsml</DependentUpon>
     </Compile>
     <Compile Include="Screens\SkoleniesListDetail.lsml.cs">
       <DependentUpon>SkoleniesListDetail.lsml</DependentUpon>
@@ -286,6 +292,7 @@
     <ClientResource Include="Properties\Config.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\mail3.png" />
     <Content Include="Resources\sys_logo_ico.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />

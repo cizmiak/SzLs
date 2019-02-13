@@ -469,43 +469,43 @@
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:EmailTemplate" />
+        Target="ServiceInterface:EmailSablona" />
     </EntityType.Attributes>
   </EntityType>
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:Offer" />
+        Target="ServiceInterface:Ponuka" />
     </EntityType.Attributes>
   </EntityType>
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:OfferState" />
+        Target="ServiceInterface:StavPonuky" />
     </EntityType.Attributes>
   </EntityType>
   <Association>
     <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:FK_Offers_EmailTemplate" />
+        Target="ServiceInterface:EmailSablona_Ponuka" />
     </Association.Attributes>
   </Association>
   <Association>
     <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:FK_Offers_OfferStates" />
+        Target="ServiceInterface:StavPonuky_Ponuka" />
     </Association.Attributes>
   </Association>
   <Association>
     <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:FK_Offers_Organization" />
+        Target="ServiceInterface:Organizacia_Ponuka" />
     </Association.Attributes>
   </Association>
   <Association>
     <Association.Attributes>
       <Proxy
-        Target="ServiceInterface:FK_Offers_ResponsibleEmployee" />
+        Target="ServiceInterface:Zamestnanec_Ponuka" />
     </Association.Attributes>
   </Association>
 </Application>

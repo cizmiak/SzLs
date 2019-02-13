@@ -194,10 +194,10 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
-        Name="Offers"
-        Association="FK_Offers_Organization"
+        Name="Ponuka"
+        Association="Organizacia_Ponuka"
         FromEnd="Organizacia"
-        ToEnd="Offers" />
+        ToEnd="Ponuka" />
     </EntityType.Properties>
   </EntityType>
   <Association
@@ -440,17 +440,17 @@
     </QueryOperation>
     <AssociationSet
       Name="FK_Offers_Organization"
-      Association="FK_Offers_Organization">
+      Association="Organizacia_Ponuka">
       <AssociationSetEnd
         Name="Organizacia"
         EntitySet="Organizacie" />
       <AssociationSetEnd
-        Name="Offers"
-        EntitySet="Offers" />
+        Name="Ponuka"
+        EntitySet="Ponuky" />
     </AssociationSet>
   </EntityContainer>
   <Association
-    Name="FK_Offers_Organization">
+    Name="Organizacia_Ponuka">
     <AssociationEnd
       Name="Organizacia"
       EntityType="Organizacia">
@@ -459,9 +459,9 @@
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      Name="Offers"
+      Name="Ponuka"
       Multiplicity="Many"
-      EntityType="Offer" />
+      EntityType="Ponuka" />
   </Association>
   <DataService
     Name="SpravaZmluvDataDataService">
@@ -596,7 +596,7 @@
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Offers_Organization]/Members[Offers]">
+          End="SpravaZmluvData/Members[FK_Offers_Organization]/Members[Ponuka]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="OrganizationId" />

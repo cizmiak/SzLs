@@ -5,7 +5,10 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="OfferState">
+    Name="StavPonuky">
+    <EntityType.Attributes>
+      <DisplayName />
+    </EntityType.Attributes>
     <EntityType.Methods>
       <EntityMethod
         Name="Delete">
@@ -35,25 +38,25 @@
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
-        Name="Offers"
-        Association="FK_Offers_OfferStates"
-        FromEnd="OfferStates"
-        ToEnd="Offers" />
+        Name="Ponuka"
+        Association="StavPonuky_Ponuka"
+        FromEnd="StavPonuky"
+        ToEnd="Ponuka" />
     </EntityType.Properties>
   </EntityType>
   <Association
-    Name="FK_Offers_OfferStates">
+    Name="StavPonuky_Ponuka">
     <AssociationEnd
-      Name="OfferStates"
-      EntityType="OfferState">
+      Name="StavPonuky"
+      EntityType="StavPonuky">
       <AssociationEnd.Attributes>
         <DeleteRule />
       </AssociationEnd.Attributes>
     </AssociationEnd>
     <AssociationEnd
-      Name="Offers"
+      Name="Ponuka"
       Multiplicity="Many"
-      EntityType="Offer" />
+      EntityType="Ponuka" />
   </Association>
   <EntityContainer
     Name="SpravaZmluvData">
@@ -61,24 +64,24 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="OfferStates"
+      Name="StavyPonuk"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="OfferState" />
+      EntityType="StavPonuky" />
     <AssociationSet
       Name="FK_Offers_OfferStates"
-      Association="FK_Offers_OfferStates">
+      Association="StavPonuky_Ponuka">
       <AssociationSetEnd
-        Name="OfferStates"
-        EntitySet="OfferStates" />
+        Name="StavPonuky"
+        EntitySet="StavyPonuk" />
       <AssociationSetEnd
-        Name="Offers"
-        EntitySet="Offers" />
+        Name="Ponuka"
+        EntitySet="Ponuky" />
     </AssociationSet>
     <QueryOperation
-      Name="OfferStates_Single"
-      ReturnType="OfferState">
+      Name="StavyPonuk_Single"
+      ReturnType="StavPonuky">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -104,7 +107,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="OfferStates" />
+            Member="StavyPonuk" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -117,8 +120,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="OfferStates_SingleOrDefault"
-      ReturnType="OfferState">
+      Name="StavyPonuk_SingleOrDefault"
+      ReturnType="StavPonuky">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -144,7 +147,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="OfferStates" />
+            Member="StavyPonuk" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -163,7 +166,7 @@
       <Partial />
     </DataService.Attributes>
     <EntitySetMapping
-      EntitySet="OfferStates">
+      EntitySet="StavyPonuk">
       <EntitySetMapping.Attributes>
         <SsdlEntitySet
           Schema="dbo"
@@ -173,13 +176,13 @@
           Nullable="False"
           StoreGeneratedPattern="Identity"
           Type="int"
-          Property="OfferState/Properties[Id]" />
+          Property="StavPonuky/Properties[Id]" />
         <SsdlProperty
           MaxLength="50"
           Name="Name"
           Nullable="True"
           Type="varchar"
-          Property="OfferState/Properties[Name]" />
+          Property="StavPonuky/Properties[Name]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping
@@ -188,14 +191,14 @@
         <SsdlAssociationSet
           Name="FK_Offers_OfferStates" />
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Offers_OfferStates]/Members[OfferStates]">
+          End="SpravaZmluvData/Members[FK_Offers_OfferStates]/Members[StavPonuky]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="Id" />
           </SsdlAssociationSetEnd.Attributes>
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
-          End="SpravaZmluvData/Members[FK_Offers_OfferStates]/Members[Offers]">
+          End="SpravaZmluvData/Members[FK_Offers_OfferStates]/Members[Ponuka]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="OfferStateId" />
