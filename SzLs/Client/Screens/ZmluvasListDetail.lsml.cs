@@ -1,40 +1,33 @@
-﻿using System;
-using System.Linq;
-using System.IO;
-using System.IO.IsolatedStorage;
-using System.Collections.Generic;
+﻿using System.Linq;
 using Microsoft.LightSwitch;
-using Microsoft.LightSwitch.Framework.Client;
-using Microsoft.LightSwitch.Presentation;
 using Microsoft.LightSwitch.Presentation.Extensions;
-using System.Collections.Specialized;
 
 namespace LightSwitchApplication
 {
-    public partial class ZmluvasListDetail
-    {
-        partial void ZrusFiltre_Execute()
-        {
-            // Write your code here.
-            this.Organizacia = null;
-            this.Typ = null;
-            this.Zodpovedny = null;
-            this.Stav = null;
+	public partial class ZmluvasListDetail
+	{
+		partial void ZrusFiltre_Execute()
+		{
+			// Write your code here.
+			this.Organizacia = null;
+			this.Typ = null;
+			this.Zodpovedny = null;
+			this.Stav = null;
 
-        }
+		}
 
-        partial void ZmluvasListDetail_Created()
-        {
-            // Write your code here.
-            Konfiguracia predvolenyFilterStavZmluvy = this.DataWorkspace.SpravaZmluvData
-                .KonfiguracnaHodnota("PredvolenyFilterStavZmluvy").FirstOrDefault();
+		partial void ZmluvasListDetail_Created()
+		{
+			// Write your code here.
+			Konfiguracia predvolenyFilterStavZmluvy = this.DataWorkspace.SpravaZmluvData
+				.KonfiguracnaHodnota("PredvolenyFilterStavZmluvy").FirstOrDefault();
 
-            this.Stav = this.ZmluvaStavs
-                .FirstOrDefault(zmluvaStav => zmluvaStav.Nazov == predvolenyFilterStavZmluvy.Hodnota);
+			this.Stav = this.ZmluvaStavs
+				.FirstOrDefault(zmluvaStav => zmluvaStav.Nazov == predvolenyFilterStavZmluvy.Hodnota);
 
 			this.UlohaTypVykon = this.DataWorkspace.SpravaZmluvData.UlohaTypVykon();
 			this.UlohaTypUvodnaPraca = this.DataWorkspace.SpravaZmluvData.UlohaTypUvodnaPraca();
-        }
+		}
 
 		partial void UvodnaPraca_SelectionChanged()
 		{
@@ -78,7 +71,7 @@ namespace LightSwitchApplication
 
 		partial void ZmluvasListDetail_Activated()
 		{
-            this.FindControl("DohodnutaCena1").IsVisible = this.Application.IsCurrentUserAdministrator;
+			this.FindControl("DohodnutaCena1").IsVisible = this.Application.IsCurrentUserAdministrator;
 		}
-    }
+	}
 }

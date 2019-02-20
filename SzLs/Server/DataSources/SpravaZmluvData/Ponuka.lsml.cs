@@ -4,6 +4,11 @@
 	{
 		partial void EmailSablona_Changed()
 		{
+			this.ReadFromEmailTemplate();
+		}
+
+		public void ReadFromEmailTemplate()
+		{
 			if (this.EmailSablona != null)
 			{
 				this.Subject = this.EmailSablona.Subject;

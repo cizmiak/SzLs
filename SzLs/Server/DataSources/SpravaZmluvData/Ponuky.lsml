@@ -118,6 +118,35 @@
           </Attribute>
         </EntityProperty.Attributes>
       </EntityProperty>
+      <EntityProperty
+        Name="IdInt"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="IdVarchar"
+        IsReadOnly="True"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="OrganizationName"
+        IsReadOnly="True"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="100" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <EntityContainer
@@ -255,6 +284,26 @@
           Nullable="True"
           Type="money"
           Property="Ponuka/Properties[Cena]" />
+        <SsdlProperty
+          Name="IdInt"
+          Nullable="False"
+          StoreGeneratedPattern="Computed"
+          Type="int"
+          Property="Ponuka/Properties[IdInt]" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="IdVarchar"
+          Nullable="True"
+          StoreGeneratedPattern="Computed"
+          Type="varchar"
+          Property="Ponuka/Properties[IdVarchar]" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="OrganizationName"
+          Nullable="True"
+          StoreGeneratedPattern="Computed"
+          Type="varchar"
+          Property="Ponuka/Properties[OrganizationName]" />
         <SsdlForeignKeyProperty
           Name="EmailTemplateId"
           Nullable="True"

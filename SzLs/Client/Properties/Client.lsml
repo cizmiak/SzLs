@@ -94,6 +94,9 @@
     <ApplicationCommand
       Name="ScreenCommandShowPonuky"
       Target="!module/Methods[ShowPonuky]" />
+    <ApplicationCommand
+      Name="ScreenCommandShowCiselnikyPonuk"
+      Target="!module/Methods[ShowCiselnikyPonuk]" />
   </Application.Commands>
   <Application.NavigationItems>
     <ApplicationNavigationGroup
@@ -146,6 +149,9 @@
       <ApplicationNavigationLink
         Name="CiselnikyOstatne"
         Command="!module/Commands[ScreenCommandShowCiselnikyOstatne]" />
+      <ApplicationNavigationLink
+        Name="link3"
+        Command="!module/Commands[ScreenCommandShowCiselnikyPonuk]" />
     </ApplicationNavigationGroup>
     <ApplicationNavigationGroup
       Name="group1">

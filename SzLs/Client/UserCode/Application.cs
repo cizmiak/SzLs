@@ -8,13 +8,13 @@ using System.Windows.Controls;
 
 namespace LightSwitchApplication
 {
-    public partial class Application
-    {
-        private bool isCurrentUserAdministrator = false;
-        public bool IsCurrentUserAdministrator
-        {
-            get { return isCurrentUserAdministrator; }
-        }
+	public partial class Application
+	{
+		private bool isCurrentUserAdministrator = false;
+		public bool IsCurrentUserAdministrator
+		{
+			get { return isCurrentUserAdministrator; }
+		}
 
 		private bool isCurrentUserPowerUser = false;
 		public bool IsCurrentUserPowerUser
@@ -22,16 +22,16 @@ namespace LightSwitchApplication
 			get { return isCurrentUserPowerUser; }
 		}
 
-        private Zamestnanec prihlasenyZamestnanec;
-        public Zamestnanec PrihlasenyZamestnanec
-        {
-            get { return prihlasenyZamestnanec; }
-        }
+		private Zamestnanec prihlasenyZamestnanec;
+		public Zamestnanec PrihlasenyZamestnanec
+		{
+			get { return prihlasenyZamestnanec; }
+		}
 
-        partial void Application_LoggedIn()
-        {
-            DataWorkspace dws = this.CreateDataWorkspace();
-            prihlasenyZamestnanec = dws.SpravaZmluvData.ZamestnanecPodlaLoginu(this.User.Name);
+		partial void Application_LoggedIn()
+		{
+			DataWorkspace dws = this.CreateDataWorkspace();
+			prihlasenyZamestnanec = dws.SpravaZmluvData.ZamestnanecPodlaLoginu(this.User.Name);
 
 			if (PrihlasenyZamestnanec != null && PrihlasenyZamestnanec.Rola != null)
 			{
@@ -39,41 +39,41 @@ namespace LightSwitchApplication
 				isCurrentUserPowerUser = (PrihlasenyZamestnanec.Rola.Nazov == "power user");
 			}
 
-            dws.Dispose();
-        }
+			dws.Dispose();
+		}
 
-        partial void KonfiguraciasListDetail_CanRun(ref bool result)
-        {
-            // Set result to the desired field value
-            result = IsCurrentUserAdministrator;
-        }
+		partial void KonfiguraciasListDetail_CanRun(ref bool result)
+		{
+			// Set result to the desired field value
+			result = IsCurrentUserAdministrator;
+		}
 
-        partial void Zamestnanci_CanRun(ref bool result)
-        {
-            // Set result to the desired field value
-            result = IsCurrentUserAdministrator;
+		partial void Zamestnanci_CanRun(ref bool result)
+		{
+			// Set result to the desired field value
+			result = IsCurrentUserAdministrator;
 
-        }
+		}
 
-        internal static void navigateUri(string uri)
-        {
-            Dispatchers.Main.BeginInvoke(() =>
-            {
-                if (AutomationFactory.IsAvailable)
-                {
-                    dynamic shell = AutomationFactory.CreateObject("Shell.Application");
-                    shell.ShellExecute(uri);
-                }
-                else if (!System.Windows.Application.Current.IsRunningOutOfBrowser)
-                {
-                    HtmlPage.Window.Navigate(new Uri(uri), "_blank");
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
-            }); 
-        }
+		internal static void navigateUri(string uri)
+		{
+			Dispatchers.Main.BeginInvoke(() =>
+			{
+				if (AutomationFactory.IsAvailable)
+				{
+					dynamic shell = AutomationFactory.CreateObject("Shell.Application");
+					shell.ShellExecute(uri);
+				}
+				else if (!System.Windows.Application.Current.IsRunningOutOfBrowser)
+				{
+					HtmlPage.Window.Navigate(new Uri(uri), "_blank");
+				}
+				else
+				{
+					throw new InvalidOperationException();
+				}
+			}); 
+		}
 
 		internal static void updateSourceAfterLastKeyUp(object sender, ControlAvailableEventArgs e)
 		{
@@ -146,5 +146,5 @@ namespace LightSwitchApplication
 				return (IsCurrentUserAdministrator || IsCurrentUserPowerUser);
 			}
 		}
-    }
+	}
 }

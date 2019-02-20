@@ -194,7 +194,7 @@
         </NavigationProperty.Attributes>
       </NavigationProperty>
       <NavigationProperty
-        Name="Ponuka"
+        Name="Ponuky"
         Association="Organizacia_Ponuka"
         FromEnd="Organizacia"
         ToEnd="Ponuka" />

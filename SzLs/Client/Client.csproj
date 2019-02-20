@@ -257,6 +257,7 @@
     <LightSwitchModel Include="Properties\XlsxReaderServiceData\XlsxRows.lsml" />
     <LightSwitchModel Include="Screens\GetXlsxSheetsById.lsml" />
     <LightSwitchModel Include="Screens\Ponuky.lsml" />
+    <LightSwitchModel Include="Screens\CiselnikyPonuk.lsml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\sys_logo.png" />

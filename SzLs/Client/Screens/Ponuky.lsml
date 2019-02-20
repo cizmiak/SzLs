@@ -45,6 +45,19 @@
                   </ScreenExpressionTree>
                 </ContentItem.DataSource>
                 <ContentItem
+                  Name="Id"
+                  Kind="Value"
+                  DataType=":Int32">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Ponuka/Properties[Id]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
+                <ContentItem
                   Name="Organizacia"
                   Kind="Details"
                   DataType="Organizacia">
@@ -184,19 +197,6 @@
                       <ChainExpression>
                         <MemberExpression
                           Member="Ponuka/Properties[DatumRealizacie]" />
-                      </ChainExpression>
-                    </ScreenExpressionTree>
-                  </ContentItem.DataSource>
-                </ContentItem>
-                <ContentItem
-                  Name="Cena"
-                  Kind="Value"
-                  DataType="Microsoft.LightSwitch.Extensions:Money?">
-                  <ContentItem.DataSource>
-                    <ScreenExpressionTree>
-                      <ChainExpression>
-                        <MemberExpression
-                          Member="Ponuka/Properties[Cena]" />
                       </ChainExpression>
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
@@ -423,50 +423,6 @@
                 </ContentItem>
               </ContentItem>
               <ContentItem
-                Name="Subject1"
-                Kind="Value"
-                DataType=":String?">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Ponuka/Properties[Subject]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-              </ContentItem>
-              <ContentItem
-                Name="Body1"
-                Kind="Value"
-                DataType=":String?">
-                <ContentItem.DataSource>
-                  <ScreenExpressionTree>
-                    <ChainExpression>
-                      <MemberExpression
-                        Member="Ponuka/Properties[TeloSpravy]" />
-                    </ChainExpression>
-                  </ScreenExpressionTree>
-                </ContentItem.DataSource>
-                <ContentItem.PropertySources>
-                  <ControlPropertySource
-                    Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HeightSizingMode]">
-                    <ScreenExpressionTree>
-                      <ConstantExpression
-                        Value="Lines"
-                        ResultType=":String" />
-                    </ScreenExpressionTree>
-                  </ControlPropertySource>
-                  <ControlPropertySource
-                    Property="Microsoft.LightSwitch.RichClient:TextBox/Properties[Lines]">
-                    <ScreenExpressionTree>
-                      <ConstantExpression
-                        Value="22"
-                        ResultType=":Int32" />
-                    </ScreenExpressionTree>
-                  </ControlPropertySource>
-                </ContentItem.PropertySources>
-              </ContentItem>
-              <ContentItem
                 Name="OfferState1"
                 Kind="Details"
                 DataType="StavPonuky">
@@ -492,7 +448,8 @@
               <ContentItem
                 Name="SentDate1"
                 Kind="Value"
-                DataType=":DateTime?">
+                DataType=":DateTime?"
+                View="Microsoft.LightSwitch.RichClient:DateTimeViewer">
                 <ContentItem.DataSource>
                   <ScreenExpressionTree>
                     <ChainExpression>
@@ -501,6 +458,18 @@
                     </ChainExpression>
                   </ScreenExpressionTree>
                 </ContentItem.DataSource>
+                <ContentItem.PropertySources>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.RichClient:DateViewerBase/Properties[LongDate]">
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <ConstantExpression
+                          Value="True"
+                          ResultType=":Boolean" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                </ContentItem.PropertySources>
               </ContentItem>
               <ContentItem
                 Name="RealizationDate1"
@@ -516,7 +485,8 @@
                 </ContentItem.DataSource>
               </ContentItem>
               <ContentItem
-                Name="Cena1"
+                Name="Cena"
+                IsHidden="True"
                 Kind="Value"
                 DataType="Microsoft.LightSwitch.Extensions:Money?">
                 <ContentItem.DataSource>
@@ -528,17 +498,34 @@
                   </ScreenExpressionTree>
                 </ContentItem.DataSource>
               </ContentItem>
-              <ContentItem.PropertySources>
-                <ControlPropertySource
-                  Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+              <ContentItem
+                Name="Subject1"
+                Kind="Value"
+                DataType=":String?">
+                <ContentItem.DataSource>
                   <ScreenExpressionTree>
                     <ChainExpression>
-                      <ConstantExpression
-                        Value="Top"
-                        ResultType=":String" />
+                      <MemberExpression
+                        Member="Ponuka/Properties[Subject]" />
                     </ChainExpression>
                   </ScreenExpressionTree>
-                </ControlPropertySource>
+                </ContentItem.DataSource>
+              </ContentItem>
+              <ContentItem.CommandItems>
+                <ContentItem
+                  Name="NacitajZoSablony"
+                  Kind="Command">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <CallExpression
+                          Target="Ponuky/Methods[NacitajZoSablony]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
+              </ContentItem.CommandItems>
+              <ContentItem.PropertySources>
                 <ControlPropertySource
                   Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
                   <ScreenExpressionTree>
@@ -548,14 +535,69 @@
                   </ScreenExpressionTree>
                 </ControlPropertySource>
                 <ControlPropertySource
+                  Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                  <ScreenExpressionTree>
+                    <ConstantExpression
+                      Value="Top"
+                      ResultType=":String" />
+                  </ScreenExpressionTree>
+                </ControlPropertySource>
+                <ControlPropertySource
                   Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[MinWidth]">
                   <ScreenExpressionTree>
                     <ConstantExpression
-                      Value="512"
+                      Value="400"
                       ResultType=":Double" />
                   </ScreenExpressionTree>
                 </ControlPropertySource>
               </ContentItem.PropertySources>
+            </ContentItem>
+            <ContentItem
+              Name="EmailBody"
+              Kind="Group">
+              <ContentItem
+                Name="TeloSpravy"
+                Kind="Value"
+                DataType=":String?">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="Ponuky/Properties[Offers]" />
+                      <MemberExpression
+                        Member="SelectedItem" />
+                      <MemberExpression
+                        Member="TeloSpravy" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+                <ContentItem.PropertySources>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[VerticalAlignment]">
+                    <ScreenExpressionTree>
+                      <ConstantExpression
+                        Value="Stretch"
+                        ResultType=":String" />
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HeightSizingMode]">
+                    <ScreenExpressionTree>
+                      <ConstantExpression
+                        Value="Lines"
+                        ResultType=":String" />
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.RichClient:TextBox/Properties[Lines]">
+                    <ScreenExpressionTree>
+                      <ConstantExpression
+                        Value="55"
+                        ResultType=":Int32" />
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                </ContentItem.PropertySources>
+              </ContentItem>
             </ContentItem>
             <ContentItem.PropertySources>
               <ControlPropertySource
@@ -566,14 +608,6 @@
                       Value="3"
                       ResultType=":Double" />
                   </ChainExpression>
-                </ScreenExpressionTree>
-              </ControlPropertySource>
-              <ControlPropertySource
-                Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
-                <ScreenExpressionTree>
-                  <ConstantExpression
-                    Value="Left"
-                    ResultType=":String" />
                 </ScreenExpressionTree>
               </ControlPropertySource>
               <ControlPropertySource
@@ -688,6 +722,8 @@
       </ScreenMethod>
       <ScreenMethod
         Name="Odosli" />
+      <ScreenMethod
+        Name="NacitajZoSablony" />
     </Screen.Methods>
     <Screen.Properties>
       <ScreenCollectionProperty

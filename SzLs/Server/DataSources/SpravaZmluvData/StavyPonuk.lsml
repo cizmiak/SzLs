@@ -29,7 +29,7 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="Name"
+        Name="Nazov"
         PropertyType=":String?">
         <EntityProperty.Attributes>
           <MaxLength
@@ -182,7 +182,7 @@
           Name="Name"
           Nullable="True"
           Type="varchar"
-          Property="StavPonuky/Properties[Name]" />
+          Property="StavPonuky/Properties[Nazov]" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping
