@@ -1,0 +1,958 @@
+USE [SpravaZmluv]
+GO
+/****** Object:  StoredProcedure [dbo].[OffersSentUpdate]    Script Date: 25.02.2019 22:56:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER TABLE [dbo].[OffersSent] ADD OfferStateId INT NULL
+GO
+
+ALTER TABLE [dbo].[OffersSent]  WITH CHECK ADD  CONSTRAINT [FK_OffersSent_OfferStates] FOREIGN KEY([OfferStateId])
+REFERENCES [dbo].[OfferStates] ([Id])
+ON DELETE SET NULL
+GO
+
+ALTER TABLE [dbo].[OffersSent] CHECK CONSTRAINT [FK_OffersSent_OfferStates]
+GO
+
+ALTER PROCEDURE [dbo].[OffersSentUpdate]
+	@OfferId INT,
+	@SentDate DATETIME = NULL,
+	@OfferStateId INT = NULL
+AS
+UPDATE dbo.OffersSent
+SET
+	SentDate = ISNULL(@SentDate, GETDATE()),
+	OfferStateId = @OfferStateId
+WHERE
+	OfferId = @OfferId
+
+IF @@ROWCOUNT = 0
+	INSERT dbo.OffersSent(OfferId, SentDate, OfferStateId)
+	VALUES (@OfferId, ISNULL(@SentDate, GETDATE()), @OfferStateId)
+GO
+
+IF OBJECT_ID('dbo.SendOfferEmail') IS NOT NULL
+	DROP PROCEDURE dbo.SendOfferEmail
+GO
+
+ALTER PROCEDURE [dbo].[SendSkolbozNotification]
+AS
+EXEC [dbo].[UlohaNotification]
+EXEC [dbo].[ZmluvaNotification]
+EXEC [dbo].[SkolenieNotification]
+EXEC [dbo].[AOPNotification]
+EXEC [dbo].[OfferNotification]
+GO
+
+USE [SpravaZmluv]
+GO
+/****** Object:  StoredProcedure [dbo].[OfferNotification]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[OfferNotification]
+AS
+EXEC [dbo].[SendOfferAfter16Months]
+EXEC [dbo].[SendOfferFillEForm]
+EXEC [dbo].[SendOfferStateReminder]
+GO
+/****** Object:  StoredProcedure [dbo].[SendOfferAfter16Months]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SendOfferAfter16Months]
+AS
+
+DECLARE @Today DATETIME = FLOOR(CAST(GETDATE() AS FLOAT))
+
+DECLARE
+	@OfferId INT,
+	@OrganizationId INT,
+	@OrganizationName VARCHAR(100),
+	@Subject VARCHAR(255),
+	@Body VARCHAR(MAX),
+	@SentDate DATETIME,
+	@RealizationDate DATETIME,
+	@Price VARCHAR(32),
+	@OrganizationEmail VARCHAR(100),
+	@ContactPersonEmail VARCHAR(MAX),
+	@ResponsibleEmail VARCHAR(100),
+	@OfferState VARCHAR(50)
+	
+DECLARE cur CURSOR FAST_FORWARD FOR
+SELECT
+	offers.Id AS OfferId,
+	offers.OrganizationId,
+	organization.Nazov AS OrganizationName,
+	ISNULL(offers.[Subject], 'Nezadané') AS [Subject],
+	ISNULL(offers.Body, 'Nezadané') AS Body,
+	offers.SentDate,
+	offers.RealizationDate,
+	ISNULL(CAST(offers.Price AS VARCHAR(32)) + ' €', 'Nezadané') AS Price,
+	ISNULL(organization.Mail, 'Nezadané') AS OrganizationEmail,
+	report.GetKontaktnaOsobaEmail(offers.OrganizationId) AS ContactPersonEmail,
+	responsible.Email AS ResponsibleEmail,
+	offerStates.Name AS OfferState
+FROM
+	dbo.Offers offers
+	LEFT JOIN dbo.Organizacia organization
+		ON organization.ID = offers.OrganizationId
+	LEFT JOIN dbo.Zamestnanec responsible
+		ON responsible.ID = offers.ResponsibleEmployeeId
+	LEFT JOIN dbo.OfferStates offerStates
+		ON offerStates.Id = offers.OfferStateId
+WHERE
+	DATEADD(MONTH, 16, FLOOR(CAST(offers.RealizationDate AS FLOAT))) = @Today
+
+OPEN cur
+FETCH NEXT FROM cur INTO
+	@OfferId,
+	@OrganizationId,
+	@OrganizationName,
+	@Subject,
+	@Body,
+	@SentDate,
+	@RealizationDate,
+	@Price,
+	@OrganizationEmail,
+	@ContactPersonEmail,
+	@ResponsibleEmail,
+	@OfferState
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	--SELECT
+	--	@OfferId AS OfferId,
+	--	@OrganizationId AS OrganizationId,
+	--	@Subject AS Subject,
+	--	@Body AS Body,
+	--	@SentDate AS SentDate,
+	--	@Price AS Price,
+	--	@OrganizationEmail AS OrganizationEmail,
+	--	@ContactPersonEmail AS ContactPersonEmail,
+	--	@ResponsibleEmail AS ResponsibleEmail
+
+	DECLARE @Contacts VARCHAR(MAX) = '
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktných osôb:<br/>
+' + @ContactPersonEmail + '<br/>
+<br/>Názov organizácie:<br/>
+<b>' + @OrganizationName + '</b><br/>
+<br/>E-mail organizácie:<br/>
+' + @OrganizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>
+<br/>
+'
+	DECLARE @18MonthAfter DATETIME = DATEADD(MONTH, 18, @RealizationDate) 
+
+	SET @Subject = 'Opakovany audit posudenia rizik'
+	SET @Body = '<br/><b>${18MonthAfter}</b> uplynie 18 mesiacov od datumu realizacie.'
+	SET @Body += '<br/><b>Datum Realizacie:</b> ${RealizationDate}'
+	SET @Body += '<br/><b>Ponuka Id:</b> ${OfferId}'
+	SET @Body += '<br/><b>Organizacia:</b> ${OrganizationName}'
+	SET @Body += '<br/><b>Stav:</b> ${OfferState}'
+
+
+	SET @Body = REPLACE(@Body, '${Price}', @Price)
+	SET @Body = REPLACE(@Body, '${OfferId}', @OfferId)
+	SET @Body = REPLACE(@Body, '${OrganizationName}', @OrganizationName)
+	SET @Body = REPLACE(@Body, '${RealizationDate}', @RealizationDate)
+	SET @Body = REPLACE(@Body, '${18MonthAfter}', @18MonthAfter)
+	SET @Body = REPLACE(@Body, '${OfferState}', @OfferState)
+	--SET @Body = REPLACE(@Body, char(13), '<br/>' + char(13))
+
+	SET @Body = dbo.GetHtmlBodyOpenTag() + @Contacts + @Body + dbo.GetHtmlBodyCloseTag()
+	--PRINT @AdminBody
+
+	EXEC msdb.dbo.sp_send_dbmail
+		@recipients = 'miroslav.hanzen@gmail.com;monika.hanzenova@gmail.com',
+		@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+		@subject = @Subject,
+		@body = @Body,
+		@body_format = 'HTML'
+	
+	--IF @ResponsibleEmail IS NOT NULL
+	--BEGIN
+	--	DECLARE @ResponsibleBody VARCHAR(MAX) = REPLACE(@Body, '${Price}', '-')
+	--	SET @ResponsibleBody = REPLACE(@ResponsibleBody, '${OfferId}', @OfferId)
+	--	SET @ResponsibleBody = dbo.GetHtmlBodyOpenTag() + @Contacts + @ResponsibleBody + dbo.GetHtmlBodyCloseTag()
+	--	--PRINT @ResponsibleBody
+
+	--	EXEC msdb.dbo.sp_send_dbmail
+	--		@recipients = @ResponsibleEmail,
+	--		@subject = @Subject,
+	--		@body = @ResponsibleBody,
+	--		@body_format = 'HTML'
+	--END
+
+	FETCH NEXT FROM cur INTO
+		@OfferId,
+		@OrganizationId,
+		@OrganizationName,
+		@Subject,
+		@Body,
+		@SentDate,
+		@RealizationDate,
+		@Price,
+		@OrganizationEmail,
+		@ContactPersonEmail,
+		@ResponsibleEmail,
+		@OfferState
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO
+/****** Object:  StoredProcedure [dbo].[SendOfferFillEForm]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SendOfferFillEForm]
+AS
+
+DECLARE @Today DATETIME = FLOOR(CAST(GETDATE() AS FLOAT))
+
+DECLARE
+	@OfferId INT,
+	@OrganizationId INT,
+	@OrganizationName VARCHAR(100),
+	@Subject VARCHAR(255),
+	@Body VARCHAR(MAX),
+	@SentDate DATETIME,
+	@RealizationDate DATETIME,
+	@Price VARCHAR(32),
+	@OrganizationEmail VARCHAR(100),
+	@ContactPersonEmail VARCHAR(MAX),
+	@ResponsibleEmail VARCHAR(100),
+	@OfferState VARCHAR(50)
+	
+DECLARE cur CURSOR FAST_FORWARD FOR
+SELECT
+	offers.Id AS OfferId,
+	offers.OrganizationId,
+	organization.Nazov AS OrganizationName,
+	ISNULL(offers.[Subject], 'Nezadané') AS [Subject],
+	ISNULL(offers.Body, 'Nezadané') AS Body,
+	offers.SentDate,
+	offers.RealizationDate,
+	ISNULL(CAST(offers.Price AS VARCHAR(32)) + ' €', 'Nezadané') AS Price,
+	ISNULL(organization.Mail, 'Nezadané') AS OrganizationEmail,
+	report.GetKontaktnaOsobaEmail(offers.OrganizationId) AS ContactPersonEmail,
+	responsible.Email AS ResponsibleEmail,
+	offerStates.Name AS OfferState
+FROM
+	dbo.Offers offers
+	LEFT JOIN dbo.Organizacia organization
+		ON organization.ID = offers.OrganizationId
+	LEFT JOIN dbo.Zamestnanec responsible
+		ON responsible.ID = offers.ResponsibleEmployeeId
+	LEFT JOIN dbo.OfferStates offerStates
+		ON offerStates.Id = offers.OfferStateId
+WHERE
+	(
+		@Today = CAST(YEAR(offers.RealizationDate) AS VARCHAR(4)) + '-12-10'
+		OR
+		@Today = CAST(YEAR(offers.RealizationDate) + 1 AS VARCHAR(4)) + '-01-07'
+	)
+
+OPEN cur
+FETCH NEXT FROM cur INTO
+	@OfferId,
+	@OrganizationId,
+	@OrganizationName,
+	@Subject,
+	@Body,
+	@SentDate,
+	@RealizationDate,
+	@Price,
+	@OrganizationEmail,
+	@ContactPersonEmail,
+	@ResponsibleEmail,
+	@OfferState
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	--SELECT
+	--	@OfferId AS OfferId,
+	--	@OrganizationId AS OrganizationId,
+	--	@Subject AS Subject,
+	--	@Body AS Body,
+	--	@SentDate AS SentDate,
+	--	@Price AS Price,
+	--	@OrganizationEmail AS OrganizationEmail,
+	--	@ContactPersonEmail AS ContactPersonEmail,
+	--	@ResponsibleEmail AS ResponsibleEmail
+
+	DECLARE @Contacts VARCHAR(MAX) = '
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktných osôb:<br/>
+' + @ContactPersonEmail + '<br/>
+<br/>Názov organizácie:<br/>
+<b>' + @OrganizationName + '</b><br/>
+<br/>E-mail organizácie:<br/>
+' + @OrganizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>
+<br/>
+'
+	DECLARE @18MonthAfter DATETIME = DATEADD(MONTH, 18, @RealizationDate) 
+
+	SET @Subject = 'Vyplnenie elektronickeho formulara'
+	SET @Body = '<br/><b>Vyplnte niekto elektronicky formular, prosim Vas.'
+	SET @Body += '<br/><b>Datum Realizacie:</b> ${RealizationDate}'
+	SET @Body += '<br/><b>Ponuka Id:</b> ${OfferId}'
+	SET @Body += '<br/><b>Organizacia:</b> ${OrganizationName}'
+	SET @Body += '<br/><b>Stav:</b> ${OfferState}'
+
+
+	SET @Body = REPLACE(@Body, '${Price}', @Price)
+	SET @Body = REPLACE(@Body, '${OfferId}', @OfferId)
+	SET @Body = REPLACE(@Body, '${OrganizationName}', @OrganizationName)
+	SET @Body = REPLACE(@Body, '${RealizationDate}', @RealizationDate)
+	SET @Body = REPLACE(@Body, '${18MonthAfter}', @18MonthAfter)
+	SET @Body = REPLACE(@Body, '${OfferState}', @OfferState)
+	--SET @Body = REPLACE(@Body, char(13), '<br/>' + char(13))
+
+	SET @Body = dbo.GetHtmlBodyOpenTag() + @Contacts + @Body + dbo.GetHtmlBodyCloseTag()
+	--PRINT @AdminBody
+
+	EXEC msdb.dbo.sp_send_dbmail
+		@recipients = 'miroslav.hanzen@gmail.com;monika.hanzenova@gmail.com',
+		@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+		@subject = @Subject,
+		@body = @Body,
+		@body_format = 'HTML'
+	
+	--IF @ResponsibleEmail IS NOT NULL
+	--BEGIN
+	--	DECLARE @ResponsibleBody VARCHAR(MAX) = REPLACE(@Body, '${Price}', '-')
+	--	SET @ResponsibleBody = REPLACE(@ResponsibleBody, '${OfferId}', @OfferId)
+	--	SET @ResponsibleBody = dbo.GetHtmlBodyOpenTag() + @Contacts + @ResponsibleBody + dbo.GetHtmlBodyCloseTag()
+	--	--PRINT @ResponsibleBody
+
+	--	EXEC msdb.dbo.sp_send_dbmail
+	--		@recipients = @ResponsibleEmail,
+	--		@subject = @Subject,
+	--		@body = @ResponsibleBody,
+	--		@body_format = 'HTML'
+	--END
+
+	FETCH NEXT FROM cur INTO
+		@OfferId,
+		@OrganizationId,
+		@OrganizationName,
+		@Subject,
+		@Body,
+		@SentDate,
+		@RealizationDate,
+		@Price,
+		@OrganizationEmail,
+		@ContactPersonEmail,
+		@ResponsibleEmail,
+		@OfferState
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO
+/****** Object:  StoredProcedure [dbo].[SendOfferChange]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SendOfferChange]
+AS
+EXEC [dbo].[SendOfferChangeSentDate]
+EXEC [dbo].[SendOfferChangeToOrder]
+EXEC [dbo].[SendOfferChangeToRealization]
+GO
+/****** Object:  StoredProcedure [dbo].[SendOfferChangeSentDate]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SendOfferChangeSentDate]
+AS
+DECLARE
+	@OfferId INT,
+	@OrganizationId INT,
+	@OrganizationName VARCHAR(100),
+	@Subject VARCHAR(255),
+	@Body VARCHAR(MAX),
+	@SentDate DATETIME,
+	@Price VARCHAR(32),
+	@OrganizationEmail VARCHAR(100),
+	@ContactPersonEmail VARCHAR(MAX),
+	@ResponsibleEmail VARCHAR(100)
+	
+DECLARE cur CURSOR FAST_FORWARD FOR
+SELECT
+	offers.Id AS OfferId,
+	offers.OrganizationId,
+	organization.Nazov AS OrganizationName,
+	ISNULL(offers.[Subject], 'Nezadané') AS [Subject],
+	ISNULL(offers.Body, 'Nezadané') AS Body,
+	offers.SentDate,
+	ISNULL(CAST(offers.Price AS VARCHAR(32)) + ' €', 'Nezadané') AS Price,
+	ISNULL(organization.Mail, 'Nezadané') AS OrganizationEmail,
+	report.GetKontaktnaOsobaEmail(offers.OrganizationId) AS ContactPersonEmail,
+	responsible.Email AS ResponsibleEmail
+FROM
+	dbo.Offers offers
+	LEFT JOIN dbo.OffersSent offersSent
+		ON offersSent.OfferId = offers.Id
+	LEFT JOIN dbo.Organizacia organization
+		ON organization.ID = offers.OrganizationId
+	LEFT JOIN dbo.Zamestnanec responsible
+		ON responsible.ID = offers.ResponsibleEmployeeId
+WHERE
+	offersSent.SentDate != offers.SentDate
+	OR
+	offersSent.SentDate IS NULL
+
+OPEN cur
+FETCH NEXT FROM cur INTO
+	@OfferId,
+	@OrganizationId,
+	@OrganizationName,
+	@Subject,
+	@Body,
+	@SentDate,
+	@Price,
+	@OrganizationEmail,
+	@ContactPersonEmail,
+	@ResponsibleEmail
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	--SELECT
+	--	@OfferId AS OfferId,
+	--	@OrganizationId AS OrganizationId,
+	--	@Subject AS Subject,
+	--	@Body AS Body,
+	--	@SentDate AS SentDate,
+	--	@Price AS Price,
+	--	@OrganizationEmail AS OrganizationEmail,
+	--	@ContactPersonEmail AS ContactPersonEmail,
+	--	@ResponsibleEmail AS ResponsibleEmail
+
+	DECLARE @Contacts VARCHAR(MAX) = '
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktných osôb:<br/>
+' + @ContactPersonEmail + '<br/>
+<br/>Názov organizácie:<br/>
+<b>' + @OrganizationName + '</b><br/>
+<br/>E-mail organizácie:<br/>
+' + @OrganizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>
+<br/>
+'
+	SET @Subject = REPLACE(@Subject, '${OfferId}', @OfferId)
+
+	DECLARE @AdminBody VARCHAR(MAX) = REPLACE(@Body, '${Price}', @Price)
+	SET @AdminBody = REPLACE(@AdminBody, '${OfferId}', @OfferId)
+	SET @AdminBody = REPLACE(@AdminBody, char(13), '<br/>' + char(13))
+	SET @AdminBody = dbo.GetHtmlBodyOpenTag() + @Contacts + @AdminBody + dbo.GetHtmlBodyCloseTag()
+	--PRINT @AdminBody
+
+	EXEC msdb.dbo.sp_send_dbmail
+		@recipients = 'miroslav.hanzen@gmail.com;monika.hanzenova@gmail.com',
+		@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+		@subject = @Subject,
+		@body = @AdminBody,
+		@body_format = 'HTML'
+	
+	--IF @ResponsibleEmail IS NOT NULL
+	--BEGIN
+	--	DECLARE @ResponsibleBody VARCHAR(MAX) = REPLACE(@Body, '${Price}', '-')
+	--	SET @ResponsibleBody = REPLACE(@ResponsibleBody, '${OfferId}', @OfferId)
+	--	SET @ResponsibleBody = dbo.GetHtmlBodyOpenTag() + @Contacts + @ResponsibleBody + dbo.GetHtmlBodyCloseTag()
+	--	--PRINT @ResponsibleBody
+
+	--	EXEC msdb.dbo.sp_send_dbmail
+	--		@recipients = @ResponsibleEmail,
+	--		@subject = @Subject,
+	--		@body = @ResponsibleBody,
+	--		@body_format = 'HTML'
+	--END
+
+	EXEC [dbo].[OffersSentUpdate] @OfferId, @SentDate
+
+	FETCH NEXT FROM cur INTO
+		@OfferId,
+		@OrganizationId,
+		@OrganizationName,
+		@Subject,
+		@Body,
+		@SentDate,
+		@Price,
+		@OrganizationEmail,
+		@ContactPersonEmail,
+		@ResponsibleEmail
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO
+/****** Object:  StoredProcedure [dbo].[SendOfferChangeToOrder]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SendOfferChangeToOrder]
+AS
+
+DECLARE
+	@OfferId INT,
+	@OrganizationId INT,
+	@OrganizationName VARCHAR(100),
+	@Subject VARCHAR(255),
+	@Body VARCHAR(MAX),
+	@SentDate DATETIME,
+	@RealizationDate DATETIME,
+	@Price VARCHAR(32),
+	@OrganizationEmail VARCHAR(100),
+	@ContactPersonEmail VARCHAR(MAX),
+	@ResponsibleEmail VARCHAR(100),
+	@OfferState VARCHAR(50),
+	@OfferStateId INT
+	
+DECLARE cur CURSOR FAST_FORWARD FOR
+SELECT
+	offers.Id AS OfferId,
+	offers.OrganizationId,
+	organization.Nazov AS OrganizationName,
+	ISNULL(offers.[Subject], 'Nezadané') AS [Subject],
+	ISNULL(offers.Body, 'Nezadané') AS Body,
+	offers.SentDate,
+	offers.RealizationDate,
+	ISNULL(CAST(offers.Price AS VARCHAR(32)) + ' €', 'Nezadané') AS Price,
+	ISNULL(organization.Mail, 'Nezadané') AS OrganizationEmail,
+	report.GetKontaktnaOsobaEmail(offers.OrganizationId) AS ContactPersonEmail,
+	responsible.Email AS ResponsibleEmail,
+	offerStates.Name AS OfferState,
+	offers.OfferStateId
+FROM
+	dbo.Offers offers
+	LEFT JOIN dbo.OffersSent offersSent
+		ON offersSent.OfferId = offers.Id
+	LEFT JOIN dbo.Organizacia organization
+		ON organization.ID = offers.OrganizationId
+	LEFT JOIN dbo.Zamestnanec responsible
+		ON responsible.ID = offers.ResponsibleEmployeeId
+	LEFT JOIN dbo.OfferStates offerStates
+		ON offerStates.Id = offers.OfferStateId
+WHERE
+	offers.OfferStateId = 2 --Objednana
+	AND
+	(
+		offersSent.OfferStateId IS NULL
+		OR
+		offersSent.OfferStateId != 2
+	)
+
+OPEN cur
+FETCH NEXT FROM cur INTO
+	@OfferId,
+	@OrganizationId,
+	@OrganizationName,
+	@Subject,
+	@Body,
+	@SentDate,
+	@RealizationDate,
+	@Price,
+	@OrganizationEmail,
+	@ContactPersonEmail,
+	@ResponsibleEmail,
+	@OfferState,
+	@OfferStateId
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	--SELECT
+	--	@OfferId AS OfferId,
+	--	@OrganizationId AS OrganizationId,
+	--	@Subject AS Subject,
+	--	@Body AS Body,
+	--	@SentDate AS SentDate,
+	--	@Price AS Price,
+	--	@OrganizationEmail AS OrganizationEmail,
+	--	@ContactPersonEmail AS ContactPersonEmail,
+	--	@ResponsibleEmail AS ResponsibleEmail
+
+	DECLARE @Contacts VARCHAR(MAX) = '
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktných osôb:<br/>
+' + @ContactPersonEmail + '<br/>
+<br/>Názov organizácie:<br/>
+<b>' + @OrganizationName + '</b><br/>
+<br/>E-mail organizácie:<br/>
+' + @OrganizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>
+<br/>
+'
+	DECLARE @18MonthAfter DATETIME = DATEADD(MONTH, 18, @RealizationDate) 
+
+	SET @Subject = 'Ponuka Id: ${OfferId} bola objednana'
+	SET @Subject = REPLACE(@Subject, '${OfferId}', @OfferId)
+
+	SET @Body = '<br/>Ponuke sa zmenil stav na objednana.<br/>'
+	SET @Body += '<br/><b>Datum odoslania:</b> ${SentDate}'
+	SET @Body += '<br/><b>Ponuka Id:</b> ${OfferId}'
+	SET @Body += '<br/><b>Organizacia:</b> ${OrganizationName}'
+	SET @Body += '<br/><b>Stav:</b> ${OfferState}'
+
+
+	--SET @Body = REPLACE(@Body, '${Price}', @Price)
+	SET @Body = REPLACE(@Body, '${OfferId}', @OfferId)
+	SET @Body = REPLACE(@Body, '${OrganizationName}', @OrganizationName)
+	SET @Body = REPLACE(@Body, '${RealizationDate}', @RealizationDate)
+	SET @Body = REPLACE(@Body, '${SentDate}', @SentDate)
+	SET @Body = REPLACE(@Body, '${18MonthAfter}', @18MonthAfter)
+	SET @Body = REPLACE(@Body, '${OfferState}', @OfferState)
+	--SET @Body = REPLACE(@Body, char(13), '<br/>' + char(13))
+
+	SET @Body = dbo.GetHtmlBodyOpenTag() + @Contacts + @Body + dbo.GetHtmlBodyCloseTag()
+	--PRINT @AdminBody
+
+	EXEC msdb.dbo.sp_send_dbmail
+		@recipients = @ResponsibleEmail,
+		@copy_recipients = 'miroslav.hanzen@gmail.com;monika.hanzenova@gmail.com',
+		@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+		@subject = @Subject,
+		@body = @Body,
+		@body_format = 'HTML'
+
+	EXEC [dbo].[OffersSentUpdate] @OfferId, @SentDate, @OfferStateId
+
+	FETCH NEXT FROM cur INTO
+		@OfferId,
+		@OrganizationId,
+		@OrganizationName,
+		@Subject,
+		@Body,
+		@SentDate,
+		@RealizationDate,
+		@Price,
+		@OrganizationEmail,
+		@ContactPersonEmail,
+		@ResponsibleEmail,
+		@OfferState,
+		@OfferStateId
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO
+/****** Object:  StoredProcedure [dbo].[SendOfferChangeToRealization]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SendOfferChangeToRealization]
+AS
+
+DECLARE
+	@OfferId INT,
+	@OrganizationId INT,
+	@OrganizationName VARCHAR(100),
+	@Subject VARCHAR(255),
+	@Body VARCHAR(MAX),
+	@SentDate DATETIME,
+	@RealizationDate DATETIME,
+	@Price VARCHAR(32),
+	@OrganizationEmail VARCHAR(100),
+	@ContactPersonEmail VARCHAR(MAX),
+	@ResponsibleEmail VARCHAR(100),
+	@OfferState VARCHAR(50),
+	@OfferStateId INT
+	
+DECLARE cur CURSOR FAST_FORWARD FOR
+SELECT
+	offers.Id AS OfferId,
+	offers.OrganizationId,
+	organization.Nazov AS OrganizationName,
+	ISNULL(offers.[Subject], 'Nezadané') AS [Subject],
+	ISNULL(offers.Body, 'Nezadané') AS Body,
+	offers.SentDate,
+	offers.RealizationDate,
+	ISNULL(CAST(offers.Price AS VARCHAR(32)) + ' €', 'Nezadané') AS Price,
+	ISNULL(organization.Mail, 'Nezadané') AS OrganizationEmail,
+	report.GetKontaktnaOsobaEmail(offers.OrganizationId) AS ContactPersonEmail,
+	responsible.Email AS ResponsibleEmail,
+	offerStates.Name AS OfferState,
+	offers.OfferStateId
+FROM
+	dbo.Offers offers
+	LEFT JOIN dbo.OffersSent offersSent
+		ON offersSent.OfferId = offers.Id
+	LEFT JOIN dbo.Organizacia organization
+		ON organization.ID = offers.OrganizationId
+	LEFT JOIN dbo.Zamestnanec responsible
+		ON responsible.ID = offers.ResponsibleEmployeeId
+	LEFT JOIN dbo.OfferStates offerStates
+		ON offerStates.Id = offers.OfferStateId
+WHERE
+	offers.OfferStateId = 3 --Ukoncena/Realizovana
+	AND
+	(
+		offersSent.OfferStateId IS NULL
+		OR
+		offersSent.OfferStateId != 3
+	)
+
+OPEN cur
+FETCH NEXT FROM cur INTO
+	@OfferId,
+	@OrganizationId,
+	@OrganizationName,
+	@Subject,
+	@Body,
+	@SentDate,
+	@RealizationDate,
+	@Price,
+	@OrganizationEmail,
+	@ContactPersonEmail,
+	@ResponsibleEmail,
+	@OfferState,
+	@OfferStateId
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	--SELECT
+	--	@OfferId AS OfferId,
+	--	@OrganizationId AS OrganizationId,
+	--	@Subject AS Subject,
+	--	@Body AS Body,
+	--	@SentDate AS SentDate,
+	--	@Price AS Price,
+	--	@OrganizationEmail AS OrganizationEmail,
+	--	@ContactPersonEmail AS ContactPersonEmail,
+	--	@ResponsibleEmail AS ResponsibleEmail
+
+	DECLARE @Contacts VARCHAR(MAX) = '
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktných osôb:<br/>
+' + @ContactPersonEmail + '<br/>
+<br/>Názov organizácie:<br/>
+<b>' + @OrganizationName + '</b><br/>
+<br/>E-mail organizácie:<br/>
+' + @OrganizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>
+<br/>
+'
+	DECLARE @18MonthAfter DATETIME = DATEADD(MONTH, 18, @RealizationDate) 
+
+	SET @Subject = 'Ponuka Id: ${OfferId} bola ukoncena/realizovana'
+	SET @Subject = REPLACE(@Subject, '${OfferId}', @OfferId)
+
+	SET @Body = '<br/>Ponuke sa zmenil stav na ukoncena/realizovana.<br/>'
+	SET @Body += '<br/><b>Datum odoslania:</b> ${SentDate}'
+	SET @Body += '<br/><b>Datum odoslania:</b> ${RealizationDate}'
+	SET @Body += '<br/><b>Ponuka Id:</b> ${OfferId}'
+	SET @Body += '<br/><b>Organizacia:</b> ${OrganizationName}'
+	SET @Body += '<br/><b>Stav:</b> ${OfferState}'
+	SET @Body += '<br/><b>Cena:</b> ${Price}'
+
+	SET @Body = REPLACE(@Body, '${Price}', @Price)
+	SET @Body = REPLACE(@Body, '${OfferId}', @OfferId)
+	SET @Body = REPLACE(@Body, '${OrganizationName}', @OrganizationName)
+	SET @Body = REPLACE(@Body, '${RealizationDate}', @RealizationDate)
+	SET @Body = REPLACE(@Body, '${SentDate}', @SentDate)
+	SET @Body = REPLACE(@Body, '${18MonthAfter}', @18MonthAfter)
+	SET @Body = REPLACE(@Body, '${OfferState}', @OfferState)
+
+	SET @Body = dbo.GetHtmlBodyOpenTag() + @Contacts + @Body + dbo.GetHtmlBodyCloseTag()
+
+	EXEC msdb.dbo.sp_send_dbmail
+		@recipients = 'monika.hanzenova@gmail.com',
+		@copy_recipients = 'miroslav.hanzen@gmail.com',
+		@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+		@subject = @Subject,
+		@body = @Body,
+		@body_format = 'HTML'
+
+	EXEC [dbo].[OffersSentUpdate] @OfferId, @SentDate, @OfferStateId
+
+	FETCH NEXT FROM cur INTO
+		@OfferId,
+		@OrganizationId,
+		@OrganizationName,
+		@Subject,
+		@Body,
+		@SentDate,
+		@RealizationDate,
+		@Price,
+		@OrganizationEmail,
+		@ContactPersonEmail,
+		@ResponsibleEmail,
+		@OfferState,
+		@OfferStateId
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO
+/****** Object:  StoredProcedure [dbo].[SendOfferStateReminder]    Script Date: 25.02.2019 23:11:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SendOfferStateReminder]
+AS
+
+DECLARE @Today DATETIME = FLOOR(CAST(GETDATE() AS FLOAT))
+
+DECLARE
+	@OfferId INT,
+	@OrganizationId INT,
+	@OrganizationName VARCHAR(100),
+	@Subject VARCHAR(255),
+	@Body VARCHAR(MAX),
+	@SentDate DATETIME,
+	@RealizationDate DATETIME,
+	@Price VARCHAR(32),
+	@OrganizationEmail VARCHAR(100),
+	@ContactPersonEmail VARCHAR(MAX),
+	@ResponsibleEmail VARCHAR(100),
+	@OfferState VARCHAR(50)
+	
+DECLARE cur CURSOR FAST_FORWARD FOR
+SELECT
+	offers.Id AS OfferId,
+	offers.OrganizationId,
+	organization.Nazov AS OrganizationName,
+	ISNULL(offers.[Subject], 'Nezadané') AS [Subject],
+	ISNULL(offers.Body, 'Nezadané') AS Body,
+	offers.SentDate,
+	offers.RealizationDate,
+	ISNULL(CAST(offers.Price AS VARCHAR(32)) + ' €', 'Nezadané') AS Price,
+	ISNULL(organization.Mail, 'Nezadané') AS OrganizationEmail,
+	report.GetKontaktnaOsobaEmail(offers.OrganizationId) AS ContactPersonEmail,
+	responsible.Email AS ResponsibleEmail,
+	offerStates.Name AS OfferState
+FROM
+	dbo.Offers offers
+	LEFT JOIN dbo.Organizacia organization
+		ON organization.ID = offers.OrganizationId
+	LEFT JOIN dbo.Zamestnanec responsible
+		ON responsible.ID = offers.ResponsibleEmployeeId
+	LEFT JOIN dbo.OfferStates offerStates
+		ON offerStates.Id = offers.OfferStateId
+WHERE
+	DATEADD(DAY, 14, FLOOR(CAST(offers.RealizationDate AS FLOAT))) = @Today
+	AND
+	offers.OfferStateId = 1 --Odoslana
+
+OPEN cur
+FETCH NEXT FROM cur INTO
+	@OfferId,
+	@OrganizationId,
+	@OrganizationName,
+	@Subject,
+	@Body,
+	@SentDate,
+	@RealizationDate,
+	@Price,
+	@OrganizationEmail,
+	@ContactPersonEmail,
+	@ResponsibleEmail,
+	@OfferState
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	--SELECT
+	--	@OfferId AS OfferId,
+	--	@OrganizationId AS OrganizationId,
+	--	@Subject AS Subject,
+	--	@Body AS Body,
+	--	@SentDate AS SentDate,
+	--	@Price AS Price,
+	--	@OrganizationEmail AS OrganizationEmail,
+	--	@ContactPersonEmail AS ContactPersonEmail,
+	--	@ResponsibleEmail AS ResponsibleEmail
+
+	DECLARE @Contacts VARCHAR(MAX) = '
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktných osôb:<br/>
+' + @ContactPersonEmail + '<br/>
+<br/>Názov organizácie:<br/>
+<b>' + @OrganizationName + '</b><br/>
+<br/>E-mail organizácie:<br/>
+' + @OrganizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>
+<br/>
+'
+	DECLARE @18MonthAfter DATETIME = DATEADD(MONTH, 18, @RealizationDate) 
+
+	SET @Subject = 'Prebehlo 14 dni od odslania ponuky Id: ${OfferId}'
+	SET @Subject = REPLACE(@Subject, '${OfferId}', @OfferId)
+
+	SET @Body = '<br/><b>Ponuka ma stale stav odoslana.'
+	SET @Body += '<br/><b>Datum odoslania:</b> ${SentDate}'
+	SET @Body += '<br/><b>Ponuka Id:</b> ${OfferId}'
+	SET @Body += '<br/><b>Organizacia:</b> ${OrganizationName}'
+	SET @Body += '<br/><b>Stav:</b> ${OfferState}'
+
+
+	SET @Body = REPLACE(@Body, '${Price}', @Price)
+	SET @Body = REPLACE(@Body, '${OfferId}', @OfferId)
+	SET @Body = REPLACE(@Body, '${OrganizationName}', @OrganizationName)
+	SET @Body = REPLACE(@Body, '${RealizationDate}', @RealizationDate)
+	SET @Body = REPLACE(@Body, '${SentDate}', @SentDate)
+	SET @Body = REPLACE(@Body, '${18MonthAfter}', @18MonthAfter)
+	SET @Body = REPLACE(@Body, '${OfferState}', @OfferState)
+	--SET @Body = REPLACE(@Body, char(13), '<br/>' + char(13))
+
+	SET @Body = dbo.GetHtmlBodyOpenTag() + @Contacts + @Body + dbo.GetHtmlBodyCloseTag()
+	--PRINT @AdminBody
+
+	EXEC msdb.dbo.sp_send_dbmail
+		@recipients = 'miroslav.hanzen@gmail.com;monika.hanzenova@gmail.com',
+		@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+		@subject = @Subject,
+		@body = @Body,
+		@body_format = 'HTML'
+	
+	--IF @ResponsibleEmail IS NOT NULL
+	--BEGIN
+	--	DECLARE @ResponsibleBody VARCHAR(MAX) = REPLACE(@Body, '${Price}', '-')
+	--	SET @ResponsibleBody = REPLACE(@ResponsibleBody, '${OfferId}', @OfferId)
+	--	SET @ResponsibleBody = dbo.GetHtmlBodyOpenTag() + @Contacts + @ResponsibleBody + dbo.GetHtmlBodyCloseTag()
+	--	--PRINT @ResponsibleBody
+
+	--	EXEC msdb.dbo.sp_send_dbmail
+	--		@recipients = @ResponsibleEmail,
+	--		@subject = @Subject,
+	--		@body = @ResponsibleBody,
+	--		@body_format = 'HTML'
+	--END
+
+	FETCH NEXT FROM cur INTO
+		@OfferId,
+		@OrganizationId,
+		@OrganizationName,
+		@Subject,
+		@Body,
+		@SentDate,
+		@RealizationDate,
+		@Price,
+		@OrganizationEmail,
+		@ContactPersonEmail,
+		@ResponsibleEmail,
+		@OfferState
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO

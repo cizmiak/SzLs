@@ -147,6 +147,16 @@
           <AnsiConstraint />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <EntityProperty
+        Name="ElektronickyFormularPodany"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <EntityContainer
@@ -304,6 +314,11 @@
           StoreGeneratedPattern="Computed"
           Type="varchar"
           Property="Ponuka/Properties[OrganizationName]" />
+        <SsdlProperty
+          Name="CustomDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Ponuka/Properties[ElektronickyFormularPodany]" />
         <SsdlForeignKeyProperty
           Name="EmailTemplateId"
           Nullable="True"
