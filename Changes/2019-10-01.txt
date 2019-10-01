@@ -1,0 +1,142 @@
+USE [SpravaZmluv]
+GO
+/****** Object:  StoredProcedure [dbo].[AOPNotification]    Script Date: 30.09.2019 18:40:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION dbo.GetTrainingType
+(
+	@trainingId INT
+) RETURNS NVARCHAR(50)
+AS
+BEGIN
+	RETURN
+	(
+		SELECT
+			Nazov
+		FROM
+			dbo.SkolenieTyp
+		WHERE
+			ID = (SELECT TypID FROM dbo.Skolenie WHERE ID = @trainingId)
+	)
+END
+GO
+USE [SpravaZmluv]
+GO
+/****** Object:  StoredProcedure [dbo].[AOPNotification]    Script Date: 30.09.2019 18:40:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[AOPNotification]
+(
+	@today DATETIME = NULL
+)
+AS
+/*
+declare @today datetime = '2019-06-7'
+declare @enddate datetime = @today-2
+
+while @today > @enddate
+begin
+	print @today
+	exec [dbo].[AOPNotification] @today
+	set @today-=1
+end
+*/
+
+SET @today = ISNULL(@today, getdate())
+
+DECLARE
+	@body VARCHAR(max),
+	@email VARCHAR(1024)
+
+DECLARE
+	@skolenieID INT,
+	@dni VARCHAR(10),
+	@organizaciaID INT,
+	@trainingTable NVARCHAR(MAX),
+	@type NVARCHAR(MAX),
+	@organization NVARCHAR(MAX),
+	@organizationEmail NVARCHAR(MAX),
+	@subject NVARCHAR(MAX) = 'Notifik·cia AktualizaËnej odbornej prÌpravy - ${type} - ${organization}'
+
+DECLARE cur CURSOR FOR
+SELECT
+	id, dni, organizaciaID
+FROM
+	dbo.AOPSkolenieToNotificate(@today)
+
+OPEN cur
+FETCH NEXT FROM cur INTo @skolenieID, @dni, @organizaciaID
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+
+SET @type = dbo.GetTrainingType(@skolenieID)
+
+SELECT
+	@organization = Nazov,
+	@organizationEmail = ISNULL(Mail, 'NezadanÈ')
+FROM
+	dbo.Organizacia
+WHERE
+	ID = @organizaciaID
+
+SET @trainingTable = [dbo].[GetSkolenieEmailTable](@skolenieID)
+
+SET @subject = REPLACE(@subject, '${type}', @type)
+SET @subject = REPLACE(@subject, '${organization}', @organization)
+
+SET @body = '<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {font-family: Tahoma; font-size: 10pt;}
+			.label {font-weight: bold; padding-right: 10px;}
+			.bold {font-weight: bold;}
+			th {font-weight: bold; text-align: left; padding-left: 10px;}
+			td {padding-left: 10px;}
+			.line-through {text-decoration: line-through;}
+			.red {color: red;}
+		 </style>
+	</head>
+	<body>
+O ' + @dni +' dnÌ uplynie 5 rokov od vydania preukazov:<br/><br/>'
++ @trainingTable + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktn˝ch osÙb:<br/>
+' + report.GetKontaktnaOsobaEmail(@organizaciaID) + '<br/>
+<br/>E-mail organiz·cie:<br/>
+' + @organizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/><br/>
+Dobr˝ deÚ,
+<br/><br/>
+Dovoæte, aby sme v·s upozornili, na blÌûiaci sa termÌn vykonania AktualizaËnej odbornej prÌpravy (AOP) pre drûiteæov preukazu na ' + @type + '. AOP by sa mala vykonaù do 5 - tich rokov odo dÚa vydania preukazu, ktor˝ m·te vyznaËen˝ na preukaze, alebo tento ˙daj n·jdete aj v naöej tabuæke dole v stÂpci oznaËenom ako "PreukazVydany". UpozorÚujeme, ûe do termÌnu vykonania AOP musÌ byù vykonan· aj opakovan· lek·rska prehliadka vo vzùahu k pr·ci. V opaËnom prÌpade preukaz str·ca platnosù. T˙to notifik·ciu v·m posielame 45 dnÌ pred uplynutÌm lehoty na vykonania AOP, aby ste mali dostatok Ëasu si pripraviù vöetko potrebnÈ.
+<br/><br/>Zoznam osÙb, ktorÈ absolvovali ökolenie:<br/><br/>'
++ dbo.PosluchaciNaSkoleniHTML(@skolenieID, null) +
+'<br/>ProsÌme V·s o aktualiz·ciu zoznamu osÙb ako aj n·vrh moûnÈho termÌnu periodickÈho ökolenia.
+<br/><br/>œakujem,
+<br/>
+	</body>
+</html>'
+--prINT @body
+--prINT ''
+
+SET @email = dbo.SkolenieEmailToNotificate(@skolenieID)
+EXEC msdb.dbo.sp_send_dbmail
+@recipients = @email,
+@copy_recipients = 'miroslav.hanzen@gmail.com;monika.hanzenova@gmail.com',
+--@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+@subject = @subject,
+@body = @body,
+@body_format = 'HTML'
+
+FETCH NEXT FROM cur INTo @skolenieID, @dni, @organizaciaID
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO
