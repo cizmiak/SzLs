@@ -1,0 +1,24 @@
+1. C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_regsql.exe and THEN aspnetdb.sql
+
+2. Restore SpravaZmluv db
+
+3. Create SpravaZmluvUser: SpravaZmluvUser.sql
+
+4. Setup Database mail: EXEC [dbo].[SetupDatabaseMail]
+
+5. Update notification sps: NotificationStoredProcedures.sql
+
+6. Test notifications:
+EXEC [dbo].[SendSkolbozNotification]
+GO
+EXEC [dbo].[SendOfferChange]
+
+7. iis install: http activation/redirection, iis management console/service, web deploy 3.6 from msi and deploy SzLs.zip
+   in iis console on SzLs app enable only windows authentication
+   copy web config from DATA backup
+
+8. TODO create scheduled tasks
+
+10. TODO backup also aspnetdb and report server dbs + backup encryption keys (seems that this is backuped in db - fuck yeah!!!)
+
+11. TODO backup scheduled tasks
