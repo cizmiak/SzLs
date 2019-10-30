@@ -19,6 +19,8 @@ EXEC [dbo].[SendOfferChange]
 
 8. TODO create scheduled tasks
 
+9. TODO install SSRS and deploy reports (restore report server databases - seems that encryption keys backuped in db - fuck yeah!!!)
+
 10. TODO backup also aspnetdb and report server dbs + backup encryption keys (seems that this is backuped in db - fuck yeah!!!)
 
 11. TODO backup scheduled tasks
