@@ -1,0 +1,1 @@
+sqlcmd -E -d SpravaZmluv -Q "EXEC [dbo].[SendOfferChange]"

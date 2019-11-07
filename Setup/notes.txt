@@ -17,10 +17,10 @@ EXEC [dbo].[SendOfferChange]
    in iis console on SzLs app enable only windows authentication
    copy web config from DATA backup
 
-8. TODO create scheduled tasks
+8. create scheduled tasks from TaskScheduler folder
 
-9. TODO install SSRS and deploy reports (restore report server databases - seems that encryption keys backuped in db - fuck yeah!!!)
+9. install SSRS and deploy reports (restore report server databases - seems that encryption keys backuped in db - fuck yeah!!!)
 
-10. TODO backup also aspnetdb and report server dbs + backup encryption keys (seems that this is backuped in db - fuck yeah!!!)
+10. backup also aspnetdb and report server dbs + backup encryption keys (seems that this is backuped in db - fuck yeah!!!)
 
-11. TODO backup scheduled tasks
+11. backup scheduled tasks
