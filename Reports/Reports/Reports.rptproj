@@ -89,6 +89,14 @@
       <Name>ZmluvaFakturovat.rdl</Name>
       <FullPath>ZmluvaFakturovat.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>KartickyVysky.rdl</Name>
+      <FullPath>KartickyVysky.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>KartickyVodici.rdl</Name>
+      <FullPath>KartickyVodici.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
