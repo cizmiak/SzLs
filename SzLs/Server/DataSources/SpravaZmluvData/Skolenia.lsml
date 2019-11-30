@@ -384,6 +384,16 @@
         Association="FK_SkolenieOtazka_Skolenie"
         FromEnd="Skolenie"
         ToEnd="SkolenieOtazka" />
+      <EntityProperty
+        Name="NasledujuceAOP"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <Association
@@ -714,6 +724,11 @@
           StoreGeneratedPattern="Computed"
           Type="varchar"
           Property="Skolenie/Properties[IdVarchar]" />
+        <SsdlProperty
+          Name="NasledujuceAOP"
+          Nullable="True"
+          Type="datetime"
+          Property="Skolenie/Properties[NasledujuceAOP]" />
         <SsdlForeignKeyProperty
           Name="ClenKomisie1ID"
           Nullable="True"

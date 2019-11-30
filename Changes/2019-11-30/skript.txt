@@ -1,0 +1,107 @@
+USE [SpravaZmluv]
+GO
+alter table dbo.Skolenie add NasledujuceAOP datetime
+go
+ALTER FUNCTION [dbo].[AOPSkolenieToNotificate]
+(
+	@today DATETIME
+)
+RETURNS @skolenia TABLE
+(
+	id INT,
+	dni VARCHAR(10),
+	organizaciaID INT
+) AS
+BEGIN
+
+SET @today = FLOOR(CAST(@today AS FLOAT))
+
+/* Pat rokov od vydania preukazu */
+INSERT @skolenia (id, dni, organizaciaID)
+SELECT
+	s.ID,
+	STR(CAST(FLOOR
+	(
+		CAST
+		(
+			DATEADD(YEAR, 5, ISNULL(sp.PreukazVydany, s.PreukazyVydane)) AS FLOAT
+		)
+	) - @today AS FLOAT)) AS dni,
+	s.OrganizaciaID
+FROM
+	dbo.SkoleniePosluchac sp
+	INNER JOIN dbo.Skolenie s
+		on s.ID = sp.SkolenieID
+WHERE
+	FLOOR
+	(
+		CAST
+		(
+			DATEADD(YEAR, 5, ISNULL(sp.PreukazVydany, s.PreukazyVydane)) AS FLOAT
+		)
+	) - @today = 45
+	OR
+	FLOOR
+	(
+		CAST
+		(
+			DATEADD(YEAR, 5, s.NasledujuceAOP) AS FLOAT
+		)
+	) - @today = 45
+GROUP BY
+	s.ID,
+	FLOOR
+	(
+		CAST
+		(
+			DATEADD(YEAR, 5, ISNULL(sp.PreukazVydany, s.PreukazyVydane)) AS FLOAT
+		)
+	) - @today,
+	s.OrganizaciaID
+
+/* Pat rokov od datumu NasledujuceAOP */
+INSERT @skolenia (id, dni, organizaciaID)
+SELECT
+	s.ID,
+	STR
+	(
+		CAST
+		(
+			FLOOR
+			(
+				CAST
+				(
+					DATEADD(YEAR, 5, s.NasledujuceAOP)
+					AS FLOAT
+				)
+			) - @today
+			AS FLOAT
+		)
+	) AS dni,
+	s.OrganizaciaID
+FROM
+	dbo.SkoleniePosluchac sp
+	INNER JOIN dbo.Skolenie s
+		on s.ID = sp.SkolenieID
+WHERE
+	FLOOR
+	(
+		CAST
+		(
+			DATEADD(YEAR, 5, s.NasledujuceAOP) AS FLOAT
+		)
+	) - @today = 45
+GROUP BY
+	s.ID,
+	FLOOR
+	(
+		CAST
+		(
+			DATEADD(YEAR, 5, s.NasledujuceAOP) AS FLOAT
+		)
+	) - @today,
+	s.OrganizaciaID
+
+RETURN
+
+END

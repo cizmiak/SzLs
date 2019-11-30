@@ -585,6 +585,19 @@
                   </ContentItem.DataSource>
                 </ContentItem>
                 <ContentItem
+                  Name="NasledujuceAOP"
+                  Kind="Value"
+                  DataType=":DateTime?">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Skolenie/Properties[NasledujuceAOP]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
+                <ContentItem
                   Name="Zamestnanec3"
                   Kind="Details"
                   DataType="Zamestnanec">
@@ -1035,6 +1048,41 @@
                         <ConstantExpression
                           Value="Stretch"
                           ResultType=":String" />
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
+                </ContentItem>
+                <ContentItem
+                  Name="NasledujuceAOP1"
+                  Kind="Value"
+                  DataType=":DateTime?">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Skolenie/Properties[NasledujuceAOP]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <ConstantExpression
+                            Value="Stretch"
+                            ResultType=":String" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[MinWidth]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <ConstantExpression
+                            Value="0"
+                            ResultType=":Double" />
+                        </ChainExpression>
                       </ScreenExpressionTree>
                     </ControlPropertySource>
                   </ContentItem.PropertySources>
@@ -3926,16 +3974,39 @@
                                   NodeType="And">
                                   <BinaryExpression.Left>
                                     <BinaryExpression
-                                      NodeType="GreaterThanOrEqual">
+                                      NodeType="Or">
+                                      <BinaryExpression.Attributes>
+                                        <ExpressionGroup />
+                                      </BinaryExpression.Attributes>
                                       <BinaryExpression.Left>
-                                        <ChainExpression>
-                                          <MemberExpression
-                                            Member="Skolenie/Properties[Nasledujuce]" />
-                                        </ChainExpression>
+                                        <BinaryExpression
+                                          NodeType="GreaterThanOrEqual">
+                                          <BinaryExpression.Left>
+                                            <ChainExpression>
+                                              <MemberExpression
+                                                Member="Skolenie/Properties[Nasledujuce]" />
+                                            </ChainExpression>
+                                          </BinaryExpression.Left>
+                                          <BinaryExpression.Right>
+                                            <ParameterExpression
+                                              Parameter="NasledujucePo" />
+                                          </BinaryExpression.Right>
+                                        </BinaryExpression>
                                       </BinaryExpression.Left>
                                       <BinaryExpression.Right>
-                                        <ParameterExpression
-                                          Parameter="NasledujucePo" />
+                                        <BinaryExpression
+                                          NodeType="GreaterThanOrEqual">
+                                          <BinaryExpression.Left>
+                                            <ChainExpression>
+                                              <MemberExpression
+                                                Member="Skolenie/Properties[NasledujuceAOP]" />
+                                            </ChainExpression>
+                                          </BinaryExpression.Left>
+                                          <BinaryExpression.Right>
+                                            <ParameterExpression
+                                              Parameter="NasledujucePo" />
+                                          </BinaryExpression.Right>
+                                        </BinaryExpression>
                                       </BinaryExpression.Right>
                                     </BinaryExpression>
                                   </BinaryExpression.Left>
