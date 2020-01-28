@@ -179,6 +179,16 @@
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <EntityProperty
+        Name="NasledujuceAOP"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
     </EntityType.Properties>
   </EntityType>
   <EntityContainer
@@ -442,6 +452,11 @@
           Nullable="True"
           Type="bit"
           Property="SkoleniePosluchac/Properties[F]" />
+        <SsdlProperty
+          Name="NasledujuceAOP"
+          Nullable="True"
+          Type="datetime"
+          Property="SkoleniePosluchac/Properties[NasledujuceAOP]" />
         <SsdlForeignKeyProperty
           Name="VysledokID"
           Nullable="True"

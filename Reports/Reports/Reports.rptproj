@@ -18,8 +18,16 @@
       <FullPath>BOZP_Kamionisti.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>KartickyVodici.rdl</Name>
+      <FullPath>KartickyVodici.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>KartickyVozikyMriezka.rdl</Name>
       <FullPath>KartickyVozikyMriezka.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>KartickyVysky.rdl</Name>
+      <FullPath>KartickyVysky.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Lesenie.rdl</Name>
@@ -90,12 +98,8 @@
       <FullPath>ZmluvaFakturovat.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>KartickyVysky.rdl</Name>
-      <FullPath>KartickyVysky.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>KartickyVodici.rdl</Name>
-      <FullPath>KartickyVodici.rdl</FullPath>
+      <Name>Ponuky.rdl</Name>
+      <FullPath>Ponuky.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

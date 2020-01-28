@@ -2601,6 +2601,31 @@
                         </ContentItem.PropertySources>
                       </ContentItem>
                       <ContentItem
+                        Name="NasledujuceAOP2"
+                        Kind="Value"
+                        DataType=":DateTime?">
+                        <ContentItem.DataSource>
+                          <ScreenExpressionTree>
+                            <ChainExpression>
+                              <MemberExpression
+                                Member="SkoleniePosluchac/Properties[NasledujuceAOP]" />
+                            </ChainExpression>
+                          </ScreenExpressionTree>
+                        </ContentItem.DataSource>
+                        <ContentItem.PropertySources>
+                          <ControlPropertySource
+                            Property="Microsoft.LightSwitch.RichClient:RootControl/Properties[HorizontalAlignment]">
+                            <ScreenExpressionTree>
+                              <ChainExpression>
+                                <ConstantExpression
+                                  Value="Stretch"
+                                  ResultType=":String" />
+                              </ChainExpression>
+                            </ScreenExpressionTree>
+                          </ControlPropertySource>
+                        </ContentItem.PropertySources>
+                      </ContentItem>
+                      <ContentItem
                         Name="I"
                         Kind="Value"
                         DataType=":Boolean?">
