@@ -1,0 +1,376 @@
+USE [SpravaZmluv]
+GO
+alter table dbo.SkoleniePosluchac add [NasledujuceAOP] datetime
+go
+/****** Object:  StoredProcedure [dbo].[AOPNotification]    Script Date: 30.01.2020 18:33:06 ******/
+DROP PROCEDURE [dbo].[AOPNotification]
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetAOPNotificationDates]    Script Date: 30.01.2020 18:33:06 ******/
+DROP FUNCTION [dbo].[GetAOPNotificationDates]
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetAOPAttendeeStyle]    Script Date: 30.01.2020 18:33:06 ******/
+DROP FUNCTION [dbo].[GetAOPAttendeeStyle]
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetAOPAttendeesHTML]    Script Date: 30.01.2020 18:33:06 ******/
+DROP FUNCTION [dbo].[GetAOPAttendeesHTML]
+GO
+/****** Object:  UserDefinedFunction [dbo].[AOPSkolenieToNotificate]    Script Date: 30.01.2020 18:33:06 ******/
+DROP FUNCTION [dbo].[AOPSkolenieToNotificate]
+GO
+/****** Object:  UserDefinedFunction [dbo].[AOPSkolenieToNotificate]    Script Date: 30.01.2020 18:33:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [dbo].[AOPSkolenieToNotificate]
+(
+	@today DATETIME
+)
+RETURNS @skolenia TABLE
+(
+	id INT,
+	dni VARCHAR(10),
+	organizaciaID INT
+) AS
+BEGIN
+
+DECLARE @AOPNotificationShiftInDays INT = 45
+SET @today = FLOOR(CAST(@today AS FLOAT))
+
+/*
+	5 rokov - 45 dni od vydania preukazu
+	alebo
+	45 dni pred nasledujucim AOP
+*/
+INSERT @skolenia (id, dni, organizaciaID)
+SELECT
+	s.ID,
+	CAST(@AOPNotificationShiftInDays AS VARCHAR(10)) AS dni,
+	s.OrganizaciaID
+FROM
+	dbo.SkoleniePosluchac sp
+	INNER JOIN dbo.Skolenie s
+		on s.ID = sp.SkolenieID
+WHERE
+	@today IN
+	(
+		SELECT
+			NotificationDate
+		FROM
+			dbo.GetAOPNotificationDates
+			(
+				ISNULL(sp.PreukazVydany, s.PreukazyVydane),
+				ISNULL(sp.NasledujuceAOP, s.NasledujuceAOP)
+			)
+	)
+GROUP BY
+	s.ID,
+	s.OrganizaciaID
+
+RETURN
+
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetAOPAttendeesHTML]    Script Date: 30.01.2020 18:33:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [dbo].[GetAOPAttendeesHTML]
+(
+--DECLARE
+	@skolenieID INT,
+	@today DATETIME
+) RETURNS NVARCHAR(MAX)
+AS BEGIN
+
+DECLARE @result NVARCHAR(MAX)
+SET @result = CONVERT (NVARCHAR(MAX), (
+SELECT
+'table-table' AS [@class],
+'tableHeader' AS [thead/@class],
+(
+	SELECT
+		'headerRow' AS [@class]
+		,'headerCell' AS [th/@class], 'SkolenieID' AS th, ''
+		,'headerCell' AS [th/@class], 'Referencia' AS th, ''
+		,'headerCell' AS [th/@class], 'Nazov' AS th, ''
+		,'headerCell' AS [th/@class], 'Uskutocnene' AS th, ''
+		,'headerCell' AS [th/@class], 'Druh' AS th, ''
+		,'headerCell' AS [th/@class], 'Typ' AS th, ''
+		,'headerCell' AS [th/@class], 'PreukazVydany' AS th, ''
+		,'headerCell' AS [th/@class], 'PreukazVydal' AS th, ''
+		,'headerCell' AS [th/@class], 'Posluchac' AS th, ''
+		,'headerCell' AS [th/@class], 'Titul' AS th, ''
+		,'headerCell' AS [th/@class], 'PracovneZaradenie' AS th, ''
+		,'headerCell' AS [th/@class], 'Organizacia' AS th, ''
+		,'headerCell' AS [th/@class], 'PosledneSkolenie' AS th, ''
+	FOR XML PATH('tr'), TYPE
+) thead,
+'tableBody' AS [tbody/@class],
+(
+	SELECT
+		CASE
+			WHEN AttendeeStateId = 2
+			THEN 'row line-through'
+			ELSE 'row'
+		END AS [@class]
+		,class AS [td/@class], style AS [td/@style], SkolenieID AS td, ''
+		,class AS [td/@class], style AS [td/@style], Referencia AS td, ''
+		,class AS [td/@class], style AS [td/@style], Nazov AS td, ''
+		,class AS [td/@class], style AS [td/@style], Uskutocnene AS td, ''
+		,class AS [td/@class], style AS [td/@style], Druh AS td, ''
+		,class AS [td/@class], style AS [td/@style], Typ AS td, ''
+		,class AS [td/@class], style AS [td/@style], PreukazVydany AS td, ''
+		,class AS [td/@class], style AS [td/@style], PreukazVydal AS td, ''
+		,class AS [td/@class], style AS [td/@style], Posluchac AS td, ''
+		,class AS [td/@class], style AS [td/@style], Titul AS td, ''
+		,class AS [td/@class], style AS [td/@style], PracovneZaradenie AS td, ''
+		,class AS [td/@class], style AS [td/@style], Organizacia AS td, ''
+		,class AS [td/@class], style AS [td/@style], LastTrainingDate AS td, ''
+	FROM
+		(
+			SELECT
+				'dataCell' as class
+				,dbo.GetAOPAttendeeStyle
+				(
+					@today,
+					ISNULL(sp.PreukazVydany, s.PreukazyVydane),
+					ISNULL(sp.PreukazVydany, s.PreukazyVydane),
+					s.Uskutocnene,
+					lastTraining.Uskutocnene,
+					ISNULL(p.StavID, -666)
+				) AS style
+				,sp.SkolenieID
+				,s.Referencia
+				,s.Nazov
+				,convert(varchar(20), s.Uskutocnene, 104) as Uskutocnene
+				,sd.Nazov as Druh
+				,st.Nazov as Typ
+				,CONVERT(varchar(20), ISNULL(sp.PreukazVydany, s.PreukazyVydane), 104) AS PreukazVydany
+				,ISNULL(sp.PreukazVydal, s.PreukazyVydal) AS PreukazVydal
+				,ISNULL(p.Priezvisko + ' ', '') + ISNULL(p.Meno, '') AS Posluchac
+				,p.Titul
+				,pz.Nazov AS PracovneZaradenie
+				,o.Nazov AS Organizacia
+				,ISNULL(p.StavID, -666) AS AttendeeStateId
+				,CONVERT(varchar(20), lastTraining.Uskutocnene, 104) AS LastTrainingDate
+			FROM
+				dbo.SkoleniePosluchac sp
+				INNER JOIN dbo.Skolenie s
+					ON s.ID = sp.SkolenieID
+				INNER JOIN dbo.Posluchac p
+					ON p.ID = sp.PosluchacID
+				LEFT JOIN dbo.Organizacia o
+					ON o.ID = p.OrganizaciaID
+				LEFT JOIN dbo.PracovneZaradenie pz
+					ON pz.ID = p.PracovneZaradenieID
+				LEFT JOIN dbo.SkolenieDruh sd
+					ON sd.ID = s.DruhID
+				LEFT JOIN dbo.SkolenieTyp st
+					ON st.ID = s.TypID
+				OUTER APPLY report.PosledneSkoleniePosluchaca(sp.SkolenieID, sp.PosluchacID) lastTraining
+			WHERE
+				sp.SkolenieID = @skolenieID
+		) xmlPrepare
+	FOR XML PATH('tr'), TYPE
+) tbody
+FOR XML PATH('table'), TYPE
+))
+
+--PRINT @result
+RETURN @result
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetAOPAttendeeStyle]    Script Date: 30.01.2020 18:33:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [dbo].[GetAOPAttendeeStyle]
+(
+	@today DATETIME,
+
+	@licenceReleaseDate DATETIME,
+	@nextAOPDate DATETIME,
+
+	@trainingDate DATETIME,
+	@lastTrainingDate DATETIME,
+
+	@attendeeStateId INT
+) RETURNS VARCHAR(255)
+AS
+BEGIN
+	DECLARE @lineThroughStyle VARCHAR(255) = 'text-decoration: line-through;'
+
+	IF @attendeeStateId = 2
+		RETURN @lineThroughStyle
+	
+	IF @lastTrainingDate > @trainingDate
+		RETURN @lineThroughStyle
+
+	IF @today NOT IN
+	(
+		SELECT
+			NotificationDate
+		FROM
+			dbo.GetAOPNotificationDates
+			(
+				@licenceReleaseDate,
+				@nextAOPDate
+			)
+	)
+		RETURN @lineThroughStyle
+
+	RETURN NULL
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetAOPNotificationDates]    Script Date: 30.01.2020 18:33:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [dbo].[GetAOPNotificationDates]
+(
+	@licenceReleaseDate DATETIME,
+	@nextAOPDate DATETIME
+) RETURNS @result TABLE ( NotificationDate DATETIME )
+AS
+BEGIN
+
+	DECLARE @AOPnotificationShiftInYears INT = 5
+	DECLARE @AOPNotificationShiftInDays INT = 45
+
+	INSERT @result VALUES
+	(
+		FLOOR
+		(
+			CAST
+			(
+				DATEADD(YEAR, @AOPnotificationShiftInYears, @licenceReleaseDate) AS FLOAT
+			)
+		) - @AOPNotificationShiftInDays
+	),
+	(
+		FLOOR
+		(
+			CAST
+			(
+				@nextAOPDate AS FLOAT
+			)
+		) - @AOPNotificationShiftInDays
+	)
+
+	RETURN
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AOPNotification]    Script Date: 30.01.2020 18:33:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[AOPNotification]
+(
+	@today DATETIME = NULL
+)
+AS
+/*
+declare @today datetime = '2019-06-7'
+declare @enddate datetime = @today-2
+
+while @today > @enddate
+begin
+	print @today
+	exec [dbo].[AOPNotification] @today
+	set @today-=1
+end
+*/
+
+SET @today = ISNULL(@today, getdate())
+
+DECLARE
+	@body VARCHAR(max),
+	@email VARCHAR(1024)
+
+DECLARE
+	@skolenieID INT,
+	@dni VARCHAR(10),
+	@organizaciaID INT,
+	@trainingTable NVARCHAR(MAX),
+	@type NVARCHAR(MAX),
+	@organization NVARCHAR(MAX),
+	@organizationEmail NVARCHAR(MAX),
+	@subject NVARCHAR(MAX) = 'Notifik·cia AktualizaËnej odbornej prÌpravy - ${type} - ${organization}'
+
+DECLARE cur CURSOR FOR
+SELECT
+	id, dni, organizaciaID
+FROM
+	dbo.AOPSkolenieToNotificate(@today)
+
+OPEN cur
+FETCH NEXT FROM cur INTo @skolenieID, @dni, @organizaciaID
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+
+SET @type = dbo.GetTrainingType(@skolenieID)
+
+SELECT
+	@organization = Nazov,
+	@organizationEmail = ISNULL(Mail, 'NezadanÈ')
+FROM
+	dbo.Organizacia
+WHERE
+	ID = @organizaciaID
+
+SET @trainingTable = [dbo].[GetSkolenieEmailTable](@skolenieID)
+
+SET @subject = REPLACE(@subject, '${type}', @type)
+SET @subject = REPLACE(@subject, '${organization}', @organization)
+
+SET @body = [dbo].[GetHtmlBodyOpenTag]() +
+'O ' + @dni +' dnÌ uplynie 5 rokov od vydania preukazov alebo vykonania poslednej AOP:<br/><br/>'
++ @trainingTable + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/>E-mail kontaktn˝ch osÙb:<br/>
+' + report.GetKontaktnaOsobaEmail(@organizaciaID) + '<br/>
+<br/>E-mail organiz·cie:<br/>
+' + @organizationEmail + '<br/>
+--------------------------------------------------------------------------------------------------
+<br/><br/>
+Dobr˝ deÚ,
+<br/><br/>
+Dovoæte, aby sme v·s upozornili, na blÌûiaci sa termÌn vykonania <span class="bold">AktualizaËnej odbornej prÌpravy (AOP)</span> pre drûiteæov preukazu na ' + @type + '.
+<span class="bold">AOP</span> by sa mala vykonaù do 5-tich rokov od d·tumu vydania preukazu alebo vykonania poslednej AOP,
+ktor˝ m·te vyznaËen˝ na preukaze, alebo tento ˙daj n·jdete aj v naöej tabuæke dole v stÂpci oznaËenom ako "<span class="bold">PreukazVydany</span>".
+UpozorÚujeme, ûe do termÌnu vykonania <span class="bold">AOP</span> musÌ byù vykonan· aj opakovan· <span class="bold">lek·rska prehliadka</span> vo vzùahu k pr·ci.
+V opaËnom prÌpade preukaz str·ca platnosù.
+T˙to notifik·ciu v·m posielame ' + @dni + ' dnÌ pred uplynutÌm lehoty na vykonanie <span class="bold">AOP</span>, aby ste mali dostatok Ëasu si pripraviù vöetko potrebnÈ.
+<br/><br/>Zoznam osÙb, ktorÈ absolvovali ökolenie:<br/><br/>'
++ [dbo].[GetAOPAttendeesHTML](@skolenieID, @today) +
+'<br/>ProsÌme V·s o aktualiz·ciu zoznamu osÙb ako aj n·vrh moûnÈho termÌnu periodickÈho ökolenia.
+<br/><br/>œakujem,
+<br/>
+' + [dbo].[GetHtmlBodyCloseTag]()
+
+SET @email = dbo.SkolenieEmailToNotificate(@skolenieID)
+
+--PRINT @body
+--PRINT ''
+
+EXEC msdb.dbo.sp_send_dbmail
+@recipients = @email,
+@copy_recipients = 'miroslav.hanzen@gmail.com;monika.hanzenova@gmail.com',
+--@blind_copy_recipients = 'matej.cizmarik@2ring.com',
+@subject = @subject,
+@body = @body,
+@body_format = 'HTML'
+
+FETCH NEXT FROM cur INTo @skolenieID, @dni, @organizaciaID
+END
+
+CLOSE cur
+DEALLOCATE cur
+GO
