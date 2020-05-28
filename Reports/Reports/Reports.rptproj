@@ -46,6 +46,14 @@
       <FullPath>OPP_Zamestnanci.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Ponuky.rdl</Name>
+      <FullPath>Ponuky.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PotvrdenieHydraulickaRuka.rdl</Name>
+      <FullPath>PotvrdenieHydraulickaRuka.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>PreukazLesenara.rdl</Name>
       <FullPath>PreukazLesenara.rdl</FullPath>
     </ProjectItem>
@@ -98,8 +106,16 @@
       <FullPath>ZmluvaFakturovat.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Ponuky.rdl</Name>
-      <FullPath>Ponuky.rdl</FullPath>
+      <Name>PotvrdeniePlosiny.rdl</Name>
+      <FullPath>PotvrdeniePlosiny.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PreukazPilcika.rdl</Name>
+      <FullPath>PreukazPilcika.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PreukazViazacaBremien.rdl</Name>
+      <FullPath>PreukazViazacaBremien.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
