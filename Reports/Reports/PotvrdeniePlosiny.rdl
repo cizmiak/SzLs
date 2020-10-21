@@ -901,7 +901,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Preukaz vydal - eviduje</Value>
+                                      <Value>Potvrdenie vydal - eviduje</Value>
                                       <Style>
                                         <FontFamily>Tahoma</FontFamily>
                                         <FontSize>5pt</FontSize>
@@ -984,7 +984,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Číslo preukazu</Value>
+                                      <Value>Číslo potvrdenia</Value>
                                       <Style>
                                         <FontFamily>Tahoma</FontFamily>
                                         <FontSize>5pt</FontSize>
@@ -1008,7 +1008,7 @@
                               <Top>4.64053cm</Top>
                               <Left>0.1cm</Left>
                               <Height>0.35823cm</Height>
-                              <Width>3cm</Width>
+                              <Width>3.3cm</Width>
                               <ZIndex>13</ZIndex>
                               <Style>
                                 <Border>
@@ -1367,7 +1367,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>OPAKOVANÉ ŠKOLENIA a AOP / REPEATED TRAININGS</Value>
+                                                    <Value>OPAKOVANÉ OVERENIA / REPEATED TRAININGS</Value>
                                                     <Style>
                                                       <FontFamily>Tahoma</FontFamily>
                                                       <FontSize>8pt</FontSize>
