@@ -1872,7 +1872,7 @@ Fields!Druh.Value="aktualizačná odborná príprava", "v rozsahu Záznamu z obo
                                 <TextRun>
                                   <Label>pocetHodin</Label>
                                   <Value>=Switch(
-Fields!Druh.Value="základné", "20 hodín",
+Fields!Druh.Value="základné", "10 hodín",
 Fields!Druh.Value="opakované", "3 hodiny",
 Fields!Druh.Value="aktualizačná odborná príprava", "8 hodín")</Value>
                                   <Style>
@@ -5664,18 +5664,14 @@ Fields!Druh.Value="aktualizačná odborná príprava", True)</Hidden>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Uskutocnene+2</Label>
-                                  <Value>=Switch(
-Fields!Druh.Value="základné", CDate(Fields!Uskutocnene.Value).AddDays(2),
-Fields!Druh.Value="opakované", Fields!Uskutocnene.Value,
-Fields!Druh.Value="aktualizačná odborná príprava", Fields!Uskutocnene.Value)</Value>
+                                  <Value>=Fields!Uskutocnene.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Normal</FontWeight>
                                     <Format>d</Format>
                                     <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -5684,7 +5680,7 @@ Fields!Druh.Value="aktualizačná odborná príprava", Fields!Uskutocnene.Value)
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Uskutocnene1</rd:DefaultName>
+                          <rd:DefaultName>Uskutocnene</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -6122,10 +6118,10 @@ Fields!Druh.Value="aktualizačná odborná príprava", Fields!Uskutocnene.Value)
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Uskutocnene+3</Label>
+                                  <Label>Uskutocnene+1</Label>
                                   <Value>=Switch(
 Fields!Druh.Value="základné",
-	CDate(Fields!Uskutocnene.Value).AddDays(3),
+	CDate(Fields!Uskutocnene.Value).AddDays(1),
 Fields!Druh.Value="opakované", "",
 Fields!Druh.Value="aktualizačná odborná príprava", "")</Value>
                                   <Style>
@@ -6291,10 +6287,10 @@ Fields!Druh.Value="aktualizačná odborná príprava", "")</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Uskutocnene+3</Label>
+                                  <Label>Uskutocnene+1</Label>
                                   <Value>=Switch(
 Fields!Druh.Value="základné",
-	CDate(Fields!Uskutocnene.Value).AddDays(3),
+	CDate(Fields!Uskutocnene.Value).AddDays(1),
 Fields!Druh.Value="opakované", "",
 Fields!Druh.Value="aktualizačná odborná príprava", "")</Value>
                                   <Style>
