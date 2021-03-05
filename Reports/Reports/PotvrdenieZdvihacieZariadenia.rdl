@@ -309,7 +309,7 @@
                               <Color>White</Color>
                               <Style>None</Style>
                             </RightBorder>
-                            <BackgroundColor>#d50000</BackgroundColor>
+                            <BackgroundColor>#ff5252</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -352,7 +352,7 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>#d50000</BackgroundColor>
+                            <BackgroundColor>#ff5252</BackgroundColor>
                           </Style>
                         </Rectangle>
                       </CellContents>

@@ -26,8 +26,8 @@
       <FullPath>KartickyVozikyMriezka.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>KartickyVysky.rdl</Name>
-      <FullPath>KartickyVysky.rdl</FullPath>
+      <Name>KartickyVysky_Old.rdl</Name>
+      <FullPath>KartickyVysky_Old.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Lesenie.rdl</Name>
@@ -56,6 +56,10 @@
     <ProjectItem>
       <Name>PotvrdeniePlosiny.rdl</Name>
       <FullPath>PotvrdeniePlosiny.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PotvrdenieZdvihacieZariadenia.rdl</Name>
+      <FullPath>PotvrdenieZdvihacieZariadenia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>PreukazLesenara.rdl</Name>
@@ -118,8 +122,12 @@
       <FullPath>ZmluvaFakturovat.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>PotvrdenieZdvihacieZariadenia.rdl</Name>
-      <FullPath>PotvrdenieZdvihacieZariadenia.rdl</FullPath>
+      <Name>KartickyVysky_Obsolete.rdl</Name>
+      <FullPath>KartickyVysky_Obsolete.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PotvrdeniePraceVoVyskach.rdl</Name>
+      <FullPath>PotvrdeniePraceVoVyskach.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
