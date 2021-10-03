@@ -379,7 +379,7 @@
                                               </Paragraph>
                                             </Paragraphs>
                                             <rd:DefaultName>PosluchacMeno</rd:DefaultName>
-                                            <Top>0.1cm</Top>
+                                            <Top>0.4175cm</Top>
                                             <Left>0.1cm</Left>
                                             <Height>0.45823cm</Height>
                                             <Width>6.59172cm</Width>
@@ -425,178 +425,11 @@
                                               </Paragraph>
                                             </Paragraphs>
                                             <rd:DefaultName>Textbox23</rd:DefaultName>
-                                            <Top>0.55823cm</Top>
+                                            <Top>0.87573cm</Top>
                                             <Left>0.1cm</Left>
                                             <Height>0.35823cm</Height>
                                             <Width>6.59172cm</Width>
                                             <ZIndex>1</ZIndex>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <VerticalAlign>Top</VerticalAlign>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>1pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <Textbox Name="PosluchacBydlisko2">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!PosluchacBydlisko.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>7pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>PosluchacBydlisko</rd:DefaultName>
-                                            <Top>0.91646cm</Top>
-                                            <Left>0.1cm</Left>
-                                            <Height>0.45823cm</Height>
-                                            <Width>6.59172cm</Width>
-                                            <ZIndex>2</ZIndex>
-                                            <Style>
-                                              <Border>
-                                                <Color>DimGray</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <BackgroundColor>White</BackgroundColor>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <Textbox Name="Textbox11">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>Trvalý pobyt</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>5pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                  <TextRun>
-                                                    <Value> / Address</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>5pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox4</rd:DefaultName>
-                                            <Top>1.37469cm</Top>
-                                            <Left>0.1cm</Left>
-                                            <Height>0.35823cm</Height>
-                                            <Width>6.59172cm</Width>
-                                            <ZIndex>3</ZIndex>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <VerticalAlign>Top</VerticalAlign>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>1pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <Textbox Name="PosluchacDatumNarodenia2">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!PosluchacDatumNarodenia.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>7pt</FontSize>
-                                                      <Format>d</Format>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>PosluchacDatumNarodenia</rd:DefaultName>
-                                            <Top>1.73292cm</Top>
-                                            <Left>0.1cm</Left>
-                                            <Height>0.45823cm</Height>
-                                            <Width>3.3cm</Width>
-                                            <ZIndex>4</ZIndex>
-                                            <Style>
-                                              <Border>
-                                                <Color>DimGray</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <BackgroundColor>White</BackgroundColor>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <Textbox Name="Textbox17">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>Dátum narodenia</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>5pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                  <TextRun>
-                                                    <Value> / Date of birth</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>5pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox8</rd:DefaultName>
-                                            <Top>2.19115cm</Top>
-                                            <Left>0.1cm</Left>
-                                            <Height>0.35823cm</Height>
-                                            <Width>3.3cm</Width>
-                                            <ZIndex>5</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -658,7 +491,7 @@
                                             <Left>0.1cm</Left>
                                             <Height>0.45823cm</Height>
                                             <Width>3.3cm</Width>
-                                            <ZIndex>6</ZIndex>
+                                            <ZIndex>2</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>DimGray</Color>
@@ -704,91 +537,7 @@
                                             <Left>0.1cm</Left>
                                             <Height>0.35823cm</Height>
                                             <Width>4.57379cm</Width>
-                                            <ZIndex>7</ZIndex>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <VerticalAlign>Top</VerticalAlign>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>1pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <Textbox Name="PreukazyVydane2">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!PreukazyVydane.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>7pt</FontSize>
-                                                      <Format>d</Format>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>PreukazyVydane</rd:DefaultName>
-                                            <Top>2.54938cm</Top>
-                                            <Left>0.1cm</Left>
-                                            <Height>0.45823cm</Height>
-                                            <Width>3.3cm</Width>
-                                            <ZIndex>8</ZIndex>
-                                            <Style>
-                                              <Border>
-                                                <Color>DimGray</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <BackgroundColor>White</BackgroundColor>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <Textbox Name="Textbox106">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>Dátum vydania</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>5pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                  <TextRun>
-                                                    <Value> / Date of issue</Value>
-                                                    <Style>
-                                                      <FontFamily>Tahoma</FontFamily>
-                                                      <FontSize>5pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox6</rd:DefaultName>
-                                            <Top>3.00761cm</Top>
-                                            <Left>0.1cm</Left>
-                                            <Height>0.35823cm</Height>
-                                            <Width>3.3cm</Width>
-                                            <ZIndex>9</ZIndex>
+                                            <ZIndex>3</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -825,7 +574,7 @@
                                             <Left>0.1cm</Left>
                                             <Height>0.45823cm</Height>
                                             <Width>9.70091cm</Width>
-                                            <ZIndex>10</ZIndex>
+                                            <ZIndex>4</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>DimGray</Color>
@@ -846,7 +595,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>Preukaz vydal - eviduje</Value>
+                                                    <Value>Potvrdenie vydal - eviduje</Value>
                                                     <Style>
                                                       <FontFamily>Tahoma</FontFamily>
                                                       <FontSize>5pt</FontSize>
@@ -870,8 +619,8 @@
                                             <Top>5.45699cm</Top>
                                             <Left>0.1cm</Left>
                                             <Height>0.35823cm</Height>
-                                            <Width>6.29171cm</Width>
-                                            <ZIndex>11</ZIndex>
+                                            <Width>9.70091cm</Width>
+                                            <ZIndex>5</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -908,7 +657,7 @@
                                             <Left>0.1cm</Left>
                                             <Height>0.45823cm</Height>
                                             <Width>3.3cm</Width>
-                                            <ZIndex>12</ZIndex>
+                                            <ZIndex>6</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>DimGray</Color>
@@ -929,7 +678,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>Číslo preukazu</Value>
+                                                    <Value>Číslo potvrdenia</Value>
                                                     <Style>
                                                       <FontFamily>Tahoma</FontFamily>
                                                       <FontSize>5pt</FontSize>
@@ -953,8 +702,8 @@
                                             <Top>4.64053cm</Top>
                                             <Left>0.1cm</Left>
                                             <Height>0.35823cm</Height>
-                                            <Width>3cm</Width>
-                                            <ZIndex>13</ZIndex>
+                                            <Width>3.3cm</Width>
+                                            <ZIndex>7</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -991,7 +740,7 @@
                                             <Left>4.67379cm</Left>
                                             <Height>0.45823cm</Height>
                                             <Width>5.12712cm</Width>
-                                            <ZIndex>14</ZIndex>
+                                            <ZIndex>8</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>DimGray</Color>
@@ -1037,7 +786,7 @@
                                             <Left>4.67379cm</Left>
                                             <Height>0.34394cm</Height>
                                             <Width>5.12712cm</Width>
-                                            <ZIndex>15</ZIndex>
+                                            <ZIndex>9</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -1082,7 +831,7 @@
                                             <Left>4.67379cm</Left>
                                             <Height>0.35823cm</Height>
                                             <Width>5.12712cm</Width>
-                                            <ZIndex>16</ZIndex>
+                                            <ZIndex>10</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -1103,7 +852,7 @@
                                             <Left>6.86813cm</Left>
                                             <Height>0.81646cm</Height>
                                             <Width>3cm</Width>
-                                            <ZIndex>17</ZIndex>
+                                            <ZIndex>11</ZIndex>
                                             <Style>
                                               <Border>
                                                 <Style>None</Style>
@@ -1455,7 +1204,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>Ak sa dočasná práca vo výške nemôže vykonávať bezpečne a vo vhodných podmienkach  z vhodnej plochy, musia sa vybrať najvhodnejšie pracovné prostriedky na zaistenie  a zachovanie bezpečných pracovných podmienok. Kolektívne ochranné opatrenia musia mať prednosť pred individuálnymi ochrannými opatreniami.</Value>
+                                                    <Value>Ak sa dočasná práca vo výške nemôže vykonávať bezpečne a vo vhodných podmienkach z vhodnej plochy, musia sa vybrať najvhodnejšie pracovné prostriedky na zaistenie a zachovanie bezpečných pracovných podmienok. Kolektívne ochranné opatrenia musia mať prednosť pred individuálnymi ochrannými opatreniami.</Value>
                                                     <Style>
                                                       <FontStyle>Normal</FontStyle>
                                                       <FontFamily>Tahoma</FontFamily>
